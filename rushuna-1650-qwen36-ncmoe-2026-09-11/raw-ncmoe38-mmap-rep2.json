@@ -1,0 +1,30 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+  "-m",
+  "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-ncmoe",
+  "38",
+  "-fa",
+  "1",
+  "-p",
+  "0",
+  "-n",
+  "128",
+  "-d",
+  "0,4096",
+  "-r",
+  "3",
+  "-t",
+  "4",
+  "-lm",
+  "mmap",
+  "-o",
+  "json"
+ ],
+ "rc": 0,
+ "stdout": "[\n  {\n    \"build_commit\": \"5266f24\",\n    \"build_number\": 1,\n    \"cpu_info\": \"Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz\",\n    \"gpu_info\": \"NVIDIA GeForce GTX 1650\",\n    \"backends\": \"CUDA\",\n    \"model_filename\": \"/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf\",\n    \"model_type\": \"qwen35moe 35B.A3B Q4_K - Medium\",\n    \"model_size\": 22123538944,\n    \"model_n_params\": 34660610688,\n    \"n_batch\": 2048,\n    \"n_ubatch\": 512,\n    \"n_threads\": 4,\n    \"cpu_mask\": \"0x0\",\n    \"cpu_strict\": false,\n    \"poll\": 50,\n    \"type_k\": \"f16\",\n    \"type_v\": \"f16\",\n    \"n_gpu_layers\": 99,\n    \"n_cpu_moe\": 38,\n    \"split_mode\": \"layer\",\n    \"main_gpu\": 0,\n    \"no_kv_offload\": false,\n    \"flash_attn\": 1,\n    \"devices\": \"auto\",\n    \"tensor_split\": \"0.00\",\n    \"tensor_buft_overrides\": \"none\",\n    \"load_mode\": \"mmap\",\n    \"lazy_mode\": \"auto\",\n    \"embeddings\": false,\n    \"no_op_offload\": 0,\n    \"no_host\": false,\n    \"fit_target\": 0,\n    \"fit_min_ctx\": 0,\n    \"n_prompt\": 0,\n    \"n_gen\": 128,\n    \"n_depth\": 0,\n    \"test_time\": \"2026-09-11T18:32:19Z\",\n    \"avg_ns\": 6206753602,\n    \"stddev_ns\": 6953531,\n    \"avg_ts\": 20.622714,\n    \"stddev_ts\": 0.023104,\n    \"samples_ns\": [ 6213745157, 6199838729, 6206676920 ],\n    \"samples_ts\": [ 20.5995, 20.6457, 20.623 ]\n  },\n  {\n    \"build_commit\": \"5266f24\",\n    \"build_number\": 1,\n    \"cpu_info\": \"Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz\",\n    \"gpu_info\": \"NVIDIA GeForce GTX 1650\",\n    \"backends\": \"CUDA\",\n    \"model_filename\": \"/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf\",\n    \"model_type\": \"qwen35moe 35B.A3B Q4_K - Medium\",\n    \"model_size\": 22123538944,\n    \"model_n_params\": 34660610688,\n    \"n_batch\": 2048,\n    \"n_ubatch\": 512,\n    \"n_threads\": 4,\n    \"cpu_mask\": \"0x0\",\n    \"cpu_strict\": false,\n    \"poll\": 50,\n    \"type_k\": \"f16\",\n    \"type_v\": \"f16\",\n    \"n_gpu_layers\": 99,\n    \"n_cpu_moe\": 38,\n    \"split_mode\": \"layer\",\n    \"main_gpu\": 0,\n    \"no_kv_offload\": false,\n    \"flash_attn\": 1,\n    \"devices\": \"auto\",\n    \"tensor_split\": \"0.00\",\n    \"tensor_buft_overrides\": \"none\",\n    \"load_mode\": \"mmap\",\n    \"lazy_mode\": \"auto\",\n    \"embeddings\": false,\n    \"no_op_offload\": 0,\n    \"no_host\": false,\n    \"fit_target\": 0,\n    \"fit_min_ctx\": 0,\n    \"n_prompt\": 0,\n    \"n_gen\": 128,\n    \"n_depth\": 4096,\n    \"test_time\": \"2026-09-11T18:32:38Z\",\n    \"avg_ns\": 6353936321,\n    \"stddev_ns\": 8749349,\n    \"avg_ts\": 20.145018,\n    \"stddev_ts\": 0.027718,\n    \"samples_ns\": [ 6363965352, 6349974737, 6347868875 ],\n    \"samples_ts\": [ 20.1132, 20.1576, 20.1642 ]\n  }\n]\n",
+ "stderr_tail": "ggml_cuda_init: found 1 CUDA devices (Total VRAM: 3714 MiB):\n  Device 0: NVIDIA GeForce GTX 1650, compute capability 7.5, VMM: yes, VRAM: 3714 MiB\nThe following devices will have suboptimal performance due to a lack of tensor cores:\n  Device 0: NVIDIA GeForce GTX 1650\nConsider compiling with CMAKE_CUDA_ARCHITECTURES=61-virtual;80-virtual and DGGML_CUDA_FORCE_MMQ to force the use of the Pascal code for Turing.\n"
+}

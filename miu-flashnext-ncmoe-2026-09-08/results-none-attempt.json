@@ -1,0 +1,122 @@
+{
+ "host": "miu",
+ "cfg": {
+  "bin": "/home/minotaur/llama-v0.4.0/build/bin",
+  "model_dir": "/home/minotaur/bench-models/qwen3.8-flash-next",
+  "out": "/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-flashnext-ncmoe-2026-09-08",
+  "ncmoe": [
+   48,
+   40,
+   34,
+   29,
+   26
+  ],
+  "threads": 6,
+  "load_mode": "none",
+  "control_mmap": true,
+  "server_stock_first": false,
+  "disk": "nvme0n1"
+ },
+ "model": "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+ "build": "v0.4.0 5266f24",
+ "sweep": [
+  {
+   "tag": "ncmoe48-none-rep1",
+   "ncmoe": 48,
+   "load_mode": "none",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "48",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "none",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 127.9,
+   "peak_vram_mib": 5480,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 15.448117,
+     "stddev_ts": 1.133964
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 13.244281,
+     "stddev_ts": 3.366156
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe48-none-rep2",
+   "ncmoe": 48,
+   "load_mode": "none",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "48",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "none",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 134.1,
+   "peak_vram_mib": 5460,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 15.568014,
+     "stddev_ts": 0.663633
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 11.344462,
+     "stddev_ts": 4.735786
+    }
+   ],
+   "oom": false
+  }
+ ],
+ "control": null,
+ "server": {}
+}

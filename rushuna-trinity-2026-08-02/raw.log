@@ -1,0 +1,218 @@
+=== TRINITY-MINI RUSHUNA SWEEP 2026-08-02T23:14:55+00:00 ===
+--- baseline ---
+name, memory.total [MiB], memory.used [MiB], memory.free [MiB], driver_version
+NVIDIA GeForce RTX 3060, 12288 MiB, 0 MiB, 11910 MiB, 580.173.02
+MemTotal:       32792824 kB
+MemAvailable:   31718292 kB
+SwapTotal:       4194300 kB
+SwapFree:        4194300 kB
+Xorg processes: 0
+0
+df /: /dev/mapper/ubuntu--vg-ubuntu--lv  216G   92G  115G  45% /
+model: 15935808352 bytes
+
+########## PHASE 1: config scan (-p 0 -n 128 -r 2) ##########
+
+===== phase 1 | -ncmoe 32 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         32 |   1 |           tg128 |         23.70 ± 0.01 |
+
+build: 67b9b0e (1)
+[rc=0 | VRAM peak 1467 MiB | temp 56C | sm 1777 MHz | pwr 60.05 W]
+MemAvailable:   31722756 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 20 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         20 |   1 |           tg128 |         34.43 ± 0.12 |
+
+build: 67b9b0e (1)
+[rc=0 | VRAM peak 7047 MiB | temp 56C | sm 1777 MHz | pwr 70.27 W]
+MemAvailable:   31636144 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 14 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         14 |   1 |           tg128 |         44.29 ± 0.17 |
+
+build: 67b9b0e (1)
+[rc=0 | VRAM peak 9769 MiB | temp 57C | sm 1777 MHz | pwr 82.29 W]
+MemAvailable:   31707400 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 12 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |           tg128 |         50.12 ± 0.05 |
+
+build: 67b9b0e (1)
+[rc=0 | VRAM peak 10699 MiB | temp 58C | sm 1905 MHz | pwr 103.62 W]
+MemAvailable:   31643820 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 8 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 54C | sm 1777 MHz | pwr 39.98 W]
+MemAvailable:   31630780 kB SwapFree:        4194300 kB 
+--- rc!=0 at -ncmoe 8; continuing down to confirm the cliff is monotonic ---
+
+===== phase 1 | -ncmoe 4 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 53C | sm 1777 MHz | pwr 35.16 W]
+MemAvailable:   31627984 kB SwapFree:        4194300 kB 
+--- rc!=0 at -ncmoe 4; continuing down to confirm the cliff is monotonic ---
+
+===== phase 1 | -ncmoe 0 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 53C | sm 1777 MHz | pwr 34.73 W]
+MemAvailable:   31568712 kB SwapFree:        4194300 kB 
+--- rc!=0 at -ncmoe 0; continuing down to confirm the cliff is monotonic ---
+
+phase1: lowest OK on the coarse ladder = 12
+phase1: highest FAIL on the coarse ladder = 0
+
+########## PHASE 1b: locating the cliff between 0 and 12 ##########
+
+===== phase 1 | -ncmoe 1 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 53C | sm 1777 MHz | pwr 34.84 W]
+MemAvailable:   31536376 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 2 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 54C | sm 1777 MHz | pwr 34.90 W]
+MemAvailable:   31449188 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 3 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 54C | sm 1777 MHz | pwr 35.26 W]
+MemAvailable:   31565336 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 4 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 54C | sm 1777 MHz | pwr 39.09 W]
+MemAvailable:   31492980 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 5 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 55C | sm 1777 MHz | pwr 35.26 W]
+MemAvailable:   31459392 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 6 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 55C | sm 1777 MHz | pwr 35.38 W]
+MemAvailable:   31422028 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 7 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 55C | sm 1777 MHz | pwr 39.73 W]
+MemAvailable:   31517952 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 8 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 1 MiB | temp 55C | sm 1777 MHz | pwr 35.85 W]
+MemAvailable:   31576592 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 9 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to create context with model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 11797 MiB | temp 55C | sm 1972 MHz | pwr 52.62 W]
+MemAvailable:   31621976 kB SwapFree:        4194300 kB 
+
+===== phase 1 | -ncmoe 10 | -p 0 -n 128 -r 2 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |           tg128 |         56.43 ± 0.10 |
+
+build: 67b9b0e (1)
+[rc=0 | VRAM peak 11629 MiB | temp 60C | sm 1957 MHz | pwr 118.80 W]
+MemAvailable:   31685672 kB SwapFree:        4194300 kB 
+
+CLIFF: lowest -ncmoe that loads = 10
+
+########## PHASE 2: depth curves (-p 512 -n 128 -d 0,4096,8192 -r 3) ##########
+
+===== phase 2 | -ncmoe 10 | -p 512 -n 128 -d 0,4096,8192 -r 3 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |           pp512 |        853.57 ± 7.06 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |           tg128 |         56.43 ± 0.29 |
+llama_bench: error: failed to create context with model '/home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf'
+[rc=1 | VRAM peak 11875 MiB | temp 59C | sm 1965 MHz | pwr 119.21 W]
+MemAvailable:   31689972 kB SwapFree:        4194300 kB 
+
+===== phase 2 | -ncmoe 12 | -p 512 -n 128 -d 0,4096,8192 -r 3 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |           pp512 |        750.70 ± 9.18 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |           tg128 |         49.25 ± 0.11 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |   pp512 @ d4096 |        731.07 ± 7.72 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |   tg128 @ d4096 |         48.40 ± 0.14 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |   pp512 @ d8192 |        725.84 ± 6.26 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |   tg128 @ d8192 |         47.86 ± 0.13 |
+
+build: 67b9b0e (1)
+[rc=0 | VRAM peak 11187 MiB | temp 58C | sm 1957 MHz | pwr 110.76 W]
+MemAvailable:   31597448 kB SwapFree:        4194300 kB 
+
+SWEEP_COMPLETE 2026-08-02T23:17:46+00:00

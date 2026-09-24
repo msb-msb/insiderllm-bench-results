@@ -1,0 +1,182 @@
+Read the following incident report carefully. Then produce a structured summary: what the fault was, how it was isolated, what was ruled out and by what evidence, and what remains uncertain. Quote specific figures where they matter.
+
+# Single-bit memory fault on Miu — evidence record, 2026-08-15
+
+> **RESOLVED 2026-08-18 — a single bad DRAM module, bisected out and physically
+> removed. Read the closing entry at the bottom of this file first; everything
+> between here and it was written while the cause was unknown.** Two statements
+> above are superseded there: "Physical address was not obtainable" (it was
+> captured as root on 2026-08-18, `0x56873d905`) and the 08-16 entry's "if the
+> fault never recurs, causation is not attributable" (it recurred, which
+> settles it).
+
+> **REPAIRED 2026-08-24 — replacement DIMM installed, all four sticks pass a
+> full memtest86+ pass, and the no-published-numbers embargo is LIFTED.** See
+> the 2026-08-24 entry at the very bottom, which is the current-state record;
+> the 08-18 entry is the closing record of the investigation. The bracketing
+> protocol stays regardless.
+
+Written before a planned power-down to reseat the DIMMs. A reboot destroys the
+live evidence, so everything needed to re-test afterwards is here.
+
+## The finding in one line
+
+A file whose on-disk bytes are provably correct was being returned from the
+Linux page cache with one byte wrong, bit 6 cleared. Evicting the page cache
+made it correct again. The storage was never wrong; RAM was.
+
+## The decisive observation
+
+File: `~/Desktop/qwen3.8-27b-gguf/Qwen3.8-27B-UD-Q4_K_XL.gguf`
+Size: 17,923,394,624 bytes. Upstream sha256 (unsloth LFS oid):
+`bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372`
+
+| Read path | sha256 | Verdict |
+|---|---|---|
+| normal read (through page cache) | `1e54a5474de4cb18794622dd612c303e66fe2097349fa6a5ceec910b41a52aea` | wrong, reproduced twice |
+| `O_DIRECT` (bypasses page cache) | `bee238bb…` | correct |
+
+File metadata untouched throughout: size unchanged, inode 19141587, 1 link,
+mtime and ctime both 2026-08-14 11:08:23. Nothing rewrote the file.
+
+Byte-level diff, page cache against device:
+
+```
+differing bytes: 1
+offset 731252997 (0x2b960905): cache=0x25 disk=0x65 xor=0x40 bit=6 dir=1->0
+                               mod512=261  mod4096=2309  mod2MiB=1444101
+```
+
+Then, conclusively:
+
+```
+POSIX_FADV_DONTNEED on the file  ->  cached re-read = bee238bb…  CLEAN
+```
+
+The disk never changed. Evicting RAM fixed it. That is a memory fault.
+
+## Why this matters more than the three earlier events
+
+The three corruptions found on 2026-08-14 all had page-cache and `O_DIRECT`
+reads *agreeing* — the bytes were genuinely wrong on the platter, i.e. written
+wrong. This one is the opposite: storage provably correct, RAM wrong. Storage
+cannot be the cause of a fault that appears only in a cached copy of a file
+whose disk bytes are intact.
+
+It is also the fault that memtester and memtest-style scans cannot reach.
+Those test pages the kernel hands the test process; they never test the page
+cache holding a 17 GB file.
+
+## All four events
+
+| # | When found | Object | Where | offset mod 4096 | Bit | Direction |
+|---|---|---|---|---|---|---|
+| 1 | 2026-08-14 | Qwen3.6-27B UD-Q4_K_XL (Aug 4 rsync) | Storage_Disk_1, on platter | **2309** | 6 | 1→0 |
+| 2 | 2026-08-14 | gemma-4-26B-A4B UD-Q4_K_XL (Aug 4 rsync) | Storage_Disk_1, on platter | **2309** | 6 | 1→0 |
+| 3 | 2026-08-14 | Qwen3.8-27B UD-Q4_K_XL (Aug 14 download) | Storage_Disk_1, on platter | 684 | 6 | 1→0 |
+| 4 | **2026-08-15** | Qwen3.8-27B UD-Q4_K_XL | **NVMe page cache (RAM)** | **2309** | 6 | 1→0 |
+
+Four for four on bit 6, all cleared 1→0. Three of four at intra-page offset
+2309. That recurrence is the signature of one physical DRAM location: whichever
+page frame lands on the bad cell has its byte 2309 corrupted at bit 6.
+
+## What is NOT known
+
+- **Physical address was not obtainable.** `/proc/self/pagemap` returns the
+  entry with PFN masked to 0 (`0xa180000000000000`, present=1, PFN=0) because
+  reading real frame numbers needs `CAP_SYS_ADMIN`. `/proc/kpageflags` and
+  `/proc/kpagecount` are not readable either. Without root there is no way to
+  turn the virtual page into a physical address, so no targeted memtest86+
+  range can be derived from this session.
+- **Which DIMM.** Four identical Samsung M378A2K43DB1-CTD 16GB non-ECC in
+  ChannelA-DIMM0/1 and ChannelB-DIMM0/1. Nothing here localises the fault to
+  one of them.
+- **Whether it is progressive.** Four events over ~11 days is all the history
+  there is.
+
+## Negative results — things that did NOT find it
+
+Recorded so they are not repeated pointlessly:
+
+- memtester 4.6.0, 8,029 MB mlocked, 2 loops, all 18 tests (Stuck Address,
+  Random Value, Compare XOR/SUB/MUL/DIV/OR/AND, Sequential Increment, Solid
+  Bits, Block Sequential, Checkerboard, Bit Spread, Bit Flip, Walking Ones,
+  Walking Zeroes, 8-bit and 16-bit Writes): **0 failures**.
+- Custom tester, 7 GiB mlocked and 24 GiB unlocked, 2 passes each, constant
+  patterns including 0x40 and 0xBF chosen to drive bit 6 both ways, plus
+  address patterns, 55/AA, and 45–60 s retention holds at 0xFF and 0x40:
+  **0 differing bytes, per-bit tally 0 across all eight bits**.
+- SMART on both drives: Reallocated 0, Pending 0, Offline Uncorrectable 0,
+  UDMA CRC 0. Kernel journal: zero I/O errors, ATA resets, ext4 errors, MCEs.
+- `EDAC ie31200: No ECC support`; dmidecode `Error Correction Type: None`.
+  Memory errors on this box are silent by construction.
+
+Coverage is why the scans came back clean: 8 GiB of 64 GB is ~12.5%, and a
+`mlock`ed region pins the *same* frames for the whole run.
+
+## Machine state at time of capture
+
+```
+uptime           4 weeks, 1 day, 20 h   (booted 2026-07-16 17:16:47)
+kernel           6.8.0-134-generic
+memory           62 GiB total, ~41 GiB in page cache at capture
+DIMMs            4 x Samsung M378A2K43DB1-CTD 16GB DDR4-2667, dual-rank,
+                 ChannelA-DIMM0/1, ChannelB-DIMM0/1, non-ECC
+```
+
+## How to re-test after the reseat
+
+The exact method that caught it, in order:
+
+1. Read the file normally and hash it:
+   `sha256sum ~/Desktop/qwen3.8-27b-gguf/Qwen3.8-27B-UD-Q4_K_XL.gguf`
+   Expect `bee238bb…`.
+2. Read the same file with `O_DIRECT` and hash it. If the two disagree, the
+   page cache is corrupt and the disk is fine — repeat of this fault.
+3. If they disagree, diff cached against direct chunk by chunk to locate the
+   byte, and record offset, both values, XOR, bit index, and `offset % 4096`.
+   Script: `scratchpad/cache_vs_disk.py` (session b6d2cbb1), reproduced in the
+   appendix below.
+4. Watch specifically for `offset % 4096 == 2309` and `xor == 0x40`. A fifth
+   occurrence at that intra-page offset after a reseat would mean the reseat
+   did not fix it.
+
+**Capture the physical address next time, as root, before touching anything:**
+with root, re-run step 2's mmap and read `/proc/self/pagemap` for the mapping's
+virtual page; the PFN will be populated, and `PFN * 4096 + (offset % 4096)`
+is the physical byte address. That number is what makes a targeted memtest86+
+range possible instead of an overnight full pass.
+
+## Appendix — the reproducer
+
+```python
+# cached vs device, locate every differing byte
+import mmap, os
+P = "<file>"; CH = 1 << 22
+fd_d = os.open(P, os.O_RDONLY | os.O_DIRECT)
+f_c = open(P, "rb", buffering=0)
+buf = mmap.mmap(-1, CH); size = os.fstat(fd_d).st_size; off = 0
+while off < size:
+    n = os.preadv(fd_d, [buf], off)
+    if n <= 0: break
+    disk = bytes(memoryview(buf)[:n]); f_c.seek(off); cache = f_c.read(n)
+    if cache != disk:
+        for j in range(n):
+            if cache[j] != disk[j]:
+                print(off + j, hex(cache[j]), hex(disk[j]),
+                      hex(cache[j] ^ disk[j]), (off + j) % 4096)
+    off += n
+```
+
+Eviction, to clear a corrupt cached copy without a reboot:
+
+```python
+import os
+fd = os.open(P, os.O_RDONLY)
+os.posix_fadvise(fd, 0, 0, os.POSIX_FADV_DONTNEED)
+os.close(fd)
+```
+
+## Reproduction attempt after eviction
+
+Six full re-reads of the file (~107 GB) after the eviction: all clean. The

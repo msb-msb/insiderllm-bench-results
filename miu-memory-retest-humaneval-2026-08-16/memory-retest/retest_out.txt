@@ -1,0 +1,97 @@
+========================================================================
+bit-6 page-cache fault re-test — post-reseat
+file      /home/minotaur/Desktop/qwen3.8-27b-gguf/Qwen3.8-27B-UD-Q4_K_XL.gguf
+size      17,923,394,624  inode 19141587  links 1
+mtime     2026-08-14 11:08:23
+expect    bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+euid      0 (root)
+========================================================================
+
+### Step 0: residency BEFORE touching (no cache drop, no fadvise)
+[residency:pre] 0/4,375,829 pages (0.00%), prior-offset page 178,528 resident=NO
+
+### dmidecode memory (reseat verification)
+    	Error Correction Type: None
+    	Size: 16 GB
+    	Locator: ChannelA-DIMM0
+    	Bank Locator: BANK 0
+    	Type: DDR4
+    	Speed: 2667 MT/s
+    	Manufacturer: Samsung
+    	Part Number: M378A2K43DB1-CTD    
+    	Rank: 2
+    	Configured Memory Speed: 2667 MT/s
+    	Configured Voltage: 1.2 V
+    	Size: 16 GB
+    	Locator: ChannelA-DIMM1
+    	Bank Locator: BANK 1
+    	Type: DDR4
+    	Speed: 2667 MT/s
+    	Manufacturer: Samsung
+    	Part Number: M378A2K43DB1-CTD    
+    	Rank: 2
+    	Configured Memory Speed: 2667 MT/s
+    	Configured Voltage: 1.2 V
+    	Size: 16 GB
+    	Locator: ChannelB-DIMM0
+    	Bank Locator: BANK 2
+    	Type: DDR4
+    	Speed: 2667 MT/s
+    	Manufacturer: Samsung
+    	Part Number: M378A2K43DB1-CTD    
+    	Rank: 2
+    	Configured Memory Speed: 2667 MT/s
+    	Configured Voltage: 1.2 V
+    	Size: 16 GB
+    	Locator: ChannelB-DIMM1
+    	Bank Locator: BANK 3
+    	Type: DDR4
+    	Speed: 2667 MT/s
+    	Manufacturer: Samsung
+    	Part Number: M378A2K43DB1-CTD    
+    	Rank: 2
+    	Configured Memory Speed: 2667 MT/s
+    	Configured Voltage: 1.2 V
+
+### total RAM
+    MemTotal:       65774440 kB
+
+### EDAC / MCE since boot
+    Aug 15 20:17:00 Miu kernel: EDAC MC: Ver: 3.0.0
+    Aug 15 20:17:00 Miu kernel: EDAC ie31200: No ECC support
+    --- edac mc ---
+    power
+    subsystem
+    uevent
+
+### Steps 1-4, x20 iterations (file held resident, no eviction)
+iter    cached sha256    direct sha256   result     secs
+   1 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     78.2
+[residency:after-iter-1] 4,375,829/4,375,829 pages (100.00%), prior-offset page 178,528 resident=YES
+   2 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.6
+   3 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.1
+   4 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.2
+   5 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.3
+   6 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.5
+   7 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.3
+   8 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     70.9
+   9 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.0
+  10 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.5
+  11 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.1
+  12 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.4
+  13 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     71.8
+  14 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     73.1
+  15 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     76.3
+  16 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     76.9
+  17 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     76.5
+  18 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     76.9
+  19 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     76.8
+  20 bee238bbeb3dc0a3 bee238bbeb3dc0a3     PASS     77.1
+
+========================================================================
+iterations run     20
+failures           0
+total bytes read   716,935,784,960 (667.7 GiB)
+wall clock         1467.8s (24.5 min)
+========================================================================
+[residency:final] 4,375,829/4,375,829 pages (100.00%), prior-offset page 178,528 resident=YES

@@ -1,0 +1,17 @@
+18:16:30 start  harness: llama-bench -ngl 99 -fa 1 -p 512 -n 128 -d 0,4096,8192 -r 5  card at 302 MiB before first load
+18:16:30   build b10088: /home/minotaur/llama-bench-src/build/bin/llama-bench
+18:16:30   build v0.4.0: /home/minotaur/llama-v0.4.0/build/bin/llama-bench
+18:17:02   b10088  qwen3.6-35b-a3b      rep1  tg128 d0/4k/8k 151.89/151.12/145.13  pp512 3490/3348/3195  (32s)
+18:17:27   v0.4.0  qwen3.6-35b-a3b      rep1  tg128 d0/4k/8k 158.63/155.72/154.24  pp512 3689/3520/3382  (24s)
+18:17:51   v0.4.0  qwen3.6-35b-a3b      rep2  tg128 d0/4k/8k 158.50/157.59/153.89  pp512 3696/3523/3377  (24s)
+18:18:15   b10088  qwen3.6-35b-a3b      rep2  tg128 d0/4k/8k 156.46/153.67/152.66  pp512 3619/3425/3319  (25s)
+18:18:40   b10088  qwen3.6-35b-a3b      rep3  tg128 d0/4k/8k 156.05/155.60/152.58  pp512 3498/3430/3313  (25s)
+18:19:04   v0.4.0  qwen3.6-35b-a3b      rep3  tg128 d0/4k/8k 158.40/156.97/153.83  pp512 3668/3517/3371  (24s)
+18:19:04 summary (mean of 3 reps of the per-run 5-repeat average; spread = min..max over reps)
+18:19:04   qwen3.6-35b-a3b      tg128 d=0     b10088   154.80 [151.89..156.46]   v0.4.0   158.51 [158.40..158.63]   delta +2.40%  -> no change
+18:19:04   qwen3.6-35b-a3b      tg128 d=4096  b10088   153.46 [151.12..155.60]   v0.4.0   156.76 [155.72..157.59]   delta +2.15%  -> no change
+18:19:04   qwen3.6-35b-a3b      tg128 d=8192  b10088   150.12 [145.13..152.66]   v0.4.0   153.99 [153.83..154.24]   delta +2.58%  -> no change
+18:19:04   qwen3.6-35b-a3b      pp512 d=0     b10088  3535.77 [3490.46..3618.98]   v0.4.0  3684.31 [3667.84..3696.45]   delta +4.20%  -> v0.4.0 FASTER
+18:19:04   qwen3.6-35b-a3b      pp512 d=4096  b10088  3401.17 [3347.81..3430.22]   v0.4.0  3520.04 [3517.07..3523.49]   delta +3.49%  -> v0.4.0 FASTER
+18:19:04   qwen3.6-35b-a3b      pp512 d=8192  b10088  3275.78 [3195.49..3318.69]   v0.4.0  3376.63 [3370.92..3382.16]   delta +3.08%  -> v0.4.0 FASTER
+18:19:04 done  card at 280 MiB after last run

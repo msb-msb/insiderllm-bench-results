@@ -1,0 +1,102 @@
+{
+ "note": "Seeds 1-10, byte-identical config (train_adapter.py sha256 fbeb2367...), frozen 47-item test split, scored via PEFT+NF4 (score_hf.py). Seeds 3-10 trained 2026-09-02 with lightdm stopped and soak paused; peak fields from torch.cuda.max_memory_* via train_wrap.py plus a 1s nvidia-smi sampler (logs/vram_seedN.csv).",
+ "base_noadapter": {
+  "exact": 21,
+  "effective": 25
+ },
+ "seeds": {
+  "1": {
+   "final_epoch_loss": 0.035537,
+   "peak_torch_alloc_mib": null,
+   "peak_torch_reserved_mib": null,
+   "peak_nvidia_smi_mib": null,
+   "exact": 15,
+   "effective": 19
+  },
+  "2": {
+   "final_epoch_loss": 0.001638,
+   "peak_torch_alloc_mib": null,
+   "peak_torch_reserved_mib": null,
+   "peak_nvidia_smi_mib": null,
+   "exact": 20,
+   "effective": 25
+  },
+  "3": {
+   "final_epoch_loss": 4e-06,
+   "peak_torch_alloc_mib": 20797,
+   "peak_torch_reserved_mib": 23412,
+   "peak_nvidia_smi_mib": 22898,
+   "exact": 19,
+   "effective": 25
+  },
+  "4": {
+   "final_epoch_loss": 0.000505,
+   "peak_torch_alloc_mib": 20791,
+   "peak_torch_reserved_mib": 23538,
+   "peak_nvidia_smi_mib": 23904,
+   "exact": 19,
+   "effective": 24
+  },
+  "5": {
+   "final_epoch_loss": 0.001879,
+   "peak_torch_alloc_mib": 20789,
+   "peak_torch_reserved_mib": 23320,
+   "peak_nvidia_smi_mib": 22976,
+   "exact": 19,
+   "effective": 25
+  },
+  "6": {
+   "final_epoch_loss": 0.006215,
+   "peak_torch_alloc_mib": 20786,
+   "peak_torch_reserved_mib": 23474,
+   "peak_nvidia_smi_mib": 23700,
+   "exact": 21,
+   "effective": 26
+  },
+  "7": {
+   "final_epoch_loss": 0.002089,
+   "peak_torch_alloc_mib": 20788,
+   "peak_torch_reserved_mib": 23652,
+   "peak_nvidia_smi_mib": 23308,
+   "exact": 19,
+   "effective": 25
+  },
+  "8": {
+   "final_epoch_loss": 0.001051,
+   "peak_torch_alloc_mib": 20793,
+   "peak_torch_reserved_mib": 23660,
+   "peak_nvidia_smi_mib": 23316,
+   "exact": 20,
+   "effective": 25
+  },
+  "9": {
+   "final_epoch_loss": 0.001887,
+   "peak_torch_alloc_mib": 20802,
+   "peak_torch_reserved_mib": 23426,
+   "peak_nvidia_smi_mib": 23754,
+   "exact": 20,
+   "effective": 26
+  },
+  "10": {
+   "final_epoch_loss": 0.01272,
+   "peak_torch_alloc_mib": 20795,
+   "peak_torch_reserved_mib": 23476,
+   "peak_nvidia_smi_mib": 23044,
+   "exact": 21,
+   "effective": 27
+  }
+ },
+ "spread": {
+  "exact_min_max": [
+   15,
+   21
+  ],
+  "effective_min_max": [
+   19,
+   27
+  ],
+  "items_exact_all_seeds": 13,
+  "items_exact_no_seed": 23,
+  "items_seed_dependent": 11
+ }
+}

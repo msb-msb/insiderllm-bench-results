@@ -1,0 +1,144 @@
+
+########################################################################
+# Ornith-1.5-35B-A3B vs Qwen3.6-35B-A3B — A-B-B-A
+# started 2026-08-28T15:21:26-0700
+# pid 739791  (written to /home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-ornith-abba-2026-08-28/harness.pid)
+# harness llama-bench -ngl 99 -fa 1 -p 512 -n 128 -d 0,4096,8192 -r 5
+# order   A1 B1 B2 A2
+########################################################################
+
+========================================================================
+### slot A1   position 1/4   ornith-1.5-35b-a3b
+    /home/minotaur/bench-models/Ornith-1.5-35B-A3B-Q4_K_M.gguf
+========================================================================
+  [0] card idle at 33 MiB before load
+  [1] evicted -> resident 0/5,337,911 pages (0.00%)
+  [2] cached sha256 12d8d5c01bae7f23ea4822b2f96ba069d531f827d02a57c31002f2f95e72614a
+      upstream      12d8d5c01bae7f23ea4822b2f96ba069d531f827d02a57c31002f2f95e72614a
+      read 43.6s  (502 MB/s)
+      MATCH
+  [3] launched pid 739853, step2->3 gap 0.023s
+      bench ok, 6 tests, 24s
+      | model                          |       size |     params | backend    | ngl |  fa |            test |                  t/s |
+      | ------------------------------ | ---------: | ---------: | ---------- | --: | --: | --------------: | -------------------: |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |           pp512 |      3620.27 ± 26.25 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |           tg128 |        172.71 ± 0.95 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |   pp512 @ d4096 |      3399.57 ± 29.43 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |   tg128 @ d4096 |        170.87 ± 0.83 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |   pp512 @ d8192 |      3273.81 ± 20.79 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |   tg128 @ d8192 |        166.96 ± 0.75 |
+  [4] residency after run 5,337,911/5,337,911 (100.00%)
+  [5] post-run sha256 12d8d5c01bae7f23ea4822b2f96ba069d531f827d02a57c31002f2f95e72614a  read 36.6s  MATCH
+      telemetry {'start_temp_c': 45, 'temp_max_c': 67, 'temp_end_c': 63, 'sm_clock_mhz': 1950, 'power_draw_w': 417.55, 'vram_peak_mib': 21662, 'samples': 23, 'throttle_reasons_seen': ['0x0000000000000004']}
+
+========================================================================
+### slot B1   position 2/4   qwen3.6-35b-a3b
+    /home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+========================================================================
+  [0] card idle at 33 MiB before load
+  [1] evicted -> resident 0/5,403,938 pages (0.00%)
+  [2] cached sha256 ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61
+      upstream      ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61
+      read 45.8s  (483 MB/s)
+      MATCH
+  [3] launched pid 740014, step2->3 gap 0.024s
+      bench ok, 6 tests, 26s
+      | model                          |       size |     params | backend    | ngl |  fa |            test |                  t/s |
+      | ------------------------------ | ---------: | ---------: | ---------- | --: | --: | --------------: | -------------------: |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |           pp512 |      3702.29 ± 30.27 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |           tg128 |        158.25 ± 1.07 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |   pp512 @ d4096 |      3491.72 ± 33.12 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |   tg128 @ d4096 |        157.24 ± 0.61 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |   pp512 @ d8192 |      3361.16 ± 23.34 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |   tg128 @ d8192 |        153.55 ± 0.61 |
+  [4] residency after run 5,403,938/5,403,938 (100.00%)
+  [5] post-run sha256 ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61  read 37.0s  MATCH
+      telemetry {'start_temp_c': 49, 'temp_max_c': 69, 'temp_end_c': 64, 'sm_clock_mhz': 1950, 'power_draw_w': 416.84, 'vram_peak_mib': 21676, 'samples': 25, 'throttle_reasons_seen': ['0x0000000000000004']}
+
+========================================================================
+### slot B2   position 3/4   qwen3.6-35b-a3b
+    /home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+========================================================================
+  [0] card idle at 33 MiB before load
+  [1] evicted -> resident 0/5,403,938 pages (0.00%)
+  [2] cached sha256 ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61
+      upstream      ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61
+      read 44.2s  (501 MB/s)
+      MATCH
+  [3] launched pid 740181, step2->3 gap 0.022s
+      bench ok, 6 tests, 24s
+      | model                          |       size |     params | backend    | ngl |  fa |            test |                  t/s |
+      | ------------------------------ | ---------: | ---------: | ---------- | --: | --: | --------------: | -------------------: |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |           pp512 |      3686.15 ± 25.23 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |           tg128 |        158.12 ± 1.03 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |   pp512 @ d4096 |      3494.57 ± 33.31 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |   tg128 @ d4096 |        157.12 ± 0.64 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |   pp512 @ d8192 |      3363.77 ± 26.98 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |   1 |   tg128 @ d8192 |        153.38 ± 0.62 |
+  [4] residency after run 5,403,938/5,403,938 (100.00%)
+  [5] post-run sha256 ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61  read 36.6s  MATCH
+      telemetry {'start_temp_c': 50, 'temp_max_c': 70, 'temp_end_c': 69, 'sm_clock_mhz': 1950, 'power_draw_w': 417.98, 'vram_peak_mib': 21676, 'samples': 23, 'throttle_reasons_seen': ['0x0000000000000004']}
+
+========================================================================
+### slot A2   position 4/4   ornith-1.5-35b-a3b
+    /home/minotaur/bench-models/Ornith-1.5-35B-A3B-Q4_K_M.gguf
+========================================================================
+  [0] card idle at 33 MiB before load
+  [1] evicted -> resident 0/5,337,911 pages (0.00%)
+  [2] cached sha256 12d8d5c01bae7f23ea4822b2f96ba069d531f827d02a57c31002f2f95e72614a
+      upstream      12d8d5c01bae7f23ea4822b2f96ba069d531f827d02a57c31002f2f95e72614a
+      read 43.0s  (509 MB/s)
+      MATCH
+  [3] launched pid 740330, step2->3 gap 0.022s
+      bench ok, 6 tests, 23s
+      | model                          |       size |     params | backend    | ngl |  fa |            test |                  t/s |
+      | ------------------------------ | ---------: | ---------: | ---------- | --: | --: | --------------: | -------------------: |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |           pp512 |      3585.61 ± 18.26 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |           tg128 |        172.17 ± 1.01 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |   pp512 @ d4096 |      3375.27 ± 28.74 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |   tg128 @ d4096 |        170.51 ± 0.74 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |   pp512 @ d8192 |      3252.86 ± 24.82 |
+      | qwen35moe 35B.A3B Q4_K - Medium |  20.35 GiB |    35.51 B | CUDA       |  99 |   1 |   tg128 @ d8192 |        166.23 ± 0.70 |
+  [4] residency after run 5,337,911/5,337,911 (100.00%)
+  [5] post-run sha256 12d8d5c01bae7f23ea4822b2f96ba069d531f827d02a57c31002f2f95e72614a  read 36.2s  MATCH
+      telemetry {'start_temp_c': 50, 'temp_max_c': 70, 'temp_end_c': 69, 'sm_clock_mhz': 1950, 'power_draw_w': 416.4, 'vram_peak_mib': 21662, 'samples': 22, 'throttle_reasons_seen': ['0x0000000000000004']}
+
+========================================================================
+REPEATABILITY — the gate, not a formality
+========================================================================
+The 08-14 rows read a sub-one-percent between-model gap only because
+same-model repeats landed within 0.02 tok/s. Same test here: a gap is
+readable only if it is larger than the spread that produced it.
+
+ornith-1.5-35b-a3b  slots A1 A2
+  d=0     tg   172.71    172.17   spread 0.535 tok/s
+          pp  3620.27   3585.61   spread 34.661 t/s
+  d=4096  tg   170.87    170.51   spread 0.365 tok/s
+          pp  3399.57   3375.27   spread 24.302 t/s
+  d=8192  tg   166.96    166.23   spread 0.725 tok/s
+          pp  3273.81   3252.86   spread 20.952 t/s
+
+qwen3.6-35b-a3b  slots B1 B2
+  d=0     tg   158.25    158.12   spread 0.135 tok/s
+          pp  3702.29   3686.15   spread 16.138 t/s
+  d=4096  tg   157.24    157.12   spread 0.125 tok/s
+          pp  3491.72   3494.57   spread 2.849 t/s
+  d=8192  tg   153.55    153.38   spread 0.172 tok/s
+          pp  3361.16   3363.77   spread 2.601 t/s
+
+========================================================================
+BETWEEN-MODEL, averaged over each model's two slots
+========================================================================
+  d=0     ornith-1.5-35b-a3b  172.44   qwen3.6-35b-a3b  158.18   gap +14.26 tok/s (+9.01%)   max repeat spread 0.535   -> RESOLVABLE
+  d=4096  ornith-1.5-35b-a3b  170.69   qwen3.6-35b-a3b  157.18   gap +13.51 tok/s (+8.60%)   max repeat spread 0.365   -> RESOLVABLE
+  d=8192  ornith-1.5-35b-a3b  166.59   qwen3.6-35b-a3b  153.47   gap +13.13 tok/s (+8.55%)   max repeat spread 0.725   -> RESOLVABLE
+
+UNRESOLVABLE means the two models differ by less than one model
+differs from itself. Report it as unresolvable, not as a delta —
+that is what the 08-14 run did for prompt processing.
+  artifacts chowned back to uid 1000:1000
+
+DONE  slots_ok=4/4  failed=None
+  per-slot : /home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-ornith-abba-2026-08-28/slots/
+  merged   : /home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-ornith-abba-2026-08-28/results.json
+  log      : /home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-ornith-abba-2026-08-28/run.log

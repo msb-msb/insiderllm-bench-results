@@ -1,0 +1,290 @@
+=== MIU HEADLESS BENCH (Trinity-Mini)  2026-08-02T16:55:14-07:00 ===
+
+=== PRE-FLIGHT (desktop still up) ===
+model: /home/minotaur/bench-models/Trinity-Mini-Q4_K_M.gguf (15935808352 bytes)
+verifying sha256 (this reads 14.8 GiB, ~1-2 min)...
+  expected: 7c2f0f2991923c21baee495340b79feb2a124b1c93b57dea0652f8aa27ba08e8
+  actual:   7c2f0f2991923c21baee495340b79feb2a124b1c93b57dea0652f8aa27ba08e8
+  sha256 OK
+afmoe.block_count from file: 32 (expected 32)
+nvidia driver: 580.159.03
+llama.cpp build: b10088 67b9b0e
+
+=== DMIDECODE MEMORY ===
+	Error Correction Type: None
+	Size: 16 GB
+	Locator: ChannelA-DIMM0
+	Bank Locator: BANK 0
+	Type: DDR4
+	Type Detail: Synchronous Unbuffered (Unregistered)
+	Speed: 2667 MT/s
+	Manufacturer: Samsung
+	Part Number: M378A2K43DB1-CTD    
+	Rank: 2
+	Configured Memory Speed: 2667 MT/s
+	Configured Voltage: 1.2 V
+	Size: 16 GB
+	Locator: ChannelA-DIMM1
+	Bank Locator: BANK 1
+	Type: DDR4
+	Type Detail: Synchronous Unbuffered (Unregistered)
+	Speed: 2667 MT/s
+	Manufacturer: Samsung
+	Part Number: M378A2K43DB1-CTD    
+	Rank: 2
+	Configured Memory Speed: 2667 MT/s
+	Configured Voltage: 1.2 V
+	Size: 16 GB
+	Locator: ChannelB-DIMM0
+	Bank Locator: BANK 2
+	Type: DDR4
+	Type Detail: Synchronous Unbuffered (Unregistered)
+	Speed: 2667 MT/s
+	Manufacturer: Samsung
+	Part Number: M378A2K43DB1-CTD    
+	Rank: 2
+	Configured Memory Speed: 2667 MT/s
+	Configured Voltage: 1.2 V
+	Size: 16 GB
+	Locator: ChannelB-DIMM1
+	Bank Locator: BANK 3
+	Type: DDR4
+	Type Detail: Synchronous Unbuffered (Unregistered)
+	Speed: 2667 MT/s
+	Manufacturer: Samsung
+	Part Number: M378A2K43DB1-CTD    
+	Rank: 2
+	Configured Memory Speed: 2667 MT/s
+	Configured Voltage: 1.2 V
+
+=== BASEBOARD ===
+	Manufacturer: ASRock
+	Product Name: B365M Pro4
+
+=== stopping lightdm ===
+lightdm is-active: inactive
+Xorg processes still up: 0
+=== resetting swap (may take a minute) ===
+
+=== HEADLESS BASELINE ===
+memory.total [MiB], memory.used [MiB], memory.free [MiB], pcie.link.gen.max, pcie.link.width.max, driver_version
+24576 MiB, 9 MiB, 24115 MiB, 3, 16, 580.159.03
+MemTotal:       65774440 kB
+MemAvailable:   62826604 kB
+SwapTotal:      10485752 kB
+SwapFree:       10485752 kB
+lightdm: inactive | Xorg: 0
+processes on GPU:
+pid, used_gpu_memory [MiB]
+
+===== -ncmoe 0  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |   1 |           pp512 |      4946.92 ± 28.57 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |   1 |           tg128 |        206.58 ± 0.74 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |   1 |   pp512 @ d4096 |      4422.94 ± 31.37 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |   1 |   tg128 @ d4096 |        197.11 ± 0.74 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |   1 |   pp512 @ d8192 |      4244.96 ± 33.89 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |   1 |   tg128 @ d8192 |        193.53 ± 0.87 |
+
+build: 67b9b0e (1)
+[VRAM peak 15998 MiB | temp 74C | sm 1905 MHz | pwr 417.20 W | rc=0 | class=ok]
+MemAvailable:   62570884 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 1  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          1 |   1 |           pp512 |      4912.71 ± 28.48 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          1 |   1 |           tg128 |        206.08 ± 1.00 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          1 |   1 |   pp512 @ d4096 |      4403.93 ± 13.23 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          1 |   1 |   tg128 @ d4096 |        196.74 ± 0.70 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          1 |   1 |   pp512 @ d8192 |      4241.74 ± 27.99 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          1 |   1 |   tg128 @ d8192 |        193.03 ± 0.66 |
+
+build: 67b9b0e (1)
+[VRAM peak 15998 MiB | temp 75C | sm 1890 MHz | pwr 405.50 W | rc=0 | class=ok]
+MemAvailable:   62745444 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 2  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          2 |   1 |           pp512 |      4917.88 ± 27.16 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          2 |   1 |           tg128 |        205.91 ± 0.71 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          2 |   1 |   pp512 @ d4096 |      4399.71 ± 35.50 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          2 |   1 |   tg128 @ d4096 |        195.99 ± 0.70 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          2 |   1 |   pp512 @ d8192 |      4220.66 ± 35.46 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          2 |   1 |   tg128 @ d8192 |        192.42 ± 0.70 |
+
+build: 67b9b0e (1)
+[VRAM peak 15998 MiB | temp 76C | sm 1890 MHz | pwr 405.72 W | rc=0 | class=ok]
+MemAvailable:   62764236 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 3  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          3 |   1 |           pp512 |     3676.71 ± 107.38 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          3 |   1 |           tg128 |        173.92 ± 0.87 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          3 |   1 |   pp512 @ d4096 |      3395.10 ± 19.08 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          3 |   1 |   tg128 @ d4096 |        166.43 ± 0.89 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          3 |   1 |   pp512 @ d8192 |      3333.71 ± 26.22 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          3 |   1 |   tg128 @ d8192 |        164.13 ± 0.79 |
+
+build: 67b9b0e (1)
+[VRAM peak 15494 MiB | temp 75C | sm 1905 MHz | pwr 373.21 W | rc=0 | class=ok]
+MemAvailable:   62681344 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 4  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          4 |   1 |           pp512 |      2740.39 ± 49.36 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          4 |   1 |           tg128 |        147.39 ± 0.75 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          4 |   1 |   pp512 @ d4096 |      2610.86 ± 16.97 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          4 |   1 |   tg128 @ d4096 |        139.88 ± 0.58 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          4 |   1 |   pp512 @ d8192 |      2564.59 ± 13.32 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          4 |   1 |   tg128 @ d8192 |        140.19 ± 0.34 |
+
+build: 67b9b0e (1)
+[VRAM peak 15052 MiB | temp 73C | sm 1920 MHz | pwr 343.31 W | rc=0 | class=ok]
+MemAvailable:   62703520 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 6  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          6 |   1 |           pp512 |      1853.79 ± 30.41 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          6 |   1 |           tg128 |        111.20 ± 0.59 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          6 |   1 |   pp512 @ d4096 |      1819.25 ± 20.16 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          6 |   1 |   tg128 @ d4096 |        109.59 ± 2.05 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          6 |   1 |   pp512 @ d8192 |      1800.63 ± 13.30 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          6 |   1 |   tg128 @ d8192 |        109.88 ± 0.32 |
+
+build: 67b9b0e (1)
+[VRAM peak 14122 MiB | temp 70C | sm 1920 MHz | pwr 298.54 W | rc=0 | class=ok]
+MemAvailable:   62767596 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 8  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          8 |   1 |           pp512 |      1410.29 ± 15.60 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          8 |   1 |           tg128 |         93.50 ± 0.33 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          8 |   1 |   pp512 @ d4096 |       1401.46 ± 7.55 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          8 |   1 |   tg128 @ d4096 |         91.16 ± 0.30 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          8 |   1 |   pp512 @ d8192 |      1372.74 ± 23.73 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |          8 |   1 |   tg128 @ d8192 |         88.38 ± 0.19 |
+
+build: 67b9b0e (1)
+[VRAM peak 13192 MiB | temp 67C | sm 1920 MHz | pwr 267.64 W | rc=0 | class=ok]
+MemAvailable:   62685496 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 10  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |           pp512 |      1133.12 ± 12.37 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |           tg128 |         78.90 ± 0.34 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |   pp512 @ d4096 |       1147.97 ± 6.05 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |   tg128 @ d4096 |         77.82 ± 0.36 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |   pp512 @ d8192 |      1128.65 ± 11.76 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         10 |   1 |   tg128 @ d8192 |         77.50 ± 0.26 |
+
+build: 67b9b0e (1)
+[VRAM peak 12328 MiB | temp 65C | sm 1920 MHz | pwr 248.95 W | rc=0 | class=ok]
+MemAvailable:   62708796 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 11  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         11 |   1 |           pp512 |      1021.06 ± 11.51 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         11 |   1 |           tg128 |         69.14 ± 1.13 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         11 |   1 |   pp512 @ d4096 |       1038.61 ± 8.47 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         11 |   1 |   tg128 @ d4096 |         71.17 ± 0.46 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         11 |   1 |   pp512 @ d8192 |       1020.86 ± 7.16 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         11 |   1 |   tg128 @ d8192 |         71.24 ± 0.34 |
+
+build: 67b9b0e (1)
+[VRAM peak 11830 MiB | temp 62C | sm 1830 MHz | pwr 202.07 W | rc=0 | class=ok]
+MemAvailable:   62778024 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 12  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |           pp512 |       956.38 ± 12.76 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |           tg128 |         66.86 ± 1.44 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |   pp512 @ d4096 |        953.01 ± 8.78 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |   tg128 @ d4096 |         67.25 ± 0.13 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |   pp512 @ d8192 |        949.97 ± 7.24 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         12 |   1 |   tg128 @ d8192 |         66.85 ± 0.28 |
+
+build: 67b9b0e (1)
+[VRAM peak 11398 MiB | temp 61C | sm 1800 MHz | pwr 192.87 W | rc=0 | class=ok]
+MemAvailable:   62714520 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 16  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         16 |   1 |           pp512 |        744.11 ± 9.65 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         16 |   1 |           tg128 |         53.46 ± 1.12 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         16 |   1 |   pp512 @ d4096 |        744.59 ± 5.90 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         16 |   1 |   tg128 @ d4096 |         53.40 ± 0.11 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         16 |   1 |   pp512 @ d8192 |        748.56 ± 5.95 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         16 |   1 |   tg128 @ d8192 |         53.22 ± 0.20 |
+
+build: 67b9b0e (1)
+[VRAM peak 9606 MiB | temp 61C | sm 1800 MHz | pwr 179.90 W | rc=0 | class=ok]
+MemAvailable:   62809156 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 24  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         24 |   1 |           pp512 |        518.97 ± 9.12 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.17 ± 0.46 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         24 |   1 |   pp512 @ d4096 |        531.18 ± 4.06 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         24 |   1 |   tg128 @ d4096 |         37.19 ± 0.01 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         24 |   1 |   pp512 @ d8192 |        525.29 ± 6.80 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         24 |   1 |   tg128 @ d8192 |         37.67 ± 0.52 |
+
+build: 67b9b0e (1)
+[VRAM peak 5952 MiB | temp 60C | sm 1920 MHz | pwr 159.82 W | rc=0 | class=ok]
+MemAvailable:   62766844 kB SwapFree:       10485752 kB 
+
+===== -ncmoe 32  -d 0,4096,8192 =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):
+  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         32 |   1 |           pp512 |        389.97 ± 6.53 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         32 |   1 |           tg128 |         29.55 ± 0.24 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         32 |   1 |   pp512 @ d4096 |        403.29 ± 4.15 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         32 |   1 |   tg128 @ d4096 |         29.40 ± 0.03 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         32 |   1 |   pp512 @ d8192 |        400.52 ± 3.37 |
+| afmoe 26B Q4_K - Medium        |  14.83 GiB |    26.12 B | CUDA       |  99 |         32 |   1 |   tg128 @ d8192 |         28.99 ± 0.57 |
+
+build: 67b9b0e (1)
+[VRAM peak 2164 MiB | temp 59C | sm 1800 MHz | pwr 151.90 W | rc=0 | class=ok]
+MemAvailable:   62821540 kB SwapFree:       10485752 kB 
+
+SWEEP_COMPLETE 2026-08-02T17:06:28-07:00
+
+=== restarting lightdm ===

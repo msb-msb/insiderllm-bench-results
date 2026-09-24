@@ -1,0 +1,142 @@
+=== PHASE 0 OFFLOAD-THRESHOLD SWEEP  2026-08-25T00:28:12+00:00 ===
+host: rushuna  kernel: 6.8.0-136-generic
+name, memory.total [MiB], driver_version, pcie.link.gen.max, pcie.link.width.max
+NVIDIA GeForce RTX 3060, 12288 MiB, 580.173.02, 3, 16
+lightdm: inactive | Xorg: 0
+MemTotal:       32792824 kB
+MemAvailable:   31909548 kB
+args: -m /home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf -ngl 99 -ncmoe 24 -fa 1 -p 512 -n 128 -r 3
+
+===== CELL CONTROL_FIRST | GGML_OP_OFFLOAD_MIN_BATCH=<unset,default 32> | start temp 59C sm 1777MHz pwr 36.48W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        412.14 ± 7.31 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.81 ± 0.10 |
+
+build: 67b9b0e (1)
+[cell CONTROL_FIRST rc=0 elapsed=23s | end temp 57C sm 1777MHz pwr 41.12W]
+MemAvailable:   31914912 kB
+
+===== CELL T32 | GGML_OP_OFFLOAD_MIN_BATCH=32 | start temp 56C sm 1777MHz pwr 40.59W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        415.66 ± 6.46 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.78 ± 0.07 |
+
+build: 67b9b0e (1)
+[cell T32 rc=0 elapsed=23s | end temp 54C sm 1777MHz pwr 39.70W]
+MemAvailable:   31830616 kB
+
+===== CELL T1 | GGML_OP_OFFLOAD_MIN_BATCH=1 | start temp 53C sm 1777MHz pwr 35.18W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        415.57 ± 6.13 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         18.56 ± 0.01 |
+
+build: 67b9b0e (1)
+[cell T1 rc=0 elapsed=33s | end temp 54C sm 1777MHz pwr 35.70W]
+MemAvailable:   31891188 kB
+
+===== CELL T128 | GGML_OP_OFFLOAD_MIN_BATCH=128 | start temp 53C sm 1777MHz pwr 39.20W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        413.12 ± 6.20 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.85 ± 0.07 |
+
+build: 67b9b0e (1)
+[cell T128 rc=0 elapsed=22s | end temp 55C sm 1777MHz pwr 40.40W]
+MemAvailable:   31718704 kB
+
+===== CELL T4 | GGML_OP_OFFLOAD_MIN_BATCH=4 | start temp 54C sm 1777MHz pwr 39.96W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        415.23 ± 6.11 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.81 ± 0.10 |
+
+build: 67b9b0e (1)
+[cell T4 rc=0 elapsed=22s | end temp 55C sm 1777MHz pwr 35.89W]
+MemAvailable:   31837112 kB
+
+===== CELL T512 | GGML_OP_OFFLOAD_MIN_BATCH=512 | start temp 54C sm 1777MHz pwr 35.56W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        412.27 ± 7.60 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.84 ± 0.11 |
+
+build: 67b9b0e (1)
+[cell T512 rc=0 elapsed=22s | end temp 55C sm 1777MHz pwr 35.83W]
+MemAvailable:   31852516 kB
+
+===== CELL T16 | GGML_OP_OFFLOAD_MIN_BATCH=16 | start temp 54C sm 1777MHz pwr 39.57W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        412.65 ± 6.30 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.58 ± 0.23 |
+
+build: 67b9b0e (1)
+[cell T16 rc=0 elapsed=22s | end temp 54C sm 1777MHz pwr 35.95W]
+MemAvailable:   31862688 kB
+
+===== CELL T2 | GGML_OP_OFFLOAD_MIN_BATCH=2 | start temp 54C sm 1777MHz pwr 35.67W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        414.96 ± 6.13 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.81 ± 0.08 |
+
+build: 67b9b0e (1)
+[cell T2 rc=0 elapsed=22s | end temp 54C sm 1777MHz pwr 35.86W]
+MemAvailable:   31847620 kB
+
+===== CELL T64 | GGML_OP_OFFLOAD_MIN_BATCH=64 | start temp 53C sm 1777MHz pwr 35.50W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        414.10 ± 6.09 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.81 ± 0.17 |
+
+build: 67b9b0e (1)
+[cell T64 rc=0 elapsed=22s | end temp 55C sm 1777MHz pwr 35.76W]
+MemAvailable:   31861600 kB
+
+===== CELL T8 | GGML_OP_OFFLOAD_MIN_BATCH=8 | start temp 54C sm 1777MHz pwr 39.89W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        414.33 ± 6.26 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.83 ± 0.09 |
+
+build: 67b9b0e (1)
+[cell T8 rc=0 elapsed=22s | end temp 54C sm 1777MHz pwr 40.35W]
+MemAvailable:   31869056 kB
+
+===== CELL CONTROL_LAST | GGML_OP_OFFLOAD_MIN_BATCH=<unset,default 32> | start temp 53C sm 1777MHz pwr 35.47W =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        414.94 ± 6.11 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         38.82 ± 0.10 |
+
+build: 67b9b0e (1)
+[cell CONTROL_LAST rc=0 elapsed=22s | end temp 54C sm 1777MHz pwr 36.06W]
+MemAvailable:   31823936 kB
+
+SWEEP_COMPLETE 2026-08-25T00:32:48+00:00

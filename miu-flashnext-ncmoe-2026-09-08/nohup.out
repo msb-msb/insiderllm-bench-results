@@ -1,0 +1,20 @@
+13:43:11 start miu  card idle 270 MiB  mem {'cached_mib': 11361, 'avail_mib': 60342, 'free_mib': 49015}  shards 3  threads 6  load-mode mmap
+13:44:48   ncmoe48-mmap-rep1 (97s) peak 5368 MiB: tg128@d0 13.65±2.73  tg128@d4096 15.46±0.96
+13:45:57   ncmoe48-mmap-rep2 (69s) peak 5368 MiB: tg128@d0 16.84±0.45  tg128@d4096 17.50±0.07
+13:47:05   ncmoe48-mmap-rep3 (69s) peak 5368 MiB: tg128@d0 16.85±1.46  tg128@d4096 17.57±0.17
+13:48:09   ncmoe40-mmap-rep1 (63s) peak 13068 MiB: tg128@d0 18.18±1.55  tg128@d4096 19.96±0.31
+13:49:13   ncmoe40-mmap-rep2 (64s) peak 13068 MiB: tg128@d0 17.79±0.82  tg128@d4096 19.86±0.25
+13:50:17   ncmoe40-mmap-rep3 (64s) peak 13068 MiB: tg128@d0 17.54±0.73  tg128@d4096 19.53±0.02
+13:51:15   ncmoe34-mmap-rep1 (58s) peak 18840 MiB: tg128@d0 20.55±1.46  tg128@d4096 22.12±0.39
+13:52:14   ncmoe34-mmap-rep2 (59s) peak 18840 MiB: tg128@d0 19.82±1.06  tg128@d4096 22.14±0.32
+13:53:13   ncmoe34-mmap-rep3 (59s) peak 18840 MiB: tg128@d0 19.65±0.62  tg128@d4096 21.89±0.36
+13:54:07   ncmoe29-mmap-rep1 (54s) peak 23652 MiB: tg128@d0 22.04±0.36  tg128@d4096 24.71±0.10
+13:55:02   ncmoe29-mmap-rep2 (55s) peak 23652 MiB: tg128@d0 22.46±0.99  tg128@d4096 24.32±0.41
+13:55:56   ncmoe29-mmap-rep3 (54s) peak 23652 MiB: tg128@d0 23.29±1.91  tg128@d4096 24.42±0.45
+13:55:59   ncmoe26-mmap-rep1 FAILED rc=1 oom=False peak 534 MiB (4s): RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf'
+13:55:59   stop: -ncmoe 26 failed; last fitting value 29
+13:56:06   server best-ncmoe29 load 6.5s RSS 13635 MiB card 23550 MiB cached 50582 MiB
+13:56:29   server best-ncmoe29 rep1: prefill 2343 tok 137.2 tok/s; decode 20.84 tok/s; disk read prefill 2490 MiB, decode 42 MiB = 7.0 MiB/s, 0.33 MiB/token; RSS 28223 MiB cached 53116 MiB
+13:56:33   server best-ncmoe29 stopped, card 270 MiB
+13:56:33 done  card 270 MiB  mem {'cached_mib': 53083, 'avail_mib': 60088, 'free_mib': 7029}

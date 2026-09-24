@@ -1,0 +1,100 @@
+=== PHASE 1 2026-08-25T01:07:23+00:00 ===
+name, driver_version, pcie.link.gen.current, pcie.link.width.current
+NVIDIA GeForce RTX 3060, 580.173.02, 3, 16
+lightdm: inactive | Xorg: 0
+
+########## (a) OUR PUBLISHED CONFIG — A-B-B-A ##########
+
+===== a_A1_baseline | env: <none> | start 53C 1777MHz | MemFree 5333984kB =====
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        409.46 ± 6.37 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.93 ± 0.16 |
+build: 20f5994 (2)
+[a_A1_baseline end 55C | MemFree 5289108kB]
+
+===== a_B1_pinned | env: GGML_CUDA_REGISTER_HOST=1 | start 54C 1777MHz | MemFree 5289148kB =====
+.................................................................................................load_all_data: pinned 12564.33 MiB of mapped model memory for faster H2D transfers
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        528.44 ± 8.16 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.85 ± 0.10 |
+build: 20f5994 (2)
+[a_B1_pinned end 55C | MemFree 5320036kB]
+
+===== a_B2_pinned | env: GGML_CUDA_REGISTER_HOST=1 | start 53C 1777MHz | MemFree 5261156kB =====
+.................................................................................................load_all_data: pinned 12564.33 MiB of mapped model memory for faster H2D transfers
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        528.90 ± 8.25 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.94 ± 0.12 |
+build: 20f5994 (2)
+[a_B2_pinned end 54C | MemFree 5336896kB]
+
+===== a_A2_baseline | env: <none> | start 54C 1777MHz | MemFree 5334364kB =====
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        413.48 ± 6.20 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.21 ± 0.08 |
+build: 20f5994 (2)
+[a_A2_baseline end 54C | MemFree 5293212kB]
+
+########## (b) THEIR PUBLISHED REPRO — A-B-B-A ##########
+
+===== b_A1_baseline | env: <none> | start 54C 1777MHz | MemFree 5243152kB =====
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         26 |     2048 |          pp2048 |        939.59 ± 3.55 |
+build: 20f5994 (2)
+[b_A1_baseline end 54C | MemFree 5257380kB]
+
+===== b_B1_pinned | env: GGML_CUDA_REGISTER_HOST=1 | start 54C 1777MHz | MemFree 5267180kB =====
+.................................................................................................load_all_data: pinned 13562.88 MiB of mapped model memory for faster H2D transfers
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         26 |     2048 |          pp2048 |       1097.89 ± 3.75 |
+build: 20f5994 (2)
+[b_B1_pinned end 55C | MemFree 5352928kB]
+
+===== b_B2_pinned | env: GGML_CUDA_REGISTER_HOST=1 | start 54C 1777MHz | MemFree 5294016kB =====
+.................................................................................................load_all_data: pinned 13562.88 MiB of mapped model memory for faster H2D transfers
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         26 |     2048 |          pp2048 |       1097.56 ± 3.89 |
+build: 20f5994 (2)
+[b_B2_pinned end 55C | MemFree 5278604kB]
+
+===== b_A2_baseline | env: <none> | start 54C 1777MHz | MemFree 5251652kB =====
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         26 |     2048 |          pp2048 |        937.15 ± 2.69 |
+build: 20f5994 (2)
+[b_A2_baseline end 55C | MemFree 5279160kB]
+
+########## (c) FOUR-WAY ENV INTERACTION at -n 128 ##########
+
+===== c_neither | env: <none> | start 54C 1777MHz | MemFree 5285240kB =====
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        412.17 ± 6.30 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.90 ± 0.13 |
+build: 20f5994 (2)
+[c_neither end 55C | MemFree 5257188kB]
+
+===== c_minbatch1 | env: GGML_OP_OFFLOAD_MIN_BATCH=1 | start 54C 1777MHz | MemFree 5280836kB =====
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        414.07 ± 6.21 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         17.93 ± 0.02 |
+build: 20f5994 (2)
+[c_minbatch1 end 53C | MemFree 5275504kB]
+
+===== c_pinned | env: GGML_CUDA_REGISTER_HOST=1 | start 52C 1777MHz | MemFree 5314620kB =====
+.................................................................................................load_all_data: pinned 12564.33 MiB of mapped model memory for faster H2D transfers
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        529.09 ± 8.45 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.87 ± 0.10 |
+build: 20f5994 (2)
+[c_pinned end 55C | MemFree 5293888kB]
+
+===== c_both | env: GGML_CUDA_REGISTER_HOST=1 GGML_OP_OFFLOAD_MIN_BATCH=1 | start 53C 1777MHz | MemFree 5340480kB =====
+.................................................................................................load_all_data: pinned 12564.33 MiB of mapped model memory for faster H2D transfers
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        528.70 ± 8.26 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         22.62 ± 0.01 |
+build: 20f5994 (2)
+[c_both end 54C | MemFree 5294872kB]
+
+########## BRIDGE: fork baseline vs our b10088 ##########
+
+===== bridge_fork_b10088 | env: <none> | start 53C 1777MHz | MemFree 5289256kB =====
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        413.48 ± 6.28 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.93 ± 0.08 |
+build: 67b9b0e (1)
+[bridge_fork_b10088 end 54C | MemFree 5352992kB]
+
+===== bridge_fork_unset | env: <none> | start 54C 1777MHz | MemFree 5297932kB =====
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           pp512 |        412.67 ± 6.15 |
+| qwen35moe 35B.A3B Q4_K - Medium |  20.60 GiB |    34.66 B | CUDA       |  99 |         24 |   1 |           tg128 |         37.97 ± 0.09 |
+build: 20f5994 (2)
+[bridge_fork_unset end 54C | MemFree 5323220kB]
+
+PHASE1_COMPLETE 2026-08-25T01:13:10+00:00

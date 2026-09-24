@@ -1,0 +1,16 @@
+========================================================================
+MEMFAULT EVENT — 2026-08-18T01:11:31-0700
+========================================================================
+cached sha256 : 3777af2f7562dde63f2fcffd32bca7014a3085f1f81efa4c967cd3ecbdbc010c
+expected      : bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+O_DIRECT sha256: bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+disk verdict  : DISK CLEAN — this is RAM
+differing bytes: 1
+offset 12764399877 (0x2f8d14905): cache=0xb8 disk=0xf8 xor=0x40 bit=6 dir=1->0
+    mod512=261  mod4096=2309  mod2MiB=1132805
+    !! MATCHES PRIOR SIGNATURE (mod4096==2309, xor==0x40)
+    pagemap 0xa18000000056873d present=True
+    PFN 0x56873d   PHYSADDR 0x56873d905 (23227259141)
+    re-read #1: cached=0xb8 STILL CORRUPT
+    re-read #2: cached=0xb8 STILL CORRUPT
+========================================================================

@@ -1,0 +1,705 @@
+{
+ "host": "miu",
+ "cfg": {
+  "bin": "/home/minotaur/llama-v0.4.0/build/bin",
+  "model_dir": "/home/minotaur/bench-models/qwen3.8-flash-next",
+  "out": "/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-flashnext-ncmoe-2026-09-08",
+  "ncmoe": [
+   48,
+   40,
+   34,
+   29,
+   26
+  ],
+  "threads": 6,
+  "load_mode": "mmap",
+  "control_mmap": false,
+  "server_stock_first": false,
+  "disk": "nvme0n1"
+ },
+ "model": "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+ "build": "v0.4.0 5266f24",
+ "sweep": [
+  {
+   "tag": "ncmoe48-mmap-rep1",
+   "ncmoe": 48,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "48",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 97.2,
+   "peak_vram_mib": 5368,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 13.653292,
+     "stddev_ts": 2.731055
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 15.4599,
+     "stddev_ts": 0.96483
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe48-mmap-rep2",
+   "ncmoe": 48,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "48",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 68.6,
+   "peak_vram_mib": 5368,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 16.844352,
+     "stddev_ts": 0.452358
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 17.497856,
+     "stddev_ts": 0.070553
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe48-mmap-rep3",
+   "ncmoe": 48,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "48",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 68.6,
+   "peak_vram_mib": 5368,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 16.854905,
+     "stddev_ts": 1.456266
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 17.574202,
+     "stddev_ts": 0.172849
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe40-mmap-rep1",
+   "ncmoe": 40,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "40",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 63.4,
+   "peak_vram_mib": 13068,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 18.178103,
+     "stddev_ts": 1.54579
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 19.955635,
+     "stddev_ts": 0.312966
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe40-mmap-rep2",
+   "ncmoe": 40,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "40",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 64.0,
+   "peak_vram_mib": 13068,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 17.789679,
+     "stddev_ts": 0.819756
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 19.864979,
+     "stddev_ts": 0.245587
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe40-mmap-rep3",
+   "ncmoe": 40,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "40",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 64.5,
+   "peak_vram_mib": 13068,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 17.538167,
+     "stddev_ts": 0.7267
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 19.532795,
+     "stddev_ts": 0.019823
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe34-mmap-rep1",
+   "ncmoe": 34,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "34",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 58.2,
+   "peak_vram_mib": 18840,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 20.5518,
+     "stddev_ts": 1.459837
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 22.122606,
+     "stddev_ts": 0.388178
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe34-mmap-rep2",
+   "ncmoe": 34,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "34",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 58.8,
+   "peak_vram_mib": 18840,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 19.823736,
+     "stddev_ts": 1.062251
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 22.136181,
+     "stddev_ts": 0.322651
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe34-mmap-rep3",
+   "ncmoe": 34,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "34",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 59.3,
+   "peak_vram_mib": 18840,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 19.649795,
+     "stddev_ts": 0.616138
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 21.891868,
+     "stddev_ts": 0.362931
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe29-mmap-rep1",
+   "ncmoe": 29,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "29",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 54.0,
+   "peak_vram_mib": 23652,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 22.04257,
+     "stddev_ts": 0.360964
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 24.707523,
+     "stddev_ts": 0.101863
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe29-mmap-rep2",
+   "ncmoe": 29,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "29",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 54.6,
+   "peak_vram_mib": 23652,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 22.457819,
+     "stddev_ts": 0.991428
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 24.31863,
+     "stddev_ts": 0.41275
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe29-mmap-rep3",
+   "ncmoe": 29,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "29",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 53.6,
+   "peak_vram_mib": 23652,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 23.293726,
+     "stddev_ts": 1.909414
+    },
+    {
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 24.416735,
+     "stddev_ts": 0.450527
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe26-mmap-rep1",
+   "ncmoe": 26,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "6",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 3.6,
+   "peak_vram_mib": 534,
+   "rc": 1,
+   "oom": false,
+   "stderr_tail": "ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):\n  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB\nllama_bench: error: failed to load model '/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf'\n"
+  }
+ ],
+ "control": null,
+ "server": {
+  "best": {
+   "load": {
+    "load_s": 6.5,
+    "rss_mib": 13635,
+    "vram_mib": 23550,
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0/build/bin/llama-server",
+     "-m",
+     "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "29",
+     "-fa",
+     "on",
+     "-c",
+     "4096",
+     "-t",
+     "6",
+     "--load-mode",
+     "mmap",
+     "--port",
+     "8099",
+     "--host",
+     "127.0.0.1",
+     "-np",
+     "1",
+     "--no-warmup"
+    ],
+    "mem": {
+     "cached_mib": 50582,
+     "avail_mib": 59731,
+     "free_mib": 9208
+    }
+   },
+   "reps": [
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 17071.817,
+     "prefill_tps": 137.24373919893824,
+     "predicted_n": 128,
+     "predicted_ms": 6094.707,
+     "decode_tps": 20.837753152038317,
+     "wall_prefill_s": 17.14,
+     "wall_decode_s": 6.09,
+     "disk_read_prefill_mib": 2489.9,
+     "disk_read_decode_mib": 42.5,
+     "disk_read_decode_mib_per_s": 7.0,
+     "disk_read_decode_mib_per_token": 0.33,
+     "rep": 1,
+     "rss_after_mib": 28223,
+     "vram_after_mib": 23626,
+     "mem_before": {
+      "cached_mib": 50583,
+      "avail_mib": 59720,
+      "free_mib": 9195
+     },
+     "mem_after": {
+      "cached_mib": 53116,
+      "avail_mib": 59097,
+      "free_mib": 6038
+     }
+    }
+   ]
+  }
+ },
+ "first_fail": 26,
+ "last_fit": 29
+}

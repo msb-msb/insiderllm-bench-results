@@ -1,0 +1,30 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.4.0/build/bin/llama-bench",
+  "-m",
+  "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+  "-ngl",
+  "99",
+  "-ncmoe",
+  "48",
+  "-fa",
+  "1",
+  "-p",
+  "0",
+  "-n",
+  "128",
+  "-d",
+  "0,4096",
+  "-r",
+  "3",
+  "-t",
+  "6",
+  "-lm",
+  "mmap",
+  "-o",
+  "json"
+ ],
+ "rc": 0,
+ "stdout": "[\n  {\n    \"build_commit\": \"5266f24\",\n    \"build_number\": 1,\n    \"cpu_info\": \"Intel(R) Core(TM) i7-8086K CPU @ 4.00GHz\",\n    \"gpu_info\": \"NVIDIA GeForce RTX 3090\",\n    \"backends\": \"CUDA\",\n    \"model_filename\": \"/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf\",\n    \"model_type\": \"qwen4exp A3B IQ3_XXS - 3.0625 bpw\",\n    \"model_size\": 81950799360,\n    \"model_n_params\": 176943899520,\n    \"n_batch\": 2048,\n    \"n_ubatch\": 512,\n    \"n_threads\": 6,\n    \"cpu_mask\": \"0x0\",\n    \"cpu_strict\": false,\n    \"poll\": 50,\n    \"type_k\": \"f16\",\n    \"type_v\": \"f16\",\n    \"n_gpu_layers\": 99,\n    \"n_cpu_moe\": 48,\n    \"split_mode\": \"layer\",\n    \"main_gpu\": 0,\n    \"no_kv_offload\": false,\n    \"flash_attn\": 1,\n    \"devices\": \"auto\",\n    \"tensor_split\": \"0.00\",\n    \"tensor_buft_overrides\": \"none\",\n    \"load_mode\": \"mmap\",\n    \"lazy_mode\": \"auto\",\n    \"embeddings\": false,\n    \"no_op_offload\": 0,\n    \"no_host\": false,\n    \"fit_target\": 0,\n    \"fit_min_ctx\": 0,\n    \"n_prompt\": 0,\n    \"n_gen\": 128,\n    \"n_depth\": 0,\n    \"test_time\": \"2026-09-08T20:43:23Z\",\n    \"avg_ns\": 9653576886,\n    \"stddev_ns\": 2096872251,\n    \"avg_ts\": 13.653292,\n    \"stddev_ts\": 2.731055,\n    \"samples_ns\": [ 12011890880, 8949435206, 7999404574 ],\n    \"samples_ts\": [ 10.6561, 14.3026, 16.0012 ]\n  },\n  {\n    \"build_commit\": \"5266f24\",\n    \"build_number\": 1,\n    \"cpu_info\": \"Intel(R) Core(TM) i7-8086K CPU @ 4.00GHz\",\n    \"gpu_info\": \"NVIDIA GeForce RTX 3090\",\n    \"backends\": \"CUDA\",\n    \"model_filename\": \"/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf\",\n    \"model_type\": \"qwen4exp A3B IQ3_XXS - 3.0625 bpw\",\n    \"model_size\": 81950799360,\n    \"model_n_params\": 176943899520,\n    \"n_batch\": 2048,\n    \"n_ubatch\": 512,\n    \"n_threads\": 6,\n    \"cpu_mask\": \"0x0\",\n    \"cpu_strict\": false,\n    \"poll\": 50,\n    \"type_k\": \"f16\",\n    \"type_v\": \"f16\",\n    \"n_gpu_layers\": 99,\n    \"n_cpu_moe\": 48,\n    \"split_mode\": \"layer\",\n    \"main_gpu\": 0,\n    \"no_kv_offload\": false,\n    \"flash_attn\": 1,\n    \"devices\": \"auto\",\n    \"tensor_split\": \"0.00\",\n    \"tensor_buft_overrides\": \"none\",\n    \"load_mode\": \"mmap\",\n    \"lazy_mode\": \"auto\",\n    \"embeddings\": false,\n    \"no_op_offload\": 0,\n    \"no_host\": false,\n    \"fit_target\": 0,\n    \"fit_min_ctx\": 0,\n    \"n_prompt\": 0,\n    \"n_gen\": 128,\n    \"n_depth\": 4096,\n    \"test_time\": \"2026-09-08T20:43:53Z\",\n    \"avg_ns\": 8301488977,\n    \"stddev_ns\": 529111975,\n    \"avg_ts\": 15.459900,\n    \"stddev_ts\": 0.964830,\n    \"samples_ns\": [ 8884592666, 8167899308, 7851974957 ],\n    \"samples_ts\": [ 14.407, 15.6711, 16.3016 ]\n  }\n]\n",
+ "stderr_tail": "ggml_cuda_init: found 1 CUDA devices (Total VRAM: 24123 MiB):\n  Device 0: NVIDIA GeForce RTX 3090, compute capability 8.6, VMM: yes, VRAM: 24123 MiB\n"
+}

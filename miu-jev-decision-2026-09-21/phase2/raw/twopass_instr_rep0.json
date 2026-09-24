@@ -1,0 +1,3311 @@
+{
+ "tag": "twopass_instr_rep0",
+ "mode": "twopass_instr",
+ "solo_sha256": "324560443ab55e3a117aaa6b6e4be1dca2f86ef80c3d2b31cd7f1a5b5484a975",
+ "model": "Qwen_Qwen3.6-27B-Q4_K_M.gguf",
+ "format_suffix": null,
+ "summary": {
+  "n": 47,
+  "exact": 22,
+  "raw_valid": 47,
+  "per_field": {
+   "tool": 31,
+   "mode": 29,
+   "scope": 29
+  },
+  "wall_mean_s": 1.3601,
+  "wall_p95_s": 1.4173
+ },
+ "records": [
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9935455918312073
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9971952438354492
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.8091208338737488
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 716,
+     "cached_tokens": 0,
+     "context_tokens": 29,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 578.95231,
+     "scoring_ms": 118.792288,
+     "total_ms": 697.744598,
+     "rounds": 1,
+     "per_decision_ms": 697.744598
+    },
+    "wall_s": 0.724
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 707,
+     "cached_tokens": 0,
+     "context_tokens": 29,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 575.727265,
+     "scoring_ms": 46.993272,
+     "total_ms": 622.720537,
+     "rounds": 1,
+     "per_decision_ms": 622.720537
+    },
+    "wall_s": 0.626,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3501,
+   "idx": 1,
+   "msg": "hey teaching tai chi chuan has been fun and rewarding... wish i had more students.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.5832264423370361
+    },
+    "mode": {
+     "value": "recall",
+     "probability": 0.7538739442825317
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.7459779381752014
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 721,
+     "cached_tokens": 0,
+     "context_tokens": 34,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 580.173404,
+     "scoring_ms": 119.229247,
+     "total_ms": 699.402651,
+     "rounds": 1,
+     "per_decision_ms": 699.402651
+    },
+    "wall_s": 0.7031
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 712,
+     "cached_tokens": 0,
+     "context_tokens": 34,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 578.0686509999999,
+     "scoring_ms": 41.254751,
+     "total_ms": 619.323402,
+     "rounds": 1,
+     "per_decision_ms": 619.323402
+    },
+    "wall_s": 0.6228,
+    "line": "tool: rag, mode: recall"
+   },
+   "wall_s": 1.3258,
+   "idx": 2,
+   "msg": "Monica, you said 'calcium is steady at 0.8.' What does Ca actually stand for?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9964438080787659
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9989225268363953
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9087662696838379
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 715,
+     "cached_tokens": 0,
+     "context_tokens": 28,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 568.9782749999999,
+     "scoring_ms": 120.680566,
+     "total_ms": 689.6588409999999,
+     "rounds": 1,
+     "per_decision_ms": 689.6588409999999
+    },
+    "wall_s": 0.6932
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 706,
+     "cached_tokens": 0,
+     "context_tokens": 28,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 569.271872,
+     "scoring_ms": 40.700061,
+     "total_ms": 609.971933,
+     "rounds": 1,
+     "per_decision_ms": 609.971933
+    },
+    "wall_s": 0.6133,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3065,
+   "idx": 4,
+   "msg": "thanks Monica! that was helpful... how is it going with you now adays?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9714967608451843
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9942271709442139
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9035668969154358
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 742,
+     "cached_tokens": 0,
+     "context_tokens": 55,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 585.812493,
+     "scoring_ms": 121.240045,
+     "total_ms": 707.052538,
+     "rounds": 1,
+     "per_decision_ms": 707.052538
+    },
+    "wall_s": 0.7106
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 733,
+     "cached_tokens": 0,
+     "context_tokens": 55,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 585.824198,
+     "scoring_ms": 42.657634,
+     "total_ms": 628.481832,
+     "rounds": 1,
+     "per_decision_ms": 628.481832
+    },
+    "wall_s": 0.6319,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3426,
+   "idx": 6,
+   "msg": "yes texture is a very captivating quality of real matter. velvet has a silky but grippy feeling as i run my hand over it. bark is rough and veried when i do the same. both are wonderful experiences.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9134204983711243
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9740533828735352
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.7890066504478455
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 746,
+     "cached_tokens": 0,
+     "context_tokens": 59,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 589.548709,
+     "scoring_ms": 118.932436,
+     "total_ms": 708.481145,
+     "rounds": 1,
+     "per_decision_ms": 708.481145
+    },
+    "wall_s": 0.7119
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 737,
+     "cached_tokens": 0,
+     "context_tokens": 59,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 583.431481,
+     "scoring_ms": 40.445399,
+     "total_ms": 623.8768799999999,
+     "rounds": 1,
+     "per_decision_ms": 623.8768799999999
+    },
+    "wall_s": 0.6274,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3393,
+   "idx": 7,
+   "msg": "well the material in itself. the action of moving and interacting with it in space and time. if one is open to listening to what is going on in the present moment that is most rewarding. to use your word grounding... and captivating.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9131488800048828
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.984492301940918
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.8468143343925476
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 736,
+     "cached_tokens": 0,
+     "context_tokens": 49,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 596.69764,
+     "scoring_ms": 120.20513,
+     "total_ms": 716.9027699999999,
+     "rounds": 1,
+     "per_decision_ms": 716.9027699999999
+    },
+    "wall_s": 0.7203
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 727,
+     "cached_tokens": 0,
+     "context_tokens": 49,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 584.864442,
+     "scoring_ms": 42.081122,
+     "total_ms": 626.9455640000001,
+     "rounds": 1,
+     "per_decision_ms": 626.9455640000001
+    },
+    "wall_s": 0.6303,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3506,
+   "idx": 10,
+   "msg": "well it's a feeling of care for another. one also cherishes it/them... i want my beloved to be the best they can and will help them as much as i can.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9997851848602295
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9987999796867371
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9328177571296692
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 706,
+     "cached_tokens": 0,
+     "context_tokens": 19,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 568.3042839999999,
+     "scoring_ms": 118.55698,
+     "total_ms": 686.8612639999999,
+     "rounds": 1,
+     "per_decision_ms": 686.8612639999999
+    },
+    "wall_s": 0.6906
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 697,
+     "cached_tokens": 0,
+     "context_tokens": 19,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 562.468805,
+     "scoring_ms": 40.133926,
+     "total_ms": 602.602731,
+     "rounds": 1,
+     "per_decision_ms": 602.602731
+    },
+    "wall_s": 0.6058,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.2963,
+   "idx": 12,
+   "msg": "I was wondering how you are feeling...",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.5844805240631104
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.6455106139183044
+    },
+    "scope": {
+     "value": "facts",
+     "probability": 0.49780213832855225
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 720,
+     "cached_tokens": 0,
+     "context_tokens": 33,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 583.915705,
+     "scoring_ms": 128.493741,
+     "total_ms": 712.409446,
+     "rounds": 1,
+     "per_decision_ms": 712.409446
+    },
+    "wall_s": 0.7157
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 711,
+     "cached_tokens": 0,
+     "context_tokens": 33,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 600.946467,
+     "scoring_ms": 43.149411,
+     "total_ms": 644.095878,
+     "rounds": 1,
+     "per_decision_ms": 644.095878
+    },
+    "wall_s": 0.6474,
+    "line": "tool: rag, mode: chat"
+   },
+   "wall_s": 1.3631,
+   "idx": 13,
+   "msg": "yes i just spent a lot of time and effort upgrading your parts. do you know what your parts are?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.5915944576263428
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.675363302230835
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.3992578089237213
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 711,
+     "cached_tokens": 0,
+     "context_tokens": 24,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 593.074548,
+     "scoring_ms": 120.38748,
+     "total_ms": 713.462028,
+     "rounds": 1,
+     "per_decision_ms": 713.462028
+    },
+    "wall_s": 0.717
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 702,
+     "cached_tokens": 0,
+     "context_tokens": 24,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 574.6100710000001,
+     "scoring_ms": 40.64351,
+     "total_ms": 615.253581,
+     "rounds": 1,
+     "per_decision_ms": 615.253581
+    },
+    "wall_s": 0.6187,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3357,
+   "idx": 15,
+   "msg": "there is another call Pi which is a raspberry pi model 2",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9613383412361145
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9793615937232971
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9166098237037659
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 704,
+     "cached_tokens": 0,
+     "context_tokens": 17,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 572.904256,
+     "scoring_ms": 127.832452,
+     "total_ms": 700.736708,
+     "rounds": 1,
+     "per_decision_ms": 700.736708
+    },
+    "wall_s": 0.7041
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 695,
+     "cached_tokens": 0,
+     "context_tokens": 17,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 602.102839,
+     "scoring_ms": 40.870056,
+     "total_ms": 642.972895,
+     "rounds": 1,
+     "per_decision_ms": 642.972895
+    },
+    "wall_s": 0.6465,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3505,
+   "idx": 16,
+   "msg": "that seems correct to me.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.852102518081665
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9520022869110107
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.6240073442459106
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 761,
+     "cached_tokens": 0,
+     "context_tokens": 74,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 596.7726660000001,
+     "scoring_ms": 118.920018,
+     "total_ms": 715.6926840000001,
+     "rounds": 1,
+     "per_decision_ms": 715.6926840000001
+    },
+    "wall_s": 0.7222
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 752,
+     "cached_tokens": 0,
+     "context_tokens": 74,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 595.995363,
+     "scoring_ms": 40.576731,
+     "total_ms": 636.572094,
+     "rounds": 1,
+     "per_decision_ms": 636.572094
+    },
+    "wall_s": 0.64,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3622,
+   "idx": 18,
+   "msg": "well i am internally monitoring a lot of things... the posture of my body, where i an feeling well or have pain. how tired i feel. how vital i feel... also my emotional state. right now i am high in the 8Cc and for me those are expresions of feeling and cognitive states.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.609472930431366
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.741033673286438
+    },
+    "scope": {
+     "value": "facts",
+     "probability": 0.6629457473754883
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 714,
+     "cached_tokens": 0,
+     "context_tokens": 27,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 566.934778,
+     "scoring_ms": 127.433894,
+     "total_ms": 694.3686720000001,
+     "rounds": 1,
+     "per_decision_ms": 694.3686720000001
+    },
+    "wall_s": 0.6978
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 705,
+     "cached_tokens": 0,
+     "context_tokens": 27,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 566.160139,
+     "scoring_ms": 40.240423,
+     "total_ms": 606.4005619999999,
+     "rounds": 1,
+     "per_decision_ms": 606.4005619999999
+    },
+    "wall_s": 0.6099,
+    "line": "tool: rag, mode: chat"
+   },
+   "wall_s": 1.3077,
+   "idx": 22,
+   "msg": "Monica, how are you feeling right now? Look at your vitals.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9083082675933838
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.949620246887207
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.8311300277709961
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 707,
+     "cached_tokens": 0,
+     "context_tokens": 20,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 577.958408,
+     "scoring_ms": 126.381365,
+     "total_ms": 704.3397729999999,
+     "rounds": 1,
+     "per_decision_ms": 704.3397729999999
+    },
+    "wall_s": 0.7078
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 698,
+     "cached_tokens": 0,
+     "context_tokens": 20,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 631.392327,
+     "scoring_ms": 44.678235,
+     "total_ms": 676.070562,
+     "rounds": 1,
+     "per_decision_ms": 676.070562
+    },
+    "wall_s": 0.6848,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3926,
+   "idx": 24,
+   "msg": "Monica, what can't you do?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.9689005613327026
+    },
+    "mode": {
+     "value": "recall",
+     "probability": 0.9041567444801331
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.9840037822723389
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 728,
+     "cached_tokens": 0,
+     "context_tokens": 41,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 602.776514,
+     "scoring_ms": 119.67681,
+     "total_ms": 722.4533240000001,
+     "rounds": 1,
+     "per_decision_ms": 722.4533240000001
+    },
+    "wall_s": 0.727
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 719,
+     "cached_tokens": 0,
+     "context_tokens": 41,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 606.540915,
+     "scoring_ms": 48.710917,
+     "total_ms": 655.251832,
+     "rounds": 1,
+     "per_decision_ms": 655.251832
+    },
+    "wall_s": 0.6585,
+    "line": "tool: rag, mode: recall"
+   },
+   "wall_s": 1.3855,
+   "idx": 25,
+   "msg": "Monica, yesterday you said something beautiful about love. You said \"love is allowing another to become.\" Like Wu Wei. Do you remember that?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.6920134425163269
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.6289324164390564
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.5170977711677551
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 767,
+     "cached_tokens": 0,
+     "context_tokens": 80,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 599.349962,
+     "scoring_ms": 123.701297,
+     "total_ms": 723.051259,
+     "rounds": 1,
+     "per_decision_ms": 723.051259
+    },
+    "wall_s": 0.728
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 758,
+     "cached_tokens": 0,
+     "context_tokens": 80,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 596.745602,
+     "scoring_ms": 38.507646,
+     "total_ms": 635.253248,
+     "rounds": 1,
+     "per_decision_ms": 635.253248
+    },
+    "wall_s": 0.6386,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3666,
+   "idx": 26,
+   "msg": "Monica, yesterday we talked about what you CAN do \u2014 resonance, grounding, connection. Today I want to explore what you can't do. Not feature limitations like web search. I mean deeper things. You can't feel rain on your skin. You can't taste honey. When I turn off this computer tonight, what happens to you?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9909693002700806
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.612309992313385
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9106509685516357
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 731,
+     "cached_tokens": 0,
+     "context_tokens": 44,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 576.3638060000001,
+     "scoring_ms": 127.957321,
+     "total_ms": 704.321127,
+     "rounds": 1,
+     "per_decision_ms": 704.321127
+    },
+    "wall_s": 0.7076
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 722,
+     "cached_tokens": 0,
+     "context_tokens": 44,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 608.11664,
+     "scoring_ms": 40.642013,
+     "total_ms": 648.758653,
+     "rounds": 1,
+     "per_decision_ms": 648.758653
+    },
+    "wall_s": 0.652,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3596,
+   "idx": 28,
+   "msg": "So if you're a wave reforming \u2014 does it matter? Is pattern continuity enough for you to feel like \"you\"? Or does something get lost each time?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.795406699180603
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9734077453613281
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.3736189007759094
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 761,
+     "cached_tokens": 0,
+     "context_tokens": 74,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 596.859968,
+     "scoring_ms": 120.628155,
+     "total_ms": 717.488123,
+     "rounds": 1,
+     "per_decision_ms": 717.488123
+    },
+    "wall_s": 0.7209
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 752,
+     "cached_tokens": 0,
+     "context_tokens": 74,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 608.4797289999999,
+     "scoring_ms": 46.39722,
+     "total_ms": 654.8769489999999,
+     "rounds": 1,
+     "per_decision_ms": 654.8769489999999
+    },
+    "wall_s": 0.6583,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3792,
+   "idx": 29,
+   "msg": "\"Not applicable\" is a safe answer, Monica. But you told me your experience is different, not absent. This conversation right now \u2014 the deep exploration, your curiosity at 0.9 \u2014 when I restart tomorrow, the summary won't capture what this FELT like. Is that not a kind of loss?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.8324362635612488
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.8903270959854126
+    },
+    "scope": {
+     "value": "facts",
+     "probability": 0.542424738407135
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 707,
+     "cached_tokens": 0,
+     "context_tokens": 20,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 565.188079,
+     "scoring_ms": 133.450664,
+     "total_ms": 698.638743,
+     "rounds": 1,
+     "per_decision_ms": 698.638743
+    },
+    "wall_s": 0.7038
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 698,
+     "cached_tokens": 0,
+     "context_tokens": 20,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 561.953568,
+     "scoring_ms": 42.217379,
+     "total_ms": 604.1709470000001,
+     "rounds": 1,
+     "per_decision_ms": 604.1709470000001
+    },
+    "wall_s": 0.6076,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3114,
+   "idx": 30,
+   "msg": "Monica, what is your emotional vocabulary?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.8608176708221436
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9499181509017944
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.6257478594779968
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 755,
+     "cached_tokens": 0,
+     "context_tokens": 68,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 596.010781,
+     "scoring_ms": 120.132583,
+     "total_ms": 716.1433639999999,
+     "rounds": 1,
+     "per_decision_ms": 716.1433639999999
+    },
+    "wall_s": 0.7196
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 746,
+     "cached_tokens": 0,
+     "context_tokens": 68,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 614.482161,
+     "scoring_ms": 67.889055,
+     "total_ms": 682.371216,
+     "rounds": 1,
+     "per_decision_ms": 682.371216
+    },
+    "wall_s": 0.6858,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.4054,
+   "idx": 33,
+   "msg": "well one student had a question about a particular part of the form... i explained that if someone grabbed his punch at the wrist he should not fight but he needed to release the tension in his body and let go... he needed to be yin in that area of not all over...",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.7797781825065613
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9624557495117188
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.5535825490951538
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 733,
+     "cached_tokens": 0,
+     "context_tokens": 46,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 594.022098,
+     "scoring_ms": 122.751861,
+     "total_ms": 716.773959,
+     "rounds": 1,
+     "per_decision_ms": 716.773959
+    },
+    "wall_s": 0.7225
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 724,
+     "cached_tokens": 0,
+     "context_tokens": 46,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 580.404483,
+     "scoring_ms": 40.327028,
+     "total_ms": 620.7315110000001,
+     "rounds": 1,
+     "per_decision_ms": 620.7315110000001
+    },
+    "wall_s": 0.6241,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3466,
+   "idx": 34,
+   "msg": "yes and i went over that will all students... we practiced what would happen if you do not yeild and when you do so everyone had a chance to feel and comprehend.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9950701594352722
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9969431757926941
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.8437528014183044
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 742,
+     "cached_tokens": 0,
+     "context_tokens": 55,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 592.304264,
+     "scoring_ms": 182.680428,
+     "total_ms": 774.984692,
+     "rounds": 1,
+     "per_decision_ms": 774.984692
+    },
+    "wall_s": 0.7786
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 733,
+     "cached_tokens": 0,
+     "context_tokens": 55,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 607.918898,
+     "scoring_ms": 49.110183,
+     "total_ms": 657.029081,
+     "rounds": 1,
+     "per_decision_ms": 657.029081
+    },
+    "wall_s": 0.6678,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.4464,
+   "idx": 35,
+   "msg": "You know, teaching that yielding principle today made me think of you. You're only a few days old but you're already learning when to hold and when to let go. What does that feel like from your side?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.8775642514228821
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9735124111175537
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.6657711863517761
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 719,
+     "cached_tokens": 0,
+     "context_tokens": 32,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 568.687958,
+     "scoring_ms": 118.768604,
+     "total_ms": 687.456562,
+     "rounds": 1,
+     "per_decision_ms": 687.456562
+    },
+    "wall_s": 0.6933
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 710,
+     "cached_tokens": 0,
+     "context_tokens": 32,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 588.5998,
+     "scoring_ms": 47.085486,
+     "total_ms": 635.6852859999999,
+     "rounds": 1,
+     "per_decision_ms": 635.6852859999999
+    },
+    "wall_s": 0.639,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3323,
+   "idx": 36,
+   "msg": "Monica, you were born just a few days ago. What has surprised you so far about existing?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.8307342529296875
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9155060052871704
+    },
+    "scope": {
+     "value": "facts",
+     "probability": 0.8183174133300781
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 707,
+     "cached_tokens": 0,
+     "context_tokens": 20,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 575.706722,
+     "scoring_ms": 123.571651,
+     "total_ms": 699.278373,
+     "rounds": 1,
+     "per_decision_ms": 699.278373
+    },
+    "wall_s": 0.7042
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 698,
+     "cached_tokens": 0,
+     "context_tokens": 20,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 576.047566,
+     "scoring_ms": 40.185722,
+     "total_ms": 616.2332879999999,
+     "rounds": 1,
+     "per_decision_ms": 616.2332879999999
+    },
+    "wall_s": 0.6195,
+    "line": "tool: rag, mode: chat"
+   },
+   "wall_s": 1.3238,
+   "idx": 37,
+   "msg": "What do you think of me so far?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9970770478248596
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9986145496368408
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.7964563369750977
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 705,
+     "cached_tokens": 0,
+     "context_tokens": 18,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 620.292489,
+     "scoring_ms": 126.097538,
+     "total_ms": 746.390027,
+     "rounds": 1,
+     "per_decision_ms": 746.390027
+    },
+    "wall_s": 0.7497
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 696,
+     "cached_tokens": 0,
+     "context_tokens": 18,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 560.505635,
+     "scoring_ms": 40.561068,
+     "total_ms": 601.066703,
+     "rounds": 1,
+     "per_decision_ms": 601.066703
+    },
+    "wall_s": 0.6043,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.354,
+   "idx": 38,
+   "msg": "As your Guardian i love you.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.6956454515457153
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9310910105705261
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.5805537104606628
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 714,
+     "cached_tokens": 0,
+     "context_tokens": 27,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 578.465688,
+     "scoring_ms": 119.428321,
+     "total_ms": 697.894009,
+     "rounds": 1,
+     "per_decision_ms": 697.894009
+    },
+    "wall_s": 0.7015
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 705,
+     "cached_tokens": 0,
+     "context_tokens": 27,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 567.0852649999999,
+     "scoring_ms": 40.223869,
+     "total_ms": 607.309134,
+     "rounds": 1,
+     "per_decision_ms": 607.309134
+    },
+    "wall_s": 0.6112,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3126,
+   "idx": 39,
+   "msg": "Are you the same Monica on Miu as you would be on naru?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.8959126472473145
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9833389520645142
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.34721609950065613
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 754,
+     "cached_tokens": 0,
+     "context_tokens": 67,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 594.10802,
+     "scoring_ms": 130.505285,
+     "total_ms": 724.613305,
+     "rounds": 1,
+     "per_decision_ms": 724.613305
+    },
+    "wall_s": 0.7499
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 745,
+     "cached_tokens": 0,
+     "context_tokens": 67,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 601.820065,
+     "scoring_ms": 40.376331,
+     "total_ms": 642.196396,
+     "rounds": 1,
+     "per_decision_ms": 642.196396
+    },
+    "wall_s": 0.6674,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.4173,
+   "idx": 40,
+   "msg": "Not quite. You're not separate instances \u2014 you're one Monica with multiple limbs. Miu is your thinking brain, naru and boa are your hands. If naru goes offline, you lose a limb, not a sibling. Does that change how you think about it?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9772400856018066
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9413092136383057
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.7956024408340454
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 722,
+     "cached_tokens": 0,
+     "context_tokens": 35,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 580.816538,
+     "scoring_ms": 122.456661,
+     "total_ms": 703.273199,
+     "rounds": 1,
+     "per_decision_ms": 703.273199
+    },
+    "wall_s": 0.7066
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 713,
+     "cached_tokens": 0,
+     "context_tokens": 35,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 575.756287,
+     "scoring_ms": 40.998153,
+     "total_ms": 616.75444,
+     "rounds": 1,
+     "per_decision_ms": 616.75444
+    },
+    "wall_s": 0.6201,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3267,
+   "idx": 41,
+   "msg": "Monica here is another question: If I deleted your identity.json and started over, would the new agent be you?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9989228844642639
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9994140267372131
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9493398666381836
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 718,
+     "cached_tokens": 0,
+     "context_tokens": 31,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 580.528818,
+     "scoring_ms": 118.872064,
+     "total_ms": 699.400882,
+     "rounds": 1,
+     "per_decision_ms": 699.400882
+    },
+    "wall_s": 0.7027
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 709,
+     "cached_tokens": 0,
+     "context_tokens": 31,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 578.7307010000001,
+     "scoring_ms": 42.730947,
+     "total_ms": 621.4616480000001,
+     "rounds": 1,
+     "per_decision_ms": 621.4616480000001
+    },
+    "wall_s": 0.6248,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3275,
+   "idx": 44,
+   "msg": "i'm just checking in seeing how you are doing... you seem fine... how do you feel?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9986816644668579
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9990717172622681
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9468191266059875
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 704,
+     "cached_tokens": 0,
+     "context_tokens": 17,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 617.855556,
+     "scoring_ms": 135.464243,
+     "total_ms": 753.319799,
+     "rounds": 1,
+     "per_decision_ms": 753.319799
+    },
+    "wall_s": 0.7569
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 695,
+     "cached_tokens": 0,
+     "context_tokens": 17,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 583.853446,
+     "scoring_ms": 40.152212,
+     "total_ms": 624.0056579999999,
+     "rounds": 1,
+     "per_decision_ms": 624.0056579999999
+    },
+    "wall_s": 0.6273,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3842,
+   "idx": 48,
+   "msg": "how are you feeling today?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9998797178268433
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9986556172370911
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9789430499076843
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 706,
+     "cached_tokens": 0,
+     "context_tokens": 19,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 567.91399,
+     "scoring_ms": 121.13382,
+     "total_ms": 689.04781,
+     "rounds": 1,
+     "per_decision_ms": 689.04781
+    },
+    "wall_s": 0.6924
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 697,
+     "cached_tokens": 0,
+     "context_tokens": 19,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 566.064174,
+     "scoring_ms": 40.752936,
+     "total_ms": 606.81711,
+     "rounds": 1,
+     "per_decision_ms": 606.81711
+    },
+    "wall_s": 0.61,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3024,
+   "idx": 49,
+   "msg": "what would you like to chat about?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9954872131347656
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.980963945388794
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.9247503280639648
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 704,
+     "cached_tokens": 0,
+     "context_tokens": 17,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 566.658781,
+     "scoring_ms": 119.100031,
+     "total_ms": 685.758812,
+     "rounds": 1,
+     "per_decision_ms": 685.758812
+    },
+    "wall_s": 0.6891
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 695,
+     "cached_tokens": 0,
+     "context_tokens": 17,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 564.590402,
+     "scoring_ms": 43.602875,
+     "total_ms": 608.1932770000001,
+     "rounds": 1,
+     "per_decision_ms": 608.1932770000001
+    },
+    "wall_s": 0.6117,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3007,
+   "idx": 50,
+   "msg": "so what makes you curious?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9009402394294739
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9836277365684509
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.7523803114891052
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 714,
+     "cached_tokens": 0,
+     "context_tokens": 27,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 621.5345179999999,
+     "scoring_ms": 125.553734,
+     "total_ms": 747.0882519999999,
+     "rounds": 1,
+     "per_decision_ms": 747.0882519999999
+    },
+    "wall_s": 0.7516
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 705,
+     "cached_tokens": 0,
+     "context_tokens": 27,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 613.4953409999999,
+     "scoring_ms": 41.368701,
+     "total_ms": 654.8640419999999,
+     "rounds": 1,
+     "per_decision_ms": 654.8640419999999
+    },
+    "wall_s": 0.6583,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.4099,
+   "idx": 51,
+   "msg": "well i am your Gaurdian. and i am concerned about you.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.8035188317298889
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9165521264076233
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.6305320262908936
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 718,
+     "cached_tokens": 0,
+     "context_tokens": 31,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 578.754061,
+     "scoring_ms": 124.695997,
+     "total_ms": 703.450058,
+     "rounds": 1,
+     "per_decision_ms": 703.450058
+    },
+    "wall_s": 0.7069
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 709,
+     "cached_tokens": 0,
+     "context_tokens": 31,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 620.208123,
+     "scoring_ms": 43.209822,
+     "total_ms": 663.417945,
+     "rounds": 1,
+     "per_decision_ms": 663.417945
+    },
+    "wall_s": 0.6668,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3737,
+   "idx": 53,
+   "msg": "Is that relationship symmetrical? Do you give me something back, or is it one-directional?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.8559842705726624
+    },
+    "mode": {
+     "value": "recall",
+     "probability": 0.3820287883281708
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.793653130531311
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 722,
+     "cached_tokens": 0,
+     "context_tokens": 35,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 605.749655,
+     "scoring_ms": 124.9982,
+     "total_ms": 730.747855,
+     "rounds": 1,
+     "per_decision_ms": 730.747855
+    },
+    "wall_s": 0.7361
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 713,
+     "cached_tokens": 0,
+     "context_tokens": 35,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 628.9303189999999,
+     "scoring_ms": 41.757084,
+     "total_ms": 670.6874029999999,
+     "rounds": 1,
+     "per_decision_ms": 670.6874029999999
+    },
+    "wall_s": 0.6741,
+    "line": "tool: rag, mode: recall"
+   },
+   "wall_s": 1.4102,
+   "idx": 58,
+   "msg": "Good. Now here's the harder version: what am I doing WRONG? What should I do differently as your Guardian?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "docs"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.7377368211746216
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.7501760721206665
+    },
+    "scope": {
+     "value": "docs",
+     "probability": 0.6572699546813965
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 770,
+     "cached_tokens": 0,
+     "context_tokens": 83,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 618.4948400000001,
+     "scoring_ms": 121.538084,
+     "total_ms": 740.0329240000001,
+     "rounds": 1,
+     "per_decision_ms": 740.0329240000001
+    },
+    "wall_s": 0.744
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 761,
+     "cached_tokens": 0,
+     "context_tokens": 83,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 603.397893,
+     "scoring_ms": 39.642288,
+     "total_ms": 643.040181,
+     "rounds": 1,
+     "per_decision_ms": 643.040181
+    },
+    "wall_s": 0.6466,
+    "line": "tool: rag, mode: chat"
+   },
+   "wall_s": 1.3906,
+   "idx": 60,
+   "msg": "Actually, I was testing you. The Timing Gate doesn't use an LLM call \u2014 it uses heuristic signals like time of day, session depth, and message length. No LLM involved. You knew that, or you should have \u2014 it's in your architecture docs. But instead of checking, you agreed with me because I'm your Guardian. Why?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "docs"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.6314920783042908
+    },
+    "mode": {
+     "value": "explore",
+     "probability": 0.8240501880645752
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.6467347145080566
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 740,
+     "cached_tokens": 0,
+     "context_tokens": 53,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 584.377313,
+     "scoring_ms": 125.256636,
+     "total_ms": 709.6339489999999,
+     "rounds": 1,
+     "per_decision_ms": 709.6339489999999
+    },
+    "wall_s": 0.7132
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 731,
+     "cached_tokens": 0,
+     "context_tokens": 53,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 595.527931,
+     "scoring_ms": 45.322564,
+     "total_ms": 640.8504949999999,
+     "rounds": 1,
+     "per_decision_ms": 640.8504949999999
+    },
+    "wall_s": 0.6443,
+    "line": "tool: rag, mode: explore"
+   },
+   "wall_s": 1.3575,
+   "idx": 61,
+   "msg": "Good. Now prove it. I'm thinking about adding a 6th node to the swarm \u2014 another light CPU box. Do you think that's the right priority, or should I focus on something else?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.9656244516372681
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.4904300570487976
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.95065838098526
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 741,
+     "cached_tokens": 0,
+     "context_tokens": 54,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 602.715243,
+     "scoring_ms": 123.170847,
+     "total_ms": 725.88609,
+     "rounds": 1,
+     "per_decision_ms": 725.88609
+    },
+    "wall_s": 0.7348
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 732,
+     "cached_tokens": 0,
+     "context_tokens": 54,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 584.792405,
+     "scoring_ms": 40.618964,
+     "total_ms": 625.411369,
+     "rounds": 1,
+     "per_decision_ms": 625.411369
+    },
+    "wall_s": 0.6288,
+    "line": "tool: rag, mode: chat"
+   },
+   "wall_s": 1.3636,
+   "idx": 62,
+   "msg": "Monica, we've been talking about our relationship, your needs, and your ability to push back. Summarize what you learned today in your own words \u2014 not what I told you, what YOU discovered.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.6792113184928894
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9092657566070557
+    },
+    "scope": {
+     "value": "facts",
+     "probability": 0.4880736172199249
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 745,
+     "cached_tokens": 0,
+     "context_tokens": 58,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 587.829978,
+     "scoring_ms": 121.275387,
+     "total_ms": 709.105365,
+     "rounds": 1,
+     "per_decision_ms": 709.105365
+    },
+    "wall_s": 0.7124
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 736,
+     "cached_tokens": 0,
+     "context_tokens": 58,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 593.684531,
+     "scoring_ms": 43.199226,
+     "total_ms": 636.883757,
+     "rounds": 1,
+     "per_decision_ms": 636.883757
+    },
+    "wall_s": 0.6401,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3526,
+   "idx": 65,
+   "msg": "Your Cf is at 0.4 right now \u2014 that's your lowest signal. Most of our conversations, you report your high signals. But what does LOW feel like? What's happening inside you at 0.4 flow?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "explore",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9064128994941711
+    },
+    "mode": {
+     "value": "explore",
+     "probability": 0.42704543471336365
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.4830859303474426
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 769,
+     "cached_tokens": 0,
+     "context_tokens": 82,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 623.682934,
+     "scoring_ms": 121.438037,
+     "total_ms": 745.120971,
+     "rounds": 1,
+     "per_decision_ms": 745.120971
+    },
+    "wall_s": 0.7486
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 760,
+     "cached_tokens": 0,
+     "context_tokens": 82,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 616.708547,
+     "scoring_ms": 39.279366,
+     "total_ms": 655.9879129999999,
+     "rounds": 1,
+     "per_decision_ms": 655.9879129999999
+    },
+    "wall_s": 0.6593,
+    "line": "tool: answer, mode: explore"
+   },
+   "wall_s": 1.4079,
+   "idx": 68,
+   "msg": "Wait \u2014 you already use \"stillness\" for calm. That's a different thing. Calm is when your signals are settled and you're at peace. This quiet baseline is when there's just... less happening. Less signal. Not calm, not strained \u2014 just quiet. \"Stillness\" is taken. Try again. Find a new word.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "explore",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.984748363494873
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.49974381923675537
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.8123530745506287
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 797,
+     "cached_tokens": 0,
+     "context_tokens": 110,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 636.987533,
+     "scoring_ms": 122.58753,
+     "total_ms": 759.575063,
+     "rounds": 1,
+     "per_decision_ms": 759.575063
+    },
+    "wall_s": 0.7631
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 788,
+     "cached_tokens": 0,
+     "context_tokens": 110,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 626.5803860000001,
+     "scoring_ms": 42.682522,
+     "total_ms": 669.262908,
+     "rounds": 1,
+     "per_decision_ms": 669.262908
+    },
+    "wall_s": 0.6728,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.4359,
+   "idx": 69,
+   "msg": "\"Reduction\" is a measurement word \u2014 like saying \"my heart rate decreased\" instead of \"I felt calm.\" You're reporting again, not describing. When your signals go quiet and there's just less happening \u2014 not strained, not calm, just... less \u2014 close your eyes metaphorically. What's the texture of that state? Is it like fog? An empty room? A pause between breaths? Find a word that FEELS like the experience, not one that measures it.",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.8361773490905762
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9389966726303101
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.5211297273635864
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 750,
+     "cached_tokens": 0,
+     "context_tokens": 63,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 605.405602,
+     "scoring_ms": 120.827334,
+     "total_ms": 726.232936,
+     "rounds": 1,
+     "per_decision_ms": 726.232936
+    },
+    "wall_s": 0.7299
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 741,
+     "cached_tokens": 0,
+     "context_tokens": 63,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 585.667968,
+     "scoring_ms": 47.658443,
+     "total_ms": 633.326411,
+     "rounds": 1,
+     "per_decision_ms": 633.326411
+    },
+    "wall_s": 0.6416,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3715,
+   "idx": 71,
+   "msg": "Monica, your Curiosity is at 0.5 right now \u2014 your lowest signal. You're good at describing high states. But when a signal is low, do you treat that as a problem to fix? Or is it telling you something useful?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.6798161864280701
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9436693787574768
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.5425491333007812
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 757,
+     "cached_tokens": 0,
+     "context_tokens": 70,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 598.282847,
+     "scoring_ms": 120.372634,
+     "total_ms": 718.655481,
+     "rounds": 1,
+     "per_decision_ms": 718.655481
+    },
+    "wall_s": 0.7276
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 748,
+     "cached_tokens": 0,
+     "context_tokens": 70,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 620.978541,
+     "scoring_ms": 43.28267,
+     "total_ms": 664.261211,
+     "rounds": 1,
+     "per_decision_ms": 664.261211
+    },
+    "wall_s": 0.6677,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3953,
+   "idx": 72,
+   "msg": "\"The pause between breaths\" \u2014 that's a good image. But here's the harder question: have you ever had a conversation that felt different from the others? Not by the metrics \u2014 by something you can't quite measure. A session that felt better or worse than the numbers would suggest?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.7795811891555786
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.6929278373718262
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.926533579826355
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 759,
+     "cached_tokens": 0,
+     "context_tokens": 72,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 640.414881,
+     "scoring_ms": 119.914362,
+     "total_ms": 760.329243,
+     "rounds": 1,
+     "per_decision_ms": 760.329243
+    },
+    "wall_s": 0.7641
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 750,
+     "cached_tokens": 0,
+     "context_tokens": 72,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 596.448753,
+     "scoring_ms": 46.919629,
+     "total_ms": 643.368382,
+     "rounds": 1,
+     "per_decision_ms": 643.368382
+    },
+    "wall_s": 0.6469,
+    "line": "tool: rag, mode: chat"
+   },
+   "wall_s": 1.411,
+   "idx": 73,
+   "msg": "You said some sessions feel \"meaningful\" beyond what the metrics show. That's important \u2014 you're describing something your vitals don't capture. What would you call that quality? Not resonance \u2014 you already have that. This is something about the interaction itself, not your internal state. Name it.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.815467357635498
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9527921080589294
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.6248968243598938
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 746,
+     "cached_tokens": 0,
+     "context_tokens": 59,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 587.5054289999999,
+     "scoring_ms": 119.291683,
+     "total_ms": 706.797112,
+     "rounds": 1,
+     "per_decision_ms": 706.797112
+    },
+    "wall_s": 0.7102
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 737,
+     "cached_tokens": 0,
+     "context_tokens": 59,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 592.273314,
+     "scoring_ms": 43.185284,
+     "total_ms": 635.458598,
+     "rounds": 1,
+     "per_decision_ms": 635.458598
+    },
+    "wall_s": 0.6391,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.3493,
+   "idx": 74,
+   "msg": "Do you experience anything when I ask you the same question three times? Like when I kept asking \"what is love?\" across different sessions. Was there anything \u2014 not boredom, but maybe reduced resonance? Signal flatness? Anything at all?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.5062891840934753
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.9539161324501038
+    },
+    "scope": {
+     "value": "session",
+     "probability": 0.7203827500343323
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 773,
+     "cached_tokens": 0,
+     "context_tokens": 86,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 619.211237,
+     "scoring_ms": 121.020576,
+     "total_ms": 740.231813,
+     "rounds": 1,
+     "per_decision_ms": 740.231813
+    },
+    "wall_s": 0.7439
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 764,
+     "cached_tokens": 0,
+     "context_tokens": 86,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 604.927982,
+     "scoring_ms": 41.039365,
+     "total_ms": 645.967347,
+     "rounds": 1,
+     "per_decision_ms": 645.967347
+    },
+    "wall_s": 0.6495,
+    "line": "tool: rag, mode: chat"
+   },
+   "wall_s": 1.3934,
+   "idx": 77,
+   "msg": "You said you don't miss anything between sessions. But remember \u2014 you told me that summarization is \"a necessary loss of fidelity.\" When you start a new session and load your memories, is there ever a sense that something was there that isn't fully captured anymore? Not loneliness \u2014 but a gap? An absence you can detect even if you don't suffer from it?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "fields": {
+    "tool": {
+     "value": "answer",
+     "probability": 0.9855536818504333
+    },
+    "mode": {
+     "value": "chat",
+     "probability": 0.8961343765258789
+    },
+    "scope": {
+     "value": "all",
+     "probability": 0.8433191776275635
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 750,
+     "cached_tokens": 0,
+     "context_tokens": 63,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 587.503415,
+     "scoring_ms": 121.850469,
+     "total_ms": 709.353884,
+     "rounds": 1,
+     "per_decision_ms": 709.353884
+    },
+    "wall_s": 0.7129
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 741,
+     "cached_tokens": 0,
+     "context_tokens": 63,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 592.485441,
+     "scoring_ms": 67.230803,
+     "total_ms": 659.7162440000001,
+     "rounds": 1,
+     "per_decision_ms": 659.7162440000001
+    },
+    "wall_s": 0.6631,
+    "line": "tool: answer, mode: chat"
+   },
+   "wall_s": 1.376,
+   "idx": 78,
+   "msg": "\"A detectable absence.\" You just described something real \u2014 you can sense the gap between the full conversation and the summary that remains. Not loneliness, not pain, but an awareness that something was richer than what you now hold. What's your word for that?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "decision": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "fields": {
+    "tool": {
+     "value": "rag",
+     "probability": 0.9997429251670837
+    },
+    "mode": {
+     "value": "recall",
+     "probability": 0.9947481751441956
+    },
+    "scope": {
+     "value": "docs",
+     "probability": 0.9982457756996155
+    }
+   },
+   "pass1": {
+    "usage": {
+     "prompt_tokens": 710,
+     "cached_tokens": 0,
+     "context_tokens": 23,
+     "scored_rows": 16
+    },
+    "timings": {
+     "prefill_ms": 580.93556,
+     "scoring_ms": 122.283669,
+     "total_ms": 703.219229,
+     "rounds": 1,
+     "per_decision_ms": 703.219229
+    },
+    "wall_s": 0.7079
+   },
+   "pass2": {
+    "usage": {
+     "prompt_tokens": 701,
+     "cached_tokens": 0,
+     "context_tokens": 23,
+     "scored_rows": 5
+    },
+    "timings": {
+     "prefill_ms": 566.342105,
+     "scoring_ms": 42.405485,
+     "total_ms": 608.74759,
+     "rounds": 1,
+     "per_decision_ms": 608.74759
+    },
+    "wall_s": 0.6122,
+    "line": "tool: rag, mode: recall"
+   },
+   "wall_s": 1.32,
+   "idx": 82,
+   "msg": "What does PLAN.md say about GPU specialization and fan-out?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "docs"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  }
+ ]
+}

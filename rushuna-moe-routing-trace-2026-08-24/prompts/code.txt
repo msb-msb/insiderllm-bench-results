@@ -1,0 +1,62 @@
+You are reviewing a memory-fault soak harness. Work through the following Python carefully and produce a thorough written review.
+
+Cover, in order and at length: (1) every path by which the counters can silently diverge from reality, with the specific line and the mechanism; (2) the failure modes around state persistence and process restart; (3) what happens on clock changes, and on partial reads; (4) a corrected rewrite of the whole function with inline commentary explaining each change; (5) a set of unit tests that would have caught each bug you found, written out in full.
+
+Be exhaustive. Do not summarise; write the complete analysis and the complete code.
+
+# every kind that advances the cycle clock. Old names retained so the backfill
+# still parses log lines written before the bench-skip fix.
+CREDITED_KINDS = {"OK"}
+BLIND_KINDS = {"BLINDSPOT", "SKIP-BENCH", "SKIP-BENCH-BLIND", "PAUSE", "PAUSE-BLIND"}
+CYCLE_KINDS = CREDITED_KINDS | BLIND_KINDS | {"*** MISMATCH ***"}
+
+
+def backfill(st):
+    """One-time seed of counters added after this run had already started.
+
+    Reads only our own log and runs only when the keys are absent, so it can
+    never overwrite live state. Without it the first post-edit cycle would
+    report a 0% credit ratio and misrepresent a run already 15h old.
+    """
+    if "blind_s" in st:
+        return st
+    run_start = prev = None
+    ok = blind = 0
+    blind_s = 0.0
+    try:
+        for line in open(LOG, errors="replace"):
+            m = TS_RE.match(line)
+            if not m:
+                continue
+            t = datetime.strptime(m.group(1), "%Y-%m-%dT%H:%M:%S%z").timestamp()
+            kind = m.group(2).strip()
+            if run_start is None:
+                run_start = t
+            if kind not in CYCLE_KINDS:
+                continue
+            iv = 0.0 if prev is None else min(max(0.0, t - prev), CREDIT_CAP_S)
+            if kind in CREDITED_KINDS:
+                ok += 1
+            elif kind in BLIND_KINDS:
+                blind += 1
+                blind_s += iv
+            prev = t
+    except FileNotFoundError:
+        pass
+    st.setdefault("run_start_ts", run_start if run_start else time.time())
+    st.setdefault("cycles_credited", ok)
+    st.setdefault("cycles_blind", blind)
+    st.setdefault("blind_s", blind_s)
+    return st
+
+
+def log_summary(st, t_now):
+    """Running state, so health is readable without reconstructing timestamps.
+    credit_ratio is the honest metric: a soak at 60% is much weaker than its
+    calendar age suggests."""
+    cred = float(st.get("credited_s", 0.0))
+    blind = float(st.get("blind_s", 0.0))
+    wall = max(0.0, t_now - float(st.get("run_start_ts", t_now)))
+    ratio = (cred / wall * 100.0) if wall > 0 else 0.0
+    logline(f"{ts()} | SUMMARY | cycles_total={st.get('cycles',0)} "
+            f"cycles_credited={st.get('cycles_credited',0)} "

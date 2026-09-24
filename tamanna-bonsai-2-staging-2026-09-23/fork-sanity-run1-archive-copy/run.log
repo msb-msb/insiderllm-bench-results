@@ -1,0 +1,24 @@
+16:09:49 start  harness: llama-bench -ngl 99 -fa 1 -p 512 -n 128 -d 0,4096,8192 -r 5  model: /home/minotaur/bench-models/Qwen3.8-27B-UD-Q4_K_XL.gguf
+16:09:49   build v0.4.0: /home/minotaur/llama-v0.4.0/build/bin
+16:09:49   build prism-b10709: /home/minotaur/llama-prismml/build/bin
+16:10:59   prime-v0.4.0        rep1  tg128 d0/4k/8k 41.93/41.34/40.79  pp512 1476/1398/1338  vram 17668 MiB  gen [4]  sm 1785  403.0 W  (67s) build 5266f24/1
+16:12:09         v0.4.0        rep1  tg128 d0/4k/8k 41.80/41.30/40.75  pp512 1449/1395/1334  vram 17668 MiB  gen [4]  sm 1770  402.1 W  (67s) build 5266f24/1
+16:13:19   prime-prism-b10709  rep1  tg128 d0/4k/8k 42.15/41.61/41.12  pp512 1415/1358/1300  vram 17666 MiB  gen [4]  sm 1770  401.9 W  (67s) build 9a9394a/1
+16:14:29         prism-b10709  rep1  tg128 d0/4k/8k 42.14/41.61/41.10  pp512 1412/1358/1302  vram 17666 MiB  gen [4]  sm 1770.0  406.2 W  (67s) build 9a9394a/1
+16:15:39   prime-prism-b10709  rep2  tg128 d0/4k/8k 42.15/41.61/41.10  pp512 1414/1356/1300  vram 17666 MiB  gen [4]  sm 1770  401.9 W  (67s) build 9a9394a/1
+16:16:49         prism-b10709  rep2  tg128 d0/4k/8k 42.12/41.59/41.09  pp512 1412/1357/1301  vram 17666 MiB  gen [4]  sm 1770  405.0 W  (68s) build 9a9394a/1
+16:18:01   prime-v0.4.0        rep2  tg128 d0/4k/8k 41.76/41.24/40.76  pp512 1443/1387/1331  vram 17668 MiB  gen [4]  sm 1770.0  403.1 W  (69s) build 5266f24/1
+16:19:11         v0.4.0        rep2  tg128 d0/4k/8k 41.78/41.25/40.77  pp512 1443/1388/1331  vram 17668 MiB  gen [4]  sm 1770  401.8 W  (67s) build 5266f24/1
+16:20:21   prime-v0.4.0        rep3  tg128 d0/4k/8k 41.77/41.26/40.74  pp512 1443/1389/1332  vram 17668 MiB  gen [4]  sm 1770  401.9 W  (67s) build 5266f24/1
+16:21:31         v0.4.0        rep3  tg128 d0/4k/8k 41.75/41.26/40.77  pp512 1445/1388/1330  vram 17668 MiB  gen [4]  sm 1770.0  400.5 W  (67s) build 5266f24/1
+16:22:41   prime-prism-b10709  rep3  tg128 d0/4k/8k 42.11/41.60/41.10  pp512 1415/1357/1301  vram 17666 MiB  gen [4]  sm 1770  401.9 W  (67s) build 9a9394a/1
+16:23:51         prism-b10709  rep3  tg128 d0/4k/8k 42.11/41.61/41.12  pp512 1415/1356/1301  vram 17666 MiB  gen [4]  sm 1770  402.0 W  (67s) build 9a9394a/1
+16:23:51 summary (mean of 3 measured reps of the per-run 5-repeat average; spread = min..max; delta = fork vs pin)
+16:23:51   tg128 d=0     v0.4.0    41.78 [41.75..41.80]   fork    42.12 [42.11..42.14]   delta +0.83%  -> no change
+16:23:51   tg128 d=4096  v0.4.0    41.27 [41.25..41.30]   fork    41.60 [41.59..41.61]   delta +0.81%  -> no change
+16:23:51   tg128 d=8192  v0.4.0    40.76 [40.75..40.77]   fork    41.10 [41.09..41.12]   delta +0.84%  -> no change
+16:23:51   pp512 d=0     v0.4.0  1445.87 [1443.46..1448.75]   fork  1413.04 [1411.89..1414.97]   delta -2.27%  -> no change
+16:23:51   pp512 d=4096  v0.4.0  1390.53 [1387.85..1395.43]   fork  1356.89 [1356.33..1357.77]   delta -2.42%  -> no change
+16:23:51   pp512 d=8192  v0.4.0  1331.64 [1329.62..1333.90]   fork  1301.18 [1300.78..1301.60]   delta -2.29%  -> no change
+16:23:51 peak VRAM measured runs: {'v0.4.0': 17668, 'prism-b10709': 17666}
+16:23:51 done

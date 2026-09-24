@@ -1,0 +1,253 @@
+{
+ "model": "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+ "shards": [
+  "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+  "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00002-of-00003.gguf",
+  "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00003-of-00003.gguf"
+ ],
+ "build": "v0.4.0 5266f24",
+ "steps": {
+  "load": {
+   "cold": {
+    "load_s": 15.1,
+    "rss_mib": 33222,
+    "vram_mib": 5274,
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0/build/bin/llama-server",
+     "-m",
+     "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+     "-ngl",
+     "99",
+     "--cpu-moe",
+     "-fa",
+     "on",
+     "-c",
+     "4096",
+     "--port",
+     "8099",
+     "--host",
+     "127.0.0.1",
+     "-np",
+     "1",
+     "--no-warmup"
+    ]
+   },
+   "warm": {
+    "load_s": 3.9,
+    "rss_mib": 33225,
+    "vram_mib": 5274,
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0/build/bin/llama-server",
+     "-m",
+     "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+     "-ngl",
+     "99",
+     "--cpu-moe",
+     "-fa",
+     "on",
+     "-c",
+     "4096",
+     "--port",
+     "8099",
+     "--host",
+     "127.0.0.1",
+     "-np",
+     "1",
+     "--no-warmup"
+    ]
+   }
+  },
+  "server_2k": [
+   {
+    "rep": 1,
+    "prompt_n": 2343,
+    "prompt_ms": 35717.813,
+    "prefill_tps": 65.59752132640371,
+    "predicted_n": 128,
+    "predicted_ms": 7809.586,
+    "decode_tps": 16.26206562037988
+   },
+   {
+    "rep": 2,
+    "prompt_n": 2343,
+    "prompt_ms": 18650.671,
+    "prefill_tps": 125.62550698578085,
+    "predicted_n": 128,
+    "predicted_ms": 8341.156,
+    "decode_tps": 15.225707324020792
+   },
+   {
+    "rep": 3,
+    "prompt_n": 2343,
+    "prompt_ms": 17754.051,
+    "prefill_tps": 131.96988112741144,
+    "predicted_n": 128,
+    "predicted_ms": 7261.562,
+    "decode_tps": 17.489350087488067
+   }
+  ],
+  "bench_default": [
+   [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 158.622129,
+     "stddev_ts": 6.661849
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 16.676864,
+     "stddev_ts": 1.369027
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 159.172944,
+     "stddev_ts": 5.748417
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 16.58315,
+     "stddev_ts": 1.277973
+    }
+   ],
+   [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 220.571969,
+     "stddev_ts": 2.791175
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 17.021172,
+     "stddev_ts": 1.364857
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 208.586263,
+     "stddev_ts": 3.05123
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 17.839578,
+     "stddev_ts": 0.031485
+    }
+   ],
+   [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 215.91707,
+     "stddev_ts": 3.226231
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 17.629736,
+     "stddev_ts": 0.144245
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 204.203964,
+     "stddev_ts": 3.496857
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "threads": 6,
+     "avg_ts": 16.362623,
+     "stddev_ts": 0.820044
+    }
+   ]
+  ],
+  "threads": [
+   [
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 3,
+     "avg_ts": 11.659934,
+     "stddev_ts": 0.164973
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 15.99695,
+     "stddev_ts": 1.122499
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 12,
+     "avg_ts": 16.147718,
+     "stddev_ts": 0.192299
+    }
+   ],
+   [
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 3,
+     "avg_ts": 11.564009,
+     "stddev_ts": 0.16868
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 17.650442,
+     "stddev_ts": 0.173081
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 12,
+     "avg_ts": 14.244837,
+     "stddev_ts": 3.28739
+    }
+   ],
+   [
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 3,
+     "avg_ts": 11.829513,
+     "stddev_ts": 0.144999
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 6,
+     "avg_ts": 14.769497,
+     "stddev_ts": 1.017809
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "threads": 12,
+     "avg_ts": 16.451718,
+     "stddev_ts": 1.708028
+    }
+   ]
+  ]
+ }
+}

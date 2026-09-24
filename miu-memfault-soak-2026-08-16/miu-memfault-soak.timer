@@ -1,0 +1,22 @@
+[Unit]
+Description=Miu bit-6 page-cache fault soak — every 20 minutes
+Documentation=file:///home/minotaur/Desktop/InsiderLLM/docs/memory-fault-2026-08-15.md
+
+[Timer]
+# First cycle shortly after boot so the exposure clock restarts promptly, then
+# every 20 minutes. Exposure accrues during the idle gap, not during the read,
+# so the cadence is deliberately sparse rather than continuous.
+OnBootSec=3min
+OnUnitActiveSec=20min
+
+# Do not fire a burst of catch-up cycles after downtime; one is enough.
+Persistent=false
+
+# Keep cycles off a round-number boundary shared with other cron work.
+AccuracySec=30s
+RandomizedDelaySec=60s
+
+Unit=miu-memfault-soak.service
+
+[Install]
+WantedBy=timers.target

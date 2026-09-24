@@ -1,0 +1,1038 @@
+{
+ "host": "rushuna1650",
+ "cfg": {
+  "bin": "/home/minotaur/llama-v0.4.0-sm75",
+  "model": "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "out": "/home/minotaur/gtx1650-qwen36-ncmoe-2026-09-11",
+  "ncmoe": [
+   40,
+   39,
+   38,
+   37,
+   36,
+   35,
+   34,
+   33,
+   32,
+   31,
+   30,
+   29,
+   28,
+   27,
+   26,
+   25,
+   24,
+   23,
+   22,
+   21,
+   20,
+   19,
+   18,
+   17,
+   16,
+   15,
+   14,
+   13,
+   12,
+   11,
+   10,
+   9,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1
+  ],
+  "threads": 4,
+  "load_mode": "mmap",
+  "control_mmap": false,
+  "server_stock_first": true,
+  "disk": "nvme0n1",
+  "n_layers": 40,
+  "none_pass": true
+ },
+ "model": "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+ "build": "v0.4.0 5266f24",
+ "sweep": [
+  {
+   "tag": "ncmoe40-mmap-rep1",
+   "ncmoe": 40,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "40",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 103.4,
+   "peak_vram_mib": 2701,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.222928,
+     "stddev_ts": 0.031005
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 19.740625,
+     "stddev_ts": 0.040471
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe40-mmap-rep2",
+   "ncmoe": 40,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "40",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 103.2,
+   "peak_vram_mib": 2701,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.237637,
+     "stddev_ts": 0.016734
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 19.762866,
+     "stddev_ts": 0.025253
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe40-mmap-rep3",
+   "ncmoe": 40,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "40",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 103.3,
+   "peak_vram_mib": 2701,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.193219,
+     "stddev_ts": 0.071691
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 19.77206,
+     "stddev_ts": 0.01206
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe39-mmap-rep1",
+   "ncmoe": 39,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "39",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 100.8,
+   "peak_vram_mib": 3167,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.441152,
+     "stddev_ts": 0.029229
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 19.951708,
+     "stddev_ts": 0.035406
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe39-mmap-rep2",
+   "ncmoe": 39,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "39",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 102.7,
+   "peak_vram_mib": 3167,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.442862,
+     "stddev_ts": 0.029711
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 19.920205,
+     "stddev_ts": 0.042801
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe39-mmap-rep3",
+   "ncmoe": 39,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "39",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 100.7,
+   "peak_vram_mib": 3167,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.410464,
+     "stddev_ts": 0.066073
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 19.982232,
+     "stddev_ts": 0.019498
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe38-mmap-rep1",
+   "ncmoe": 38,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "38",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 100.8,
+   "peak_vram_mib": 3665,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.651597,
+     "stddev_ts": 0.023993
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 20.123235,
+     "stddev_ts": 0.030755
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe38-mmap-rep2",
+   "ncmoe": 38,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "38",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 100.2,
+   "peak_vram_mib": 3665,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.622714,
+     "stddev_ts": 0.023104
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 20.145018,
+     "stddev_ts": 0.027718
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe38-mmap-rep3",
+   "ncmoe": 38,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "38",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 100.2,
+   "peak_vram_mib": 3665,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 20.616278,
+     "stddev_ts": 0.047484
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 20.168958,
+     "stddev_ts": 0.014531
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe37-mmap-rep1",
+   "ncmoe": 37,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "37",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 4.4,
+   "peak_vram_mib": 3437,
+   "rc": 1,
+   "oom": false,
+   "stderr_tail": "ggml_cuda_init: found 1 CUDA devices (Total VRAM: 3714 MiB):\n  Device 0: NVIDIA GeForce GTX 1650, compute capability 7.5, VMM: yes, VRAM: 3714 MiB\nThe following devices will have suboptimal performance due to a lack of tensor cores:\n  Device 0: NVIDIA GeForce GTX 1650\nConsider compiling with CMAKE_CUDA_ARCHITECTURES=61-virtual;80-virtual and DGGML_CUDA_FORCE_MMQ to force the use of the Pascal code for Turing.\nllama_bench: error: failed to create context with model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'\n"
+  }
+ ],
+ "control": null,
+ "server": {
+  "stock": {
+   "load": {
+    "load_s": 4.2,
+    "rss_mib": 21162,
+    "vram_mib": 2413,
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0-sm75/llama-server",
+     "-m",
+     "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "40",
+     "-fa",
+     "on",
+     "-c",
+     "4096",
+     "-t",
+     "4",
+     "--load-mode",
+     "mmap",
+     "--port",
+     "8099",
+     "--host",
+     "127.0.0.1",
+     "-np",
+     "1",
+     "--no-warmup"
+    ],
+    "mem": {
+     "cached_mib": 23636,
+     "avail_mib": 30450,
+     "free_mib": 6476
+    }
+   },
+   "reps": [
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 35925.025,
+     "prefill_tps": 65.2191612949469,
+     "predicted_n": 128,
+     "predicted_ms": 6459.577,
+     "decode_tps": 19.66073010663082,
+     "wall_prefill_s": 35.99,
+     "wall_decode_s": 6.46,
+     "disk_read_prefill_mib": 0.1,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 1,
+     "rss_after_mib": 21446,
+     "vram_after_mib": 2451,
+     "mem_before": {
+      "cached_mib": 23636,
+      "avail_mib": 30442,
+      "free_mib": 6468
+     },
+     "mem_after": {
+      "cached_mib": 23636,
+      "avail_mib": 30168,
+      "free_mib": 6194
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 36096.048,
+     "prefill_tps": 64.91015304500924,
+     "predicted_n": 128,
+     "predicted_ms": 6437.258,
+     "decode_tps": 19.728896993098616,
+     "wall_prefill_s": 36.1,
+     "wall_decode_s": 6.44,
+     "disk_read_prefill_mib": 0.0,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 2,
+     "rss_after_mib": 21447,
+     "vram_after_mib": 2451,
+     "mem_before": {
+      "cached_mib": 23636,
+      "avail_mib": 30168,
+      "free_mib": 6194
+     },
+     "mem_after": {
+      "cached_mib": 23636,
+      "avail_mib": 30138,
+      "free_mib": 6164
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 36104.601,
+     "prefill_tps": 64.89477615332184,
+     "predicted_n": 128,
+     "predicted_ms": 6425.801,
+     "decode_tps": 19.764072992612128,
+     "wall_prefill_s": 36.11,
+     "wall_decode_s": 6.43,
+     "disk_read_prefill_mib": 0.0,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 3,
+     "rss_after_mib": 21450,
+     "vram_after_mib": 2451,
+     "mem_before": {
+      "cached_mib": 23636,
+      "avail_mib": 30138,
+      "free_mib": 6164
+     },
+     "mem_after": {
+      "cached_mib": 23636,
+      "avail_mib": 30147,
+      "free_mib": 6173
+     }
+    }
+   ]
+  },
+  "best": {
+   "load": {
+    "load_s": 4.7,
+    "rss_mib": 20085,
+    "vram_mib": 3409,
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0-sm75/llama-server",
+     "-m",
+     "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "38",
+     "-fa",
+     "on",
+     "-c",
+     "4096",
+     "-t",
+     "4",
+     "--load-mode",
+     "mmap",
+     "--port",
+     "8099",
+     "--host",
+     "127.0.0.1",
+     "-np",
+     "1",
+     "--no-warmup"
+    ],
+    "mem": {
+     "cached_mib": 23637,
+     "avail_mib": 30348,
+     "free_mib": 6372
+    }
+   },
+   "reps": [
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 35305.092,
+     "prefill_tps": 66.36436466445124,
+     "predicted_n": 128,
+     "predicted_ms": 6295.125,
+     "decode_tps": 20.174341256130738,
+     "wall_prefill_s": 35.35,
+     "wall_decode_s": 6.3,
+     "disk_read_prefill_mib": 0.0,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 1,
+     "rss_after_mib": 20369,
+     "vram_after_mib": 3447,
+     "mem_before": {
+      "cached_mib": 23637,
+      "avail_mib": 30341,
+      "free_mib": 6364
+     },
+     "mem_after": {
+      "cached_mib": 23637,
+      "avail_mib": 30167,
+      "free_mib": 6191
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 35475.824,
+     "prefill_tps": 66.04497755992926,
+     "predicted_n": 128,
+     "predicted_ms": 6299.352,
+     "decode_tps": 20.16080384141099,
+     "wall_prefill_s": 35.48,
+     "wall_decode_s": 6.3,
+     "disk_read_prefill_mib": 0.0,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 2,
+     "rss_after_mib": 20369,
+     "vram_after_mib": 3447,
+     "mem_before": {
+      "cached_mib": 23637,
+      "avail_mib": 30167,
+      "free_mib": 6191
+     },
+     "mem_after": {
+      "cached_mib": 23637,
+      "avail_mib": 30123,
+      "free_mib": 6146
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 35473.465,
+     "prefill_tps": 66.04936957807759,
+     "predicted_n": 128,
+     "predicted_ms": 6290.715,
+     "decode_tps": 20.188484138925382,
+     "wall_prefill_s": 35.48,
+     "wall_decode_s": 6.29,
+     "disk_read_prefill_mib": 0.0,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 3,
+     "rss_after_mib": 20372,
+     "vram_after_mib": 3447,
+     "mem_before": {
+      "cached_mib": 23637,
+      "avail_mib": 30123,
+      "free_mib": 6146
+     },
+     "mem_after": {
+      "cached_mib": 23637,
+      "avail_mib": 30149,
+      "free_mib": 6172
+     }
+    }
+   ]
+  }
+ },
+ "first_fail": 37,
+ "last_fit": 38,
+ "none": {
+  "bench": [
+   {
+    "tag": "ncmoe38-none-rep1",
+    "ncmoe": 38,
+    "load_mode": "none",
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+     "-m",
+     "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "38",
+     "-fa",
+     "1",
+     "-p",
+     "0",
+     "-n",
+     "128",
+     "-d",
+     "0,4096",
+     "-r",
+     "3",
+     "-t",
+     "4",
+     "-lm",
+     "none",
+     "-o",
+     "json"
+    ],
+    "elapsed_s": 118.8,
+    "peak_vram_mib": 3699,
+    "rc": 0,
+    "rows": [
+     {
+      "depth": 0,
+      "threads": 4,
+      "avg_ts": 20.724296,
+      "stddev_ts": 0.031972
+     },
+     {
+      "depth": 4096,
+      "threads": 4,
+      "avg_ts": 20.235512,
+      "stddev_ts": 0.008296
+     }
+    ],
+    "oom": false
+   },
+   {
+    "tag": "ncmoe38-none-rep2",
+    "ncmoe": 38,
+    "load_mode": "none",
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+     "-m",
+     "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "38",
+     "-fa",
+     "1",
+     "-p",
+     "0",
+     "-n",
+     "128",
+     "-d",
+     "0,4096",
+     "-r",
+     "3",
+     "-t",
+     "4",
+     "-lm",
+     "none",
+     "-o",
+     "json"
+    ],
+    "elapsed_s": 124.5,
+    "peak_vram_mib": 3699,
+    "rc": 0,
+    "rows": [
+     {
+      "depth": 0,
+      "threads": 4,
+      "avg_ts": 20.685778,
+      "stddev_ts": 0.033952
+     },
+     {
+      "depth": 4096,
+      "threads": 4,
+      "avg_ts": 20.207051,
+      "stddev_ts": 0.032057
+     }
+    ],
+    "oom": false
+   },
+   {
+    "tag": "ncmoe38-none-rep3",
+    "ncmoe": 38,
+    "load_mode": "none",
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+     "-m",
+     "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "38",
+     "-fa",
+     "1",
+     "-p",
+     "0",
+     "-n",
+     "128",
+     "-d",
+     "0,4096",
+     "-r",
+     "3",
+     "-t",
+     "4",
+     "-lm",
+     "none",
+     "-o",
+     "json"
+    ],
+    "elapsed_s": 124.0,
+    "peak_vram_mib": 3699,
+    "rc": 0,
+    "rows": [
+     {
+      "depth": 0,
+      "threads": 4,
+      "avg_ts": 20.682918,
+      "stddev_ts": 0.032491
+     },
+     {
+      "depth": 4096,
+      "threads": 4,
+      "avg_ts": 20.209241,
+      "stddev_ts": 0.011228
+     }
+    ],
+    "oom": false
+   }
+  ],
+  "server": {
+   "load": {
+    "load_s": 27.7,
+    "rss_mib": 18641,
+    "vram_mib": 3443,
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0-sm75/llama-server",
+     "-m",
+     "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "38",
+     "-fa",
+     "on",
+     "-c",
+     "4096",
+     "-t",
+     "4",
+     "--load-mode",
+     "none",
+     "--port",
+     "8099",
+     "--host",
+     "127.0.0.1",
+     "-np",
+     "1",
+     "--no-warmup"
+    ],
+    "mem": {
+     "cached_mib": 30555,
+     "avail_mib": 12294,
+     "free_mib": 250
+    }
+   },
+   "reps": [
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 33088.988,
+     "prefill_tps": 70.80905587079303,
+     "predicted_n": 128,
+     "predicted_ms": 6275.523,
+     "decode_tps": 20.237357109519,
+     "wall_prefill_s": 33.13,
+     "wall_decode_s": 6.28,
+     "disk_read_prefill_mib": 6.2,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 1,
+     "rss_after_mib": 18925,
+     "vram_after_mib": 3481,
+     "mem_before": {
+      "cached_mib": 30555,
+      "avail_mib": 12294,
+      "free_mib": 250
+     },
+     "mem_after": {
+      "cached_mib": 30170,
+      "avail_mib": 11976,
+      "free_mib": 316
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 33225.694,
+     "prefill_tps": 70.51771439296347,
+     "predicted_n": 128,
+     "predicted_ms": 6269.657,
+     "decode_tps": 20.256291532375695,
+     "wall_prefill_s": 33.23,
+     "wall_decode_s": 6.27,
+     "disk_read_prefill_mib": 9.5,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 2,
+     "rss_after_mib": 18928,
+     "vram_after_mib": 3481,
+     "mem_before": {
+      "cached_mib": 30170,
+      "avail_mib": 11976,
+      "free_mib": 316
+     },
+     "mem_after": {
+      "cached_mib": 30179,
+      "avail_mib": 11956,
+      "free_mib": 287
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 33226.202,
+     "prefill_tps": 70.51663623787034,
+     "predicted_n": 128,
+     "predicted_ms": 6270.708,
+     "decode_tps": 20.252896483140344,
+     "wall_prefill_s": 33.23,
+     "wall_decode_s": 6.27,
+     "disk_read_prefill_mib": 1.2,
+     "disk_read_decode_mib": 0.0,
+     "disk_read_decode_mib_per_s": 0.0,
+     "disk_read_decode_mib_per_token": 0.0,
+     "rep": 3,
+     "rss_after_mib": 18929,
+     "vram_after_mib": 3481,
+     "mem_before": {
+      "cached_mib": 30179,
+      "avail_mib": 11956,
+      "free_mib": 287
+     },
+     "mem_after": {
+      "cached_mib": 30180,
+      "avail_mib": 11964,
+      "free_mib": 295
+     }
+    }
+   ]
+  }
+ }
+}

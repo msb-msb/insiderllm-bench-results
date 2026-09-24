@@ -1,0 +1,7 @@
+I've been running local models on a 12GB card for about a year and I feel like I've hit a wall. I can run 30B-class mixture-of-experts models by offloading experts to system RAM, and they're usable, but every benchmark thread leaves me more confused about whether my setup is reasonable.
+
+Please talk me through this properly and at length — I want a genuine essay, not bullet points, and I'd rather you over-explain than under-explain.
+
+Cover: whether faster system RAM is worth it if the GPU stays the same, and why; how much I should trust tokens-per-second numbers measured on a different platform, and what specifically makes them non-transferable; where the crossover sits between running a smaller dense model well and a larger sparse model badly; how PCIe generation enters into it; what the memory-bandwidth argument actually is at a hardware level; and how I would design an experiment on my own machine to answer these for myself rather than trusting anyone's published figures.
+
+Work through each in turn, with the reasoning shown, and finish with a concrete testing plan.

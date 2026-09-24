@@ -1,0 +1,41 @@
+=== step 3 finished, starting mycoSwarm at 12:48:13
+--- myco smoke 12:48:14
+{"label": "myco", "rep": 0, "started_at": "12:48:14", "wall_s": 6.584, "ok": 1, "failed": 0, "split": {"myco-dbda5095678e": 1}}
+per-request wall_s: [6.583]
+  myco-dbda5095678e: n=1 service mean=5.19s tok/s mean=46.2
+--- myco rep 1 12:48:20
+{"label": "myco", "rep": 1, "started_at": "12:48:20", "wall_s": 101.288, "ok": 20, "failed": 0, "split": {"myco-dbda5095678e": 20}}
+per-request wall_s: [6.288, 11.324, 16.337, 21.384, 26.387, 31.391, 36.421, 41.458, 46.472, 51.504, 56.499, 61.517, 66.564, 71.579, 76.596, 81.652, 86.669, 91.712, 96.737, 101.283]
+  myco-dbda5095678e: n=20 service mean=9.76s tok/s mean=46.0
+--- myco rep 2 12:50:07
+{"label": "myco", "rep": 2, "started_at": "12:50:07", "wall_s": 100.93, "ok": 20, "failed": 0, "split": {"myco-dbda5095678e": 20}}
+per-request wall_s: [7.277, 12.338, 17.398, 22.433, 26.465, 31.474, 36.489, 41.528, 46.532, 51.557, 56.612, 61.646, 66.698, 71.724, 76.758, 81.804, 85.808, 90.868, 95.903, 100.906]
+  myco-dbda5095678e: n=20 service mean=9.75s tok/s mean=46.0
+--- myco rep 3 12:51:53
+{"label": "myco", "rep": 3, "started_at": "12:51:53", "wall_s": 102.001, "ok": 20, "failed": 0, "split": {"myco-dbda5095678e": 20}}
+per-request wall_s: [6.852, 11.904, 16.922, 21.943, 27.458, 32.491, 36.487, 41.607, 46.219, 51.653, 56.681, 61.819, 66.808, 71.865, 76.914, 81.924, 86.92, 91.937, 96.94, 101.995]
+  myco-dbda5095678e: n=20 service mean=9.75s tok/s mean=46.0
+=== step 5 with N=8 at 12:53:40
+step5 start 12:53:40
+== inventory via PAIR (who advertises qwen3.6:27b)
+['deepseek-r1:14b', 'gemma3:1b', 'gemma3:27b', 'gemma3:4b', 'gemma4:26b', 'nomic-embed-text:latest', 'qwen3.5:27b', 'qwen3.5:35b-a3b', 'qwen3.5:9b', 'qwen3.6:27b']
+== rushuna local tags
+['deepseek-r1:14b', 'nomic-embed-text:latest', 'qwen3.5:9b']
+== warm qwen3.6:27b on Miu direct
+load_s 25.6
+22461 MiB
+--- direct rep 1 12:54:06
+{"label": "direct-27b", "rep": 1, "started_at": "12:54:06", "wall_s": 86.483, "ok": 8, "failed": 0, "completion_tokens_total": 1600, "completion_tokens_mean": 200, "agg_tok_per_s": 18.5}
+per-request wall_s: [11.061, 21.612, 33.182, 44.632, 55.375, 65.825, 76.105, 86.482]
+--- pair rep 1 12:55:38
+{"label": "pair-27b", "rep": 1, "started_at": "12:55:38", "wall_s": 85.553, "ok": 8, "failed": 0, "completion_tokens_total": 1600, "completion_tokens_mean": 200, "agg_tok_per_s": 18.7}
+per-request wall_s: [11.367, 22.443, 32.621, 42.552, 52.917, 64.428, 75.069, 85.551]
+attribution (start 12:55:38): 8 complete lines
+      8 node_id=Miu
+      8 status=200
+== resolveCandidates lines during rep (eligibility)
+12:55:38.694 [ollama-proxy] DEBUG resolveCandidates resolved selected="" priority=2 candidates=1 eligible=1 known=2
+12:55:38.698 [ollama-proxy] DEBUG resolveCandidates resolved selected="" priority=2 candidates=1 eligible=1 known=2
+12:55:38.735 [ollama-proxy] DEBUG resolveCandidates resolved selected="" priority=2 candidates=1 eligible=1 known=2
+step5 end 12:57:07
+=== phase2 rest done 12:57:07

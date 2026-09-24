@@ -1,0 +1,9 @@
+date: 2026-09-21
+rig: Miu, RTX 3090 24 GB, i7-8086K, 62 GB DDR4-2667, Ubuntu 24.04, desktop up (4.2-4.4 GB VRAM), swap 8/8 GB used, RAM ~17 GB available at launch
+fork: https://github.com/thecodacus/llama.cpp branch parallel-decision, commit 14d04e755fa28653e87b9a07072892265bdc0fad (2026-09-20 15:58:37 +0530), describe b9891-1161-g14d04e755, tree ~/llama-jev (separate from ~/llama-v0.4.0 and the b10088 tree)
+build: cmake -DGGML_CUDA=ON -DCMAKE_CUDA_ARCHITECTURES=86 -DGGML_NATIVE=OFF -DLLAMA_CURL=OFF, CUDA 12.8, targets llama-server llama-parallel-decision
+model: /media/minotaur/Storage_Disk_1/LLM_repo/qwen3.6-27b-gguf/Qwen_Qwen3.6-27B-Q4_K_M.gguf sha256 8739a0cbb80036e5dbdced2085f142b8ba86e3235db8b8039b3769fe5fc70843 (verified 2026-09-21, equals ten-seeds logs/gguf_sha256.txt)
+server: /home/minotaur/llama-jev/build/bin/llama-server -m <gguf> -ngl 99 -fa on -c 4096 --jinja --load-mode mmap --port 8081 -kvu --decision-seqs 3   (the line that served every run; see logs/server.log "probe launch 2026-09-21T11:42:01". --decision-seqs 16 and --load-mode none both failed to load, see README)
+gpu after load: 22030 MiB, 24576 MiB
+driver: 580.178.04
+split: ten-seeds splits/test.json, 47 items (manifest seed 20260830); scorer: ten-seeds score_lora.parse_and_sanitise + score, deployed.py solo.py sha256 324560443ab55e3a117aaa6b6e4be1dca2f86ef80c3d2b31cd7f1a5b5484a975

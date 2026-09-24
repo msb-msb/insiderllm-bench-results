@@ -1,0 +1,86 @@
+========================================================================
+Qwen3.8-27B-UD-Q4_K_XL — HumanEval pass@1, hash-bracketed load
+model   /home/minotaur/Desktop/qwen3.8-27b-gguf/Qwen3.8-27B-UD-Q4_K_XL.gguf
+size    17,923,394,624  inode 19141587
+expect  bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+euid    0 (root)
+========================================================================
+
+### Step 6: engine identity
+  llama-server --version: version: 1 (67b9b0e)
+  llama-server sha256   : ac2bb7684e022a4e0160946a28de38719097490f5c5d64ea7b4b9f3966fd03f1
+  libggml-cuda sha256   : e6016ef9f362db6de19785a08e414a8c443a98f4fe1e0f9f41419ae4304c36e3
+  git describe          : b10088
+  driver,display,mem    : 580.178.04, Enabled, 3938 MiB, 24576 MiB
+  display_attached      : true
+
+### Step 1: evict + confirm 0% residency
+[residency:post-evict] 0/4,375,829 pages (0.00%), prior-offset page 178,528 resident=NO
+
+### Step 2: buffered read -> sha256 (repopulates AND verifies cache)
+  cached sha256 : bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+  expected      : bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+  read time     : 39.0s
+  MATCH — cache verified clean immediately before load
+[residency:post-verify] 4,375,829/4,375,829 pages (100.00%), prior-offset page 178,528 resident=YES
+
+### Step 3: llama-server launched (pid 79590)
+  step 2 -> step 3 gap: 0.000 s
+  flags: -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --port 8099
+  ready in 4s
+[residency:after-model-load] 4,375,829/4,375,829 pages (100.00%), prior-offset page 178,528 resident=YES
+
+### Step 4: HumanEval 164, greedy, pinned sampling
+40/164  57s
+   80/164  114s
+  120/164  189s
+  160/164  291s
+qwen3.8-bracketed: 164 prompts in 299s, 9282 generated tokens (31.0 tok/s), -> /home/minotaur/he38run/he_38_bracket.json
+
+### Step 5: post-run bracket
+[residency:pre-postread] 4,375,829/4,375,829 pages (100.00%), prior-offset page 178,528 resident=YES
+  cached sha256 : bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+  read time     : 33.0s
+  MATCH — cache still clean after the run
+
+### Scoring: official OpenAI human-eval, sandboxed
+  164 samples -> /home/minotaur/he38run/eval/he_38_bracket.jsonl
+0it [00:00, ?it/s]Reading samples...
+
+164it [00:00, 65843.39it/s]
+Running test suites...
+
+  0%|          | 0/164 [00:00<?, ?it/s]
+  9%|▉         | 15/164 [00:00<00:01, 146.31it/s]
+ 22%|██▏       | 36/164 [00:00<00:00, 182.85it/s]
+ 34%|███▍      | 56/164 [00:00<00:00, 189.88it/s]
+ 48%|████▊     | 78/164 [00:00<00:00, 196.76it/s]
+ 61%|██████    | 100/164 [00:00<00:00, 201.95it/s]
+ 74%|███████▍  | 121/164 [00:00<00:00, 202.26it/s]
+ 87%|████████▋ | 142/164 [00:00<00:00, 203.10it/s]
+ 99%|█████████▉| 163/164 [00:00<00:00, 201.35it/s]
+100%|██████████| 164/164 [00:00<00:00, 197.68it/s]
+Writing results to /work/he_38_bracket.jsonl_results.jsonl...
+
+  0%|          | 0/164 [00:00<?, ?it/s]
+100%|██████████| 164/164 [00:00<00:00, 113284.89it/s]
+{'pass@1': np.float64(0.8048780487804879)}
+
+========================================================================
+RESULT
+========================================================================
+  pass@1            80.49%  (132/164)
+  prior run         80.49%  (132/164)
+  reproduces 80.49% YES
+  outputs sha256-16 987646660b2af81b   prior 987646660b2af81b   IDENTICAL
+  bracket pre       bee238bbeb3dc0a3…  MATCH
+  bracket post      bee238bbeb3dc0a3…  MATCH
+  step2->3 gap      0.000 s
+  gen elapsed       299s, 9282 tokens (31.0 tok/s)
+
+  --- pass/fail vector vs prior ---
+  Outputs are byte-identical to the prior run, so the pass/fail
+  vector is necessarily identical problem-for-problem.
+
+  summary -> /home/minotaur/he38run/summary.json
+========================================================================

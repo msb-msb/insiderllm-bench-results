@@ -1,0 +1,234 @@
+{
+ "config": "dflash",
+ "rep": 2,
+ "tag": "measured",
+ "started": "2026-09-22T09:07:35-0700",
+ "elapsed_s": 14.6,
+ "server_args": [
+  "-m",
+  "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-fa",
+  "on",
+  "-c",
+  "8192",
+  "-np",
+  "1",
+  "--host",
+  "127.0.0.1",
+  "--port",
+  "8080",
+  "-md",
+  "/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf",
+  "-ngld",
+  "99",
+  "--spec-type",
+  "draft-dflash",
+  "--spec-draft-n-max",
+  "15"
+ ],
+ "gen": {
+  "n_predict": 192,
+  "temperature": 0.0,
+  "seed": 42,
+  "cache_prompt": false,
+  "stream": false
+ },
+ "aggregate": {
+  "total_predicted": 1288,
+  "total_predicted_ms": 7488.5,
+  "gen_tok_s": 172.0,
+  "mean_per_prompt_tok_s": 165.57,
+  "total_draft": 4225,
+  "total_draft_accepted": 987,
+  "accept_rate": 0.2336,
+  "wall_s_prompts": 9.37,
+  "load_s": 4.8,
+  "vram_after_load_mib": "23676"
+ },
+ "results": [
+  {
+   "name": "code_python",
+   "wall_s": 0.977,
+   "prompt_n": 20,
+   "prompt_ms": 226.151,
+   "predicted_n": 192,
+   "predicted_ms": 749.107,
+   "predicted_per_second": 254.97025124581668,
+   "draft_n": 330,
+   "draft_n_accepted": 168,
+   "content_sha_head": "0ccf99f9ef64",
+   "stop_type": "limit",
+   "truncated": false,
+   "accept_rate": 0.5091
+  },
+  {
+   "name": "code_cpp",
+   "wall_s": 0.48,
+   "prompt_n": 30,
+   "prompt_ms": 97.707,
+   "predicted_n": 58,
+   "predicted_ms": 301.733,
+   "predicted_per_second": 188.90873719480467,
+   "draft_n": 180,
+   "draft_n_accepted": 45,
+   "content_sha_head": "76bc655434db",
+   "stop_type": "eos",
+   "truncated": false,
+   "accept_rate": 0.25
+  },
+  {
+   "name": "explain_concept",
+   "wall_s": 1.335,
+   "prompt_n": 17,
+   "prompt_ms": 83.374,
+   "predicted_n": 192,
+   "predicted_ms": 1175.619,
+   "predicted_per_second": 162.46760217383354,
+   "draft_n": 667,
+   "draft_n_accepted": 144,
+   "content_sha_head": "bdbc1d061b94",
+   "stop_type": "limit",
+   "truncated": false,
+   "accept_rate": 0.2159
+  },
+  {
+   "name": "summarize",
+   "wall_s": 0.563,
+   "prompt_n": 52,
+   "prompt_ms": 99.433,
+   "predicted_n": 56,
+   "predicted_ms": 384.78,
+   "predicted_per_second": 142.93882218410522,
+   "draft_n": 225,
+   "draft_n_accepted": 40,
+   "content_sha_head": "42caa69206d1",
+   "stop_type": "eos",
+   "truncated": false,
+   "accept_rate": 0.1778
+  },
+  {
+   "name": "qa_factual",
+   "wall_s": 1.317,
+   "prompt_n": 14,
+   "prompt_ms": 78.786,
+   "predicted_n": 192,
+   "predicted_ms": 1161.998,
+   "predicted_per_second": 164.37205571782394,
+   "draft_n": 679,
+   "draft_n_accepted": 145,
+   "content_sha_head": "56868160767d",
+   "stop_type": "limit",
+   "truncated": false,
+   "accept_rate": 0.2135
+  },
+  {
+   "name": "translation",
+   "wall_s": 0.497,
+   "prompt_n": 15,
+   "prompt_ms": 82.81,
+   "predicted_n": 22,
+   "predicted_ms": 335.472,
+   "predicted_per_second": 62.59836886535985,
+   "draft_n": 210,
+   "draft_n_accepted": 7,
+   "content_sha_head": "f7a880da21ea",
+   "stop_type": "eos",
+   "truncated": false,
+   "accept_rate": 0.0333
+  },
+  {
+   "name": "creative_short",
+   "wall_s": 1.35,
+   "prompt_n": 11,
+   "prompt_ms": 74.083,
+   "predicted_n": 192,
+   "predicted_ms": 1201.672,
+   "predicted_per_second": 158.94520301712947,
+   "draft_n": 696,
+   "draft_n_accepted": 141,
+   "content_sha_head": "0c1456347368",
+   "stop_type": "limit",
+   "truncated": false,
+   "accept_rate": 0.2026
+  },
+  {
+   "name": "stepwise_math",
+   "wall_s": 1.145,
+   "prompt_n": 50,
+   "prompt_ms": 94.887,
+   "predicted_n": 192,
+   "predicted_ms": 971.597,
+   "predicted_per_second": 196.58356293813173,
+   "draft_n": 555,
+   "draft_n_accepted": 153,
+   "content_sha_head": "6d64e94ec81d",
+   "stop_type": "limit",
+   "truncated": false,
+   "accept_rate": 0.2757
+  },
+  {
+   "name": "long_code_review",
+   "wall_s": 1.701,
+   "prompt_n": 721,
+   "prompt_ms": 412.604,
+   "predicted_n": 192,
+   "predicted_ms": 1206.518,
+   "predicted_per_second": 158.306796914758,
+   "draft_n": 683,
+   "draft_n_accepted": 144,
+   "content_sha_head": "4098e78fd0f9",
+   "stop_type": "limit",
+   "truncated": false,
+   "accept_rate": 0.2108
+  }
+ ],
+ "telemetry": {
+  "samples": 18,
+  "samples_under_load": 11,
+  "temp_start": 56,
+  "temp_end": 56,
+  "temp_max": 61,
+  "vram_peak_mib": 23762,
+  "pcie_gen_under_load": [
+   3
+  ],
+  "pcie_gen_under_load_share": {
+   "3": 1.0
+  },
+  "pcie_gen_gpu_under_load": [
+   3
+  ],
+  "pcie_width_under_load": [
+   16
+  ],
+  "sm_clock": {
+   "mean": 1935,
+   "median": 1935,
+   "min": 1935,
+   "max": 1935
+  },
+  "mem_clock": {
+   "mean": 9501,
+   "median": 9501,
+   "min": 9501,
+   "max": 9501
+  },
+  "power": {
+   "mean": 277.0,
+   "median": 322.56,
+   "min": 135.06,
+   "max": 342.01
+  },
+  "temp_under_load": {
+   "mean": 58.9,
+   "median": 60,
+   "min": 55,
+   "max": 61
+  },
+  "clock_event_reasons_under_load": [
+   "0x0000000000000000"
+  ]
+ }
+}

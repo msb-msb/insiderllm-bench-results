@@ -1,0 +1,27 @@
+[Unit]
+Description=Miu bit-6 page-cache fault soak (one cycle)
+Documentation=file:///home/minotaur/Desktop/InsiderLLM/docs/memory-fault-2026-08-15.md
+# Diagnostic only. Reads and hashes the target GGUF; changes no config.
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-memfault-soak-2026-08-16/soak.py
+
+# root is mandatory: /proc/self/pagemap masks the PFN to 0 for unprivileged
+# readers, and the physical address is the entire point of catching an event.
+User=root
+
+# /var/lib/miu-memfault-soak, created and owned by systemd
+StateDirectory=miu-memfault-soak
+
+# One cycle is a ~35s sequential read. Never let two overlap.
+TimeoutStartSec=900
+
+# Stay out of the way of bench work: lowest CPU and I/O priority. The script
+# also skips its read entirely when llama-server/bench/cli is running.
+Nice=19
+IOSchedulingClass=idle
+CPUSchedulingPolicy=idle
+
+[Install]
+WantedBy=multi-user.target

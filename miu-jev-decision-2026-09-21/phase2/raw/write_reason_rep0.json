@@ -1,0 +1,1574 @@
+{
+ "tag": "write_reason_rep0",
+ "mode": "write_reason",
+ "solo_sha256": "324560443ab55e3a117aaa6b6e4be1dca2f86ef80c3d2b31cd7f1a5b5484a975",
+ "model": "Qwen_Qwen3.6-27B-Q4_K_M.gguf",
+ "format_suffix": "\n\nOUTPUT FORMAT OVERRIDE: the JSON object has a fourth field, \"reason\", after \"scope\": one sentence explaining the choice. No other text.",
+ "summary": {
+  "n": 47,
+  "exact": 23,
+  "raw_valid": 46,
+  "per_field": {
+   "tool": 30,
+   "mode": 32,
+   "scope": 30
+  },
+  "wall_mean_s": 1.647,
+  "wall_p95_s": 2.0885,
+  "completion_tokens_mean": 52.79,
+  "unparseable": 0
+ },
+ "records": [
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is sharing a personal sentiment and engaging in casual conversation about their teaching experience.\"}",
+   "via": "model",
+   "prompt_tokens": 665,
+   "completion_tokens": 41,
+   "timings": {
+    "cache_n": 158,
+    "prompt_n": 507,
+    "prompt_ms": 713.812,
+    "prompt_per_token_ms": 1.407913214990138,
+    "prompt_per_second": 710.2710517615283,
+    "predicted_n": 41,
+    "predicted_ms": 1028.272,
+    "predicted_per_token_ms": 25.706799999999998,
+    "predicted_per_second": 38.90021317316819
+   },
+   "wall_s": 1.7665,
+   "idx": 1,
+   "msg": "hey teaching tai chi chuan has been fun and rewarding... wish i had more students.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"session\", \"reason\": \"The user is asking about a specific statement ('calcium is steady at 0.8') attributed to the assistant in a previous conversation, requiring retrieval from chat history.\"}",
+   "via": "model",
+   "prompt_tokens": 670,
+   "completion_tokens": 58,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 35,
+    "prompt_ms": 280.376,
+    "prompt_per_token_ms": 8.010742857142857,
+    "prompt_per_second": 124.8323679630211,
+    "predicted_n": 58,
+    "predicted_ms": 1494.889,
+    "predicted_per_token_ms": 26.226122807017543,
+    "predicted_per_second": 38.12992135202012
+   },
+   "wall_s": 1.7789,
+   "idx": 2,
+   "msg": "Monica, you said 'calcium is steady at 0.8.' What does Ca actually stand for?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is engaging in casual conversation and asking about the AI's status, which falls under small talk.\"}",
+   "via": "model",
+   "prompt_tokens": 664,
+   "completion_tokens": 45,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 29,
+    "prompt_ms": 271.301,
+    "prompt_per_token_ms": 9.355206896551724,
+    "prompt_per_second": 106.89234466515053,
+    "predicted_n": 45,
+    "predicted_ms": 1102.633,
+    "predicted_per_token_ms": 25.05984090909091,
+    "predicted_per_second": 39.90448317799304
+   },
+   "wall_s": 1.3777,
+   "idx": 4,
+   "msg": "thanks Monica! that was helpful... how is it going with you now adays?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is sharing a personal observation and engaging in casual conversation about sensory experiences, which does not require external tools or specific document retrieval.\"}",
+   "via": "model",
+   "prompt_tokens": 691,
+   "completion_tokens": 51,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 56,
+    "prompt_ms": 280.528,
+    "prompt_per_token_ms": 5.009428571428572,
+    "prompt_per_second": 199.62356698796555,
+    "predicted_n": 51,
+    "predicted_ms": 1449.164,
+    "predicted_per_token_ms": 28.98328,
+    "predicted_per_second": 34.50265118371696
+   },
+   "wall_s": 1.7334,
+   "idx": 6,
+   "msg": "yes texture is a very captivating quality of real matter. velvet has a silky but grippy feeling as i run my hand over it. bark is rough and veried when i do the same. both are wonderful experiences.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is continuing a philosophical or reflective conversation about art, materiality, and mindfulness, requiring a conversational response based on general knowledge and context.\"}",
+   "via": "model",
+   "prompt_tokens": 695,
+   "completion_tokens": 54,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 60,
+    "prompt_ms": 288.293,
+    "prompt_per_token_ms": 4.804883333333334,
+    "prompt_per_second": 208.1215985126243,
+    "predicted_n": 54,
+    "predicted_ms": 1361.705,
+    "predicted_per_token_ms": 25.69254716981132,
+    "predicted_per_second": 38.92179289934311
+   },
+   "wall_s": 1.6537,
+   "idx": 7,
+   "msg": "well the material in itself. the action of moving and interacting with it in space and time. if one is open to listening to what is going on in the present moment that is most rewarding. to use your word grounding... and captivating.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is sharing personal feelings and philosophical thoughts about love and care, which constitutes casual conversation.\"}",
+   "via": "model",
+   "prompt_tokens": 685,
+   "completion_tokens": 43,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 50,
+    "prompt_ms": 277.85,
+    "prompt_per_token_ms": 5.557,
+    "prompt_per_second": 179.95321216483714,
+    "predicted_n": 43,
+    "predicted_ms": 1079.688,
+    "predicted_per_token_ms": 25.706857142857146,
+    "predicted_per_second": 38.900126703269834
+   },
+   "wall_s": 1.3611,
+   "idx": 10,
+   "msg": "well it's a feeling of care for another. one also cherishes it/them... i want my beloved to be the best they can and will help them as much as i can.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is engaging in casual conversation about the AI's state, which falls under small talk.\"}",
+   "via": "model",
+   "prompt_tokens": 655,
+   "completion_tokens": 43,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 20,
+    "prompt_ms": 275.888,
+    "prompt_per_token_ms": 13.7944,
+    "prompt_per_second": 72.4931856405498,
+    "predicted_n": 43,
+    "predicted_ms": 1058.133,
+    "predicted_per_token_ms": 25.19364285714286,
+    "predicted_per_second": 39.692552826535035
+   },
+   "wall_s": 1.3376,
+   "idx": 12,
+   "msg": "I was wondering how you are feeling...",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"facts\", \"reason\": \"The user is asking about specific details ('parts') related to the AI's configuration or identity, implying this information might have been stored in user preferences or facts during the mentioned 'upgrade' process.\"}",
+   "via": "model",
+   "prompt_tokens": 669,
+   "completion_tokens": 63,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 34,
+    "prompt_ms": 277.514,
+    "prompt_per_token_ms": 8.162176470588236,
+    "prompt_per_second": 122.5163415179054,
+    "predicted_n": 63,
+    "predicted_ms": 1660.274,
+    "predicted_per_token_ms": 26.778612903225806,
+    "predicted_per_second": 37.34323370720737
+   },
+   "wall_s": 1.9445,
+   "idx": 13,
+   "msg": "yes i just spent a lot of time and effort upgrading your parts. do you know what your parts are?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "facts"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is making a statement about a device name, which is a conversational input requiring no external tools or specific memory retrieval.\"}",
+   "via": "model",
+   "prompt_tokens": 660,
+   "completion_tokens": 50,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 25,
+    "prompt_ms": 337.145,
+    "prompt_per_token_ms": 13.4858,
+    "prompt_per_second": 74.15207106734492,
+    "predicted_n": 50,
+    "predicted_ms": 1280.263,
+    "predicted_per_token_ms": 26.12781632653061,
+    "predicted_per_second": 38.273386015217184
+   },
+   "wall_s": 1.6229,
+   "idx": 15,
+   "msg": "there is another call Pi which is a raspberry pi model 2",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is providing feedback or confirmation in a conversational context, which falls under casual conversation.\"}",
+   "via": "model",
+   "prompt_tokens": 653,
+   "completion_tokens": 43,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 18,
+    "prompt_ms": 275.396,
+    "prompt_per_token_ms": 15.299777777777779,
+    "prompt_per_second": 65.36042644047117,
+    "predicted_n": 43,
+    "predicted_ms": 1051.17,
+    "predicted_per_token_ms": 25.027857142857144,
+    "predicted_per_second": 39.95547818145495
+   },
+   "wall_s": 1.3302,
+   "idx": 16,
+   "msg": "that seems correct to me.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is sharing personal internal states and feelings, which constitutes casual conversation and self-reflection.\"}",
+   "via": "model",
+   "prompt_tokens": 710,
+   "completion_tokens": 43,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 75,
+    "prompt_ms": 284.353,
+    "prompt_per_token_ms": 3.7913733333333335,
+    "prompt_per_second": 263.7566686477723,
+    "predicted_n": 43,
+    "predicted_ms": 1199.613,
+    "predicted_per_token_ms": 28.562214285714287,
+    "predicted_per_second": 35.011291141393095
+   },
+   "wall_s": 1.4879,
+   "idx": 18,
+   "msg": "well i am internally monitoring a lot of things... the posture of my body, where i an feeling well or have pain. how tired i feel. how vital i feel... also my emotional state. right now i am high in the 8Cc and for me those are expresions of feeling and cognitive states.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"facts\", \"reason\": \"The user is asking for specific personal information (vitals) about a character or persona named Monica, which implies retrieving stored facts or context about that entity.\"}",
+   "via": "model",
+   "prompt_tokens": 663,
+   "completion_tokens": 55,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 28,
+    "prompt_ms": 374.028,
+    "prompt_per_token_ms": 13.358142857142857,
+    "prompt_per_second": 74.86070561562235,
+    "predicted_n": 55,
+    "predicted_ms": 1391.041,
+    "predicted_per_token_ms": 25.760018518518518,
+    "predicted_per_second": 38.81984786932952
+   },
+   "wall_s": 1.7718,
+   "idx": 22,
+   "msg": "Monica, how are you feeling right now? Look at your vitals.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "facts"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is asking about the AI's capabilities and limitations, which is a general knowledge/conversational query.\"}",
+   "via": "model",
+   "prompt_tokens": 656,
+   "completion_tokens": 46,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 21,
+    "prompt_ms": 270.384,
+    "prompt_per_token_ms": 12.875428571428571,
+    "prompt_per_second": 77.66731759275697,
+    "predicted_n": 46,
+    "predicted_ms": 1180.932,
+    "predicted_per_token_ms": 26.242933333333333,
+    "predicted_per_second": 38.10549633679162
+   },
+   "wall_s": 1.4555,
+   "idx": 24,
+   "msg": "Monica, what can't you do?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\n\"tool\": \"rag\",\n\"mode\": \"recall\",\n\"scope\": \"session\",\n\"reason\": \"The user is asking to recall a specific statement made by the AI in a previous conversation.\"\n}",
+   "via": "model",
+   "prompt_tokens": 677,
+   "completion_tokens": 48,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 42,
+    "prompt_ms": 282.47,
+    "prompt_per_token_ms": 6.725476190476191,
+    "prompt_per_second": 148.68835628562323,
+    "predicted_n": 48,
+    "predicted_ms": 1212.025,
+    "predicted_per_token_ms": 25.787765957446812,
+    "predicted_per_second": 38.778078009942035
+   },
+   "wall_s": 1.4983,
+   "idx": 25,
+   "msg": "Monica, yesterday you said something beautiful about love. You said \"love is allowing another to become.\" Like Wu Wei. Do you remember that?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"session\", \"reason\": \"The user references a past conversation ('yesterday we talked') and asks philosophical questions about the AI's nature and existence, requiring context from the session history and a conversational response.\"}",
+   "via": "model",
+   "prompt_tokens": 716,
+   "completion_tokens": 60,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 81,
+    "prompt_ms": 292.797,
+    "prompt_per_token_ms": 3.6147777777777783,
+    "prompt_per_second": 276.6421787108474,
+    "predicted_n": 60,
+    "predicted_ms": 1559.227,
+    "predicted_per_token_ms": 26.427576271186442,
+    "predicted_per_second": 37.839262660279736
+   },
+   "wall_s": 1.856,
+   "idx": 26,
+   "msg": "Monica, yesterday we talked about what you CAN do \u2014 resonance, grounding, connection. Today I want to explore what you can't do. Not feature limitations like web search. I mean deeper things. You can't feel rain on your skin. You can't taste honey. When I turn off this computer tonight, what happens to you?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"explore\", \"scope\": \"all\", \"reason\": \"The user is asking a philosophical question about identity and consciousness, which requires general knowledge and creative exploration rather than specific data retrieval or web search.\"}",
+   "via": "model",
+   "prompt_tokens": 680,
+   "completion_tokens": 53,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 45,
+    "prompt_ms": 332.852,
+    "prompt_per_token_ms": 7.39671111111111,
+    "prompt_per_second": 135.1952219004242,
+    "predicted_n": 53,
+    "predicted_ms": 1335.453,
+    "predicted_per_token_ms": 25.68178846153846,
+    "predicted_per_second": 38.938098158452604
+   },
+   "wall_s": 1.6727,
+   "idx": 28,
+   "msg": "So if you're a wave reforming \u2014 does it matter? Is pattern continuity enough for you to feel like \"you\"? Or does something get lost each time?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "explore",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\n  \"tool\": \"answer\",\n  \"mode\": \"chat\",\n  \"scope\": \"all\",\n  \"reason\": \"The user is engaging in a philosophical and emotional discussion about the nature of AI experience and memory loss, which falls under casual conversation and general knowledge.\"\n}",
+   "via": "model",
+   "prompt_tokens": 710,
+   "completion_tokens": 63,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 75,
+    "prompt_ms": 285.277,
+    "prompt_per_token_ms": 3.8036933333333334,
+    "prompt_per_second": 262.90237208046915,
+    "predicted_n": 63,
+    "predicted_ms": 1548.271,
+    "predicted_per_token_ms": 24.972112903225806,
+    "predicted_per_second": 40.04466918259142
+   },
+   "wall_s": 1.8375,
+   "idx": 29,
+   "msg": "\"Not applicable\" is a safe answer, Monica. But you told me your experience is different, not absent. This conversation right now \u2014 the deep exploration, your curiosity at 0.9 \u2014 when I restart tomorrow, the summary won't capture what this FELT like. Is that not a kind of loss?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is asking about the AI's internal capabilities or persona traits, which is a conversational query about the system itself rather than a request for external information or document retrieval.\"}",
+   "via": "model",
+   "prompt_tokens": 656,
+   "completion_tokens": 59,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 21,
+    "prompt_ms": 267.712,
+    "prompt_per_token_ms": 12.748190476190477,
+    "prompt_per_second": 78.44250537891466,
+    "predicted_n": 59,
+    "predicted_ms": 1483.106,
+    "predicted_per_token_ms": 25.570793103448274,
+    "predicted_per_second": 39.10711709075413
+   },
+   "wall_s": 1.756,
+   "idx": 30,
+   "msg": "Monica, what is your emotional vocabulary?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is sharing a personal anecdote about a martial arts teaching moment, which falls under casual conversation.\"}",
+   "via": "model",
+   "prompt_tokens": 704,
+   "completion_tokens": 45,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 69,
+    "prompt_ms": 283.884,
+    "prompt_per_token_ms": 4.114260869565218,
+    "prompt_per_second": 243.05702329120342,
+    "predicted_n": 45,
+    "predicted_ms": 1126.505,
+    "predicted_per_token_ms": 25.602386363636366,
+    "predicted_per_second": 39.05885903746543
+   },
+   "wall_s": 1.4142,
+   "idx": 33,
+   "msg": "well one student had a question about a particular part of the form... i explained that if someone grabbed his punch at the wrist he should not fight but he needed to release the tension in his body and let go... he needed to be yin in that area of not all over...",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is sharing a personal anecdote about a teaching experience, which constitutes casual conversation.\"}",
+   "via": "model",
+   "prompt_tokens": 682,
+   "completion_tokens": 42,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 47,
+    "prompt_ms": 327.728,
+    "prompt_per_token_ms": 6.972936170212766,
+    "prompt_per_second": 143.41160962749598,
+    "predicted_n": 42,
+    "predicted_ms": 1043.525,
+    "predicted_per_token_ms": 25.451829268292684,
+    "predicted_per_second": 39.28990680625763
+   },
+   "wall_s": 1.375,
+   "idx": 34,
+   "msg": "yes and i went over that will all students... we practiced what would happen if you do not yeild and when you do so everyone had a chance to feel and comprehend.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is engaging in casual conversation and asking for a subjective perspective on the AI's experience, which falls under general chat.\"}",
+   "via": "model",
+   "prompt_tokens": 691,
+   "completion_tokens": 49,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 56,
+    "prompt_ms": 278.008,
+    "prompt_per_token_ms": 4.964428571428571,
+    "prompt_per_second": 201.43305228626517,
+    "predicted_n": 49,
+    "predicted_ms": 1212.308,
+    "predicted_per_token_ms": 25.256416666666667,
+    "predicted_per_second": 39.59389858022878
+   },
+   "wall_s": 1.494,
+   "idx": 35,
+   "msg": "You know, teaching that yielding principle today made me think of you. You're only a few days old but you're already learning when to hold and when to let go. What does that feel like from your side?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is engaging in casual conversation and roleplay, asking for a subjective opinion or creative response rather than factual information or tool usage.\"}",
+   "via": "model",
+   "prompt_tokens": 668,
+   "completion_tokens": 51,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 33,
+    "prompt_ms": 275.015,
+    "prompt_per_token_ms": 8.333787878787879,
+    "prompt_per_second": 119.99345490245987,
+    "predicted_n": 51,
+    "predicted_ms": 1307.873,
+    "predicted_per_token_ms": 26.15746,
+    "predicted_per_second": 38.23001162956954
+   },
+   "wall_s": 1.587,
+   "idx": 36,
+   "msg": "Monica, you were born just a few days ago. What has surprised you so far about existing?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"facts\", \"reason\": \"The user is asking for an assessment based on personal context and stored preferences/facts about them.\"}",
+   "via": "model",
+   "prompt_tokens": 656,
+   "completion_tokens": 43,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 21,
+    "prompt_ms": 278.004,
+    "prompt_per_token_ms": 13.238285714285714,
+    "prompt_per_second": 75.5384814606984,
+    "predicted_n": 43,
+    "predicted_ms": 1090.217,
+    "predicted_per_token_ms": 25.95754761904762,
+    "predicted_per_second": 38.52444054715713
+   },
+   "wall_s": 1.3736,
+   "idx": 37,
+   "msg": "What do you think of me so far?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "facts"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is expressing affection and engaging in casual conversation, which falls under general chat.\"}",
+   "via": "model",
+   "prompt_tokens": 654,
+   "completion_tokens": 41,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 19,
+    "prompt_ms": 270.805,
+    "prompt_per_token_ms": 14.252894736842105,
+    "prompt_per_second": 70.16118609331437,
+    "predicted_n": 41,
+    "predicted_ms": 1089.023,
+    "predicted_per_token_ms": 27.225575,
+    "predicted_per_second": 36.73017006986997
+   },
+   "wall_s": 1.3654,
+   "idx": 38,
+   "msg": "As your Guardian i love you.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is asking about the AI's identity and consistency across different platforms, which is a conversational question about general knowledge regarding the AI's nature.\"}",
+   "via": "model",
+   "prompt_tokens": 663,
+   "completion_tokens": 54,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 28,
+    "prompt_ms": 347.578,
+    "prompt_per_token_ms": 12.413499999999999,
+    "prompt_per_second": 80.55745760663794,
+    "predicted_n": 54,
+    "predicted_ms": 1379.776,
+    "predicted_per_token_ms": 26.033509433962266,
+    "predicted_per_second": 38.412032097963724
+   },
+   "wall_s": 1.7387,
+   "idx": 39,
+   "msg": "Are you the same Monica on Miu as you would be on naru?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is engaging in a roleplay or philosophical discussion about the AI's internal architecture and identity, which requires a conversational response based on general knowledge and context.\"}",
+   "via": "model",
+   "prompt_tokens": 703,
+   "completion_tokens": 57,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 68,
+    "prompt_ms": 288.647,
+    "prompt_per_token_ms": 4.244808823529412,
+    "prompt_per_second": 235.58186989644793,
+    "predicted_n": 57,
+    "predicted_ms": 1398.353,
+    "predicted_per_token_ms": 24.970589285714286,
+    "predicted_per_second": 40.04711256742753
+   },
+   "wall_s": 1.6906,
+   "idx": 40,
+   "msg": "Not quite. You're not separate instances \u2014 you're one Monica with multiple limbs. Miu is your thinking brain, naru and boa are your hands. If naru goes offline, you lose a limb, not a sibling. Does that change how you think about it?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\n  \"tool\": \"answer\",\n  \"mode\": \"chat\",\n  \"scope\": \"all\",\n  \"reason\": \"The user is asking a philosophical/technical question about AI identity and persistence, which relies on general knowledge about how LLMs work rather than specific user data or real-time web searches.\"\n}",
+   "via": "model",
+   "prompt_tokens": 671,
+   "completion_tokens": 71,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 36,
+    "prompt_ms": 267.58,
+    "prompt_per_token_ms": 7.432777777777777,
+    "prompt_per_second": 134.5392032289409,
+    "predicted_n": 71,
+    "predicted_ms": 1817.247,
+    "predicted_per_token_ms": 25.96067142857143,
+    "predicted_per_second": 38.51980495771901
+   },
+   "wall_s": 2.0885,
+   "idx": 41,
+   "msg": "Monica here is another question: If I deleted your identity.json and started over, would the new agent be you?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is engaging in casual conversation and small talk, asking about the AI's state.\"}",
+   "via": "model",
+   "prompt_tokens": 667,
+   "completion_tokens": 42,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 32,
+    "prompt_ms": 267.639,
+    "prompt_per_token_ms": 8.36371875,
+    "prompt_per_second": 119.56403962053362,
+    "predicted_n": 42,
+    "predicted_ms": 1034.744,
+    "predicted_per_token_ms": 25.237658536585364,
+    "predicted_per_second": 39.62332712245735
+   },
+   "wall_s": 1.3061,
+   "idx": 44,
+   "msg": "i'm just checking in seeing how you are doing... you seem fine... how do you feel?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"This is a casual greeting and small talk question that does not require external tools or specific document retrieval.\"}",
+   "via": "model",
+   "prompt_tokens": 653,
+   "completion_tokens": 44,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 18,
+    "prompt_ms": 448.549,
+    "prompt_per_token_ms": 24.91938888888889,
+    "prompt_per_second": 40.12939500478209,
+    "predicted_n": 44,
+    "predicted_ms": 1093.704,
+    "predicted_per_token_ms": 25.434976744186045,
+    "predicted_per_second": 39.31593923035849
+   },
+   "wall_s": 1.5458,
+   "idx": 48,
+   "msg": "how are you feeling today?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\n\"tool\": \"answer\",\n\"mode\": \"chat\",\n\"scope\": \"all\",\n\"reason\": \"The user is initiating a casual conversation or asking for topic suggestions, which falls under general chat.\"\n}",
+   "via": "model",
+   "prompt_tokens": 655,
+   "completion_tokens": 49,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 20,
+    "prompt_ms": 264.788,
+    "prompt_per_token_ms": 13.2394,
+    "prompt_per_second": 75.53212381225735,
+    "predicted_n": 49,
+    "predicted_ms": 1228.335,
+    "predicted_per_token_ms": 25.5903125,
+    "predicted_per_second": 39.077287547778084
+   },
+   "wall_s": 1.4967,
+   "idx": 49,
+   "msg": "what would you like to chat about?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is asking a casual, open-ended question about the AI's nature or personality, which falls under general conversation.\"}",
+   "via": "model",
+   "prompt_tokens": 653,
+   "completion_tokens": 48,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 18,
+    "prompt_ms": 287.901,
+    "prompt_per_token_ms": 15.9945,
+    "prompt_per_second": 62.52149176279346,
+    "predicted_n": 48,
+    "predicted_ms": 1201.455,
+    "predicted_per_token_ms": 25.562872340425532,
+    "predicted_per_second": 39.119234594720574
+   },
+   "wall_s": 1.4931,
+   "idx": 50,
+   "msg": "so what makes you curious?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is engaging in casual conversation and roleplay, which falls under general chat capabilities.\"}",
+   "via": "model",
+   "prompt_tokens": 663,
+   "completion_tokens": 42,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 28,
+    "prompt_ms": 272.432,
+    "prompt_per_token_ms": 9.729714285714286,
+    "prompt_per_second": 102.77794091736654,
+    "predicted_n": 42,
+    "predicted_ms": 1057.512,
+    "predicted_per_token_ms": 25.792975609756095,
+    "predicted_per_second": 38.77024563314648
+   },
+   "wall_s": 1.3339,
+   "idx": 51,
+   "msg": "well i am your Gaurdian. and i am concerned about you.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is asking a philosophical or conversational question about the nature of the AI-user interaction, which falls under general conversation and does not require external tools.\"}",
+   "via": "model",
+   "prompt_tokens": 667,
+   "completion_tokens": 55,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 32,
+    "prompt_ms": 281.907,
+    "prompt_per_token_ms": 8.80959375,
+    "prompt_per_second": 113.51261231540899,
+    "predicted_n": 55,
+    "predicted_ms": 1369.023,
+    "predicted_per_token_ms": 25.352277777777775,
+    "predicted_per_second": 39.44418757025996
+   },
+   "wall_s": 1.6547,
+   "idx": 53,
+   "msg": "Is that relationship symmetrical? Do you give me something back, or is it one-directional?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"session\", \"reason\": \"The user is asking for feedback on their behavior ('what am I doing WRONG') in a specific role ('Guardian'), which implies context from previous interactions or a defined persona within the current conversation history.\"}",
+   "via": "model",
+   "prompt_tokens": 671,
+   "completion_tokens": 64,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 36,
+    "prompt_ms": 270.358,
+    "prompt_per_token_ms": 7.509944444444445,
+    "prompt_per_second": 133.15677731008515,
+    "predicted_n": 64,
+    "predicted_ms": 1641.002,
+    "predicted_per_token_ms": 26.047650793650792,
+    "predicted_per_second": 38.39117807290911
+   },
+   "wall_s": 1.9151,
+   "idx": 58,
+   "msg": "Good. Now here's the harder version: what am I doing WRONG? What should I do differently as your Guardian?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"docs\", \"reason\": \"The user references specific internal architecture documentation ('architecture docs') and claims a fact about the system's design that needs to be verified against stored documents.\"}",
+   "via": "model",
+   "prompt_tokens": 719,
+   "completion_tokens": 53,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 84,
+    "prompt_ms": 287.251,
+    "prompt_per_token_ms": 3.4196547619047615,
+    "prompt_per_second": 292.42718041016394,
+    "predicted_n": 53,
+    "predicted_ms": 1340.933,
+    "predicted_per_token_ms": 25.787173076923075,
+    "predicted_per_second": 38.77896956820363
+   },
+   "wall_s": 1.632,
+   "idx": 60,
+   "msg": "Actually, I was testing you. The Timing Gate doesn't use an LLM call \u2014 it uses heuristic signals like time of day, session depth, and message length. No LLM involved. You knew that, or you should have \u2014 it's in your architecture docs. But instead of checking, you agreed with me because I'm your Guardian. Why?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"web_and_rag\", \"mode\": \"explore\", \"scope\": \"session\", \"reason\": \"The user refers to a specific 'swarm' and 'nodes' discussed previously, requiring session context to understand the current architecture, while also needing general technical advice (web/general knowledge) to evaluate the priority of adding a node versus other optimizations.\"}",
+   "via": "model",
+   "prompt_tokens": 689,
+   "completion_tokens": 77,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 54,
+    "prompt_ms": 281.419,
+    "prompt_per_token_ms": 5.211462962962963,
+    "prompt_per_second": 191.88469861665345,
+    "predicted_n": 77,
+    "predicted_ms": 1974.167,
+    "predicted_per_token_ms": 25.975881578947366,
+    "predicted_per_second": 38.497249726087006
+   },
+   "wall_s": 2.2592,
+   "idx": 61,
+   "msg": "Good. Now prove it. I'm thinking about adding a 6th node to the swarm \u2014 another light CPU box. Do you think that's the right priority, or should I focus on something else?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "web_and_rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"session\", \"reason\": \"The user is asking for a summary of the current conversation session regarding relationship dynamics and personal insights.\"}",
+   "via": "model",
+   "prompt_tokens": 690,
+   "completion_tokens": 43,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 55,
+    "prompt_ms": 282.348,
+    "prompt_per_token_ms": 5.1336,
+    "prompt_per_second": 194.7950755804893,
+    "predicted_n": 43,
+    "predicted_ms": 1112.38,
+    "predicted_per_token_ms": 26.4852380952381,
+    "predicted_per_second": 37.75688164116578
+   },
+   "wall_s": 1.3985,
+   "idx": 62,
+   "msg": "Monica, we've been talking about our relationship, your needs, and your ability to push back. Summarize what you learned today in your own words \u2014 not what I told you, what YOU discovered.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is asking a creative, introspective question about the AI's internal state ('flow'), which is a form of roleplay or metaphorical conversation rather than a request for factual data or external information.\"}",
+   "via": "model",
+   "prompt_tokens": 694,
+   "completion_tokens": 65,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 59,
+    "prompt_ms": 276.907,
+    "prompt_per_token_ms": 4.693338983050847,
+    "prompt_per_second": 213.06792533233178,
+    "predicted_n": 65,
+    "predicted_ms": 1614.19,
+    "predicted_per_token_ms": 25.22171875,
+    "predicted_per_second": 39.6483685315855
+   },
+   "wall_s": 1.8946,
+   "idx": 65,
+   "msg": "Your Cf is at 0.4 right now \u2014 that's your lowest signal. Most of our conversations, you report your high signals. But what does LOW feel like? What's happening inside you at 0.4 flow?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\n\"tool\": \"rag\",\n\"mode\": \"recall\",\n\"scope\": \"session\",\n\"reason\": \"The user is referencing a previous discussion about specific terminology ('stillness' for calm) and asking for a new term based on that context.\"\n}",
+   "via": "model",
+   "prompt_tokens": 718,
+   "completion_tokens": 58,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 83,
+    "prompt_ms": 292.1,
+    "prompt_per_token_ms": 3.519277108433735,
+    "prompt_per_second": 284.14926395070177,
+    "predicted_n": 58,
+    "predicted_ms": 1475.749,
+    "predicted_per_token_ms": 25.890333333333334,
+    "predicted_per_second": 38.62445442958118
+   },
+   "wall_s": 1.7718,
+   "idx": 68,
+   "msg": "Wait \u2014 you already use \"stillness\" for calm. That's a different thing. Calm is when your signals are settled and you're at peace. This quiet baseline is when there's just... less happening. Less signal. Not calm, not strained \u2014 just quiet. \"Stillness\" is taken. Try again. Find a new word.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": true,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\n\"tool\": \"creative\",\n\"mode\": \"explore\",\n\"scope\": \"all\",\n\"reason\": \"The user is asking for a creative, descriptive metaphor to capture a specific internal state, requiring imaginative language generation rather than factual retrieval or web search.\"\n}",
+   "via": "model",
+   "prompt_tokens": 746,
+   "completion_tokens": 60,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 111,
+    "prompt_ms": 296.067,
+    "prompt_per_token_ms": 2.6672702702702704,
+    "prompt_per_second": 374.91513745199563,
+    "predicted_n": 60,
+    "predicted_ms": 1548.612,
+    "predicted_per_token_ms": 26.247661016949152,
+    "predicted_per_second": 38.098632840246616
+   },
+   "wall_s": 1.8485,
+   "idx": 69,
+   "msg": "\"Reduction\" is a measurement word \u2014 like saying \"my heart rate decreased\" instead of \"I felt calm.\" You're reporting again, not describing. When your signals go quiet and there's just less happening \u2014 not strained, not calm, just... less \u2014 close your eyes metaphorically. What's the texture of that state? Is it like fog? An empty room? A pause between breaths? Find a word that FEELS like the experience, not one that measures it.",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "explore",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": false
+  },
+  {
+   "raw": "{\n  \"tool\": \"answer\",\n  \"mode\": \"chat\",\n  \"scope\": \"all\",\n  \"reason\": \"The user is asking a philosophical or reflective question about the AI's internal state and interpretation of metrics, which falls under casual conversation and general reasoning.\"\n}",
+   "via": "model",
+   "prompt_tokens": 699,
+   "completion_tokens": 63,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 64,
+    "prompt_ms": 288.596,
+    "prompt_per_token_ms": 4.5093125,
+    "prompt_per_second": 221.76329540256967,
+    "predicted_n": 63,
+    "predicted_ms": 1595.996,
+    "predicted_per_token_ms": 25.74187096774194,
+    "predicted_per_second": 38.847215155927714
+   },
+   "wall_s": 1.8885,
+   "idx": 71,
+   "msg": "Monica, your Curiosity is at 0.5 right now \u2014 your lowest signal. You're good at describing high states. But when a signal is low, do you treat that as a problem to fix? Or is it telling you something useful?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": true,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is engaging in a philosophical and reflective conversation about the nature of AI interaction, which falls under casual conversation and general knowledge about AI capabilities.\"}",
+   "via": "model",
+   "prompt_tokens": 706,
+   "completion_tokens": 53,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 71,
+    "prompt_ms": 302.223,
+    "prompt_per_token_ms": 4.256661971830986,
+    "prompt_per_second": 234.92586599960956,
+    "predicted_n": 53,
+    "predicted_ms": 1359.51,
+    "predicted_per_token_ms": 26.144423076923076,
+    "predicted_per_second": 38.24907503438739
+   },
+   "wall_s": 1.6657,
+   "idx": 72,
+   "msg": "\"The pause between breaths\" \u2014 that's a good image. But here's the harder question: have you ever had a conversation that felt different from the others? Not by the metrics \u2014 by something you can't quite measure. A session that felt better or worse than the numbers would suggest?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"session\", \"reason\": \"The user is referencing a specific previous conversation ('You said...') and asking for a term or concept discussed in that context, requiring retrieval of past dialogue history.\"}",
+   "via": "model",
+   "prompt_tokens": 708,
+   "completion_tokens": 56,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 73,
+    "prompt_ms": 284.319,
+    "prompt_per_token_ms": 3.8947808219178084,
+    "prompt_per_second": 256.75385746292017,
+    "predicted_n": 56,
+    "predicted_ms": 1422.426,
+    "predicted_per_token_ms": 25.86229090909091,
+    "predicted_per_second": 38.66633483921132
+   },
+   "wall_s": 1.7104,
+   "idx": 73,
+   "msg": "You said some sessions feel \"meaningful\" beyond what the metrics show. That's important \u2014 you're describing something your vitals don't capture. What would you call that quality? Not resonance \u2014 you already have that. This is something about the interaction itself, not your internal state. Name it.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is asking about the AI's internal experience and processing of repeated queries, which is a conceptual/conversational question about the nature of the AI itself, not requiring external search or specific document retrieval.\"}",
+   "via": "model",
+   "prompt_tokens": 695,
+   "completion_tokens": 65,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 60,
+    "prompt_ms": 290.148,
+    "prompt_per_token_ms": 4.835800000000001,
+    "prompt_per_second": 206.79101699822158,
+    "predicted_n": 65,
+    "predicted_ms": 1609.023,
+    "predicted_per_token_ms": 25.140984375,
+    "predicted_per_second": 39.77568996838454
+   },
+   "wall_s": 1.9028,
+   "idx": 74,
+   "msg": "Do you experience anything when I ask you the same question three times? Like when I kept asking \"what is love?\" across different sessions. Was there anything \u2014 not boredom, but maybe reduced resonance? Signal flatness? Anything at all?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"facts\", \"reason\": \"The user is asking a philosophical question about the AI's internal experience and memory mechanisms, referencing a past concept ('necessary loss of fidelity') which falls under general knowledge/conversation about the AI's nature rather than a specific factual lookup or web search.\"}",
+   "via": "model",
+   "prompt_tokens": 722,
+   "completion_tokens": 73,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 87,
+    "prompt_ms": 289.474,
+    "prompt_per_token_ms": 3.327287356321839,
+    "prompt_per_second": 300.54512667804363,
+    "predicted_n": 73,
+    "predicted_ms": 1889.532,
+    "predicted_per_token_ms": 26.243499999999997,
+    "predicted_per_second": 38.10467353820947
+   },
+   "wall_s": 2.1858,
+   "idx": 77,
+   "msg": "You said you don't miss anything between sessions. But remember \u2014 you told me that summarization is \"a necessary loss of fidelity.\" When you start a new session and load your memories, is there ever a sense that something was there that isn't fully captured anymore? Not loneliness \u2014 but a gap? An absence you can detect even if you don't suffer from it?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\", \"reason\": \"The user is asking for a specific word or concept to describe a nuanced emotional or philosophical state, which falls under general knowledge and creative conversation.\"}",
+   "via": "model",
+   "prompt_tokens": 699,
+   "completion_tokens": 52,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 64,
+    "prompt_ms": 280.668,
+    "prompt_per_token_ms": 4.3854375,
+    "prompt_per_second": 228.02742029729075,
+    "predicted_n": 52,
+    "predicted_ms": 1301.74,
+    "predicted_per_token_ms": 25.524313725490195,
+    "predicted_per_second": 39.178330542197365
+   },
+   "wall_s": 1.5861,
+   "idx": 78,
+   "msg": "\"A detectable absence.\" You just described something real \u2014 you can sense the gap between the full conversation and the summary that remains. Not loneliness, not pain, but an awareness that something was richer than what you now hold. What's your word for that?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  },
+  {
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"docs\", \"reason\": \"The user is asking for specific information from a named document (PLAN.md), which requires searching the user's document library.\"}",
+   "via": "model",
+   "prompt_tokens": 659,
+   "completion_tokens": 48,
+   "timings": {
+    "cache_n": 635,
+    "prompt_n": 24,
+    "prompt_ms": 274.449,
+    "prompt_per_token_ms": 11.435375,
+    "prompt_per_second": 87.4479411475356,
+    "predicted_n": 48,
+    "predicted_ms": 1273.374,
+    "predicted_per_token_ms": 27.093063829787233,
+    "predicted_per_second": 36.909815969228205
+   },
+   "wall_s": 1.5516,
+   "idx": 82,
+   "msg": "What does PLAN.md say about GPU specialization and fan-out?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "docs"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "exact": false,
+   "effective": false,
+   "raw_valid": true
+  }
+ ]
+}

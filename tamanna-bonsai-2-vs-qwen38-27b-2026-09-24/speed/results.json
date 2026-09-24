@@ -1,0 +1,1605 @@
+{
+ "harness": "llama-bench -ngl 99 -fa 1 -p 512 -n 128 -d 0,4096,8192 -r 5",
+ "order": [
+  [
+   "qwen3.8-27b-udq4kxl",
+   "bonsai-2-27b-pq2_0"
+  ],
+  [
+   "bonsai-2-27b-pq2_0",
+   "qwen3.8-27b-udq4kxl"
+  ],
+  [
+   "qwen3.8-27b-udq4kxl",
+   "bonsai-2-27b-pq2_0"
+  ]
+ ],
+ "results": [
+  {
+   "build": "qwen3.8-27b-udq4kxl",
+   "model": "qwen3.8-27b-udq4kxl",
+   "rep": 1,
+   "tag": "measured",
+   "elapsed_s": 67.1,
+   "telemetry": {
+    "samples": 70,
+    "under_load": 65,
+    "temp_start": 62,
+    "temp_max": 73,
+    "vram_peak_mib": 17666,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1770,
+    "sm_min": 1635,
+    "mem_clock": 9501,
+    "power_mean": 401.9,
+    "power_max": 420.03
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1419.191904,
+     "stddev_ts": 20.922315,
+     "samples": [
+      1382.22,
+      1422.93,
+      1429.78,
+      1431.52,
+      1429.51
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 42.148393,
+     "stddev_ts": 0.043505,
+     "samples": [
+      42.0782,
+      42.1839,
+      42.1851,
+      42.1511,
+      42.1437
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1361.158721,
+     "stddev_ts": 13.912646,
+     "samples": [
+      1359.5,
+      1338.36,
+      1363.42,
+      1372.01,
+      1372.5
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 41.615172,
+     "stddev_ts": 0.050519,
+     "samples": [
+      41.5249,
+      41.6337,
+      41.641,
+      41.6364,
+      41.6398
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1299.254303,
+     "stddev_ts": 13.050498,
+     "samples": [
+      1297.2,
+      1277.31,
+      1305.69,
+      1307.93,
+      1308.14
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 41.114929,
+     "stddev_ts": 0.044253,
+     "samples": [
+      41.0359,
+      41.1355,
+      41.1369,
+      41.1365,
+      41.1299
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    }
+   ]
+  },
+  {
+   "build": "bonsai-2-27b-pq2_0",
+   "model": "bonsai-2-27b-pq2_0",
+   "rep": 1,
+   "tag": "measured",
+   "elapsed_s": 44.1,
+   "telemetry": {
+    "samples": 47,
+    "under_load": 41,
+    "temp_start": 63,
+    "temp_max": 72,
+    "vram_peak_mib": 8118,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1815,
+    "sm_min": 1770,
+    "mem_clock": 9501,
+    "power_mean": 400.4,
+    "power_max": 418.82
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1477.540433,
+     "stddev_ts": 24.243373,
+     "samples": [
+      1434.49,
+      1487.83,
+      1483.71,
+      1491.26,
+      1490.4
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 77.665271,
+     "stddev_ts": 0.100052,
+     "samples": [
+      77.6197,
+      77.8186,
+      77.6904,
+      77.649,
+      77.5488
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1413.708767,
+     "stddev_ts": 15.758878,
+     "samples": [
+      1410.76,
+      1387.31,
+      1422.78,
+      1423.89,
+      1423.81
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 75.936443,
+     "stddev_ts": 0.174128,
+     "samples": [
+      75.6262,
+      76.0392,
+      76.0106,
+      76.0082,
+      75.998
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1351.254491,
+     "stddev_ts": 15.847696,
+     "samples": [
+      1349.75,
+      1324.28,
+      1362.13,
+      1360.89,
+      1359.23
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 74.358092,
+     "stddev_ts": 0.184501,
+     "samples": [
+      74.0286,
+      74.4298,
+      74.4547,
+      74.4477,
+      74.4296
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    }
+   ]
+  },
+  {
+   "build": "bonsai-2-27b-pq2_0",
+   "model": "bonsai-2-27b-pq2_0",
+   "rep": 2,
+   "tag": "measured",
+   "elapsed_s": 44.1,
+   "telemetry": {
+    "samples": 47,
+    "under_load": 41,
+    "temp_start": 63,
+    "temp_max": 72,
+    "vram_peak_mib": 8118,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1815,
+    "sm_min": 1710,
+    "mem_clock": 9501,
+    "power_mean": 400.3,
+    "power_max": 419.02
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1475.708442,
+     "stddev_ts": 26.384025,
+     "samples": [
+      1428.83,
+      1486.04,
+      1490.06,
+      1490.58,
+      1483.04
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 77.630048,
+     "stddev_ts": 0.116358,
+     "samples": [
+      77.4255,
+      77.6961,
+      77.7056,
+      77.6497,
+      77.6733
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1414.684383,
+     "stddev_ts": 17.036551,
+     "samples": [
+      1412.92,
+      1386.02,
+      1422.13,
+      1423.32,
+      1429.05
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 75.961896,
+     "stddev_ts": 0.200557,
+     "samples": [
+      75.6053,
+      76.0887,
+      76.039,
+      76.0446,
+      76.0319
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1350.107462,
+     "stddev_ts": 14.465805,
+     "samples": [
+      1347.86,
+      1325.83,
+      1359.24,
+      1360.79,
+      1356.81
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 74.40419,
+     "stddev_ts": 0.192182,
+     "samples": [
+      74.0658,
+      74.5327,
+      74.4508,
+      74.4613,
+      74.5103
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    }
+   ]
+  },
+  {
+   "build": "qwen3.8-27b-udq4kxl",
+   "model": "qwen3.8-27b-udq4kxl",
+   "rep": 2,
+   "tag": "measured",
+   "elapsed_s": 67.1,
+   "telemetry": {
+    "samples": 70,
+    "under_load": 65,
+    "temp_start": 63,
+    "temp_max": 73,
+    "vram_peak_mib": 17666,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1770,
+    "sm_min": 1635,
+    "mem_clock": 9501,
+    "power_mean": 401.8,
+    "power_max": 419.01
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1413.967854,
+     "stddev_ts": 21.848678,
+     "samples": [
+      1376.43,
+      1419.17,
+      1429.69,
+      1428.9,
+      1415.65
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 42.115347,
+     "stddev_ts": 0.036109,
+     "samples": [
+      42.0509,
+      42.129,
+      42.1325,
+      42.1345,
+      42.1299
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1356.948552,
+     "stddev_ts": 14.546726,
+     "samples": [
+      1359.7,
+      1331.23,
+      1365.56,
+      1363.86,
+      1364.4
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 41.594968,
+     "stddev_ts": 0.045807,
+     "samples": [
+      41.5131,
+      41.6191,
+      41.6147,
+      41.6131,
+      41.6149
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1300.192748,
+     "stddev_ts": 13.510779,
+     "samples": [
+      1300.02,
+      1276.88,
+      1309.31,
+      1307.93,
+      1306.82
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 41.107238,
+     "stddev_ts": 0.047356,
+     "samples": [
+      41.0226,
+      41.13,
+      41.1286,
+      41.1265,
+      41.1284
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    }
+   ]
+  },
+  {
+   "build": "qwen3.8-27b-udq4kxl",
+   "model": "qwen3.8-27b-udq4kxl",
+   "rep": 3,
+   "tag": "measured",
+   "elapsed_s": 67.1,
+   "telemetry": {
+    "samples": 70,
+    "under_load": 65,
+    "temp_start": 63,
+    "temp_max": 73,
+    "vram_peak_mib": 17666,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1770,
+    "sm_min": 1650,
+    "mem_clock": 9501,
+    "power_mean": 401.5,
+    "power_max": 419.5
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1412.295064,
+     "stddev_ts": 20.976116,
+     "samples": [
+      1375.73,
+      1419.06,
+      1422.88,
+      1428.27,
+      1415.54
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 42.113084,
+     "stddev_ts": 0.039187,
+     "samples": [
+      42.0433,
+      42.1247,
+      42.1322,
+      42.1336,
+      42.1317
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1357.256378,
+     "stddev_ts": 14.802159,
+     "samples": [
+      1359.72,
+      1331.12,
+      1365.19,
+      1364.85,
+      1365.41
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 41.602698,
+     "stddev_ts": 0.049894,
+     "samples": [
+      41.5135,
+      41.6225,
+      41.6279,
+      41.626,
+      41.6236
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1299.408713,
+     "stddev_ts": 13.292454,
+     "samples": [
+      1298.63,
+      1276.66,
+      1306.23,
+      1306.59,
+      1308.93
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 41.109542,
+     "stddev_ts": 0.048836,
+     "samples": [
+      41.0224,
+      41.1336,
+      41.1325,
+      41.1335,
+      41.1257
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    }
+   ]
+  },
+  {
+   "build": "bonsai-2-27b-pq2_0",
+   "model": "bonsai-2-27b-pq2_0",
+   "rep": 3,
+   "tag": "measured",
+   "elapsed_s": 44.2,
+   "telemetry": {
+    "samples": 47,
+    "under_load": 42,
+    "temp_start": 63,
+    "temp_max": 72,
+    "vram_peak_mib": 8118,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1815.0,
+    "sm_min": 1725,
+    "mem_clock": 9501.0,
+    "power_mean": 400.4,
+    "power_max": 421.09
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1474.326599,
+     "stddev_ts": 23.661377,
+     "samples": [
+      1433.19,
+      1483.82,
+      1489.21,
+      1489.61,
+      1475.8
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 77.570077,
+     "stddev_ts": 0.134384,
+     "samples": [
+      77.3523,
+      77.6762,
+      77.6735,
+      77.5368,
+      77.6115
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1412.058324,
+     "stddev_ts": 16.685759,
+     "samples": [
+      1411.45,
+      1383.32,
+      1421.88,
+      1421.27,
+      1422.37
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 75.899244,
+     "stddev_ts": 0.201132,
+     "samples": [
+      75.54,
+      75.9787,
+      75.9931,
+      76.0061,
+      75.9783
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1350.29359,
+     "stddev_ts": 15.752915,
+     "samples": [
+      1348.71,
+      1323.5,
+      1361.34,
+      1359.4,
+      1358.51
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 74.371487,
+     "stddev_ts": 0.180551,
+     "samples": [
+      74.0489,
+      74.4434,
+      74.4661,
+      74.4536,
+      74.4454
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    }
+   ]
+  }
+ ],
+ "primes": [
+  {
+   "build": "qwen3.8-27b-udq4kxl",
+   "model": "qwen3.8-27b-udq4kxl",
+   "rep": 1,
+   "tag": "prime",
+   "elapsed_s": 67.0,
+   "telemetry": {
+    "samples": 70,
+    "under_load": 65,
+    "temp_start": 46,
+    "temp_max": 72,
+    "vram_peak_mib": 17666,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1785,
+    "sm_min": 1680,
+    "mem_clock": 9501,
+    "power_mean": 401.5,
+    "power_max": 421.44
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1435.63022,
+     "stddev_ts": 17.556493,
+     "samples": [
+      1405.06,
+      1444.86,
+      1445.3,
+      1446.53,
+      1436.4
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 42.220226,
+     "stddev_ts": 0.028424,
+     "samples": [
+      42.1768,
+      42.2543,
+      42.2316,
+      42.2242,
+      42.2141
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1365.788994,
+     "stddev_ts": 15.102831,
+     "samples": [
+      1369.12,
+      1339.01,
+      1374.14,
+      1372.76,
+      1373.92
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 41.643914,
+     "stddev_ts": 0.048211,
+     "samples": [
+      41.5581,
+      41.6667,
+      41.6691,
+      41.6686,
+      41.657
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1305.432384,
+     "stddev_ts": 12.772676,
+     "samples": [
+      1306.99,
+      1283.66,
+      1307,
+      1314.84,
+      1314.67
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 41.132255,
+     "stddev_ts": 0.050128,
+     "samples": [
+      41.0432,
+      41.1549,
+      41.1621,
+      41.1553,
+      41.1458
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    }
+   ]
+  },
+  {
+   "build": "bonsai-2-27b-pq2_0",
+   "model": "bonsai-2-27b-pq2_0",
+   "rep": 1,
+   "tag": "prime",
+   "elapsed_s": 44.2,
+   "telemetry": {
+    "samples": 47,
+    "under_load": 41,
+    "temp_start": 63,
+    "temp_max": 72,
+    "vram_peak_mib": 8118,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1815,
+    "sm_min": 1755,
+    "mem_clock": 9501,
+    "power_mean": 400.1,
+    "power_max": 419.8
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1476.098461,
+     "stddev_ts": 25.1566,
+     "samples": [
+      1431.3,
+      1485.19,
+      1489.24,
+      1490.08,
+      1484.67
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 77.714629,
+     "stddev_ts": 0.08106,
+     "samples": [
+      77.6099,
+      77.833,
+      77.7333,
+      77.7129,
+      77.684
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1414.863078,
+     "stddev_ts": 15.544537,
+     "samples": [
+      1411.16,
+      1389.36,
+      1427.99,
+      1423.48,
+      1422.33
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 75.946953,
+     "stddev_ts": 0.160584,
+     "samples": [
+      75.6608,
+      75.9946,
+      76.0316,
+      76.0205,
+      76.0272
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1353.314225,
+     "stddev_ts": 14.418969,
+     "samples": [
+      1350.57,
+      1329.51,
+      1359.99,
+      1366.01,
+      1360.5
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 74.398992,
+     "stddev_ts": 0.177472,
+     "samples": [
+      74.0818,
+      74.4723,
+      74.4909,
+      74.4726,
+      74.4774
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    }
+   ]
+  },
+  {
+   "build": "bonsai-2-27b-pq2_0",
+   "model": "bonsai-2-27b-pq2_0",
+   "rep": 2,
+   "tag": "prime",
+   "elapsed_s": 44.2,
+   "telemetry": {
+    "samples": 47,
+    "under_load": 41,
+    "temp_start": 63,
+    "temp_max": 73,
+    "vram_peak_mib": 8118,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1815,
+    "sm_min": 1710,
+    "mem_clock": 9501,
+    "power_mean": 400.5,
+    "power_max": 418.74
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1475.444184,
+     "stddev_ts": 25.931905,
+     "samples": [
+      1429.22,
+      1486.92,
+      1487.26,
+      1490.02,
+      1483.8
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 77.637736,
+     "stddev_ts": 0.168253,
+     "samples": [
+      77.3422,
+      77.7643,
+      77.7078,
+      77.6813,
+      77.6931
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1415.761694,
+     "stddev_ts": 15.218698,
+     "samples": [
+      1412.85,
+      1390.49,
+      1427.71,
+      1425.4,
+      1422.36
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 75.938191,
+     "stddev_ts": 0.179481,
+     "samples": [
+      75.6177,
+      76.023,
+      76.0343,
+      76.0065,
+      76.0095
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1353.791214,
+     "stddev_ts": 16.977008,
+     "samples": [
+      1350.4,
+      1325.75,
+      1367.1,
+      1365.43,
+      1360.28
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 74.375852,
+     "stddev_ts": 0.158698,
+     "samples": [
+      74.0949,
+      74.4341,
+      74.4851,
+      74.4365,
+      74.4287
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    }
+   ]
+  },
+  {
+   "build": "qwen3.8-27b-udq4kxl",
+   "model": "qwen3.8-27b-udq4kxl",
+   "rep": 2,
+   "tag": "prime",
+   "elapsed_s": 67.1,
+   "telemetry": {
+    "samples": 70,
+    "under_load": 65,
+    "temp_start": 63,
+    "temp_max": 73,
+    "vram_peak_mib": 17666,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1770,
+    "sm_min": 1620,
+    "mem_clock": 9501,
+    "power_mean": 402.0,
+    "power_max": 419.76
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1414.174429,
+     "stddev_ts": 22.69493,
+     "samples": [
+      1374.97,
+      1418.54,
+      1429.83,
+      1429.88,
+      1417.66
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 42.119862,
+     "stddev_ts": 0.028052,
+     "samples": [
+      42.0795,
+      42.1533,
+      42.107,
+      42.1255,
+      42.134
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1357.297808,
+     "stddev_ts": 14.689978,
+     "samples": [
+      1358.2,
+      1331.67,
+      1364.94,
+      1366.61,
+      1365.07
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 41.600726,
+     "stddev_ts": 0.052111,
+     "samples": [
+      41.5075,
+      41.6218,
+      41.6258,
+      41.6246,
+      41.6239
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1299.121091,
+     "stddev_ts": 12.652291,
+     "samples": [
+      1299.16,
+      1277.29,
+      1306.62,
+      1304.62,
+      1307.92
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 41.108797,
+     "stddev_ts": 0.052577,
+     "samples": [
+      41.0148,
+      41.1291,
+      41.1338,
+      41.132,
+      41.1343
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    }
+   ]
+  },
+  {
+   "build": "qwen3.8-27b-udq4kxl",
+   "model": "qwen3.8-27b-udq4kxl",
+   "rep": 3,
+   "tag": "prime",
+   "elapsed_s": 67.1,
+   "telemetry": {
+    "samples": 70,
+    "under_load": 65,
+    "temp_start": 63,
+    "temp_max": 73,
+    "vram_peak_mib": 17666,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1755,
+    "sm_min": 1650,
+    "mem_clock": 9501,
+    "power_mean": 401.6,
+    "power_max": 419.57
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1412.239775,
+     "stddev_ts": 21.989507,
+     "samples": [
+      1374.73,
+      1418.18,
+      1427.61,
+      1428.21,
+      1412.46
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 42.101329,
+     "stddev_ts": 0.036617,
+     "samples": [
+      42.0371,
+      42.1241,
+      42.1241,
+      42.1074,
+      42.1141
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1356.464339,
+     "stddev_ts": 15.363377,
+     "samples": [
+      1358.78,
+      1329.38,
+      1365.02,
+      1364.92,
+      1364.23
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 41.59384,
+     "stddev_ts": 0.049753,
+     "samples": [
+      41.5049,
+      41.6151,
+      41.6145,
+      41.6183,
+      41.6163
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1300.600947,
+     "stddev_ts": 13.144611,
+     "samples": [
+      1300.31,
+      1277.96,
+      1309.65,
+      1307.8,
+      1307.29
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 41.102144,
+     "stddev_ts": 0.048302,
+     "samples": [
+      41.016,
+      41.1193,
+      41.1301,
+      41.1236,
+      41.1217
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B Q4_K - Small",
+     "model_size": 17912397824,
+     "model_n_params": 27320697856
+    }
+   ]
+  },
+  {
+   "build": "bonsai-2-27b-pq2_0",
+   "model": "bonsai-2-27b-pq2_0",
+   "rep": 3,
+   "tag": "prime",
+   "elapsed_s": 44.2,
+   "telemetry": {
+    "samples": 47,
+    "under_load": 42,
+    "temp_start": 63,
+    "temp_max": 72,
+    "vram_peak_mib": 8118,
+    "pcie_gen": [
+     4
+    ],
+    "sm_median": 1815.0,
+    "sm_min": 1740,
+    "mem_clock": 9501.0,
+    "power_mean": 399.8,
+    "power_max": 418.91
+   },
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 1474.764107,
+     "stddev_ts": 23.973209,
+     "samples": [
+      1432.06,
+      1485.26,
+      1484.8,
+      1488.87,
+      1482.84
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 77.590928,
+     "stddev_ts": 0.142471,
+     "samples": [
+      77.3368,
+      77.6618,
+      77.6526,
+      77.6373,
+      77.6662
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 1411.775049,
+     "stddev_ts": 16.900992,
+     "samples": [
+      1413.41,
+      1382.14,
+      1420.8,
+      1421.01,
+      1421.51
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 75.907014,
+     "stddev_ts": 0.186708,
+     "samples": [
+      75.5745,
+      75.9776,
+      76.0197,
+      75.9769,
+      75.9863
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 1350.57501,
+     "stddev_ts": 14.406132,
+     "samples": [
+      1347.15,
+      1326.74,
+      1360.68,
+      1358.53,
+      1359.78
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 74.35755,
+     "stddev_ts": 0.169907,
+     "samples": [
+      74.0545,
+      74.4445,
+      74.4178,
+      74.448,
+      74.423
+     ],
+     "build_commit": "9a9394a",
+     "build_number": 1,
+     "model_type": "qwen35 27B PQ2_0 - 2.13 bpw (group 128)",
+     "model_size": 7195047936,
+     "model_n_params": 26895998464
+    }
+   ]
+  }
+ ]
+}

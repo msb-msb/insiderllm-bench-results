@@ -1,0 +1,25 @@
+09:06:07 start  pre-registered: baseline vs z-lab DFlash drafter, 9 prompts, prime both then A,B x3 alternating
+09:06:07   server: /home/minotaur/llama-v0.4.0/build/bin/llama-server
+09:06:07   card: NVIDIA GeForce RTX 3090, 580.178.04, 3, 4, 1, 7, 44, 35.46
+09:06:07   free -g: Mem:              31           1           1           0          29          30
+09:06:24   prime-baseline  rep0  gen  157.86 tok/s  per-prompt mean  156.13  accept   n/a  pred 1285  draft 0/0  wall 9.7s  load 4.1s  vram 21234 MiB  (14s)
+09:06:24     load: pcie gen [3] (gpu view [3]) x[16]  sm 1935 MHz (min 1935)  mem 9501  power 297 W (max 361)  temp 44->60 C  vram peak 21258  reasons ['0x0000000000000000', '0x0000000000000004']  n=11/17
+09:06:42   prime-dflash    rep0  gen  171.69 tok/s  per-prompt mean  165.45  accept 0.234  pred 1288  draft 4225/987  wall 9.4s  load 4.9s  vram 23676 MiB  (15s)
+09:06:42     load: pcie gen [3] (gpu view [3]) x[16]  sm 1935 MHz (min 1935)  mem 9501  power 276 W (max 350)  temp 55->64 C  vram peak 23762  reasons ['0x0000000000000000']  n=10/18
+09:06:59         baseline  rep1  gen  157.51 tok/s  per-prompt mean  155.76  accept   n/a  pred 1285  draft 0/0  wall 9.7s  load 4.0s  vram 21234 MiB  (14s)
+09:06:59     load: pcie gen [3] (gpu view [3]) x[16]  sm 1935 MHz (min 1860)  mem 9501  power 304 W (max 374)  temp 59->65 C  vram peak 21258  reasons ['0x0000000000000000', '0x0000000000000004']  n=12/17
+09:07:17         dflash    rep1  gen  171.98 tok/s  per-prompt mean  165.64  accept 0.234  pred 1288  draft 4225/987  wall 9.4s  load 4.8s  vram 23676 MiB  (15s)
+09:07:17     load: pcie gen [3] (gpu view [3]) x[16]  sm 1935 MHz (min 1935)  mem 9501  power 281 W (max 353)  temp 59->63 C  vram peak 23762  reasons ['0x0000000000000000']  n=11/18
+09:07:34         baseline  rep2  gen  157.60 tok/s  per-prompt mean  155.85  accept   n/a  pred 1285  draft 0/0  wall 9.7s  load 4.1s  vram 21234 MiB  (14s)
+09:07:34     load: pcie gen [3] (gpu view [3]) x[16]  sm 1935 MHz (min 1875)  mem 9501  power 302 W (max 378)  temp 56->63 C  vram peak 21258  reasons ['0x0000000000000000', '0x0000000000000004']  n=12/17
+09:07:52         dflash    rep2  gen  172.00 tok/s  per-prompt mean  165.57  accept 0.234  pred 1288  draft 4225/987  wall 9.4s  load 4.8s  vram 23676 MiB  (15s)
+09:07:52     load: pcie gen [3] (gpu view [3]) x[16]  sm 1935 MHz (min 1935)  mem 9501  power 277 W (max 342)  temp 56->61 C  vram peak 23762  reasons ['0x0000000000000000']  n=11/18
+09:08:09         baseline  rep3  gen  157.62 tok/s  per-prompt mean  155.87  accept   n/a  pred 1285  draft 0/0  wall 9.7s  load 4.1s  vram 21234 MiB  (14s)
+09:08:09     load: pcie gen [3] (gpu view [3]) x[16]  sm 1935 MHz (min 1920)  mem 9501  power 296 W (max 370)  temp 55->62 C  vram peak 21258  reasons ['0x0000000000000000', '0x0000000000000004']  n=11/17
+09:08:27         dflash    rep3  gen  172.10 tok/s  per-prompt mean  165.75  accept 0.234  pred 1288  draft 4225/987  wall 9.4s  load 4.8s  vram 23676 MiB  (15s)
+09:08:27     load: pcie gen [3] (gpu view [3]) x[16]  sm 1935 MHz (min 1935)  mem 9501  power 279 W (max 346)  temp 56->62 C  vram peak 23762  reasons ['0x0000000000000000']  n=11/18
+09:08:27 summary (mean of 3 measured reps; spread = min..max over reps)
+09:08:27   baseline  gen  157.58 [157.51..157.62]  per-prompt mean  155.83 [155.76..155.87]  accept n/a
+09:08:27   dflash    gen  172.03 [171.98..172.10]  per-prompt mean  165.65 [165.57..165.75]  accept 0.2336
+09:08:27   verdict: OVERTURNED  speedup 1.092x  gap +14.45 tok/s vs larger spread 0.12
+09:08:27 done  card at 7 MiB, 55 C after last run

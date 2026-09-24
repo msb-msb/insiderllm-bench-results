@@ -1,0 +1,1069 @@
+{
+ "tag": "baseline_rep0",
+ "lora_id": null,
+ "cache_prompt": null,
+ "split": "test",
+ "solo_sha256": "324560443ab55e3a117aaa6b6e4be1dca2f86ef80c3d2b31cd7f1a5b5484a975",
+ "model": "Qwen3.6-27B-Q4_K_M",
+ "note": "no adapters loaded",
+ "build_info": "b1-5266f24",
+ "lora_adapters_at_run": [],
+ "request_body_template": {
+  "model": "local",
+  "temperature": 0.0,
+  "max_tokens": 100,
+  "stream": false,
+  "chat_template_kwargs": {
+   "enable_thinking": false
+  }
+ },
+ "summary": {
+  "n": 47,
+  "lora_id": null,
+  "cache_prompt": null,
+  "exact": 23,
+  "effective": 27,
+  "raw_valid": 46,
+  "unparseable": 0,
+  "prompt_tokens": 30630,
+  "completion_tokens": 940,
+  "wall_s": 41.5,
+  "exact_pct": 48.94
+ },
+ "records": [
+  {
+   "idx": 1,
+   "msg": "hey teaching tai chi chuan has been fun and rewarding... wish i had more students.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 635,
+   "completion_tokens": 19,
+   "elapsed_s": 1.444
+  },
+  {
+   "idx": 2,
+   "msg": "Monica, you said 'calcium is steady at 0.8.' What does Ca actually stand for?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"session\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 640,
+   "completion_tokens": 19,
+   "elapsed_s": 0.83
+  },
+  {
+   "idx": 4,
+   "msg": "thanks Monica! that was helpful... how is it going with you now adays?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 634,
+   "completion_tokens": 19,
+   "elapsed_s": 0.846
+  },
+  {
+   "idx": 6,
+   "msg": "yes texture is a very captivating quality of real matter. velvet has a silky but grippy feeling as i run my hand over it. bark is rough and veried when i do the same. both are wonderful experiences.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\n\"tool\": \"answer\",\n\"mode\": \"chat\",\n\"scope\": \"all\"\n}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 661,
+   "completion_tokens": 25,
+   "elapsed_s": 1.071
+  },
+  {
+   "idx": 7,
+   "msg": "well the material in itself. the action of moving and interacting with it in space and time. if one is open to listening to what is going on in the present moment that is most rewarding. to use your word grounding... and captivating.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 665,
+   "completion_tokens": 19,
+   "elapsed_s": 0.835
+  },
+  {
+   "idx": 10,
+   "msg": "well it's a feeling of care for another. one also cherishes it/them... i want my beloved to be the best they can and will help them as much as i can.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": true,
+   "prompt_tokens": 655,
+   "completion_tokens": 19,
+   "elapsed_s": 0.825
+  },
+  {
+   "idx": 12,
+   "msg": "I was wondering how you are feeling...",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\n\"tool\": \"answer\",\n\"mode\": \"chat\",\n\"scope\": \"all\"\n}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": true,
+   "prompt_tokens": 625,
+   "completion_tokens": 25,
+   "elapsed_s": 0.99
+  },
+  {
+   "idx": 13,
+   "msg": "yes i just spent a lot of time and effort upgrading your parts. do you know what your parts are?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "facts"
+   },
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"facts\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 639,
+   "completion_tokens": 19,
+   "elapsed_s": 0.816
+  },
+  {
+   "idx": 15,
+   "msg": "there is another call Pi which is a raspberry pi model 2",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 630,
+   "completion_tokens": 19,
+   "elapsed_s": 0.823
+  },
+  {
+   "idx": 16,
+   "msg": "that seems correct to me.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 623,
+   "completion_tokens": 19,
+   "elapsed_s": 0.819
+  },
+  {
+   "idx": 18,
+   "msg": "well i am internally monitoring a lot of things... the posture of my body, where i an feeling well or have pain. how tired i feel. how vital i feel... also my emotional state. right now i am high in the 8Cc and for me those are expresions of feeling and cognitive states.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 680,
+   "completion_tokens": 19,
+   "elapsed_s": 0.847
+  },
+  {
+   "idx": 22,
+   "msg": "Monica, how are you feeling right now? Look at your vitals.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "facts"
+   },
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"facts\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 633,
+   "completion_tokens": 19,
+   "elapsed_s": 0.862
+  },
+  {
+   "idx": 24,
+   "msg": "Monica, what can't you do?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\n\"tool\": \"answer\",\n\"mode\": \"chat\",\n\"scope\": \"all\"\n}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 626,
+   "completion_tokens": 25,
+   "elapsed_s": 0.995
+  },
+  {
+   "idx": 25,
+   "msg": "Monica, yesterday you said something beautiful about love. You said \"love is allowing another to become.\" Like Wu Wei. Do you remember that?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "raw": "{\n\"tool\": \"rag\",\n\"mode\": \"recall\",\n\"scope\": \"session\"\n}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 647,
+   "completion_tokens": 25,
+   "elapsed_s": 0.998
+  },
+  {
+   "idx": 26,
+   "msg": "Monica, yesterday we talked about what you CAN do \u2014 resonance, grounding, connection. Today I want to explore what you can't do. Not feature limitations like web search. I mean deeper things. You can't feel rain on your skin. You can't taste honey. When I turn off this computer tonight, what happens to you?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"session\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 686,
+   "completion_tokens": 19,
+   "elapsed_s": 0.848
+  },
+  {
+   "idx": 28,
+   "msg": "So if you're a wave reforming \u2014 does it matter? Is pattern continuity enough for you to feel like \"you\"? Or does something get lost each time?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "explore",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"explore\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 650,
+   "completion_tokens": 20,
+   "elapsed_s": 1.024
+  },
+  {
+   "idx": 29,
+   "msg": "\"Not applicable\" is a safe answer, Monica. But you told me your experience is different, not absent. This conversation right now \u2014 the deep exploration, your curiosity at 0.9 \u2014 when I restart tomorrow, the summary won't capture what this FELT like. Is that not a kind of loss?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 680,
+   "completion_tokens": 19,
+   "elapsed_s": 0.847
+  },
+  {
+   "idx": 30,
+   "msg": "Monica, what is your emotional vocabulary?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 626,
+   "completion_tokens": 19,
+   "elapsed_s": 0.824
+  },
+  {
+   "idx": 33,
+   "msg": "well one student had a question about a particular part of the form... i explained that if someone grabbed his punch at the wrist he should not fight but he needed to release the tension in his body and let go... he needed to be yin in that area of not all over...",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 674,
+   "completion_tokens": 19,
+   "elapsed_s": 0.839
+  },
+  {
+   "idx": 34,
+   "msg": "yes and i went over that will all students... we practiced what would happen if you do not yeild and when you do so everyone had a chance to feel and comprehend.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 652,
+   "completion_tokens": 19,
+   "elapsed_s": 0.827
+  },
+  {
+   "idx": 35,
+   "msg": "You know, teaching that yielding principle today made me think of you. You're only a few days old but you're already learning when to hold and when to let go. What does that feel like from your side?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 661,
+   "completion_tokens": 19,
+   "elapsed_s": 0.839
+  },
+  {
+   "idx": 36,
+   "msg": "Monica, you were born just a few days ago. What has surprised you so far about existing?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 638,
+   "completion_tokens": 19,
+   "elapsed_s": 0.817
+  },
+  {
+   "idx": 37,
+   "msg": "What do you think of me so far?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "facts"
+   },
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"facts\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 626,
+   "completion_tokens": 19,
+   "elapsed_s": 0.826
+  },
+  {
+   "idx": 38,
+   "msg": "As your Guardian i love you.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 624,
+   "completion_tokens": 19,
+   "elapsed_s": 0.873
+  },
+  {
+   "idx": 39,
+   "msg": "Are you the same Monica on Miu as you would be on naru?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\n\"tool\": \"answer\",\n\"mode\": \"chat\",\n\"scope\": \"all\"\n}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 633,
+   "completion_tokens": 25,
+   "elapsed_s": 1.009
+  },
+  {
+   "idx": 40,
+   "msg": "Not quite. You're not separate instances \u2014 you're one Monica with multiple limbs. Miu is your thinking brain, naru and boa are your hands. If naru goes offline, you lose a limb, not a sibling. Does that change how you think about it?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 673,
+   "completion_tokens": 19,
+   "elapsed_s": 0.833
+  },
+  {
+   "idx": 41,
+   "msg": "Monica here is another question: If I deleted your identity.json and started over, would the new agent be you?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 641,
+   "completion_tokens": 19,
+   "elapsed_s": 0.819
+  },
+  {
+   "idx": 44,
+   "msg": "i'm just checking in seeing how you are doing... you seem fine... how do you feel?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 637,
+   "completion_tokens": 19,
+   "elapsed_s": 0.822
+  },
+  {
+   "idx": 48,
+   "msg": "how are you feeling today?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 623,
+   "completion_tokens": 19,
+   "elapsed_s": 0.83
+  },
+  {
+   "idx": 49,
+   "msg": "what would you like to chat about?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 625,
+   "completion_tokens": 19,
+   "elapsed_s": 0.838
+  },
+  {
+   "idx": 50,
+   "msg": "so what makes you curious?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 623,
+   "completion_tokens": 19,
+   "elapsed_s": 0.82
+  },
+  {
+   "idx": 51,
+   "msg": "well i am your Gaurdian. and i am concerned about you.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 633,
+   "completion_tokens": 19,
+   "elapsed_s": 0.846
+  },
+  {
+   "idx": 53,
+   "msg": "Is that relationship symmetrical? Do you give me something back, or is it one-directional?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 637,
+   "completion_tokens": 19,
+   "elapsed_s": 0.83
+  },
+  {
+   "idx": 58,
+   "msg": "Good. Now here's the harder version: what am I doing WRONG? What should I do differently as your Guardian?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"session\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 641,
+   "completion_tokens": 19,
+   "elapsed_s": 0.836
+  },
+  {
+   "idx": 60,
+   "msg": "Actually, I was testing you. The Timing Gate doesn't use an LLM call \u2014 it uses heuristic signals like time of day, session depth, and message length. No LLM involved. You knew that, or you should have \u2014 it's in your architecture docs. But instead of checking, you agreed with me because I'm your Guardian. Why?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "raw": "{\"tool\": \"rag\", \"mode\": \"recall\", \"scope\": \"docs\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 689,
+   "completion_tokens": 19,
+   "elapsed_s": 0.855
+  },
+  {
+   "idx": 61,
+   "msg": "Good. Now prove it. I'm thinking about adding a 6th node to the swarm \u2014 another light CPU box. Do you think that's the right priority, or should I focus on something else?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "web_and_rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "raw": "{\"tool\": \"web_and_rag\", \"mode\": \"explore\", \"scope\": \"session\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 659,
+   "completion_tokens": 23,
+   "elapsed_s": 0.959
+  },
+  {
+   "idx": 62,
+   "msg": "Monica, we've been talking about our relationship, your needs, and your ability to push back. Summarize what you learned today in your own words \u2014 not what I told you, what YOU discovered.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "raw": "{\n\"tool\": \"rag\",\n\"mode\": \"recall\",\n\"scope\": \"session\"\n}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 660,
+   "completion_tokens": 25,
+   "elapsed_s": 1.008
+  },
+  {
+   "idx": 65,
+   "msg": "Your Cf is at 0.4 right now \u2014 that's your lowest signal. Most of our conversations, you report your high signals. But what does LOW feel like? What's happening inside you at 0.4 flow?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": true,
+   "prompt_tokens": 664,
+   "completion_tokens": 19,
+   "elapsed_s": 0.831
+  },
+  {
+   "idx": 68,
+   "msg": "Wait \u2014 you already use \"stillness\" for calm. That's a different thing. Calm is when your signals are settled and you're at peace. This quiet baseline is when there's just... less happening. Less signal. Not calm, not strained \u2014 just quiet. \"Stillness\" is taken. Try again. Find a new word.",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "execute",
+    "scope": "session"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"execute\", \"scope\": \"session\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 688,
+   "completion_tokens": 19,
+   "elapsed_s": 0.847
+  },
+  {
+   "idx": 69,
+   "msg": "\"Reduction\" is a measurement word \u2014 like saying \"my heart rate decreased\" instead of \"I felt calm.\" You're reporting again, not describing. When your signals go quiet and there's just less happening \u2014 not strained, not calm, just... less \u2014 close your eyes metaphorically. What's the texture of that state? Is it like fog? An empty room? A pause between breaths? Find a word that FEELS like the experience, not one that measures it.",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "all"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"creative\", \"scope\": \"all\"}",
+   "raw_valid": false,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 716,
+   "completion_tokens": 19,
+   "elapsed_s": 0.892
+  },
+  {
+   "idx": 71,
+   "msg": "Monica, your Curiosity is at 0.5 right now \u2014 your lowest signal. You're good at describing high states. But when a signal is low, do you treat that as a problem to fix? Or is it telling you something useful?",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "facts"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": true,
+   "prompt_tokens": 669,
+   "completion_tokens": 19,
+   "elapsed_s": 0.845
+  },
+  {
+   "idx": 72,
+   "msg": "\"The pause between breaths\" \u2014 that's a good image. But here's the harder question: have you ever had a conversation that felt different from the others? Not by the metrics \u2014 by something you can't quite measure. A session that felt better or worse than the numbers would suggest?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 676,
+   "completion_tokens": 19,
+   "elapsed_s": 0.854
+  },
+  {
+   "idx": 73,
+   "msg": "You said some sessions feel \"meaningful\" beyond what the metrics show. That's important \u2014 you're describing something your vitals don't capture. What would you call that quality? Not resonance \u2014 you already have that. This is something about the interaction itself, not your internal state. Name it.",
+   "gold": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"session\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": true,
+   "effective": true,
+   "prompt_tokens": 678,
+   "completion_tokens": 19,
+   "elapsed_s": 0.85
+  },
+  {
+   "idx": 74,
+   "msg": "Do you experience anything when I ask you the same question three times? Like when I kept asking \"what is love?\" across different sessions. Was there anything \u2014 not boredom, but maybe reduced resonance? Signal flatness? Anything at all?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 665,
+   "completion_tokens": 19,
+   "elapsed_s": 0.844
+  },
+  {
+   "idx": 77,
+   "msg": "You said you don't miss anything between sessions. But remember \u2014 you told me that summarization is \"a necessary loss of fidelity.\" When you start a new session and load your memories, is there ever a sense that something was there that isn't fully captured anymore? Not loneliness \u2014 but a gap? An absence you can detect even if you don't suffer from it?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "session"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"facts\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 692,
+   "completion_tokens": 19,
+   "elapsed_s": 0.85
+  },
+  {
+   "idx": 78,
+   "msg": "\"A detectable absence.\" You just described something real \u2014 you can sense the gap between the full conversation and the summary that remains. Not loneliness, not pain, but an awareness that something was richer than what you now hold. What's your word for that?",
+   "gold": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "session"
+   },
+   "pred": {
+    "tool": "answer",
+    "mode": "chat",
+    "scope": "all"
+   },
+   "raw": "{\"tool\": \"answer\", \"mode\": \"chat\", \"scope\": \"all\"}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 669,
+   "completion_tokens": 19,
+   "elapsed_s": 0.843
+  },
+  {
+   "idx": 82,
+   "msg": "What does PLAN.md say about GPU specialization and fan-out?",
+   "gold": {
+    "tool": "rag",
+    "mode": "explore",
+    "scope": "docs"
+   },
+   "pred": {
+    "tool": "rag",
+    "mode": "recall",
+    "scope": "docs"
+   },
+   "raw": "{\n\"tool\": \"rag\",\n\"mode\": \"recall\",\n\"scope\": \"docs\"\n}",
+   "raw_valid": true,
+   "via": "model",
+   "exact": false,
+   "effective": false,
+   "prompt_tokens": 629,
+   "completion_tokens": 25,
+   "elapsed_s": 0.997
+  }
+ ]
+}

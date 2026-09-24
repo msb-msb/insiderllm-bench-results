@@ -1,0 +1,30 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.4.0-sm75/llama-bench",
+  "-m",
+  "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-ncmoe",
+  "37",
+  "-fa",
+  "1",
+  "-p",
+  "0",
+  "-n",
+  "128",
+  "-d",
+  "0,4096",
+  "-r",
+  "3",
+  "-t",
+  "4",
+  "-lm",
+  "mmap",
+  "-o",
+  "json"
+ ],
+ "rc": 1,
+ "stdout": "[\n",
+ "stderr_tail": "ggml_cuda_init: found 1 CUDA devices (Total VRAM: 3714 MiB):\n  Device 0: NVIDIA GeForce GTX 1650, compute capability 7.5, VMM: yes, VRAM: 3714 MiB\nThe following devices will have suboptimal performance due to a lack of tensor cores:\n  Device 0: NVIDIA GeForce GTX 1650\nConsider compiling with CMAKE_CUDA_ARCHITECTURES=61-virtual;80-virtual and DGGML_CUDA_FORCE_MMQ to force the use of the Pascal code for Turing.\nllama_bench: error: failed to create context with model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'\n"
+}

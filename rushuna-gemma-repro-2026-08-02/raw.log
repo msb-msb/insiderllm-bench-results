@@ -1,0 +1,54 @@
+=== GEMMA REPRO 2026-08-02T23:26:20+00:00 ===
+name, driver_version, memory.total [MiB], memory.used [MiB], memory.free [MiB]
+NVIDIA GeForce RTX 3060, 580.173.02, 12288 MiB, 0 MiB, 11910 MiB
+MemTotal:       32792824 kB
+MemAvailable:   31735728 kB
+SwapTotal:       4194300 kB
+SwapFree:        4194300 kB
+Xorg: 0
+0 | df /: /dev/mapper/ubuntu--vg-ubuntu--lv  216G   92G  115G  45% /
+model: /home/minotaur/bench-models/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf 16947541728 bytes
+
+===== -ncmoe 8  (-p 0 -n 128 -r 2) =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 113 MiB | temp 60C | sm 1777 MHz | pwr 49.17 W | class=failed_to_load_model]
+error strings seen:
+    llama_bench: error: failed to load model '/home/minotaur/bench-models/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf'
+
+===== -ncmoe 10  (-p 0 -n 128 -r 2) =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to create context with model '/home/minotaur/bench-models/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf'
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+[rc=1 | VRAM peak 11723 MiB | temp 59C | sm 1957 MHz | pwr 50.94 W | class=failed_to_create_context]
+error strings seen:
+    llama_bench: error: failed to create context with model '/home/minotaur/bench-models/gemma-4-26B-A4B-it-UD-Q4_K_M.gguf'
+
+===== -ncmoe 12  (-p 0 -n 128 -r 2) =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| gemma4 26B.A4B Q4_K - Medium   |  15.77 GiB |    25.23 B | CUDA       |  99 |         12 |   1 |           tg128 |         37.31 ± 0.09 |
+
+build: 67b9b0e (1)
+[rc=0 | VRAM peak 11179 MiB | temp 60C | sm 1965 MHz | pwr 106.74 W | class=ok]
+error strings seen:
+
+===== -ncmoe 14  (-p 0 -n 128 -r 2) =====
+ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):
+  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+| model                          |       size |     params | backend    | ngl |  n_cpu_moe |  fa |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | --: | ---------: | --: | --------------: | -------------------: |
+| gemma4 26B.A4B Q4_K - Medium   |  15.77 GiB |    25.23 B | CUDA       |  99 |         14 |   1 |           tg128 |         34.50 ± 0.06 |
+
+build: 67b9b0e (1)
+[rc=0 | VRAM peak 10273 MiB | temp 59C | sm 1965 MHz | pwr 106.94 W | class=ok]
+error strings seen:
+
+REPRO_COMPLETE 2026-08-02T23:26:57+00:00

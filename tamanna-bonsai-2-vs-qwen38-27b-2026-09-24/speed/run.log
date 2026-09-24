@@ -1,0 +1,24 @@
+12:34:00 start  harness: llama-bench -ngl 99 -fa 1 -p 512 -n 128 -d 0,4096,8192 -r 5  fork: /home/minotaur/llama-prismml/build/bin
+12:34:00   model qwen3.8-27b-udq4kxl: /home/minotaur/bench-models/Qwen3.8-27B-UD-Q4_K_XL.gguf
+12:34:00   model bonsai-2-27b-pq2_0: /home/minotaur/bench-models/Ternary-Bonsai-2-27B-PQ2_0.gguf
+12:35:10   prime-qwen3.8-27b-udq4kxl rep1  tg128 d0/4k/8k 42.22/41.64/41.13  pp512 1436/1366/1305  vram 17666 MiB  gen [4]  sm 1785  401.5 W  (67s) build 9a9394a/1
+12:36:20         qwen3.8-27b-udq4kxl rep1  tg128 d0/4k/8k 42.15/41.62/41.11  pp512 1419/1361/1299  vram 17666 MiB  gen [4]  sm 1770  401.9 W  (67s) build 9a9394a/1
+12:37:07   prime-bonsai-2-27b-pq2_0 rep1  tg128 d0/4k/8k 77.71/75.95/74.40  pp512 1476/1415/1353  vram 8118 MiB  gen [4]  sm 1815  400.1 W  (44s) build 9a9394a/1
+12:37:54         bonsai-2-27b-pq2_0 rep1  tg128 d0/4k/8k 77.67/75.94/74.36  pp512 1478/1414/1351  vram 8118 MiB  gen [4]  sm 1815  400.4 W  (44s) build 9a9394a/1
+12:38:41   prime-bonsai-2-27b-pq2_0 rep2  tg128 d0/4k/8k 77.64/75.94/74.38  pp512 1475/1416/1354  vram 8118 MiB  gen [4]  sm 1815  400.5 W  (44s) build 9a9394a/1
+12:39:28         bonsai-2-27b-pq2_0 rep2  tg128 d0/4k/8k 77.63/75.96/74.40  pp512 1476/1415/1350  vram 8118 MiB  gen [4]  sm 1815  400.3 W  (44s) build 9a9394a/1
+12:40:38   prime-qwen3.8-27b-udq4kxl rep2  tg128 d0/4k/8k 42.12/41.60/41.11  pp512 1414/1357/1299  vram 17666 MiB  gen [4]  sm 1770  402.0 W  (67s) build 9a9394a/1
+12:41:48         qwen3.8-27b-udq4kxl rep2  tg128 d0/4k/8k 42.12/41.59/41.11  pp512 1414/1357/1300  vram 17666 MiB  gen [4]  sm 1770  401.8 W  (67s) build 9a9394a/1
+12:42:58   prime-qwen3.8-27b-udq4kxl rep3  tg128 d0/4k/8k 42.10/41.59/41.10  pp512 1412/1356/1301  vram 17666 MiB  gen [4]  sm 1755  401.6 W  (67s) build 9a9394a/1
+12:44:08         qwen3.8-27b-udq4kxl rep3  tg128 d0/4k/8k 42.11/41.60/41.11  pp512 1412/1357/1299  vram 17666 MiB  gen [4]  sm 1770  401.5 W  (67s) build 9a9394a/1
+12:44:55   prime-bonsai-2-27b-pq2_0 rep3  tg128 d0/4k/8k 77.59/75.91/74.36  pp512 1475/1412/1351  vram 8118 MiB  gen [4]  sm 1815.0  399.8 W  (44s) build 9a9394a/1
+12:45:42         bonsai-2-27b-pq2_0 rep3  tg128 d0/4k/8k 77.57/75.90/74.37  pp512 1474/1412/1350  vram 8118 MiB  gen [4]  sm 1815.0  400.4 W  (44s) build 9a9394a/1
+12:45:42 summary (mean of 3 measured reps of the per-run 5-repeat average; spread = min..max; delta = fork vs pin)
+12:45:42   tg128 d=0     qwen3.8    42.13 [42.11..42.15]   bonsai    77.62 [77.57..77.67]   1.84x  -> bonsai FASTER
+12:45:42   tg128 d=4096  qwen3.8    41.60 [41.59..41.62]   bonsai    75.93 [75.90..75.96]   1.83x  -> bonsai FASTER
+12:45:42   tg128 d=8192  qwen3.8    41.11 [41.11..41.11]   bonsai    74.38 [74.36..74.40]   1.81x  -> bonsai FASTER
+12:45:42   pp512 d=0     qwen3.8  1415.15 [1412.30..1419.19]   bonsai  1475.86 [1474.33..1477.54]   1.04x  -> bonsai FASTER
+12:45:42   pp512 d=4096  qwen3.8  1358.45 [1356.95..1361.16]   bonsai  1413.48 [1412.06..1414.68]   1.04x  -> bonsai FASTER
+12:45:42   pp512 d=8192  qwen3.8  1299.62 [1299.25..1300.19]   bonsai  1350.55 [1350.11..1351.25]   1.04x  -> bonsai FASTER
+12:45:42 peak VRAM measured runs: {'qwen3.8-27b-udq4kxl': 17666, 'bonsai-2-27b-pq2_0': 8118}
+12:45:42 done

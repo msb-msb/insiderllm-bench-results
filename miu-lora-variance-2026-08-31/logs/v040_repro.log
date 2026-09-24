@@ -1,0 +1,73 @@
+2026-09-09T16:21:12-07:00 ==== v0.4.0 repro start; version: 0.4.0-dev (build 1, commit 5266f24)
+3810 MiB, 24576 MiB
+2026-09-09T16:21:12-07:00 LAUNCH noadapter: /home/minotaur/llama-v0.4.0/build/bin/llama-server -m /media/minotaur/Storage_Disk_1/LLM_repo/qwen3.6-27b-gguf/Qwen_Qwen3.6-27B-Q4_K_M.gguf -ngl 99 -fa on -c 4096 --jinja --no-mmap --port 8081 
+2026-09-09T16:23:23-07:00 READY noadapter after ~130s pid=3105910
+2026-09-09T16:23:23-07:00 RUN baseline_rep0 --note no adapters loaded
+  baseline_rep0: lora_id=None cache_prompt=None exact 23/47  raw_valid 46/47  tok(p/c) 30630/940  41.5s  build=b1-5266f24  adapters=[]
+2026-09-09T16:24:05-07:00 RUN baseline_rep1 --note no adapters loaded, repeat
+  baseline_rep1: lora_id=None cache_prompt=None exact 23/47  raw_valid 46/47  tok(p/c) 30630/940  41.6s  build=b1-5266f24  adapters=[]
+2026-09-09T16:24:47-07:00 STOP pid=3105910
+2026-09-09T16:24:50-07:00 LAUNCH initwithoutapply: /home/minotaur/llama-v0.4.0/build/bin/llama-server -m /media/minotaur/Storage_Disk_1/LLM_repo/qwen3.6-27b-gguf/Qwen_Qwen3.6-27B-Q4_K_M.gguf -ngl 99 -fa on -c 4096 --jinja --no-mmap --port 8081 --lora /home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf,/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf --lora-init-without-apply
+2026-09-09T16:27:01-07:00 READY initwithoutapply after ~130s pid=3106313
+2026-09-09T16:27:01-07:00 GET /lora-adapters -> [{"id":0,"path":"/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf","scale":1.0,"task_name":"","prompt_prefix":""},{"id":1,"path":"/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf","scale":1.0,"task_name":"","prompt_prefix":""}]
+2026-09-09T16:27:01-07:00 RUN L_nofield --note lora field omitted; --lora-init-without-apply should mean scale 0 for both
+  L_nofield: lora_id=None cache_prompt=None exact 20/47  raw_valid 47/47  tok(p/c) 30630/895  46.6s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 1.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 1.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:27:48-07:00 RUN L_alloff --id -1 --note lora: [] — every adapter explicitly off
+  L_alloff: lora_id=-1 cache_prompt=None exact 20/47  raw_valid 47/47  tok(p/c) 30630/895  45.7s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 1.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 1.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:28:34-07:00 RUN L_id0 --id 0 --note lora: [{id:0, scale:1.0}] — seed 1 active
+  L_id0: lora_id=0 cache_prompt=None exact 22/47  raw_valid 47/47  tok(p/c) 30630/895  41.7s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 1.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 1.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:29:15-07:00 RUN L_id1 --id 1 --note lora: [{id:1, scale:1.0}] — seed 2 active
+  L_id1: lora_id=1 cache_prompt=None exact 21/47  raw_valid 47/47  tok(p/c) 30630/895  42.1s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 1.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 1.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:29:58-07:00 POST /lora-adapters [{id:0,scale:0},{id:1,scale:0}] -> {"success":true}
+2026-09-09T16:29:58-07:00 GET /lora-adapters -> [{"id":0,"path":"/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf","scale":0.0,"task_name":"","prompt_prefix":""},{"id":1,"path":"/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf","scale":0.0,"task_name":"","prompt_prefix":""}]
+2026-09-09T16:29:58-07:00 RUN L_zeroed_rep0 --note runtime scales 0 via POST /lora-adapters; lora field omitted; cache_prompt server default
+  L_zeroed_rep0: lora_id=None cache_prompt=None exact 23/47  raw_valid 47/47  tok(p/c) 30630/897  36.3s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:30:34-07:00 RUN L_zeroed_rep1 --note same, repeat
+  L_zeroed_rep1: lora_id=None cache_prompt=None exact 23/47  raw_valid 47/47  tok(p/c) 30630/897  39.8s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:31:14-07:00 RUN L_zeroed_nocache_rep0 --cache-prompt false --note runtime scales 0; cache_prompt:false to rule out KV reuse (#26207)
+  L_zeroed_nocache_rep0: lora_id=None cache_prompt=False exact 23/47  raw_valid 46/47  tok(p/c) 30630/927  64.2s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:32:18-07:00 RUN L_zeroed_nocache_rep1 --cache-prompt false --note same, repeat
+  L_zeroed_nocache_rep1: lora_id=None cache_prompt=False exact 23/47  raw_valid 46/47  tok(p/c) 30630/927  64.4s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:33:23-07:00 STOP pid=3106313
+2026-09-09T16:33:26-07:00 LAUNCH scaled0: /home/minotaur/llama-v0.4.0/build/bin/llama-server -m /media/minotaur/Storage_Disk_1/LLM_repo/qwen3.6-27b-gguf/Qwen_Qwen3.6-27B-Q4_K_M.gguf -ngl 99 -fa on -c 4096 --jinja --no-mmap --port 8081 --lora-scaled /home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf:0.0,/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf:0.0
+2026-09-09T16:35:37-07:00 READY scaled0 after ~130s pid=3107187
+2026-09-09T16:35:37-07:00 GET /lora-adapters -> [{"id":0,"path":"/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf","scale":0.0,"task_name":"","prompt_prefix":""},{"id":1,"path":"/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf","scale":0.0,"task_name":"","prompt_prefix":""}]
+2026-09-09T16:35:37-07:00 RUN S_scaled0_rep0 --note --lora-scaled FILE:0.0 at launch; lora field omitted
+  S_scaled0_rep0: lora_id=None cache_prompt=None exact 23/47  raw_valid 46/47  tok(p/c) 30630/940  42.1s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:36:19-07:00 RUN S_scaled0_rep1 --note same, repeat
+  S_scaled0_rep1: lora_id=None cache_prompt=None exact 23/47  raw_valid 46/47  tok(p/c) 30630/940  41.5s  build=b1-5266f24  adapters=[{'id': 0, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed1-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}, {'id': 1, 'path': '/home/minotaur/Desktop/InsiderLLM/docs/bench-results/miu-lora-variance-2026-08-31/adapters/seed2-f16.gguf', 'scale': 0.0, 'task_name': '', 'prompt_prefix': ''}]
+2026-09-09T16:37:01-07:00 STOP pid=3107187
+2026-09-09T16:37:04-07:00 ==== compare against baseline_rep0
+baseline baseline_rep0: exact 23/47
+baseline_rep1                exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=None  idx=[]
+L_nofield                    exact 20/47  preds differ 16  raw differ 25  lora_id=None cache_prompt=None  idx=[2, 6, 7, 10, 13, 18, 22, 28, 33, 34, 37, 58, 60, 61, 62, 68]
+L_alloff                     exact 20/47  preds differ 16  raw differ 25  lora_id=-1 cache_prompt=None  idx=[2, 6, 7, 10, 13, 18, 22, 28, 33, 34, 37, 58, 60, 61, 62, 68]
+L_id0                        exact 22/47  preds differ 15  raw differ 24  lora_id=0 cache_prompt=None  idx=[2, 7, 13, 18, 22, 28, 33, 34, 37, 58, 61, 68, 72, 73, 77]
+L_id1                        exact 21/47  preds differ 11  raw differ 21  lora_id=1 cache_prompt=None  idx=[2, 13, 22, 28, 33, 34, 37, 58, 61, 68, 73]
+L_zeroed_rep0                exact 23/47  preds differ  6  raw differ 16  lora_id=None cache_prompt=None  idx=[13, 22, 28, 37, 68, 73]
+L_zeroed_rep1                exact 23/47  preds differ  6  raw differ 16  lora_id=None cache_prompt=None  idx=[13, 22, 28, 37, 68, 73]
+L_zeroed_nocache_rep0        exact 23/47  preds differ  1  raw differ  3  lora_id=None cache_prompt=False  idx=[28]
+L_zeroed_nocache_rep1        exact 23/47  preds differ  1  raw differ  3  lora_id=None cache_prompt=False  idx=[28]
+S_scaled0_rep0               exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=None  idx=[]
+S_scaled0_rep1               exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=None  idx=[]
+2026-09-09T16:37:04-07:00 ==== zeroed rep0 vs rep1 (stability)
+baseline L_zeroed_rep0: exact 23/47
+L_zeroed_rep1                exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=None  idx=[]
+baseline L_zeroed_nocache_rep0: exact 23/47
+L_zeroed_nocache_rep1        exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=False  idx=[]
+2026-09-09T16:37:04-07:00 ==== done
+2026-09-09T16:37:46-07:00 LAUNCH noadapter_nocache: /home/minotaur/llama-v0.4.0/build/bin/llama-server -m /media/minotaur/Storage_Disk_1/LLM_repo/qwen3.6-27b-gguf/Qwen_Qwen3.6-27B-Q4_K_M.gguf -ngl 99 -fa on -c 4096 --jinja --no-mmap --port 8081
+2026-09-09T16:39:57-07:00 READY noadapter_nocache pid=3107636
+2026-09-09T16:39:57-07:00 RUN baseline_nocache_rep0 --cache-prompt false
+  baseline_nocache_rep0: lora_id=None cache_prompt=False exact 23/47  raw_valid 46/47  tok(p/c) 30630/927  64.5s  build=b1-5266f24  adapters=[]
+2026-09-09T16:41:02-07:00 RUN baseline_nocache_rep1 --cache-prompt false
+  baseline_nocache_rep1: lora_id=None cache_prompt=False exact 23/47  raw_valid 46/47  tok(p/c) 30630/927  64.6s  build=b1-5266f24  adapters=[]
+2026-09-09T16:42:07-07:00 ==== extra compare
+baseline baseline_rep0: exact 23/47
+baseline_nocache_rep0        exact 23/47  preds differ  1  raw differ  3  lora_id=None cache_prompt=False  idx=[28]
+baseline_nocache_rep1        exact 23/47  preds differ  1  raw differ  3  lora_id=None cache_prompt=False  idx=[28]
+baseline baseline_nocache_rep0: exact 23/47
+baseline_nocache_rep1        exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=False  idx=[]
+L_zeroed_nocache_rep0        exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=False  idx=[]
+L_zeroed_nocache_rep1        exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=False  idx=[]
+2026-09-09T16:42:07-07:00 ==== extra done
