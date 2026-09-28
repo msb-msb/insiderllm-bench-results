@@ -1,0 +1,263 @@
+#!/usr/bin/env python3
+"""z-lab DFlash drafter vs the Qwen 3.5 0.8B drafter vs no drafter, Qwen3.6-35B-A3B under -ncmoe offload
+on Rushuna's RTX 3060 12 GB, 2026-09-28. PRE-REGISTERED before the first measured run; the README carries
+the full pre-registration and the load-only fit checks that preceded it (fitcheck/).
+
+Derived from ../tamanna-dflash-35b-a3b-2026-09-22/dflash_bench.py: same prompts (am17an nine, lifted by AST),
+same request body, same aggregate metric, same telemetry fields. Changes: five configs instead of two, a
+discarded PRIMING run of the same config immediately before EVERY measured run, and an nvidia-smi dmon
+PCIe rx/tx sampler (MB/s, 1 s) alongside the 09-22 sampler.
+
+Configs (all -ngl 99 -fa on -c 8192 -np 1):
+  base24   -ncmoe 24, no drafter                 (the article's recommended config)
+  q08b24   -ncmoe 24, Qwen3.5-0.8B Q8_0, draft-simple, n_max 15
+  base26   -ncmoe 26, no drafter
+  dflash26 -ncmoe 26, z-lab DFlash Q8_0, draft-dflash, n_max 15   (does not fit at -ncmoe 24)
+  q08b26   -ncmoe 26, Qwen3.5-0.8B Q8_0, draft-simple, n_max 15
+Order per rep: base24, q08b24, base26, dflash26, q08b26, each as prime-then-measured, x3 reps.
+
+Verdicts (aggregate tok/s, mean of 3 reps; thresholds from the brief):
+  (A) mechanism: dflash26 / base26.   < 1.00 CONFIRMS the negative; >= 1.05 OVERTURNS it; between = INCONCLUSIVE.
+  (B) reader:    dflash26 / base24.   same thresholds; decides what the article tells people to do.
+  Resolvability (08-28 rule) reported beside each: the gap must exceed the larger same-config rep spread.
+"""
+import json, os, subprocess, sys, time, statistics as st, signal
+from urllib import request, error
+
+OUT     = os.path.expanduser("~/rushuna-dflash-ncmoe24-2026-09-28")
+BIN     = os.path.expanduser("~/llama-v0.4.0")
+SERVER  = os.path.join(BIN, "llama-server")
+TARGET  = os.path.expanduser("~/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf")
+DRAFT   = os.path.expanduser("~/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf")
+DRAFT08 = os.path.expanduser("~/bench-models/Qwen3.5-0.8B-Q8_0.gguf")
+PORT    = 8080
+URL     = f"http://127.0.0.1:{PORT}"
+def common(ncmoe): return ["-m", TARGET, "-ngl", "99", "-ncmoe", str(ncmoe), "-fa", "on", "-c", "8192", "-np", "1", "--host", "127.0.0.1", "--port", str(PORT)]
+DF  = ["-md", DRAFT,   "-ngld", "99", "--spec-type", "draft-dflash", "--spec-draft-n-max", "15"]
+Q08 = ["-md", DRAFT08, "-ngld", "99", "--spec-type", "draft-simple", "--spec-draft-n-max", "15"]
+CONFIGS = {
+    "base24":   common(24),
+    "q08b24":   common(24) + Q08,
+    "base26":   common(26),
+    "dflash26": common(26) + DF,
+    "q08b26":   common(26) + Q08,
+}
+ORDER   = ["base24", "q08b24", "base26", "dflash26", "q08b26"]
+REPS    = 3
+GEN     = {"n_predict": 192, "temperature": 0.0, "seed": 42, "cache_prompt": False, "stream": False}
+SMI_FIELDS = ["timestamp", "pcie.link.gen.current", "pcie.link.gen.gpucurrent", "pcie.link.width.current",
+              "temperature.gpu", "clocks.sm", "clocks.mem", "power.draw", "utilization.gpu", "memory.used",
+              "clocks_event_reasons.active"]
+
+# the published nine, unmodified: lifted from the gist harness by AST so its argparse tail does not run on import
+import ast
+_src = open(os.path.expanduser("~/am17an_bench.py")).read()
+_node = next(n for n in ast.parse(_src).body if isinstance(n, ast.Assign) and n.targets[0].id == "PROMPTS")
+PROMPTS = ast.literal_eval(_node.value)
+
+def log(s):
+    line = f"{time.strftime('%H:%M:%S')} {s}"
+    print(line, flush=True)
+    with open(os.path.join(OUT, "run.log"), "a") as f: f.write(line + "\n")
+
+def smi(q):
+    return subprocess.run(["nvidia-smi", f"--query-gpu={q}", "--format=csv,noheader,nounits"],
+                          capture_output=True, text=True).stdout.strip().split("\n")[0]
+
+def start_sampler(path):
+    f = open(path, "w"); f.write(",".join(SMI_FIELDS) + "\n"); f.flush()
+    p = subprocess.Popen(["nvidia-smi", "--query-gpu=" + ",".join(SMI_FIELDS), "--format=csv,noheader,nounits", "-lms", "1000"],
+                         stdout=f, stderr=subprocess.DEVNULL)
+    return p, f
+
+def start_dmon(path):
+    f = open(path, "w")
+    p = subprocess.Popen(["nvidia-smi", "dmon", "-s", "t", "-d", "1", "-o", "T"], stdout=f, stderr=subprocess.DEVNULL)
+    return p, f
+
+def parse_dmon(path, t_start, t_end):
+    # rows: "HH:MM:SS gpu rxpci txpci"; keep rows whose wall-clock second falls inside [t_start, t_end]
+    rx, tx = [], []
+    lo, hi = time.strftime("%H:%M:%S", time.localtime(t_start)), time.strftime("%H:%M:%S", time.localtime(t_end))
+    for line in open(path):
+        if line.startswith("#"): continue
+        parts = line.split()
+        if len(parts) < 4: continue
+        try:
+            if lo <= parts[0] <= hi: rx.append(float(parts[2])); tx.append(float(parts[3]))
+        except ValueError: pass
+    return rx, tx
+
+def stop_sampler(p, f):
+    p.send_signal(signal.SIGINT)
+    try: p.wait(timeout=5)
+    except subprocess.TimeoutExpired: p.kill(); p.wait()
+    f.close()
+
+def parse_telemetry(path):
+    rows = []
+    with open(path) as f:
+        next(f)
+        for line in f:
+            parts = [x.strip() for x in line.strip().split(",")]
+            if len(parts) < len(SMI_FIELDS): continue
+            try:
+                rows.append({"ts": parts[0], "pcie_gen": int(parts[1]), "pcie_gen_gpu": int(parts[2]), "pcie_width": int(parts[3]),
+                             "temp": int(parts[4]), "sm": int(parts[5]), "mem": int(parts[6]), "power": float(parts[7]),
+                             "util": int(parts[8]), "vram": int(parts[9]), "reasons": parts[10]})
+            except ValueError:
+                continue
+    return rows
+
+def summarise_telemetry(rows):
+    load = [r for r in rows if r["util"] >= 50]
+    if not rows: return {}
+    def s(vals): return {"mean": round(st.mean(vals), 1), "median": st.median(vals), "min": min(vals), "max": max(vals)}
+    out = {"samples": len(rows), "samples_under_load": len(load), "temp_start": rows[0]["temp"], "temp_end": rows[-1]["temp"],
+           "temp_max": max(r["temp"] for r in rows), "vram_peak_mib": max(r["vram"] for r in rows)}
+    if load:
+        gens = sorted(set(r["pcie_gen"] for r in load))
+        out.update({"pcie_gen_under_load": gens, "pcie_gen_under_load_share": {str(g): round(sum(1 for r in load if r["pcie_gen"] == g) / len(load), 3) for g in gens},
+                    "pcie_gen_gpu_under_load": sorted(set(r["pcie_gen_gpu"] for r in load)),
+                    "pcie_width_under_load": sorted(set(r["pcie_width"] for r in load)),
+                    "sm_clock": s([r["sm"] for r in load]), "mem_clock": s([r["mem"] for r in load]),
+                    "power": s([r["power"] for r in load]), "temp_under_load": s([r["temp"] for r in load]),
+                    "clock_event_reasons_under_load": sorted(set(r["reasons"] for r in load))})
+    return out
+
+def post(path, payload, timeout=300):
+    req = request.Request(URL + path, data=json.dumps(payload).encode(), headers={"Content-Type": "application/json"}, method="POST")
+    with request.urlopen(req, timeout=timeout) as r: return json.loads(r.read())
+
+def wait_health(proc, timeout=180):
+    t0 = time.time()
+    while time.time() - t0 < timeout:
+        if proc.poll() is not None: return False
+        try:
+            with request.urlopen(URL + "/health", timeout=2) as r:
+                if b"ok" in r.read(): return True
+        except Exception: pass
+        time.sleep(0.5)
+    return False
+
+def run(config, rep, tag=""):
+    args = CONFIGS[config]
+    env = dict(os.environ); env["LD_LIBRARY_PATH"] = BIN
+    name = f"{tag}{config}-rep{rep}"
+    tpath = os.path.join(OUT, f"telemetry-{name}.csv")
+    slog  = open(os.path.join(OUT, f"server-{name}.log"), "w")
+    sp, sf = start_sampler(tpath)
+    dpath = os.path.join(OUT, f"dmon-{name}.txt")
+    dp, df = start_dmon(dpath)
+    time.sleep(1.2)
+    t0 = time.time()
+    proc = subprocess.Popen([SERVER] + args, stdout=slog, stderr=subprocess.STDOUT, env=env)
+    ok = wait_health(proc)
+    t_load = time.time() - t0
+    results = []
+    if ok:
+        vram_loaded = smi("memory.used")
+        t_prompts0 = time.time()
+        for p in PROMPTS:
+            tq = time.time()
+            r = post("/completion", dict(GEN, prompt=p["prompt"]))
+            wall = time.time() - tq
+            t = r.get("timings", {}) or {}
+            rec = {"name": p["name"], "wall_s": round(wall, 3), "prompt_n": t.get("prompt_n"), "prompt_ms": t.get("prompt_ms"),
+                   "predicted_n": t.get("predicted_n"), "predicted_ms": t.get("predicted_ms"), "predicted_per_second": t.get("predicted_per_second"),
+                   "draft_n": t.get("draft_n", 0) or 0, "draft_n_accepted": t.get("draft_n_accepted", 0) or 0,
+                   "content_sha_head": __import__("hashlib").sha256(r.get("content", "").encode()).hexdigest()[:12],
+                   "stop_type": r.get("stop_type"), "truncated": r.get("truncated")}
+            rec["accept_rate"] = round(rec["draft_n_accepted"] / rec["draft_n"], 4) if rec["draft_n"] else None
+            results.append(rec)
+        t_prompts1 = time.time()
+    else:
+        log(f"  FAILED to start {name}")
+        vram_loaded = None
+    proc.send_signal(signal.SIGINT)
+    try: proc.wait(timeout=30)
+    except subprocess.TimeoutExpired: proc.kill(); proc.wait()
+    slog.close()
+    el = time.time() - t0
+    time.sleep(1.2)
+    stop_sampler(sp, sf)
+    stop_sampler(dp, df)
+    if not ok: return None
+    rx, tx = parse_dmon(dpath, t_prompts0, t_prompts1)
+    tel = summarise_telemetry(parse_telemetry(tpath))
+    tp = sum(x["predicted_n"] or 0 for x in results); tms = sum(x["predicted_ms"] or 0 for x in results)
+    td = sum(x["draft_n"] for x in results); ta = sum(x["draft_n_accepted"] for x in results)
+    agg = {"total_predicted": tp, "total_predicted_ms": round(tms, 1), "gen_tok_s": round(tp / (tms / 1000), 2) if tms else None,
+           "mean_per_prompt_tok_s": round(st.mean([x["predicted_per_second"] for x in results]), 2),
+           "total_draft": td, "total_draft_accepted": ta, "accept_rate": round(ta / td, 4) if td else None,
+           "wall_s_prompts": round(sum(x["wall_s"] for x in results), 2), "load_s": round(t_load, 1), "vram_after_load_mib": vram_loaded,
+           "pcie_rx_mbps_mean": round(st.mean(rx), 1) if rx else None, "pcie_tx_mbps_mean": round(st.mean(tx), 1) if tx else None,
+           "pcie_rx_mbps_max": max(rx) if rx else None, "pcie_samples": len(rx),
+           "pcie_rx_mb_per_token": round(st.mean(rx) * (t_prompts1 - t_prompts0) / tp, 3) if rx and tp else None}
+    rec = {"config": config, "rep": rep, "tag": tag.strip("-") or "measured", "started": time.strftime("%Y-%m-%dT%H:%M:%S%z", time.localtime(t0)),
+           "elapsed_s": round(el, 1), "server_args": args, "gen": GEN, "aggregate": agg, "results": results, "telemetry": tel}
+    with open(os.path.join(OUT, f"raw-{name}.json"), "w") as f: json.dump(rec, f, indent=1)
+    ar = f"{agg['accept_rate']:.3f}" if agg["accept_rate"] is not None else "  n/a"
+    log(f"  {tag or '':6s}{config:9s} rep{rep}  gen {agg['gen_tok_s']:7.2f} tok/s  per-prompt mean {agg['mean_per_prompt_tok_s']:7.2f}  accept {ar}  "
+        f"pred {tp}  draft {td}/{ta}  pcie rx {agg['pcie_rx_mbps_mean']} MB/s ({agg['pcie_rx_mb_per_token']} MB/tok)  wall {agg['wall_s_prompts']:.1f}s  load {t_load:.1f}s  vram {vram_loaded} MiB  ({el:.0f}s)")
+    if tel.get("sm_clock"):
+        log(f"    load: pcie gen {tel['pcie_gen_under_load']} (gpu view {tel['pcie_gen_gpu_under_load']}) x{tel['pcie_width_under_load']}  sm {tel['sm_clock']['median']:.0f} MHz (min {tel['sm_clock']['min']})  "
+            f"mem {tel['mem_clock']['median']:.0f}  power {tel['power']['mean']:.0f} W (max {tel['power']['max']:.0f})  temp {tel['temp_start']}->{tel['temp_max']} C  "
+            f"vram peak {tel['vram_peak_mib']}  reasons {tel['clock_event_reasons_under_load']}  n={tel['samples_under_load']}/{tel['samples']}")
+    return rec
+
+def main():
+    os.makedirs(OUT, exist_ok=True)
+    log("start  pre-registered: 5 configs, 9 prompts, prime-then-measure each, rotating x3")
+    log(f"  server: {SERVER}")
+    log(f"  card: {smi('name,driver_version,pcie.link.gen.max,pcie.link.gen.gpumax,pcie.link.gen.current,memory.used,temperature.gpu,power.draw')}")
+    log(f"  free -g: " + subprocess.run(["free", "-g"], capture_output=True, text=True).stdout.strip().split("\n")[1])
+    primes, results = [], []
+    for rep in range(1, REPS + 1):
+        for config in ORDER:
+            r = run(config, rep, tag="prime-")
+            if r: primes.append(r)
+            r = run(config, rep)
+            if r: results.append(r)
+    with open(os.path.join(OUT, "results.json"), "w") as f:
+        json.dump({"order": ORDER, "reps": REPS, "configs": CONFIGS, "gen": GEN, "prompts": [p["name"] for p in PROMPTS],
+                   "started": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "results": results, "primes": primes}, f, indent=1)
+    log("summary (mean of 3 measured reps; spread = min..max over reps)")
+    summ = {}
+    for config in ORDER:
+        rs = [r for r in results if r["config"] == config]
+        if not rs: continue
+        g = [r["aggregate"]["gen_tok_s"] for r in rs]; m = [r["aggregate"]["mean_per_prompt_tok_s"] for r in rs]
+        a = [r["aggregate"]["accept_rate"] for r in rs if r["aggregate"]["accept_rate"] is not None]
+        px = [r["aggregate"]["pcie_rx_mb_per_token"] for r in rs if r["aggregate"]["pcie_rx_mb_per_token"] is not None]
+        pr = [r["aggregate"]["pcie_rx_mbps_mean"] for r in rs if r["aggregate"]["pcie_rx_mbps_mean"] is not None]
+        summ[config] = {"gen_tok_s": {"mean": round(st.mean(g), 2), "min": min(g), "max": max(g), "reps": g},
+                        "mean_per_prompt_tok_s": {"mean": round(st.mean(m), 2), "min": min(m), "max": max(m), "reps": m},
+                        "accept_rate": {"mean": round(st.mean(a), 4), "min": min(a), "max": max(a), "reps": a} if a else None,
+                        "pcie_rx_mbps_mean": round(st.mean(pr), 1) if pr else None,
+                        "pcie_rx_mb_per_token": round(st.mean(px), 3) if px else None,
+                        "vram_peak_mib": max(r["telemetry"].get("vram_peak_mib", 0) for r in rs),
+                        "vram_after_load_mib": [r["aggregate"]["vram_after_load_mib"] for r in rs],
+                        "per_prompt": {p["name"]: {"tok_s_mean": round(st.mean([x["predicted_per_second"] for r in rs for x in r["results"] if x["name"] == p["name"]]), 2),
+                                                   "accept_mean": (lambda v: round(st.mean(v), 4) if v else None)([x["accept_rate"] for r in rs for x in r["results"] if x["name"] == p["name"] and x["accept_rate"] is not None])}
+                                       for p in PROMPTS}}
+        log(f"  {config:9s} gen {st.mean(g):7.2f} [{min(g):.2f}..{max(g):.2f}]  per-prompt mean {st.mean(m):7.2f} [{min(m):.2f}..{max(m):.2f}]  accept {summ[config]['accept_rate']['mean'] if a else 'n/a'}")
+    def gate(num, den, label):
+        if num not in summ or den not in summ: return
+        B, A = summ[num]["gen_tok_s"], summ[den]["gen_tok_s"]
+        ratio = B["mean"] / A["mean"]; gap = B["mean"] - A["mean"]; spread = max(A["max"] - A["min"], B["max"] - B["min"])
+        verdict = "CONFIRMS the negative" if ratio < 1.0 else ("OVERTURNS the negative" if ratio >= 1.05 else "INCONCLUSIVE")
+        summ.setdefault("verdicts", {})[label] = {"num": num, "den": den, "ratio": round(ratio, 3), "gap_tok_s": round(gap, 2),
+                                                  "larger_spread": round(spread, 2), "resolvable": abs(gap) > spread, "verdict": verdict}
+        log(f"  verdict {label}: {num}/{den} = {ratio:.3f}x  gap {gap:+.2f} tok/s vs larger spread {spread:.2f}  -> {verdict}")
+    gate("dflash26", "base26", "A_mechanism")
+    gate("dflash26", "base24", "B_reader")
+    for num, den in [("q08b24", "base24"), ("q08b26", "base26")]:
+        if num in summ and den in summ:
+            summ.setdefault("secondary", {})[f"{num}/{den}"] = round(summ[num]["gen_tok_s"]["mean"] / summ[den]["gen_tok_s"]["mean"], 3)
+            log(f"  secondary {num}/{den} = {summ['secondary'][f'{num}/{den}']:.3f}x")
+    with open(os.path.join(OUT, "summary.json"), "w") as f: json.dump(summ, f, indent=1)
+    log(f"done  card at {smi('memory.used')} MiB, {smi('temperature.gpu')} C after last run")
+
+if __name__ == "__main__":
+    main()

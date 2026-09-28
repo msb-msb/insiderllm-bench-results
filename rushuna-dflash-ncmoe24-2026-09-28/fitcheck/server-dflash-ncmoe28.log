@@ -1,0 +1,30 @@
+0.00.517.946 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.518.343 W srv  llama_server: -----------------
+0.00.518.344 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.00.518.345 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.00.518.345 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.00.518.345 W srv  llama_server: -----------------
+0.00.519.635 I srv    load_model: loading model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'
+0.01.681.406 E llama_init_from_model: failed to initialize the context: dflash requires ctx_other to be set (this warning is normal during memory fitting)
+0.01.742.510 W operator(): failed to measure the memory of the extra model, fitting without it: failed to create llama_context from model
+0.02.173.101 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.04.378.544 I cmn          init: llama threadpool init, n_threads = 4
+0.04.487.195 I common_speculative_init_result: loading draft model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf'
+0.05.087.251 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 8192, kv_unified = 'false'
+0.05.087.291 I common_speculative_impl_draft_dflash: adding speculative implementation 'draft-dflash'
+0.05.087.293 I common_speculative_impl_draft_dflash: - n_max=15, n_min=0, p_min=0.00
+0.05.087.294 I common_speculative_impl_draft_dflash: - block_size=16, mask_token_id=248077, n_extract=8, sample_from_anchor=true
+0.05.121.721 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.05.121.770 I srv  llama_server: model loaded
+0.05.121.773 I srv  llama_server: listening on http://127.0.0.1:8080
+0.05.121.774 W srv  llama_server: NOTICE: server default port will be changed to :9931 in a future release
+0.05.121.774 W srv  llama_server:         ref: https://github.com/ggml-org/llama.cpp/pull/26508
+0.05.463.565 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.05.463.625 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.07.152.554 I slot print_timing: id  0 | task 0 | prompt eval time =     126.66 ms /     1 tokens (  126.66 ms per token,     7.90 tokens per second)
+0.07.152.558 I slot print_timing: id  0 | task 0 |        eval time =    1562.22 ms /    16 tokens (  104.15 ms per token,     9.60 tokens per second)
+0.07.152.559 I slot print_timing: id  0 | task 0 |       total time =    1688.88 ms /    17 tokens
+0.07.152.562 I slot print_timing: id  0 | task 0 |    graphs reused =          1
+0.07.152.570 I slot print_timing: id  0 | task 0 | draft acceptance = 0.06494 (    5 accepted /    77 generated), mean len =  1.50
+0.07.152.605 I slot      release: id  0 | task 0 | stop processing: n_tokens = 16, truncated = 0
+0.07.175.405 I srv    operator(): operator(): cleaning up before exit...

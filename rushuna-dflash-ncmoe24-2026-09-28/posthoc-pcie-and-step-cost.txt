@@ -1,0 +1,18 @@
+# POST-HOC, not pre-registered (2026-09-28, written after the measured block). Script inline in the session;
+# block 1: decode-second PCIe rx from dmon-*.txt (samples >= 2000 MB/s treated as prefill bursts), block 2: per-verify-step cost
+# (blocks = draft_n/15), block 3 (appended): GPU utilization median/mean over telemetry samples with the model loaded (memory.used > 5000 MiB), per rep.
+config    decode-second rx median / mean MB/s (per rep)          bursts/rep  decode MB per generated token (mean rx / tok/s)
+base24       64/ 68.5     61/ 72.1     61/ 67.6   [5, 5, 5]   1.81
+q08b24      165/165.0    174/234.2    174/207.3   [7, 7, 11]   12.70
+base26       66/ 69.7     67/ 74.5     63/ 72.8   [4, 4, 5]   2.00
+dflash26    165/154.1    165/152.6    165/189.3   [4, 5, 4]   7.50
+q08b26      174/273.6    174/242.3    174/189.7   [7, 9, 8]   15.45
+
+dflash26: 4308 drafted / 976 accepted -> 287 verify steps, 3.40 accepted + 1 = 4.47 tokens per step
+  203.0 ms per verify step vs 27.71 ms per single-token step at base26 -> one step costs 7.33x a plain decode step; break-even needs 7.33 tokens/step
+tamanna 09-22 (resident 3090): 282 steps, 4.57 tokens/step, 26.6 ms/step vs 6.35 ms plain -> 4.19x
+base24 [(40, 41.6), (39, 41.2), (41, 41.7)]
+q08b24 [(36.0, 38.1), (31.0, 34.3), (36.0, 34.9)]
+base26 [(37, 39.1), (38, 40), (38.5, 41.5)]
+dflash26 [(18.0, 22.2), (24.0, 22.6), (24.5, 23.6)]
+q08b26 [(34.5, 34.4), (33.0, 36.9), (34.0, 36.8)]

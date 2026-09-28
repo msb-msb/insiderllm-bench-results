@@ -1,0 +1,7295 @@
+{
+ "order": [
+  "base24",
+  "q08b24",
+  "base26",
+  "dflash26",
+  "q08b26"
+ ],
+ "reps": 3,
+ "configs": {
+  "base24": [
+   "-m",
+   "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+   "-ngl",
+   "99",
+   "-ncmoe",
+   "24",
+   "-fa",
+   "on",
+   "-c",
+   "8192",
+   "-np",
+   "1",
+   "--host",
+   "127.0.0.1",
+   "--port",
+   "8080"
+  ],
+  "q08b24": [
+   "-m",
+   "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+   "-ngl",
+   "99",
+   "-ncmoe",
+   "24",
+   "-fa",
+   "on",
+   "-c",
+   "8192",
+   "-np",
+   "1",
+   "--host",
+   "127.0.0.1",
+   "--port",
+   "8080",
+   "-md",
+   "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+   "-ngld",
+   "99",
+   "--spec-type",
+   "draft-simple",
+   "--spec-draft-n-max",
+   "15"
+  ],
+  "base26": [
+   "-m",
+   "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+   "-ngl",
+   "99",
+   "-ncmoe",
+   "26",
+   "-fa",
+   "on",
+   "-c",
+   "8192",
+   "-np",
+   "1",
+   "--host",
+   "127.0.0.1",
+   "--port",
+   "8080"
+  ],
+  "dflash26": [
+   "-m",
+   "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+   "-ngl",
+   "99",
+   "-ncmoe",
+   "26",
+   "-fa",
+   "on",
+   "-c",
+   "8192",
+   "-np",
+   "1",
+   "--host",
+   "127.0.0.1",
+   "--port",
+   "8080",
+   "-md",
+   "/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf",
+   "-ngld",
+   "99",
+   "--spec-type",
+   "draft-dflash",
+   "--spec-draft-n-max",
+   "15"
+  ],
+  "q08b26": [
+   "-m",
+   "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+   "-ngl",
+   "99",
+   "-ncmoe",
+   "26",
+   "-fa",
+   "on",
+   "-c",
+   "8192",
+   "-np",
+   "1",
+   "--host",
+   "127.0.0.1",
+   "--port",
+   "8080",
+   "-md",
+   "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+   "-ngld",
+   "99",
+   "--spec-type",
+   "draft-simple",
+   "--spec-draft-n-max",
+   "15"
+  ]
+ },
+ "gen": {
+  "n_predict": 192,
+  "temperature": 0.0,
+  "seed": 42,
+  "cache_prompt": false,
+  "stream": false
+ },
+ "prompts": [
+  "code_python",
+  "code_cpp",
+  "explain_concept",
+  "summarize",
+  "qa_factual",
+  "translation",
+  "creative_short",
+  "stepwise_math",
+  "long_code_review"
+ ],
+ "started": "2026-09-28T19:58:37+0000",
+ "results": [
+  {
+   "config": "base24",
+   "rep": 1,
+   "tag": "measured",
+   "started": "2026-09-28T19:22:19+0000",
+   "elapsed_s": 44.4,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 33542.6,
+    "gen_tok_s": 38.31,
+    "mean_per_prompt_tok_s": 37.95,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 39.44,
+    "load_s": 4.4,
+    "vram_after_load_mib": "10075",
+    "pcie_rx_mbps_mean": 970.3,
+    "pcie_tx_mbps_mean": 158.0,
+    "pcie_rx_mbps_max": 9179.0,
+    "pcie_samples": 38,
+    "pcie_rx_mb_per_token": 29.784
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.418,
+     "prompt_n": 20,
+     "prompt_ms": 392.185,
+     "predicted_n": 192,
+     "predicted_ms": 5023.815,
+     "predicted_per_second": 38.01891590355139,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.94,
+     "prompt_n": 30,
+     "prompt_ms": 371.635,
+     "predicted_n": 58,
+     "predicted_ms": 1500.023,
+     "predicted_per_second": 37.99941734226742,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.33,
+     "prompt_n": 17,
+     "prompt_ms": 252.408,
+     "predicted_n": 192,
+     "predicted_ms": 5010.031,
+     "predicted_per_second": 38.12351660099509,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a00847371ae5",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.101,
+     "prompt_n": 52,
+     "prompt_ms": 659.451,
+     "predicted_n": 53,
+     "predicted_ms": 1372.795,
+     "predicted_per_second": 37.878925841076054,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.308,
+     "prompt_n": 14,
+     "prompt_ms": 223.339,
+     "predicted_n": 192,
+     "predicted_ms": 5017.734,
+     "predicted_per_second": 38.06499108960339,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b1a14923c25c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.87,
+     "prompt_n": 15,
+     "prompt_ms": 238.644,
+     "predicted_n": 22,
+     "predicted_ms": 563.339,
+     "predicted_per_second": 37.27773152577755,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.273,
+     "prompt_n": 11,
+     "prompt_ms": 194.934,
+     "predicted_n": 192,
+     "predicted_ms": 5011.552,
+     "predicted_per_second": 38.11194615959288,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "61cb1c8cd3ba",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 5.676,
+     "prompt_n": 50,
+     "prompt_ms": 597.417,
+     "predicted_n": 192,
+     "predicted_ms": 5009.652,
+     "predicted_per_second": 38.126400795903585,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.527,
+     "prompt_n": 721,
+     "prompt_ms": 2422.858,
+     "predicted_n": 192,
+     "predicted_ms": 5033.703,
+     "predicted_per_second": 37.944233102350296,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 46,
+    "samples_under_load": 5,
+    "temp_start": 52,
+    "temp_end": 54,
+    "temp_max": 58,
+    "vram_peak_mib": 10099,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1927.4,
+     "median": 1965,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 81.3,
+     "median": 87.94,
+     "min": 46.65,
+     "max": 96.36
+    },
+    "temp_under_load": {
+     "mean": 55,
+     "median": 56,
+     "min": 52,
+     "max": 56
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "q08b24",
+   "rep": 1,
+   "tag": "measured",
+   "started": "2026-09-28T19:24:45+0000",
+   "elapsed_s": 93.4,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 80748.8,
+    "gen_tok_s": 15.91,
+    "mean_per_prompt_tok_s": 17.19,
+    "total_draft": 3244,
+    "total_draft_accepted": 850,
+    "accept_rate": 0.262,
+    "wall_s_prompts": 86.99,
+    "load_s": 5.8,
+    "vram_after_load_mib": "11007",
+    "pcie_rx_mbps_mean": 578.9,
+    "pcie_tx_mbps_mean": 283.8,
+    "pcie_rx_mbps_max": 9522.0,
+    "pcie_samples": 84,
+    "pcie_rx_mb_per_token": 39.189
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 6.83,
+     "prompt_n": 20,
+     "prompt_ms": 392.748,
+     "predicted_n": 192,
+     "predicted_ms": 6435.548,
+     "predicted_per_second": 29.67890224732999,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.803,
+     "prompt_n": 30,
+     "prompt_ms": 401.773,
+     "predicted_n": 58,
+     "predicted_ms": 2310.43,
+     "predicted_per_second": 24.670732287929088,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 17.706,
+     "prompt_n": 17,
+     "prompt_ms": 257.949,
+     "predicted_n": 192,
+     "predicted_ms": 17360.399,
+     "predicted_per_second": 11.00205127773849,
+     "draft_n": 719,
+     "draft_n_accepted": 90,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1252
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.591,
+     "prompt_n": 52,
+     "prompt_ms": 686.145,
+     "predicted_n": 53,
+     "predicted_ms": 3814.739,
+     "predicted_per_second": 13.631338867482153,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.091,
+     "prompt_n": 14,
+     "prompt_ms": 236.792,
+     "predicted_n": 192,
+     "predicted_ms": 9765.643,
+     "predicted_per_second": 19.558363950023566,
+     "draft_n": 394,
+     "draft_n_accepted": 141,
+     "content_sha_head": "d1af93d82fcd",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3579
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.186,
+     "prompt_n": 15,
+     "prompt_ms": 243.312,
+     "predicted_n": 22,
+     "predicted_ms": 1853.901,
+     "predicted_per_second": 11.327465706097573,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 14.562,
+     "prompt_n": 11,
+     "prompt_ms": 199.683,
+     "predicted_n": 192,
+     "predicted_ms": 14275.429,
+     "predicted_per_second": 13.379632934323725,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.154,
+     "prompt_n": 50,
+     "prompt_ms": 612.571,
+     "predicted_n": 192,
+     "predicted_ms": 10451.805,
+     "predicted_per_second": 18.27435548213921,
+     "draft_n": 413,
+     "draft_n_accepted": 138,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3341
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.066,
+     "prompt_n": 721,
+     "prompt_ms": 2493.337,
+     "predicted_n": 192,
+     "predicted_ms": 14480.878,
+     "predicted_per_second": 13.189807966063935,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 95,
+    "samples_under_load": 28,
+    "temp_start": 48,
+    "temp_end": 51,
+    "temp_max": 59,
+    "vram_peak_mib": 11047,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1966.9,
+     "median": 1965.0,
+     "min": 1957,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 87.3,
+     "median": 89.315,
+     "min": 51.04,
+     "max": 94.78
+    },
+    "temp_under_load": {
+     "mean": 54.6,
+     "median": 54.0,
+     "min": 48,
+     "max": 59
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "base26",
+   "rep": 1,
+   "tag": "measured",
+   "started": "2026-09-28T19:27:12+0000",
+   "elapsed_s": 46.8,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 35557.6,
+    "gen_tok_s": 36.14,
+    "mean_per_prompt_tok_s": 35.82,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 41.84,
+    "load_s": 4.4,
+    "vram_after_load_mib": "9147",
+    "pcie_rx_mbps_mean": 652.4,
+    "pcie_tx_mbps_mean": 207.2,
+    "pcie_rx_mbps_max": 8749.0,
+    "pcie_samples": 41,
+    "pcie_rx_mb_per_token": 21.243
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.715,
+     "prompt_n": 20,
+     "prompt_ms": 413.479,
+     "predicted_n": 192,
+     "predicted_ms": 5299.628,
+     "predicted_per_second": 36.04026546768943,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.084,
+     "prompt_n": 30,
+     "prompt_ms": 396.844,
+     "predicted_n": 58,
+     "predicted_ms": 1618.71,
+     "predicted_per_second": 35.213225346108935,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.661,
+     "prompt_n": 17,
+     "prompt_ms": 268.437,
+     "predicted_n": 192,
+     "predicted_ms": 5325.162,
+     "predicted_per_second": 35.8674534220743,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.21,
+     "prompt_n": 52,
+     "prompt_ms": 706.781,
+     "predicted_n": 53,
+     "predicted_ms": 1434.826,
+     "predicted_per_second": 36.2413282168012,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.623,
+     "prompt_n": 14,
+     "prompt_ms": 235.588,
+     "predicted_n": 192,
+     "predicted_ms": 5319.696,
+     "predicted_per_second": 35.90430731380139,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a1d762786306",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.911,
+     "prompt_n": 15,
+     "prompt_ms": 251.265,
+     "predicted_n": 22,
+     "predicted_ms": 591.593,
+     "predicted_per_second": 35.49737741994919,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.601,
+     "prompt_n": 11,
+     "prompt_ms": 205.757,
+     "predicted_n": 192,
+     "predicted_ms": 5328.605,
+     "predicted_per_second": 35.84427819288538,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "bcdcc5f5f919",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 6.0,
+     "prompt_n": 50,
+     "prompt_ms": 647.848,
+     "predicted_n": 192,
+     "predicted_ms": 5283.552,
+     "predicted_per_second": 36.14992338487442,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "2da725119eeb",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 8.034,
+     "prompt_n": 721,
+     "prompt_ms": 2607.005,
+     "predicted_n": 192,
+     "predicted_ms": 5355.85,
+     "predicted_per_second": 35.661939748125874,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 48,
+    "samples_under_load": 3,
+    "temp_start": 53,
+    "temp_end": 53,
+    "temp_max": 59,
+    "vram_peak_mib": 9171,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1902.3,
+     "median": 1965,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 69.0,
+     "median": 74.04,
+     "min": 46.87,
+     "max": 86.03
+    },
+    "temp_under_load": {
+     "mean": 54.7,
+     "median": 55,
+     "min": 53,
+     "max": 56
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "dflash26",
+   "rep": 1,
+   "tag": "measured",
+   "started": "2026-09-28T19:29:17+0000",
+   "elapsed_s": 71.0,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-dflash",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 58272.4,
+    "gen_tok_s": 22.05,
+    "mean_per_prompt_tok_s": 21.82,
+    "total_draft": 4308,
+    "total_draft_accepted": 976,
+    "accept_rate": 0.2266,
+    "wall_s_prompts": 64.93,
+    "load_s": 5.4,
+    "vram_after_load_mib": "11587",
+    "pcie_rx_mbps_mean": 516.5,
+    "pcie_tx_mbps_mean": 148.9,
+    "pcie_rx_mbps_max": 8730.0,
+    "pcie_samples": 63,
+    "pcie_rx_mb_per_token": 26.097
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.239,
+     "prompt_n": 20,
+     "prompt_ms": 489.996,
+     "predicted_n": 192,
+     "predicted_ms": 4747.192,
+     "predicted_per_second": 40.23431114646301,
+     "draft_n": 330,
+     "draft_n_accepted": 168,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.5091
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.832,
+     "prompt_n": 30,
+     "prompt_ms": 424.661,
+     "predicted_n": 58,
+     "predicted_ms": 2335.286,
+     "predicted_per_second": 24.408145297835038,
+     "draft_n": 180,
+     "draft_n_accepted": 45,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.25
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 9.514,
+     "prompt_n": 17,
+     "prompt_ms": 284.885,
+     "predicted_n": 192,
+     "predicted_ms": 9160.912,
+     "predicted_per_second": 20.849452543589546,
+     "draft_n": 678,
+     "draft_n_accepted": 143,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2109
+    },
+    {
+     "name": "summarize",
+     "wall_s": 3.632,
+     "prompt_n": 52,
+     "prompt_ms": 743.718,
+     "predicted_n": 53,
+     "predicted_ms": 2817.019,
+     "predicted_per_second": 18.45922941946789,
+     "draft_n": 210,
+     "draft_n_accepted": 38,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.181
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.141,
+     "prompt_n": 14,
+     "prompt_ms": 250.278,
+     "predicted_n": 192,
+     "predicted_ms": 9822.463,
+     "predicted_per_second": 19.445224685498943,
+     "draft_n": 735,
+     "draft_n_accepted": 141,
+     "content_sha_head": "0a1808c61040",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1918
+    },
+    {
+     "name": "translation",
+     "wall_s": 3.017,
+     "prompt_n": 15,
+     "prompt_ms": 268.919,
+     "predicted_n": 22,
+     "predicted_ms": 2676.648,
+     "predicted_per_second": 7.845633792713872,
+     "draft_n": 210,
+     "draft_n_accepted": 7,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.0333
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 10.186,
+     "prompt_n": 11,
+     "prompt_ms": 223.236,
+     "predicted_n": 192,
+     "predicted_ms": 9893.511,
+     "predicted_per_second": 19.305583225206906,
+     "draft_n": 737,
+     "draft_n_accepted": 137,
+     "content_sha_head": "ed4e75ab22d2",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1859
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 8.339,
+     "prompt_n": 50,
+     "prompt_ms": 675.942,
+     "predicted_n": 192,
+     "predicted_ms": 7591.815,
+     "predicted_per_second": 25.1586741773871,
+     "draft_n": 555,
+     "draft_n_accepted": 153,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2757
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 12.026,
+     "prompt_n": 721,
+     "prompt_ms": 2725.076,
+     "predicted_n": 192,
+     "predicted_ms": 9227.54,
+     "predicted_per_second": 20.6989078345908,
+     "draft_n": 673,
+     "draft_n_accepted": 144,
+     "content_sha_head": "d20f769f26ef",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.214
+    }
+   ],
+   "telemetry": {
+    "samples": 72,
+    "samples_under_load": 4,
+    "temp_start": 50,
+    "temp_end": 53,
+    "temp_max": 59,
+    "vram_peak_mib": 11671,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1957.5,
+     "median": 1965.0,
+     "min": 1920,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 74.2,
+     "median": 75.77,
+     "min": 51.46,
+     "max": 93.84
+    },
+    "temp_under_load": {
+     "mean": 55.8,
+     "median": 56.5,
+     "min": 51,
+     "max": 59
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "q08b26",
+   "rep": 1,
+   "tag": "measured",
+   "started": "2026-09-28T19:32:12+0000",
+   "elapsed_s": 97.1,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 84416.8,
+    "gen_tok_s": 15.22,
+    "mean_per_prompt_tok_s": 16.38,
+    "total_draft": 3250,
+    "total_draft_accepted": 849,
+    "accept_rate": 0.2612,
+    "wall_s_prompts": 91.02,
+    "load_s": 5.4,
+    "vram_after_load_mib": "10079",
+    "pcie_rx_mbps_mean": 732.4,
+    "pcie_tx_mbps_mean": 693.9,
+    "pcie_rx_mbps_max": 8981.0,
+    "pcie_samples": 88,
+    "pcie_rx_mb_per_token": 51.876
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 7.109,
+     "prompt_n": 20,
+     "prompt_ms": 431.381,
+     "predicted_n": 192,
+     "predicted_ms": 6675.161,
+     "predicted_per_second": 28.613542055390127,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.933,
+     "prompt_n": 30,
+     "prompt_ms": 426.51,
+     "predicted_n": 58,
+     "predicted_ms": 2415.518,
+     "predicted_per_second": 23.597422995812906,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 18.253,
+     "prompt_n": 17,
+     "prompt_ms": 272.101,
+     "predicted_n": 192,
+     "predicted_ms": 17893.421,
+     "predicted_per_second": 10.674314319212632,
+     "draft_n": 715,
+     "draft_n_accepted": 93,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1301
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.809,
+     "prompt_n": 52,
+     "prompt_ms": 732.749,
+     "predicted_n": 53,
+     "predicted_ms": 3985.069,
+     "predicted_per_second": 13.048707563156372,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.434,
+     "prompt_n": 14,
+     "prompt_ms": 242.027,
+     "predicted_n": 192,
+     "predicted_ms": 10102.884,
+     "predicted_per_second": 18.90549272861096,
+     "draft_n": 382,
+     "draft_n_accepted": 142,
+     "content_sha_head": "5e109f03f7b3",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3717
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.413,
+     "prompt_n": 15,
+     "prompt_ms": 255.911,
+     "predicted_n": 22,
+     "predicted_ms": 2066.197,
+     "predicted_per_second": 10.163600082663947,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "ea7c29be75f5",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 15.147,
+     "prompt_n": 11,
+     "prompt_ms": 209.82,
+     "predicted_n": 192,
+     "predicted_ms": 14849.768,
+     "predicted_per_second": 12.862153806039258,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.961,
+     "prompt_n": 50,
+     "prompt_ms": 652.948,
+     "predicted_n": 192,
+     "predicted_ms": 11217.433,
+     "predicted_per_second": 17.0270684924082,
+     "draft_n": 435,
+     "draft_n_accepted": 133,
+     "content_sha_head": "725dc400481e",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3057
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.956,
+     "prompt_n": 721,
+     "prompt_ms": 2651.347,
+     "predicted_n": 192,
+     "predicted_ms": 15211.379,
+     "predicted_per_second": 12.556389529180752,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 98,
+    "samples_under_load": 26,
+    "temp_start": 48,
+    "temp_end": 51,
+    "temp_max": 58,
+    "vram_peak_mib": 10117,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1967.0,
+     "median": 1965.0,
+     "min": 1957,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 83.8,
+     "median": 85.35,
+     "min": 51.1,
+     "max": 91.09
+    },
+    "temp_under_load": {
+     "mean": 54.2,
+     "median": 54.0,
+     "min": 48,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "base24",
+   "rep": 2,
+   "tag": "measured",
+   "started": "2026-09-28T19:34:41+0000",
+   "elapsed_s": 44.4,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 33610.4,
+    "gen_tok_s": 38.23,
+    "mean_per_prompt_tok_s": 37.92,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 39.53,
+    "load_s": 4.3,
+    "vram_after_load_mib": "10075",
+    "pcie_rx_mbps_mean": 924.1,
+    "pcie_tx_mbps_mean": 242.5,
+    "pcie_rx_mbps_max": 9141.0,
+    "pcie_samples": 39,
+    "pcie_rx_mb_per_token": 28.427
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.413,
+     "prompt_n": 20,
+     "prompt_ms": 396.022,
+     "predicted_n": 192,
+     "predicted_ms": 5014.414,
+     "predicted_per_second": 38.09019358991898,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.94,
+     "prompt_n": 30,
+     "prompt_ms": 370.705,
+     "predicted_n": 58,
+     "predicted_ms": 1500.717,
+     "predicted_per_second": 37.981844678243796,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.338,
+     "prompt_n": 17,
+     "prompt_ms": 252.09,
+     "predicted_n": 192,
+     "predicted_ms": 5018.916,
+     "predicted_per_second": 38.05602644076928,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a00847371ae5",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.107,
+     "prompt_n": 52,
+     "prompt_ms": 663.476,
+     "predicted_n": 53,
+     "predicted_ms": 1374.721,
+     "predicted_per_second": 37.82585702844432,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.341,
+     "prompt_n": 14,
+     "prompt_ms": 222.778,
+     "predicted_n": 192,
+     "predicted_ms": 5051.138,
+     "predicted_per_second": 37.81326109086705,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b1a14923c25c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.865,
+     "prompt_n": 15,
+     "prompt_ms": 237.376,
+     "predicted_n": 22,
+     "predicted_ms": 559.013,
+     "predicted_per_second": 37.56621044591091,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.28,
+     "prompt_n": 11,
+     "prompt_ms": 194.421,
+     "predicted_n": 192,
+     "predicted_ms": 5019.405,
+     "predicted_per_second": 38.05231895015445,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "61cb1c8cd3ba",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 5.707,
+     "prompt_n": 50,
+     "prompt_ms": 600.138,
+     "predicted_n": 192,
+     "predicted_ms": 5038.156,
+     "predicted_per_second": 37.91069589746725,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.538,
+     "prompt_n": 721,
+     "prompt_ms": 2433.023,
+     "predicted_n": 192,
+     "predicted_ms": 5033.91,
+     "predicted_per_second": 37.94267279311708,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 46,
+    "samples_under_load": 5,
+    "temp_start": 52,
+    "temp_end": 54,
+    "temp_max": 58,
+    "vram_peak_mib": 10099,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1927.4,
+     "median": 1965,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 82.2,
+     "median": 87.59,
+     "min": 46.71,
+     "max": 98.87
+    },
+    "temp_under_load": {
+     "mean": 55,
+     "median": 56,
+     "min": 52,
+     "max": 56
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "q08b24",
+   "rep": 2,
+   "tag": "measured",
+   "started": "2026-09-28T19:37:07+0000",
+   "elapsed_s": 93.4,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 80676.8,
+    "gen_tok_s": 15.93,
+    "mean_per_prompt_tok_s": 17.22,
+    "total_draft": 3244,
+    "total_draft_accepted": 850,
+    "accept_rate": 0.262,
+    "wall_s_prompts": 86.93,
+    "load_s": 5.8,
+    "vram_after_load_mib": "11007",
+    "pcie_rx_mbps_mean": 647.7,
+    "pcie_tx_mbps_mean": 511.7,
+    "pcie_rx_mbps_max": 9587.0,
+    "pcie_samples": 84,
+    "pcie_rx_mb_per_token": 43.818
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 6.795,
+     "prompt_n": 20,
+     "prompt_ms": 392.275,
+     "predicted_n": 192,
+     "predicted_ms": 6401.151,
+     "predicted_per_second": 29.83838375317189,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.799,
+     "prompt_n": 30,
+     "prompt_ms": 401.252,
+     "predicted_n": 58,
+     "predicted_ms": 2307.435,
+     "predicted_per_second": 24.702754357110816,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 17.694,
+     "prompt_n": 17,
+     "prompt_ms": 256.891,
+     "predicted_n": 192,
+     "predicted_ms": 17349.968,
+     "predicted_per_second": 11.00866583730875,
+     "draft_n": 719,
+     "draft_n_accepted": 90,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1252
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.603,
+     "prompt_n": 52,
+     "prompt_ms": 688.992,
+     "predicted_n": 53,
+     "predicted_ms": 3824.398,
+     "predicted_per_second": 13.596911200141825,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.065,
+     "prompt_n": 14,
+     "prompt_ms": 229.72,
+     "predicted_n": 192,
+     "predicted_ms": 9744.381,
+     "predicted_per_second": 19.601039819768953,
+     "draft_n": 394,
+     "draft_n_accepted": 141,
+     "content_sha_head": "d1af93d82fcd",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3579
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.182,
+     "prompt_n": 15,
+     "prompt_ms": 242.948,
+     "predicted_n": 22,
+     "predicted_ms": 1849.966,
+     "predicted_per_second": 11.35155997461575,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 14.561,
+     "prompt_n": 11,
+     "prompt_ms": 198.939,
+     "predicted_n": 192,
+     "predicted_ms": 14275.019,
+     "predicted_per_second": 13.380017217490217,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.138,
+     "prompt_n": 50,
+     "prompt_ms": 619.889,
+     "predicted_n": 192,
+     "predicted_ms": 10426.839,
+     "predicted_per_second": 18.31811155806664,
+     "draft_n": 413,
+     "draft_n_accepted": 138,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3341
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.096,
+     "prompt_n": 721,
+     "prompt_ms": 2506.264,
+     "predicted_n": 192,
+     "predicted_ms": 14497.609,
+     "predicted_per_second": 13.174586236944313,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 95,
+    "samples_under_load": 24,
+    "temp_start": 48,
+    "temp_end": 51,
+    "temp_max": 59,
+    "vram_peak_mib": 11047,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1967.8,
+     "median": 1968.5,
+     "min": 1957,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 86.8,
+     "median": 89.185,
+     "min": 51.2,
+     "max": 94.9
+    },
+    "temp_under_load": {
+     "mean": 54.7,
+     "median": 55.0,
+     "min": 48,
+     "max": 59
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000024"
+    ]
+   }
+  },
+  {
+   "config": "base26",
+   "rep": 2,
+   "tag": "measured",
+   "started": "2026-09-28T19:39:35+0000",
+   "elapsed_s": 46.6,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 35365.8,
+    "gen_tok_s": 36.33,
+    "mean_per_prompt_tok_s": 36.04,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 41.63,
+    "load_s": 4.4,
+    "vram_after_load_mib": "9147",
+    "pcie_rx_mbps_mean": 711.2,
+    "pcie_tx_mbps_mean": 137.5,
+    "pcie_rx_mbps_max": 9065.0,
+    "pcie_samples": 41,
+    "pcie_rx_mb_per_token": 23.045
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.708,
+     "prompt_n": 20,
+     "prompt_ms": 414.062,
+     "predicted_n": 192,
+     "predicted_ms": 5292.138,
+     "predicted_per_second": 36.09127350798486,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.068,
+     "prompt_n": 30,
+     "prompt_ms": 410.081,
+     "predicted_n": 58,
+     "predicted_ms": 1589.069,
+     "predicted_per_second": 35.87005976455396,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.638,
+     "prompt_n": 17,
+     "prompt_ms": 267.968,
+     "predicted_n": 192,
+     "predicted_ms": 5302.917,
+     "predicted_per_second": 36.01791240556848,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.199,
+     "prompt_n": 52,
+     "prompt_ms": 699.838,
+     "predicted_n": 53,
+     "predicted_ms": 1430.658,
+     "predicted_per_second": 36.34691170076986,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.598,
+     "prompt_n": 14,
+     "prompt_ms": 234.919,
+     "predicted_n": 192,
+     "predicted_ms": 5296.537,
+     "predicted_per_second": 36.06129816519737,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a1d762786306",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.91,
+     "prompt_n": 15,
+     "prompt_ms": 251.608,
+     "predicted_n": 22,
+     "predicted_ms": 589.383,
+     "predicted_per_second": 35.63048136780328,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.604,
+     "prompt_n": 11,
+     "prompt_ms": 205.641,
+     "predicted_n": 192,
+     "predicted_ms": 5331.92,
+     "predicted_per_second": 35.82199282809945,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "bcdcc5f5f919",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 5.979,
+     "prompt_n": 50,
+     "prompt_ms": 645.904,
+     "predicted_n": 192,
+     "predicted_ms": 5261.291,
+     "predicted_per_second": 36.302876993498366,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "2da725119eeb",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.929,
+     "prompt_n": 721,
+     "prompt_ms": 2586.005,
+     "predicted_n": 192,
+     "predicted_ms": 5271.912,
+     "predicted_per_second": 36.22973979838813,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 48,
+    "samples_under_load": 3,
+    "temp_start": 53,
+    "temp_end": 53,
+    "temp_max": 59,
+    "vram_peak_mib": 9171,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1902.3,
+     "median": 1965,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 69.1,
+     "median": 73.36,
+     "min": 47.02,
+     "max": 87.0
+    },
+    "temp_under_load": {
+     "mean": 54.3,
+     "median": 55,
+     "min": 53,
+     "max": 55
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "dflash26",
+   "rep": 2,
+   "tag": "measured",
+   "started": "2026-09-28T19:41:39+0000",
+   "elapsed_s": 71.3,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-dflash",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 58362.7,
+    "gen_tok_s": 22.02,
+    "mean_per_prompt_tok_s": 21.8,
+    "total_draft": 4308,
+    "total_draft_accepted": 976,
+    "accept_rate": 0.2266,
+    "wall_s_prompts": 65.16,
+    "load_s": 5.4,
+    "vram_after_load_mib": "11587",
+    "pcie_rx_mbps_mean": 581.3,
+    "pcie_tx_mbps_mean": 131.5,
+    "pcie_rx_mbps_max": 8839.0,
+    "pcie_samples": 63,
+    "pcie_rx_mb_per_token": 29.472
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.237,
+     "prompt_n": 20,
+     "prompt_ms": 485.039,
+     "predicted_n": 192,
+     "predicted_ms": 4750.478,
+     "predicted_per_second": 40.20648027419556,
+     "draft_n": 330,
+     "draft_n_accepted": 168,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.5091
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.834,
+     "prompt_n": 30,
+     "prompt_ms": 425.716,
+     "predicted_n": 58,
+     "predicted_ms": 2336.223,
+     "predicted_per_second": 24.398355807643366,
+     "draft_n": 180,
+     "draft_n_accepted": 45,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.25
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 9.51,
+     "prompt_n": 17,
+     "prompt_ms": 284.342,
+     "predicted_n": 192,
+     "predicted_ms": 9157.498,
+     "predicted_per_second": 20.85722541244344,
+     "draft_n": 678,
+     "draft_n_accepted": 143,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2109
+    },
+    {
+     "name": "summarize",
+     "wall_s": 3.618,
+     "prompt_n": 52,
+     "prompt_ms": 740.309,
+     "predicted_n": 53,
+     "predicted_ms": 2806.123,
+     "predicted_per_second": 18.530905452113114,
+     "draft_n": 210,
+     "draft_n_accepted": 38,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.181
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.176,
+     "prompt_n": 14,
+     "prompt_ms": 250.448,
+     "predicted_n": 192,
+     "predicted_ms": 9856.395,
+     "predicted_per_second": 19.37828181601894,
+     "draft_n": 735,
+     "draft_n_accepted": 141,
+     "content_sha_head": "0a1808c61040",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1918
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.999,
+     "prompt_n": 15,
+     "prompt_ms": 267.474,
+     "predicted_n": 22,
+     "predicted_ms": 2660.736,
+     "predicted_per_second": 7.892553037956416,
+     "draft_n": 210,
+     "draft_n_accepted": 7,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.0333
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 10.198,
+     "prompt_n": 11,
+     "prompt_ms": 217.419,
+     "predicted_n": 192,
+     "predicted_ms": 9912.911,
+     "predicted_per_second": 19.2678013552225,
+     "draft_n": 737,
+     "draft_n_accepted": 137,
+     "content_sha_head": "ed4e75ab22d2",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1859
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 8.374,
+     "prompt_n": 50,
+     "prompt_ms": 676.931,
+     "predicted_n": 192,
+     "predicted_ms": 7626.114,
+     "predicted_per_second": 25.0455212182771,
+     "draft_n": 555,
+     "draft_n_accepted": 153,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2757
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 12.21,
+     "prompt_n": 721,
+     "prompt_ms": 2844.673,
+     "predicted_n": 192,
+     "predicted_ms": 9256.184,
+     "predicted_per_second": 20.63485341259422,
+     "draft_n": 673,
+     "draft_n_accepted": 144,
+     "content_sha_head": "d20f769f26ef",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.214
+    }
+   ],
+   "telemetry": {
+    "samples": 73,
+    "samples_under_load": 5,
+    "temp_start": 50,
+    "temp_end": 53,
+    "temp_max": 58,
+    "vram_peak_mib": 11671,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1968,
+     "median": 1965,
+     "min": 1965,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 68.6,
+     "median": 64.25,
+     "min": 51.33,
+     "max": 83.43
+    },
+    "temp_under_load": {
+     "mean": 54.6,
+     "median": 56,
+     "min": 51,
+     "max": 57
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "q08b26",
+   "rep": 2,
+   "tag": "measured",
+   "started": "2026-09-28T19:44:35+0000",
+   "elapsed_s": 97.0,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 84351.0,
+    "gen_tok_s": 15.23,
+    "mean_per_prompt_tok_s": 16.39,
+    "total_draft": 3250,
+    "total_draft_accepted": 849,
+    "accept_rate": 0.2612,
+    "wall_s_prompts": 90.95,
+    "load_s": 5.4,
+    "vram_after_load_mib": "10079",
+    "pcie_rx_mbps_mean": 696.8,
+    "pcie_tx_mbps_mean": 368.6,
+    "pcie_rx_mbps_max": 8349.0,
+    "pcie_samples": 88,
+    "pcie_rx_mb_per_token": 49.316
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 7.11,
+     "prompt_n": 20,
+     "prompt_ms": 435.839,
+     "predicted_n": 192,
+     "predicted_ms": 6672.516,
+     "predicted_per_second": 28.62488452631661,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.92,
+     "prompt_n": 30,
+     "prompt_ms": 422.111,
+     "predicted_n": 58,
+     "predicted_ms": 2407.214,
+     "predicted_per_second": 23.678825397326534,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 18.232,
+     "prompt_n": 17,
+     "prompt_ms": 272.326,
+     "predicted_n": 192,
+     "predicted_ms": 17871.714,
+     "predicted_per_second": 10.687279351046017,
+     "draft_n": 715,
+     "draft_n_accepted": 93,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1301
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.852,
+     "prompt_n": 52,
+     "prompt_ms": 734.228,
+     "predicted_n": 53,
+     "predicted_ms": 4026.595,
+     "predicted_per_second": 12.914137130751914,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.395,
+     "prompt_n": 14,
+     "prompt_ms": 241.698,
+     "predicted_n": 192,
+     "predicted_ms": 10064.529,
+     "predicted_per_second": 18.977539833210276,
+     "draft_n": 382,
+     "draft_n_accepted": 142,
+     "content_sha_head": "5e109f03f7b3",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3717
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.406,
+     "prompt_n": 15,
+     "prompt_ms": 255.405,
+     "predicted_n": 22,
+     "predicted_ms": 2060.259,
+     "predicted_per_second": 10.192893223618972,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "ea7c29be75f5",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 15.133,
+     "prompt_n": 11,
+     "prompt_ms": 209.728,
+     "predicted_n": 192,
+     "predicted_ms": 14835.681,
+     "predicted_per_second": 12.87436687267676,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.981,
+     "prompt_n": 50,
+     "prompt_ms": 658.077,
+     "predicted_n": 192,
+     "predicted_ms": 11231.23,
+     "predicted_per_second": 17.00615159693106,
+     "draft_n": 435,
+     "draft_n_accepted": 133,
+     "content_sha_head": "725dc400481e",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3057
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.917,
+     "prompt_n": 721,
+     "prompt_ms": 2643.605,
+     "predicted_n": 192,
+     "predicted_ms": 15181.287,
+     "predicted_per_second": 12.581278517427409,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 98,
+    "samples_under_load": 30,
+    "temp_start": 48,
+    "temp_end": 51,
+    "temp_max": 58,
+    "vram_peak_mib": 10117,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1967.9,
+     "median": 1972.0,
+     "min": 1957,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 84.8,
+     "median": 86.62,
+     "min": 51.18,
+     "max": 93.04
+    },
+    "temp_under_load": {
+     "mean": 54.4,
+     "median": 54.0,
+     "min": 49,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "base24",
+   "rep": 3,
+   "tag": "measured",
+   "started": "2026-09-28T19:47:04+0000",
+   "elapsed_s": 44.4,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 33639.2,
+    "gen_tok_s": 38.2,
+    "mean_per_prompt_tok_s": 37.86,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 39.55,
+    "load_s": 4.3,
+    "vram_after_load_mib": "10075",
+    "pcie_rx_mbps_mean": 1243.9,
+    "pcie_tx_mbps_mean": 345.5,
+    "pcie_rx_mbps_max": 11121.0,
+    "pcie_samples": 39,
+    "pcie_rx_mb_per_token": 38.282
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.45,
+     "prompt_n": 20,
+     "prompt_ms": 386.964,
+     "predicted_n": 192,
+     "predicted_ms": 5061.392,
+     "predicted_per_second": 37.73665426428145,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.953,
+     "prompt_n": 30,
+     "prompt_ms": 371.223,
+     "predicted_n": 58,
+     "predicted_ms": 1512.68,
+     "predicted_per_second": 37.68146600735119,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.341,
+     "prompt_n": 17,
+     "prompt_ms": 251.802,
+     "predicted_n": 192,
+     "predicted_ms": 5021.695,
+     "predicted_per_second": 38.034966281305415,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a00847371ae5",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.102,
+     "prompt_n": 52,
+     "prompt_ms": 661.321,
+     "predicted_n": 53,
+     "predicted_ms": 1371.699,
+     "predicted_per_second": 37.90919144797802,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.311,
+     "prompt_n": 14,
+     "prompt_ms": 222.834,
+     "predicted_n": 192,
+     "predicted_ms": 5020.22,
+     "predicted_per_second": 38.04614140416157,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b1a14923c25c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.868,
+     "prompt_n": 15,
+     "prompt_ms": 238.368,
+     "predicted_n": 22,
+     "predicted_ms": 561.073,
+     "predicted_per_second": 37.428284733002656,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.282,
+     "prompt_n": 11,
+     "prompt_ms": 194.714,
+     "predicted_n": 192,
+     "predicted_ms": 5020.603,
+     "predicted_per_second": 38.04323902925604,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "61cb1c8cd3ba",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 5.685,
+     "prompt_n": 50,
+     "prompt_ms": 598.583,
+     "predicted_n": 192,
+     "predicted_ms": 5017.777,
+     "predicted_per_second": 38.0646648904485,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.555,
+     "prompt_n": 721,
+     "prompt_ms": 2432.043,
+     "predicted_n": 192,
+     "predicted_ms": 5052.056,
+     "predicted_per_second": 37.806390111273515,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 46,
+    "samples_under_load": 5,
+    "temp_start": 52,
+    "temp_end": 54,
+    "temp_max": 58,
+    "vram_peak_mib": 10099,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1927.4,
+     "median": 1965,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 82.1,
+     "median": 87.85,
+     "min": 46.66,
+     "max": 98.36
+    },
+    "temp_under_load": {
+     "mean": 55,
+     "median": 56,
+     "min": 52,
+     "max": 56
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "q08b24",
+   "rep": 3,
+   "tag": "measured",
+   "started": "2026-09-28T19:49:30+0000",
+   "elapsed_s": 93.3,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 80640.3,
+    "gen_tok_s": 15.93,
+    "mean_per_prompt_tok_s": 17.23,
+    "total_draft": 3244,
+    "total_draft_accepted": 850,
+    "accept_rate": 0.262,
+    "wall_s_prompts": 86.9,
+    "load_s": 5.8,
+    "vram_after_load_mib": "11007",
+    "pcie_rx_mbps_mean": 781.0,
+    "pcie_tx_mbps_mean": 440.7,
+    "pcie_rx_mbps_max": 9720.0,
+    "pcie_samples": 84,
+    "pcie_rx_mb_per_token": 52.819
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 6.784,
+     "prompt_n": 20,
+     "prompt_ms": 392.223,
+     "predicted_n": 192,
+     "predicted_ms": 6390.55,
+     "predicted_per_second": 29.887881324768607,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.794,
+     "prompt_n": 30,
+     "prompt_ms": 400.137,
+     "predicted_n": 58,
+     "predicted_ms": 2303.044,
+     "predicted_per_second": 24.749852803507014,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 17.711,
+     "prompt_n": 17,
+     "prompt_ms": 258.232,
+     "predicted_n": 192,
+     "predicted_ms": 17365.205,
+     "predicted_per_second": 10.999006346311488,
+     "draft_n": 719,
+     "draft_n_accepted": 90,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1252
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.597,
+     "prompt_n": 52,
+     "prompt_ms": 687.287,
+     "predicted_n": 53,
+     "predicted_ms": 3819.733,
+     "predicted_per_second": 13.613516965714618,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.114,
+     "prompt_n": 14,
+     "prompt_ms": 229.288,
+     "predicted_n": 192,
+     "predicted_ms": 9796.78,
+     "predicted_per_second": 19.49620181324884,
+     "draft_n": 394,
+     "draft_n_accepted": 141,
+     "content_sha_head": "d1af93d82fcd",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3579
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.192,
+     "prompt_n": 15,
+     "prompt_ms": 253.683,
+     "predicted_n": 22,
+     "predicted_ms": 1849.479,
+     "predicted_per_second": 11.354549037864176,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 14.523,
+     "prompt_n": 11,
+     "prompt_ms": 199.291,
+     "predicted_n": 192,
+     "predicted_ms": 14236.582,
+     "predicted_per_second": 13.416141599156315,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.109,
+     "prompt_n": 50,
+     "prompt_ms": 613.879,
+     "predicted_n": 192,
+     "predicted_ms": 10405.001,
+     "predicted_per_second": 18.356557582262607,
+     "draft_n": 413,
+     "draft_n_accepted": 138,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3341
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.078,
+     "prompt_n": 721,
+     "prompt_ms": 2511.953,
+     "predicted_n": 192,
+     "predicted_ms": 14473.888,
+     "predicted_per_second": 13.19617783417973,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 95,
+    "samples_under_load": 23,
+    "temp_start": 48,
+    "temp_end": 51,
+    "temp_max": 59,
+    "vram_peak_mib": 11047,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1967.3,
+     "median": 1965,
+     "min": 1957,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 86.4,
+     "median": 88.96,
+     "min": 51.18,
+     "max": 94.85
+    },
+    "temp_under_load": {
+     "mean": 55.0,
+     "median": 56,
+     "min": 48,
+     "max": 59
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "base26",
+   "rep": 3,
+   "tag": "measured",
+   "started": "2026-09-28T19:51:58+0000",
+   "elapsed_s": 47.1,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 35891.3,
+    "gen_tok_s": 35.8,
+    "mean_per_prompt_tok_s": 35.49,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 42.15,
+    "load_s": 4.4,
+    "vram_after_load_mib": "9147",
+    "pcie_rx_mbps_mean": 819.2,
+    "pcie_tx_mbps_mean": 142.7,
+    "pcie_rx_mbps_max": 8582.0,
+    "pcie_samples": 42,
+    "pcie_rx_mb_per_token": 26.872
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.706,
+     "prompt_n": 20,
+     "prompt_ms": 411.076,
+     "predicted_n": 192,
+     "predicted_ms": 5292.45,
+     "predicted_per_second": 36.08914585872328,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.083,
+     "prompt_n": 30,
+     "prompt_ms": 398.297,
+     "predicted_n": 58,
+     "predicted_ms": 1616.18,
+     "predicted_per_second": 35.26834882253214,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.73,
+     "prompt_n": 17,
+     "prompt_ms": 268.639,
+     "predicted_n": 192,
+     "predicted_ms": 5394.626,
+     "predicted_per_second": 35.4056055044409,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.228,
+     "prompt_n": 52,
+     "prompt_ms": 702.084,
+     "predicted_n": 53,
+     "predicted_ms": 1457.223,
+     "predicted_per_second": 35.68431187265093,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.731,
+     "prompt_n": 14,
+     "prompt_ms": 249.491,
+     "predicted_n": 192,
+     "predicted_ms": 5410.196,
+     "predicted_per_second": 35.30371173244001,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a1d762786306",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.919,
+     "prompt_n": 15,
+     "prompt_ms": 251.403,
+     "predicted_n": 22,
+     "predicted_ms": 599.585,
+     "predicted_per_second": 35.02422508901991,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.661,
+     "prompt_n": 11,
+     "prompt_ms": 205.457,
+     "predicted_n": 192,
+     "predicted_ms": 5388.663,
+     "predicted_per_second": 35.444784726749475,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "bcdcc5f5f919",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 6.065,
+     "prompt_n": 50,
+     "prompt_ms": 642.032,
+     "predicted_n": 192,
+     "predicted_ms": 5354.84,
+     "predicted_per_second": 35.66866610393588,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "2da725119eeb",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 8.028,
+     "prompt_n": 721,
+     "prompt_ms": 2579.957,
+     "predicted_n": 192,
+     "predicted_ms": 5377.568,
+     "predicted_per_second": 35.51791441781861,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 48,
+    "samples_under_load": 5,
+    "temp_start": 53,
+    "temp_end": 53,
+    "temp_max": 59,
+    "vram_peak_mib": 9171,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1927.4,
+     "median": 1965,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 72.2,
+     "median": 73.57,
+     "min": 47.04,
+     "max": 84.67
+    },
+    "temp_under_load": {
+     "mean": 55,
+     "median": 55,
+     "min": 53,
+     "max": 56
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "dflash26",
+   "rep": 3,
+   "tag": "measured",
+   "started": "2026-09-28T19:54:03+0000",
+   "elapsed_s": 71.1,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-dflash",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 58300.9,
+    "gen_tok_s": 22.04,
+    "mean_per_prompt_tok_s": 21.83,
+    "total_draft": 4308,
+    "total_draft_accepted": 976,
+    "accept_rate": 0.2266,
+    "wall_s_prompts": 64.95,
+    "load_s": 5.4,
+    "vram_after_load_mib": "11587",
+    "pcie_rx_mbps_mean": 588.4,
+    "pcie_tx_mbps_mean": 143.4,
+    "pcie_rx_mbps_max": 8806.0,
+    "pcie_samples": 63,
+    "pcie_rx_mb_per_token": 29.741
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.225,
+     "prompt_n": 20,
+     "prompt_ms": 483.239,
+     "predicted_n": 192,
+     "predicted_ms": 4740.396,
+     "predicted_per_second": 40.2919924833284,
+     "draft_n": 330,
+     "draft_n_accepted": 168,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.5091
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.833,
+     "prompt_n": 30,
+     "prompt_ms": 424.712,
+     "predicted_n": 58,
+     "predicted_ms": 2336.137,
+     "predicted_per_second": 24.399253982108068,
+     "draft_n": 180,
+     "draft_n_accepted": 45,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.25
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 9.548,
+     "prompt_n": 17,
+     "prompt_ms": 284.473,
+     "predicted_n": 192,
+     "predicted_ms": 9195.292,
+     "predicted_per_second": 20.771499154132357,
+     "draft_n": 678,
+     "draft_n_accepted": 143,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2109
+    },
+    {
+     "name": "summarize",
+     "wall_s": 3.618,
+     "prompt_n": 52,
+     "prompt_ms": 739.794,
+     "predicted_n": 53,
+     "predicted_ms": 2806.826,
+     "predicted_per_second": 18.52626418595239,
+     "draft_n": 210,
+     "draft_n_accepted": 38,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.181
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.128,
+     "prompt_n": 14,
+     "prompt_ms": 250.431,
+     "predicted_n": 192,
+     "predicted_ms": 9809.376,
+     "predicted_per_second": 19.47116717719863,
+     "draft_n": 735,
+     "draft_n_accepted": 141,
+     "content_sha_head": "0a1808c61040",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1918
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.99,
+     "prompt_n": 15,
+     "prompt_ms": 266.919,
+     "predicted_n": 22,
+     "predicted_ms": 2652.558,
+     "predicted_per_second": 7.916886266011902,
+     "draft_n": 210,
+     "draft_n_accepted": 7,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.0333
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 10.227,
+     "prompt_n": 11,
+     "prompt_ms": 217.65,
+     "predicted_n": 192,
+     "predicted_ms": 9941.903,
+     "predicted_per_second": 19.211613712183674,
+     "draft_n": 737,
+     "draft_n_accepted": 137,
+     "content_sha_head": "ed4e75ab22d2",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1859
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 8.333,
+     "prompt_n": 50,
+     "prompt_ms": 677.952,
+     "predicted_n": 192,
+     "predicted_ms": 7584.182,
+     "predicted_per_second": 25.18399479337389,
+     "draft_n": 555,
+     "draft_n_accepted": 153,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2757
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 12.048,
+     "prompt_n": 721,
+     "prompt_ms": 2739.764,
+     "predicted_n": 192,
+     "predicted_ms": 9234.205,
+     "predicted_per_second": 20.68396792143991,
+     "draft_n": 673,
+     "draft_n_accepted": 144,
+     "content_sha_head": "d20f769f26ef",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.214
+    }
+   ],
+   "telemetry": {
+    "samples": 72,
+    "samples_under_load": 4,
+    "temp_start": 50,
+    "temp_end": 53,
+    "temp_max": 58,
+    "vram_peak_mib": 11671,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1944.2,
+     "median": 1965.0,
+     "min": 1867,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 72.9,
+     "median": 75.43,
+     "min": 51.38,
+     "max": 89.55
+    },
+    "temp_under_load": {
+     "mean": 55.5,
+     "median": 56.5,
+     "min": 51,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "q08b26",
+   "rep": 3,
+   "tag": "measured",
+   "started": "2026-09-28T19:56:58+0000",
+   "elapsed_s": 97.2,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 84467.6,
+    "gen_tok_s": 15.21,
+    "mean_per_prompt_tok_s": 16.39,
+    "total_draft": 3250,
+    "total_draft_accepted": 849,
+    "accept_rate": 0.2612,
+    "wall_s_prompts": 91.06,
+    "load_s": 5.4,
+    "vram_after_load_mib": "10079",
+    "pcie_rx_mbps_mean": 629.7,
+    "pcie_tx_mbps_mean": 391.1,
+    "pcie_rx_mbps_max": 9150.0,
+    "pcie_samples": 87,
+    "pcie_rx_mb_per_token": 44.625
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 7.09,
+     "prompt_n": 20,
+     "prompt_ms": 432.142,
+     "predicted_n": 192,
+     "predicted_ms": 6656.129,
+     "predicted_per_second": 28.695357316542395,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.923,
+     "prompt_n": 30,
+     "prompt_ms": 421.846,
+     "predicted_n": 58,
+     "predicted_ms": 2410.477,
+     "predicted_per_second": 23.646771987453107,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 18.263,
+     "prompt_n": 17,
+     "prompt_ms": 272.515,
+     "predicted_n": 192,
+     "predicted_ms": 17902.394,
+     "predicted_per_second": 10.668964161999785,
+     "draft_n": 715,
+     "draft_n_accepted": 93,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1301
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.805,
+     "prompt_n": 52,
+     "prompt_ms": 732.286,
+     "predicted_n": 53,
+     "predicted_ms": 3981.668,
+     "predicted_per_second": 13.059853307709231,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.409,
+     "prompt_n": 14,
+     "prompt_ms": 241.817,
+     "predicted_n": 192,
+     "predicted_ms": 10077.566,
+     "predicted_per_second": 18.952989243632835,
+     "draft_n": 382,
+     "draft_n_accepted": 142,
+     "content_sha_head": "5e109f03f7b3",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3717
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.411,
+     "prompt_n": 15,
+     "prompt_ms": 256.398,
+     "predicted_n": 22,
+     "predicted_ms": 2063.767,
+     "predicted_per_second": 10.175567299990746,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "ea7c29be75f5",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 15.168,
+     "prompt_n": 11,
+     "prompt_ms": 210.666,
+     "predicted_n": 192,
+     "predicted_ms": 14869.529,
+     "predicted_per_second": 12.845060526126954,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.974,
+     "prompt_n": 50,
+     "prompt_ms": 650.641,
+     "predicted_n": 192,
+     "predicted_ms": 11232.407,
+     "predicted_per_second": 17.00436958881565,
+     "draft_n": 435,
+     "draft_n_accepted": 133,
+     "content_sha_head": "725dc400481e",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3057
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 18.022,
+     "prompt_n": 721,
+     "prompt_ms": 2655.303,
+     "predicted_n": 192,
+     "predicted_ms": 15273.668,
+     "predicted_per_second": 12.505182121282196,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 98,
+    "samples_under_load": 28,
+    "temp_start": 48,
+    "temp_end": 51,
+    "temp_max": 58,
+    "vram_peak_mib": 10117,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1967.6,
+     "median": 1968.5,
+     "min": 1957,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 84.8,
+     "median": 86.425,
+     "min": 51.07,
+     "max": 92.57
+    },
+    "temp_under_load": {
+     "mean": 54.5,
+     "median": 54.0,
+     "min": 48,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  }
+ ],
+ "primes": [
+  {
+   "config": "base24",
+   "rep": 1,
+   "tag": "prime",
+   "started": "2026-09-28T19:21:30+0000",
+   "elapsed_s": 44.9,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 33671.2,
+    "gen_tok_s": 38.16,
+    "mean_per_prompt_tok_s": 37.84,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 40.06,
+    "load_s": 4.3,
+    "vram_after_load_mib": "10075",
+    "pcie_rx_mbps_mean": 841.0,
+    "pcie_tx_mbps_mean": 255.6,
+    "pcie_rx_mbps_max": 9547.0,
+    "pcie_samples": 39,
+    "pcie_rx_mb_per_token": 26.221
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.43,
+     "prompt_n": 20,
+     "prompt_ms": 394.592,
+     "predicted_n": 192,
+     "predicted_ms": 5033.15,
+     "predicted_per_second": 37.94840209411601,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.947,
+     "prompt_n": 30,
+     "prompt_ms": 372.101,
+     "predicted_n": 58,
+     "predicted_ms": 1506.058,
+     "predicted_per_second": 37.84714798500457,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.357,
+     "prompt_n": 17,
+     "prompt_ms": 252.657,
+     "predicted_n": 192,
+     "predicted_ms": 5036.775,
+     "predicted_per_second": 37.92109038025324,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a00847371ae5",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.109,
+     "prompt_n": 52,
+     "prompt_ms": 662.984,
+     "predicted_n": 53,
+     "predicted_ms": 1376.82,
+     "predicted_per_second": 37.76819046788978,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.398,
+     "prompt_n": 14,
+     "prompt_ms": 223.711,
+     "predicted_n": 192,
+     "predicted_ms": 5037.96,
+     "predicted_per_second": 37.91217079929178,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b1a14923c25c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.868,
+     "prompt_n": 15,
+     "prompt_ms": 237.526,
+     "predicted_n": 22,
+     "predicted_ms": 560.353,
+     "predicted_per_second": 37.47637649838585,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.299,
+     "prompt_n": 11,
+     "prompt_ms": 194.462,
+     "predicted_n": 192,
+     "predicted_ms": 5036.406,
+     "predicted_per_second": 37.92386872702479,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "61cb1c8cd3ba",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 6.091,
+     "prompt_n": 50,
+     "prompt_ms": 599.58,
+     "predicted_n": 192,
+     "predicted_ms": 5031.011,
+     "predicted_per_second": 37.96453635263369,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.565,
+     "prompt_n": 721,
+     "prompt_ms": 2439.112,
+     "predicted_n": 192,
+     "predicted_ms": 5052.636,
+     "predicted_per_second": 37.80205025653935,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 46,
+    "samples_under_load": 4,
+    "temp_start": 59,
+    "temp_end": 55,
+    "temp_max": 62,
+    "vram_peak_mib": 10099,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1912,
+     "median": 1957.0,
+     "min": 1777,
+     "max": 1957
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 79.1,
+     "median": 84.575,
+     "min": 49.23,
+     "max": 98.05
+    },
+    "temp_under_load": {
+     "mean": 57.5,
+     "median": 57.0,
+     "min": 57,
+     "max": 59
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "q08b24",
+   "rep": 1,
+   "tag": "prime",
+   "started": "2026-09-28T19:23:07+0000",
+   "elapsed_s": 93.4,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 80669.4,
+    "gen_tok_s": 15.93,
+    "mean_per_prompt_tok_s": 17.22,
+    "total_draft": 3244,
+    "total_draft_accepted": 850,
+    "accept_rate": 0.262,
+    "wall_s_prompts": 86.92,
+    "load_s": 5.8,
+    "vram_after_load_mib": "11007",
+    "pcie_rx_mbps_mean": 733.0,
+    "pcie_tx_mbps_mean": 478.9,
+    "pcie_rx_mbps_max": 9521.0,
+    "pcie_samples": 84,
+    "pcie_rx_mb_per_token": 49.58
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 6.787,
+     "prompt_n": 20,
+     "prompt_ms": 391.715,
+     "predicted_n": 192,
+     "predicted_ms": 6393.837,
+     "predicted_per_second": 29.872516299680456,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.802,
+     "prompt_n": 30,
+     "prompt_ms": 399.868,
+     "predicted_n": 58,
+     "predicted_ms": 2310.612,
+     "predicted_per_second": 24.668789048096347,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 17.726,
+     "prompt_n": 17,
+     "prompt_ms": 257.084,
+     "predicted_n": 192,
+     "predicted_ms": 17380.974,
+     "predicted_per_second": 10.989027427346707,
+     "draft_n": 719,
+     "draft_n_accepted": 90,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1252
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.597,
+     "prompt_n": 52,
+     "prompt_ms": 689.688,
+     "predicted_n": 53,
+     "predicted_ms": 3817.442,
+     "predicted_per_second": 13.621686983063528,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.069,
+     "prompt_n": 14,
+     "prompt_ms": 229.149,
+     "predicted_n": 192,
+     "predicted_ms": 9751.472,
+     "predicted_per_second": 19.586786487209316,
+     "draft_n": 394,
+     "draft_n_accepted": 141,
+     "content_sha_head": "d1af93d82fcd",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3579
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.178,
+     "prompt_n": 15,
+     "prompt_ms": 242.254,
+     "predicted_n": 22,
+     "predicted_ms": 1845.189,
+     "predicted_per_second": 11.38094796793174,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 14.532,
+     "prompt_n": 11,
+     "prompt_ms": 199.642,
+     "predicted_n": 192,
+     "predicted_ms": 14245.49,
+     "predicted_per_second": 13.407752207891761,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.143,
+     "prompt_n": 50,
+     "prompt_ms": 611.77,
+     "predicted_n": 192,
+     "predicted_ms": 10441.258,
+     "predicted_per_second": 18.292814907935423,
+     "draft_n": 413,
+     "draft_n_accepted": 138,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3341
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.082,
+     "prompt_n": 721,
+     "prompt_ms": 2503.087,
+     "predicted_n": 192,
+     "predicted_ms": 14483.079,
+     "predicted_per_second": 13.18780350504199,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 95,
+    "samples_under_load": 26,
+    "temp_start": 52,
+    "temp_end": 50,
+    "temp_max": 58,
+    "vram_peak_mib": 11047,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1967.3,
+     "median": 1965.0,
+     "min": 1965,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 86.7,
+     "median": 88.99000000000001,
+     "min": 51.49,
+     "max": 92.76
+    },
+    "temp_under_load": {
+     "mean": 54.7,
+     "median": 55.0,
+     "min": 51,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "base26",
+   "rep": 1,
+   "tag": "prime",
+   "started": "2026-09-28T19:26:22+0000",
+   "elapsed_s": 46.8,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 35492.1,
+    "gen_tok_s": 36.21,
+    "mean_per_prompt_tok_s": 35.95,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 41.76,
+    "load_s": 4.4,
+    "vram_after_load_mib": "9147",
+    "pcie_rx_mbps_mean": 713.2,
+    "pcie_tx_mbps_mean": 196.9,
+    "pcie_rx_mbps_max": 8986.0,
+    "pcie_samples": 40,
+    "pcie_rx_mb_per_token": 23.178
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.785,
+     "prompt_n": 20,
+     "prompt_ms": 408.348,
+     "predicted_n": 192,
+     "predicted_ms": 5374.949,
+     "predicted_per_second": 35.53522089232847,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.056,
+     "prompt_n": 30,
+     "prompt_ms": 398.123,
+     "predicted_n": 58,
+     "predicted_ms": 1589.164,
+     "predicted_per_second": 35.86791545743548,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.647,
+     "prompt_n": 17,
+     "prompt_ms": 267.933,
+     "predicted_n": 192,
+     "predicted_ms": 5312.326,
+     "predicted_per_second": 35.95411877960803,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.206,
+     "prompt_n": 52,
+     "prompt_ms": 707.034,
+     "predicted_n": 53,
+     "predicted_ms": 1428.944,
+     "predicted_per_second": 36.39050935516018,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.607,
+     "prompt_n": 14,
+     "prompt_ms": 234.59,
+     "predicted_n": 192,
+     "predicted_ms": 5305.321,
+     "predicted_per_second": 36.00159160963116,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a1d762786306",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.91,
+     "prompt_n": 15,
+     "prompt_ms": 250.991,
+     "predicted_n": 22,
+     "predicted_ms": 589.957,
+     "predicted_per_second": 35.59581461021735,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.619,
+     "prompt_n": 11,
+     "prompt_ms": 205.593,
+     "predicted_n": 192,
+     "predicted_ms": 5346.495,
+     "predicted_per_second": 35.72433902958854,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "bcdcc5f5f919",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 5.98,
+     "prompt_n": 50,
+     "prompt_ms": 645.14,
+     "predicted_n": 192,
+     "predicted_ms": 5265.761,
+     "predicted_per_second": 36.272060201744814,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "2da725119eeb",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.948,
+     "prompt_n": 721,
+     "prompt_ms": 2598.22,
+     "predicted_n": 192,
+     "predicted_ms": 5279.177,
+     "predicted_per_second": 36.17988182627709,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 48,
+    "samples_under_load": 4,
+    "temp_start": 48,
+    "temp_end": 56,
+    "temp_max": 59,
+    "vram_peak_mib": 9171,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1919.8,
+     "median": 1965.0,
+     "min": 1777,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 70.6,
+     "median": 73.99,
+     "min": 46.38,
+     "max": 87.86
+    },
+    "temp_under_load": {
+     "mean": 55,
+     "median": 57.0,
+     "min": 48,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "dflash26",
+   "rep": 1,
+   "tag": "prime",
+   "started": "2026-09-28T19:28:03+0000",
+   "elapsed_s": 71.1,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-dflash",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 58326.5,
+    "gen_tok_s": 22.03,
+    "mean_per_prompt_tok_s": 21.8,
+    "total_draft": 4308,
+    "total_draft_accepted": 976,
+    "accept_rate": 0.2266,
+    "wall_s_prompts": 64.98,
+    "load_s": 5.4,
+    "vram_after_load_mib": "11587",
+    "pcie_rx_mbps_mean": 573.4,
+    "pcie_tx_mbps_mean": 125.1,
+    "pcie_rx_mbps_max": 9067.0,
+    "pcie_samples": 63,
+    "pcie_rx_mb_per_token": 28.996
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.239,
+     "prompt_n": 20,
+     "prompt_ms": 489.45,
+     "predicted_n": 192,
+     "predicted_ms": 4746.868,
+     "predicted_per_second": 40.23705736076924,
+     "draft_n": 330,
+     "draft_n_accepted": 168,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.5091
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.837,
+     "prompt_n": 30,
+     "prompt_ms": 423.843,
+     "predicted_n": 58,
+     "predicted_ms": 2341.584,
+     "predicted_per_second": 24.342496361437387,
+     "draft_n": 180,
+     "draft_n_accepted": 45,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.25
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 9.52,
+     "prompt_n": 17,
+     "prompt_ms": 285.623,
+     "predicted_n": 192,
+     "predicted_ms": 9166.346,
+     "predicted_per_second": 20.83709255574686,
+     "draft_n": 678,
+     "draft_n_accepted": 143,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2109
+    },
+    {
+     "name": "summarize",
+     "wall_s": 3.624,
+     "prompt_n": 52,
+     "prompt_ms": 740.942,
+     "predicted_n": 53,
+     "predicted_ms": 2812.062,
+     "predicted_per_second": 18.491768673663667,
+     "draft_n": 210,
+     "draft_n_accepted": 38,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.181
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.152,
+     "prompt_n": 14,
+     "prompt_ms": 251.814,
+     "predicted_n": 192,
+     "predicted_ms": 9831.066,
+     "predicted_per_second": 19.42820849743049,
+     "draft_n": 735,
+     "draft_n_accepted": 141,
+     "content_sha_head": "0a1808c61040",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1918
+    },
+    {
+     "name": "translation",
+     "wall_s": 3.002,
+     "prompt_n": 15,
+     "prompt_ms": 266.851,
+     "predicted_n": 22,
+     "predicted_ms": 2664.097,
+     "predicted_per_second": 7.882595866441799,
+     "draft_n": 210,
+     "draft_n_accepted": 7,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.0333
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 10.19,
+     "prompt_n": 11,
+     "prompt_ms": 217.41,
+     "predicted_n": 192,
+     "predicted_ms": 9905.556,
+     "predicted_per_second": 19.282107940230713,
+     "draft_n": 737,
+     "draft_n_accepted": 137,
+     "content_sha_head": "ed4e75ab22d2",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1859
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 8.365,
+     "prompt_n": 50,
+     "prompt_ms": 676.806,
+     "predicted_n": 192,
+     "predicted_ms": 7617.424,
+     "predicted_per_second": 25.074093289279947,
+     "draft_n": 555,
+     "draft_n_accepted": 153,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2757
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 12.05,
+     "prompt_n": 721,
+     "prompt_ms": 2734.064,
+     "predicted_n": 192,
+     "predicted_ms": 9241.483,
+     "predicted_per_second": 20.667678553323096,
+     "draft_n": 673,
+     "draft_n_accepted": 144,
+     "content_sha_head": "d20f769f26ef",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.214
+    }
+   ],
+   "telemetry": {
+    "samples": 72,
+    "samples_under_load": 4,
+    "temp_start": 51,
+    "temp_end": 52,
+    "temp_max": 58,
+    "vram_peak_mib": 11671,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1944.2,
+     "median": 1965.0,
+     "min": 1867,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 72.8,
+     "median": 75.14,
+     "min": 51.43,
+     "max": 89.65
+    },
+    "temp_under_load": {
+     "mean": 55.2,
+     "median": 56.0,
+     "min": 51,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "q08b26",
+   "rep": 1,
+   "tag": "prime",
+   "started": "2026-09-28T19:30:31+0000",
+   "elapsed_s": 97.1,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 84334.3,
+    "gen_tok_s": 15.24,
+    "mean_per_prompt_tok_s": 16.41,
+    "total_draft": 3250,
+    "total_draft_accepted": 849,
+    "accept_rate": 0.2612,
+    "wall_s_prompts": 90.94,
+    "load_s": 5.4,
+    "vram_after_load_mib": "10079",
+    "pcie_rx_mbps_mean": 826.6,
+    "pcie_tx_mbps_mean": 391.4,
+    "pcie_rx_mbps_max": 8494.0,
+    "pcie_samples": 88,
+    "pcie_rx_mb_per_token": 58.502
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 7.103,
+     "prompt_n": 20,
+     "prompt_ms": 433.075,
+     "predicted_n": 192,
+     "predicted_ms": 6668.152,
+     "predicted_per_second": 28.643618201864623,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.922,
+     "prompt_n": 30,
+     "prompt_ms": 421.923,
+     "predicted_n": 58,
+     "predicted_ms": 2408.554,
+     "predicted_per_second": 23.665651673161573,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 18.235,
+     "prompt_n": 17,
+     "prompt_ms": 271.241,
+     "predicted_n": 192,
+     "predicted_ms": 17875.924,
+     "predicted_per_second": 10.68476236529088,
+     "draft_n": 715,
+     "draft_n_accepted": 93,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1301
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.798,
+     "prompt_n": 52,
+     "prompt_ms": 737.704,
+     "predicted_n": 53,
+     "predicted_ms": 3969.687,
+     "predicted_per_second": 13.09926953938686,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.391,
+     "prompt_n": 14,
+     "prompt_ms": 240.951,
+     "predicted_n": 192,
+     "predicted_ms": 10061.513,
+     "predicted_per_second": 18.983228466732587,
+     "draft_n": 382,
+     "draft_n_accepted": 142,
+     "content_sha_head": "5e109f03f7b3",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3717
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.401,
+     "prompt_n": 15,
+     "prompt_ms": 254.625,
+     "predicted_n": 22,
+     "predicted_ms": 2055.76,
+     "predicted_per_second": 10.21520021792427,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "ea7c29be75f5",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 15.124,
+     "prompt_n": 11,
+     "prompt_ms": 209.607,
+     "predicted_n": 192,
+     "predicted_ms": 14827.14,
+     "predicted_per_second": 12.881783000632623,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.978,
+     "prompt_n": 50,
+     "prompt_ms": 653.151,
+     "predicted_n": 192,
+     "predicted_ms": 11233.138,
+     "predicted_per_second": 17.003263024098874,
+     "draft_n": 435,
+     "draft_n_accepted": 133,
+     "content_sha_head": "725dc400481e",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3057
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.986,
+     "prompt_n": 721,
+     "prompt_ms": 2658.831,
+     "predicted_n": 192,
+     "predicted_ms": 15234.47,
+     "predicted_per_second": 12.537357715759065,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 98,
+    "samples_under_load": 29,
+    "temp_start": 51,
+    "temp_end": 50,
+    "temp_max": 58,
+    "vram_peak_mib": 10117,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1964.0,
+     "median": 1965,
+     "min": 1875,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 84.8,
+     "median": 86.71,
+     "min": 51.52,
+     "max": 91.06
+    },
+    "temp_under_load": {
+     "mean": 54.6,
+     "median": 54,
+     "min": 51,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "base24",
+   "rep": 2,
+   "tag": "prime",
+   "started": "2026-09-28T19:33:53+0000",
+   "elapsed_s": 44.4,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 33562.9,
+    "gen_tok_s": 38.29,
+    "mean_per_prompt_tok_s": 37.98,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 39.49,
+    "load_s": 4.3,
+    "vram_after_load_mib": "10075",
+    "pcie_rx_mbps_mean": 899.3,
+    "pcie_tx_mbps_mean": 252.0,
+    "pcie_rx_mbps_max": 8635.0,
+    "pcie_samples": 39,
+    "pcie_rx_mb_per_token": 27.637
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.438,
+     "prompt_n": 20,
+     "prompt_ms": 381.071,
+     "predicted_n": 192,
+     "predicted_ms": 5055.256,
+     "predicted_per_second": 37.78245849468355,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.94,
+     "prompt_n": 30,
+     "prompt_ms": 370.959,
+     "predicted_n": 58,
+     "predicted_ms": 1499.875,
+     "predicted_per_second": 38.00316693057755,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.328,
+     "prompt_n": 17,
+     "prompt_ms": 253.262,
+     "predicted_n": 192,
+     "predicted_ms": 5007.333,
+     "predicted_per_second": 38.14405792464771,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a00847371ae5",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.102,
+     "prompt_n": 52,
+     "prompt_ms": 663.845,
+     "predicted_n": 53,
+     "predicted_ms": 1369.149,
+     "predicted_per_second": 37.97979620917811,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.309,
+     "prompt_n": 14,
+     "prompt_ms": 223.539,
+     "predicted_n": 192,
+     "predicted_ms": 5017.435,
+     "predicted_per_second": 38.06725946624121,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b1a14923c25c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.864,
+     "prompt_n": 15,
+     "prompt_ms": 237.683,
+     "predicted_n": 22,
+     "predicted_ms": 557.743,
+     "predicted_per_second": 37.65174999955176,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.279,
+     "prompt_n": 11,
+     "prompt_ms": 199.439,
+     "predicted_n": 192,
+     "predicted_ms": 5012.208,
+     "predicted_per_second": 38.106958051222136,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "61cb1c8cd3ba",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 5.684,
+     "prompt_n": 50,
+     "prompt_ms": 601.538,
+     "predicted_n": 192,
+     "predicted_ms": 5013.534,
+     "predicted_per_second": 38.0968793669296,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.548,
+     "prompt_n": 721,
+     "prompt_ms": 2446.772,
+     "predicted_n": 192,
+     "predicted_ms": 5030.344,
+     "predicted_per_second": 37.96957027193369,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 46,
+    "samples_under_load": 5,
+    "temp_start": 48,
+    "temp_end": 55,
+    "temp_max": 58,
+    "vram_peak_mib": 10099,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1927.4,
+     "median": 1965,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 82.2,
+     "median": 88.17,
+     "min": 46.23,
+     "max": 98.71
+    },
+    "temp_under_load": {
+     "mean": 55,
+     "median": 57,
+     "min": 48,
+     "max": 57
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "q08b24",
+   "rep": 2,
+   "tag": "prime",
+   "started": "2026-09-28T19:35:29+0000",
+   "elapsed_s": 93.4,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 80710.8,
+    "gen_tok_s": 15.92,
+    "mean_per_prompt_tok_s": 17.21,
+    "total_draft": 3244,
+    "total_draft_accepted": 850,
+    "accept_rate": 0.262,
+    "wall_s_prompts": 86.99,
+    "load_s": 5.8,
+    "vram_after_load_mib": "11007",
+    "pcie_rx_mbps_mean": 895.4,
+    "pcie_tx_mbps_mean": 279.4,
+    "pcie_rx_mbps_max": 9847.0,
+    "pcie_samples": 84,
+    "pcie_rx_mb_per_token": 60.612
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 6.788,
+     "prompt_n": 20,
+     "prompt_ms": 394.033,
+     "predicted_n": 192,
+     "predicted_ms": 6393.085,
+     "predicted_per_second": 29.876030116915384,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.804,
+     "prompt_n": 30,
+     "prompt_ms": 400.214,
+     "predicted_n": 58,
+     "predicted_ms": 2312.346,
+     "predicted_per_second": 24.650290224732803,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 17.708,
+     "prompt_n": 17,
+     "prompt_ms": 258.029,
+     "predicted_n": 192,
+     "predicted_ms": 17361.849,
+     "predicted_per_second": 11.001132425469201,
+     "draft_n": 719,
+     "draft_n_accepted": 90,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1252
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.622,
+     "prompt_n": 52,
+     "prompt_ms": 710.812,
+     "predicted_n": 53,
+     "predicted_ms": 3821.026,
+     "predicted_per_second": 13.608910276977966,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.097,
+     "prompt_n": 14,
+     "prompt_ms": 230.096,
+     "predicted_n": 192,
+     "predicted_ms": 9778.508,
+     "predicted_per_second": 19.532632176606082,
+     "draft_n": 394,
+     "draft_n_accepted": 141,
+     "content_sha_head": "d1af93d82fcd",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3579
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.183,
+     "prompt_n": 15,
+     "prompt_ms": 242.882,
+     "predicted_n": 22,
+     "predicted_ms": 1849.953,
+     "predicted_per_second": 11.351639744361073,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 14.572,
+     "prompt_n": 11,
+     "prompt_ms": 199.546,
+     "predicted_n": 192,
+     "predicted_ms": 14285.594,
+     "predicted_per_second": 13.370112576347893,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.139,
+     "prompt_n": 50,
+     "prompt_ms": 616.121,
+     "predicted_n": 192,
+     "predicted_ms": 10432.057,
+     "predicted_per_second": 18.308949040443316,
+     "draft_n": 413,
+     "draft_n_accepted": 138,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3341
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.078,
+     "prompt_n": 721,
+     "prompt_ms": 2508.266,
+     "predicted_n": 192,
+     "predicted_ms": 14476.415,
+     "predicted_per_second": 13.193874312113875,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 95,
+    "samples_under_load": 28,
+    "temp_start": 52,
+    "temp_end": 50,
+    "temp_max": 59,
+    "vram_peak_mib": 11047,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1966.1,
+     "median": 1965.0,
+     "min": 1965,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 87.9,
+     "median": 89.72999999999999,
+     "min": 51.49,
+     "max": 94.36
+    },
+    "temp_under_load": {
+     "mean": 54.6,
+     "median": 54.0,
+     "min": 52,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "base26",
+   "rep": 2,
+   "tag": "prime",
+   "started": "2026-09-28T19:38:44+0000",
+   "elapsed_s": 46.6,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 35368.5,
+    "gen_tok_s": 36.33,
+    "mean_per_prompt_tok_s": 36.04,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 41.62,
+    "load_s": 4.4,
+    "vram_after_load_mib": "9147",
+    "pcie_rx_mbps_mean": 612.9,
+    "pcie_tx_mbps_mean": 196.6,
+    "pcie_rx_mbps_max": 9270.0,
+    "pcie_samples": 40,
+    "pcie_rx_mb_per_token": 19.853
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.708,
+     "prompt_n": 20,
+     "prompt_ms": 413.719,
+     "predicted_n": 192,
+     "predicted_ms": 5292.376,
+     "predicted_per_second": 36.08965047079044,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.057,
+     "prompt_n": 30,
+     "prompt_ms": 397.183,
+     "predicted_n": 58,
+     "predicted_ms": 1590.771,
+     "predicted_per_second": 35.83168161853592,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.635,
+     "prompt_n": 17,
+     "prompt_ms": 268.229,
+     "predicted_n": 192,
+     "predicted_ms": 5299.224,
+     "predicted_per_second": 36.043013090218494,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.2,
+     "prompt_n": 52,
+     "prompt_ms": 703.041,
+     "predicted_n": 53,
+     "predicted_ms": 1428.178,
+     "predicted_per_second": 36.410027321524346,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.639,
+     "prompt_n": 14,
+     "prompt_ms": 235.432,
+     "predicted_n": 192,
+     "predicted_ms": 5336.283,
+     "predicted_per_second": 35.792704397424195,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a1d762786306",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.909,
+     "prompt_n": 15,
+     "prompt_ms": 250.882,
+     "predicted_n": 22,
+     "predicted_ms": 589.718,
+     "predicted_per_second": 35.61024082697154,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.584,
+     "prompt_n": 11,
+     "prompt_ms": 205.261,
+     "predicted_n": 192,
+     "predicted_ms": 5311.875,
+     "predicted_per_second": 35.95717143193317,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "bcdcc5f5f919",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 5.966,
+     "prompt_n": 50,
+     "prompt_ms": 644.474,
+     "predicted_n": 192,
+     "predicted_ms": 5252.733,
+     "predicted_per_second": 36.36202335051106,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "2da725119eeb",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.924,
+     "prompt_n": 721,
+     "prompt_ms": 2585.122,
+     "predicted_n": 192,
+     "predicted_ms": 5267.342,
+     "predicted_per_second": 36.26117309261483,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 48,
+    "samples_under_load": 4,
+    "temp_start": 48,
+    "temp_end": 55,
+    "temp_max": 58,
+    "vram_peak_mib": 9171,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1871,
+     "median": 1871.0,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 70.9,
+     "median": 74.415,
+     "min": 46.39,
+     "max": 88.56
+    },
+    "temp_under_load": {
+     "mean": 54,
+     "median": 55.0,
+     "min": 48,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "dflash26",
+   "rep": 2,
+   "tag": "prime",
+   "started": "2026-09-28T19:40:25+0000",
+   "elapsed_s": 71.1,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-dflash",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 58321.1,
+    "gen_tok_s": 22.03,
+    "mean_per_prompt_tok_s": 21.8,
+    "total_draft": 4308,
+    "total_draft_accepted": 976,
+    "accept_rate": 0.2266,
+    "wall_s_prompts": 64.97,
+    "load_s": 5.4,
+    "vram_after_load_mib": "11587",
+    "pcie_rx_mbps_mean": 555.2,
+    "pcie_tx_mbps_mean": 143.1,
+    "pcie_rx_mbps_max": 8673.0,
+    "pcie_samples": 63,
+    "pcie_rx_mb_per_token": 28.07
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.229,
+     "prompt_n": 20,
+     "prompt_ms": 489.146,
+     "predicted_n": 192,
+     "predicted_ms": 4737.984,
+     "predicted_per_second": 40.31250422120463,
+     "draft_n": 330,
+     "draft_n_accepted": 168,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.5091
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.853,
+     "prompt_n": 30,
+     "prompt_ms": 424.68,
+     "predicted_n": 58,
+     "predicted_ms": 2356.116,
+     "predicted_per_second": 24.192357252359393,
+     "draft_n": 180,
+     "draft_n_accepted": 45,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.25
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 9.525,
+     "prompt_n": 17,
+     "prompt_ms": 285.893,
+     "predicted_n": 192,
+     "predicted_ms": 9170.795,
+     "predicted_per_second": 20.82698392015087,
+     "draft_n": 678,
+     "draft_n_accepted": 143,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2109
+    },
+    {
+     "name": "summarize",
+     "wall_s": 3.62,
+     "prompt_n": 52,
+     "prompt_ms": 738.072,
+     "predicted_n": 53,
+     "predicted_ms": 2811.213,
+     "predicted_per_second": 18.497353277748783,
+     "draft_n": 210,
+     "draft_n_accepted": 38,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.181
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.135,
+     "prompt_n": 14,
+     "prompt_ms": 251.986,
+     "predicted_n": 192,
+     "predicted_ms": 9814.04,
+     "predicted_per_second": 19.4619137480589,
+     "draft_n": 735,
+     "draft_n_accepted": 141,
+     "content_sha_head": "0a1808c61040",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1918
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.989,
+     "prompt_n": 15,
+     "prompt_ms": 267.134,
+     "predicted_n": 22,
+     "predicted_ms": 2650.623,
+     "predicted_per_second": 7.922665728019413,
+     "draft_n": 210,
+     "draft_n_accepted": 7,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.0333
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 10.234,
+     "prompt_n": 11,
+     "prompt_ms": 217.46,
+     "predicted_n": 192,
+     "predicted_ms": 9949.425,
+     "predicted_per_second": 19.19708927902869,
+     "draft_n": 737,
+     "draft_n_accepted": 137,
+     "content_sha_head": "ed4e75ab22d2",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1859
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 8.344,
+     "prompt_n": 50,
+     "prompt_ms": 681.104,
+     "predicted_n": 192,
+     "predicted_ms": 7592.465,
+     "predicted_per_second": 25.156520313231603,
+     "draft_n": 555,
+     "draft_n_accepted": 153,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2757
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 12.04,
+     "prompt_n": 721,
+     "prompt_ms": 2727.306,
+     "predicted_n": 192,
+     "predicted_ms": 9238.451,
+     "predicted_per_second": 20.674461552050232,
+     "draft_n": 673,
+     "draft_n_accepted": 144,
+     "content_sha_head": "d20f769f26ef",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.214
+    }
+   ],
+   "telemetry": {
+    "samples": 72,
+    "samples_under_load": 4,
+    "temp_start": 51,
+    "temp_end": 52,
+    "temp_max": 58,
+    "vram_peak_mib": 11671,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1944.2,
+     "median": 1965.0,
+     "min": 1867,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 72.7,
+     "median": 75.22,
+     "min": 51.47,
+     "max": 89.02
+    },
+    "temp_under_load": {
+     "mean": 55.2,
+     "median": 56.0,
+     "min": 51,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "q08b26",
+   "rep": 2,
+   "tag": "prime",
+   "started": "2026-09-28T19:42:55+0000",
+   "elapsed_s": 97.2,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 84417.5,
+    "gen_tok_s": 15.22,
+    "mean_per_prompt_tok_s": 16.37,
+    "total_draft": 3250,
+    "total_draft_accepted": 849,
+    "accept_rate": 0.2612,
+    "wall_s_prompts": 91.07,
+    "load_s": 5.4,
+    "vram_after_load_mib": "10079",
+    "pcie_rx_mbps_mean": 759.4,
+    "pcie_tx_mbps_mean": 469.5,
+    "pcie_rx_mbps_max": 8873.0,
+    "pcie_samples": 87,
+    "pcie_rx_mb_per_token": 53.821
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 7.097,
+     "prompt_n": 20,
+     "prompt_ms": 437.777,
+     "predicted_n": 192,
+     "predicted_ms": 6657.17,
+     "predicted_per_second": 28.69087014452087,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.96,
+     "prompt_n": 30,
+     "prompt_ms": 423.382,
+     "predicted_n": 58,
+     "predicted_ms": 2446.104,
+     "predicted_per_second": 23.302361633029506,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 18.255,
+     "prompt_n": 17,
+     "prompt_ms": 273.095,
+     "predicted_n": 192,
+     "predicted_ms": 17895.045,
+     "predicted_per_second": 10.673345610474856,
+     "draft_n": 715,
+     "draft_n_accepted": 93,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1301
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.818,
+     "prompt_n": 52,
+     "prompt_ms": 741.169,
+     "predicted_n": 53,
+     "predicted_ms": 3985.268,
+     "predicted_per_second": 13.048055990211951,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.385,
+     "prompt_n": 14,
+     "prompt_ms": 241.925,
+     "predicted_n": 192,
+     "predicted_ms": 10053.571,
+     "predicted_per_second": 18.998224610936752,
+     "draft_n": 382,
+     "draft_n_accepted": 142,
+     "content_sha_head": "5e109f03f7b3",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3717
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.405,
+     "prompt_n": 15,
+     "prompt_ms": 255.644,
+     "predicted_n": 22,
+     "predicted_ms": 2058.519,
+     "predicted_per_second": 10.201508948909387,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "ea7c29be75f5",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 15.146,
+     "prompt_n": 11,
+     "prompt_ms": 210.174,
+     "predicted_n": 192,
+     "predicted_ms": 14838.044,
+     "predicted_per_second": 12.872316593750497,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.999,
+     "prompt_n": 50,
+     "prompt_ms": 658.135,
+     "predicted_n": 192,
+     "predicted_ms": 11250.101,
+     "predicted_per_second": 16.97762535643013,
+     "draft_n": 435,
+     "draft_n_accepted": 133,
+     "content_sha_head": "725dc400481e",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3057
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 18.008,
+     "prompt_n": 721,
+     "prompt_ms": 2679.625,
+     "predicted_n": 192,
+     "predicted_ms": 15233.664,
+     "predicted_per_second": 12.538021056523236,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 98,
+    "samples_under_load": 29,
+    "temp_start": 51,
+    "temp_end": 50,
+    "temp_max": 59,
+    "vram_peak_mib": 10117,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1967.1,
+     "median": 1965,
+     "min": 1965,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 84.5,
+     "median": 86.37,
+     "min": 51.53,
+     "max": 91.68
+    },
+    "temp_under_load": {
+     "mean": 54.3,
+     "median": 54,
+     "min": 51,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "base24",
+   "rep": 3,
+   "tag": "prime",
+   "started": "2026-09-28T19:46:16+0000",
+   "elapsed_s": 44.3,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 33521.1,
+    "gen_tok_s": 38.33,
+    "mean_per_prompt_tok_s": 38.01,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 39.46,
+    "load_s": 4.3,
+    "vram_after_load_mib": "10075",
+    "pcie_rx_mbps_mean": 951.1,
+    "pcie_tx_mbps_mean": 139.1,
+    "pcie_rx_mbps_max": 9241.0,
+    "pcie_samples": 39,
+    "pcie_rx_mb_per_token": 29.206
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.417,
+     "prompt_n": 20,
+     "prompt_ms": 392.41,
+     "predicted_n": 192,
+     "predicted_ms": 5023.076,
+     "predicted_per_second": 38.02450928474903,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.94,
+     "prompt_n": 30,
+     "prompt_ms": 370.949,
+     "predicted_n": 58,
+     "predicted_ms": 1500.007,
+     "predicted_per_second": 37.999822667494215,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.322,
+     "prompt_n": 17,
+     "prompt_ms": 252.201,
+     "predicted_n": 192,
+     "predicted_ms": 5002.356,
+     "predicted_per_second": 38.182008637530004,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a00847371ae5",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.108,
+     "prompt_n": 52,
+     "prompt_ms": 668.334,
+     "predicted_n": 53,
+     "predicted_ms": 1370.632,
+     "predicted_per_second": 37.938702729835576,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.299,
+     "prompt_n": 14,
+     "prompt_ms": 222.887,
+     "predicted_n": 192,
+     "predicted_ms": 5008.938,
+     "predicted_per_second": 38.131835530805134,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b1a14923c25c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.864,
+     "prompt_n": 15,
+     "prompt_ms": 237.293,
+     "predicted_n": 22,
+     "predicted_ms": 558.208,
+     "predicted_per_second": 37.62038523274478,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.279,
+     "prompt_n": 11,
+     "prompt_ms": 193.894,
+     "predicted_n": 192,
+     "predicted_ms": 5018.722,
+     "predicted_per_second": 38.05749750633727,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "61cb1c8cd3ba",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 5.69,
+     "prompt_n": 50,
+     "prompt_ms": 609.862,
+     "predicted_n": 192,
+     "predicted_ms": 5011.913,
+     "predicted_per_second": 38.10920101765534,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 7.54,
+     "prompt_n": 721,
+     "prompt_ms": 2441.305,
+     "predicted_n": 192,
+     "predicted_ms": 5027.289,
+     "predicted_per_second": 37.992643748946996,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 46,
+    "samples_under_load": 5,
+    "temp_start": 48,
+    "temp_end": 55,
+    "temp_max": 58,
+    "vram_peak_mib": 10099,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1927.4,
+     "median": 1965,
+     "min": 1777,
+     "max": 1965
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 81.6,
+     "median": 87.88,
+     "min": 46.42,
+     "max": 97.05
+    },
+    "temp_under_load": {
+     "mean": 55,
+     "median": 57,
+     "min": 48,
+     "max": 57
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "q08b24",
+   "rep": 3,
+   "tag": "prime",
+   "started": "2026-09-28T19:47:52+0000",
+   "elapsed_s": 93.3,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "24",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 80655.3,
+    "gen_tok_s": 15.93,
+    "mean_per_prompt_tok_s": 17.23,
+    "total_draft": 3244,
+    "total_draft_accepted": 850,
+    "accept_rate": 0.262,
+    "wall_s_prompts": 86.88,
+    "load_s": 5.8,
+    "vram_after_load_mib": "11007",
+    "pcie_rx_mbps_mean": 663.6,
+    "pcie_tx_mbps_mean": 366.9,
+    "pcie_rx_mbps_max": 9766.0,
+    "pcie_samples": 84,
+    "pcie_rx_mb_per_token": 44.864
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 6.801,
+     "prompt_n": 20,
+     "prompt_ms": 391.845,
+     "predicted_n": 192,
+     "predicted_ms": 6408.21,
+     "predicted_per_second": 29.805515112644564,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.801,
+     "prompt_n": 30,
+     "prompt_ms": 401.638,
+     "predicted_n": 58,
+     "predicted_ms": 2307.715,
+     "predicted_per_second": 24.699757119054993,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 17.729,
+     "prompt_n": 17,
+     "prompt_ms": 257.041,
+     "predicted_n": 192,
+     "predicted_ms": 17384.356,
+     "predicted_per_second": 10.986889591998692,
+     "draft_n": 719,
+     "draft_n_accepted": 90,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1252
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.588,
+     "prompt_n": 52,
+     "prompt_ms": 684.86,
+     "predicted_n": 53,
+     "predicted_ms": 3814.093,
+     "predicted_per_second": 13.633647632608854,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.046,
+     "prompt_n": 14,
+     "prompt_ms": 229.206,
+     "predicted_n": 192,
+     "predicted_ms": 9729.053,
+     "predicted_per_second": 19.63192101019493,
+     "draft_n": 394,
+     "draft_n_accepted": 141,
+     "content_sha_head": "d1af93d82fcd",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3579
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.179,
+     "prompt_n": 15,
+     "prompt_ms": 242.732,
+     "predicted_n": 22,
+     "predicted_ms": 1847.204,
+     "predicted_per_second": 11.368533199365094,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 14.527,
+     "prompt_n": 11,
+     "prompt_ms": 198.782,
+     "predicted_n": 192,
+     "predicted_ms": 14241.704,
+     "predicted_per_second": 13.411316511001774,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.1,
+     "prompt_n": 50,
+     "prompt_ms": 611.838,
+     "predicted_n": 192,
+     "predicted_ms": 10399.094,
+     "predicted_per_second": 18.366984662317698,
+     "draft_n": 413,
+     "draft_n_accepted": 138,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3341
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.109,
+     "prompt_n": 721,
+     "prompt_ms": 2493.221,
+     "predicted_n": 192,
+     "predicted_ms": 14523.825,
+     "predicted_per_second": 13.150805658977575,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 95,
+    "samples_under_load": 29,
+    "temp_start": 52,
+    "temp_end": 50,
+    "temp_max": 58,
+    "vram_peak_mib": 11047,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1962.9,
+     "median": 1965,
+     "min": 1875,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 88.2,
+     "median": 89.71,
+     "min": 51.58,
+     "max": 106.07
+    },
+    "temp_under_load": {
+     "mean": 54.8,
+     "median": 55,
+     "min": 51,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "base26",
+   "rep": 3,
+   "tag": "prime",
+   "started": "2026-09-28T19:51:08+0000",
+   "elapsed_s": 47.2,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 35945.3,
+    "gen_tok_s": 35.75,
+    "mean_per_prompt_tok_s": 35.44,
+    "total_draft": 0,
+    "total_draft_accepted": 0,
+    "accept_rate": null,
+    "wall_s_prompts": 42.23,
+    "load_s": 4.4,
+    "vram_after_load_mib": "9147",
+    "pcie_rx_mbps_mean": 884.2,
+    "pcie_tx_mbps_mean": 133.7,
+    "pcie_rx_mbps_max": 8761.0,
+    "pcie_samples": 41,
+    "pcie_rx_mb_per_token": 29.057
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.748,
+     "prompt_n": 20,
+     "prompt_ms": 410.517,
+     "predicted_n": 192,
+     "predicted_ms": 5335.597,
+     "predicted_per_second": 35.797306280815434,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.089,
+     "prompt_n": 30,
+     "prompt_ms": 402.687,
+     "predicted_n": 58,
+     "predicted_ms": 1617.685,
+     "predicted_per_second": 35.2355372028547,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 5.733,
+     "prompt_n": 17,
+     "prompt_ms": 268.827,
+     "predicted_n": 192,
+     "predicted_ms": 5396.569,
+     "predicted_per_second": 35.39285794363048,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "summarize",
+     "wall_s": 2.23,
+     "prompt_n": 52,
+     "prompt_ms": 705.684,
+     "predicted_n": 53,
+     "predicted_ms": 1454.82,
+     "predicted_per_second": 35.74325346090926,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 5.698,
+     "prompt_n": 14,
+     "prompt_ms": 234.33,
+     "predicted_n": 192,
+     "predicted_ms": 5396.518,
+     "predicted_per_second": 35.393192425189724,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "a1d762786306",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.922,
+     "prompt_n": 15,
+     "prompt_ms": 252.056,
+     "predicted_n": 22,
+     "predicted_ms": 600.997,
+     "predicted_per_second": 34.94193814611388,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 5.671,
+     "prompt_n": 11,
+     "prompt_ms": 205.635,
+     "predicted_n": 192,
+     "predicted_ms": 5398.652,
+     "predicted_per_second": 35.37920206747906,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "bcdcc5f5f919",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 6.078,
+     "prompt_n": 50,
+     "prompt_ms": 645.884,
+     "predicted_n": 192,
+     "predicted_ms": 5363.563,
+     "predicted_per_second": 35.61065657287889,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "2da725119eeb",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 8.059,
+     "prompt_n": 721,
+     "prompt_ms": 2606.824,
+     "predicted_n": 192,
+     "predicted_ms": 5380.899,
+     "predicted_per_second": 35.49592735340321,
+     "draft_n": 0,
+     "draft_n_accepted": 0,
+     "content_sha_head": "b6a23173976c",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": null
+    }
+   ],
+   "telemetry": {
+    "samples": 48,
+    "samples_under_load": 5,
+    "temp_start": 48,
+    "temp_end": 56,
+    "temp_max": 58,
+    "vram_peak_mib": 9171,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1928.8,
+     "median": 1965,
+     "min": 1777,
+     "max": 1972
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 72.3,
+     "median": 74.73,
+     "min": 46.47,
+     "max": 85.71
+    },
+    "temp_under_load": {
+     "mean": 55.4,
+     "median": 57,
+     "min": 48,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000"
+    ]
+   }
+  },
+  {
+   "config": "dflash26",
+   "rep": 3,
+   "tag": "prime",
+   "started": "2026-09-28T19:52:48+0000",
+   "elapsed_s": 71.0,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-dflash",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 58268.6,
+    "gen_tok_s": 22.05,
+    "mean_per_prompt_tok_s": 21.85,
+    "total_draft": 4308,
+    "total_draft_accepted": 976,
+    "accept_rate": 0.2266,
+    "wall_s_prompts": 64.91,
+    "load_s": 5.4,
+    "vram_after_load_mib": "11587",
+    "pcie_rx_mbps_mean": 559.2,
+    "pcie_tx_mbps_mean": 164.9,
+    "pcie_rx_mbps_max": 9308.0,
+    "pcie_samples": 63,
+    "pcie_rx_mb_per_token": 28.247
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 5.225,
+     "prompt_n": 20,
+     "prompt_ms": 490.96,
+     "predicted_n": 192,
+     "predicted_ms": 4731.497,
+     "predicted_per_second": 40.367773666558385,
+     "draft_n": 330,
+     "draft_n_accepted": 168,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.5091
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.826,
+     "prompt_n": 30,
+     "prompt_ms": 423.941,
+     "predicted_n": 58,
+     "predicted_ms": 2329.609,
+     "predicted_per_second": 24.467625253851615,
+     "draft_n": 180,
+     "draft_n_accepted": 45,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.25
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 9.494,
+     "prompt_n": 17,
+     "prompt_ms": 284.39,
+     "predicted_n": 192,
+     "predicted_ms": 9140.854,
+     "predicted_per_second": 20.89520300838412,
+     "draft_n": 678,
+     "draft_n_accepted": 143,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2109
+    },
+    {
+     "name": "summarize",
+     "wall_s": 3.618,
+     "prompt_n": 52,
+     "prompt_ms": 737.994,
+     "predicted_n": 53,
+     "predicted_ms": 2808.589,
+     "predicted_per_second": 18.514634928784528,
+     "draft_n": 210,
+     "draft_n_accepted": 38,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.181
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.222,
+     "prompt_n": 14,
+     "prompt_ms": 252.143,
+     "predicted_n": 192,
+     "predicted_ms": 9901.354,
+     "predicted_per_second": 19.290291004644416,
+     "draft_n": 735,
+     "draft_n_accepted": 141,
+     "content_sha_head": "0a1808c61040",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1918
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.988,
+     "prompt_n": 15,
+     "prompt_ms": 266.547,
+     "predicted_n": 22,
+     "predicted_ms": 2650.651,
+     "predicted_per_second": 7.922582037393833,
+     "draft_n": 210,
+     "draft_n_accepted": 7,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.0333
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 10.192,
+     "prompt_n": 11,
+     "prompt_ms": 217.741,
+     "predicted_n": 192,
+     "predicted_ms": 9906.928,
+     "predicted_per_second": 19.279437581458147,
+     "draft_n": 737,
+     "draft_n_accepted": 137,
+     "content_sha_head": "ed4e75ab22d2",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1859
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 8.318,
+     "prompt_n": 50,
+     "prompt_ms": 676.529,
+     "predicted_n": 192,
+     "predicted_ms": 7570.324,
+     "predicted_per_second": 25.23009583209385,
+     "draft_n": 555,
+     "draft_n_accepted": 153,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.2757
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 12.027,
+     "prompt_n": 721,
+     "prompt_ms": 2724.407,
+     "predicted_n": 192,
+     "predicted_ms": 9228.757,
+     "predicted_per_second": 20.696178261059426,
+     "draft_n": 673,
+     "draft_n_accepted": 144,
+     "content_sha_head": "d20f769f26ef",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.214
+    }
+   ],
+   "telemetry": {
+    "samples": 72,
+    "samples_under_load": 4,
+    "temp_start": 51,
+    "temp_end": 52,
+    "temp_max": 58,
+    "vram_peak_mib": 11671,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1957.5,
+     "median": 1965.0,
+     "min": 1920,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 74.3,
+     "median": 75.9,
+     "min": 51.57,
+     "max": 93.98
+    },
+    "temp_under_load": {
+     "mean": 55.5,
+     "median": 56.0,
+     "min": 52,
+     "max": 58
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "config": "q08b26",
+   "rep": 3,
+   "tag": "prime",
+   "started": "2026-09-28T19:55:17+0000",
+   "elapsed_s": 97.0,
+   "server_args": [
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "26",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8080",
+    "-md",
+    "/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf",
+    "-ngld",
+    "99",
+    "--spec-type",
+    "draft-simple",
+    "--spec-draft-n-max",
+    "15"
+   ],
+   "gen": {
+    "n_predict": 192,
+    "temperature": 0.0,
+    "seed": 42,
+    "cache_prompt": false,
+    "stream": false
+   },
+   "aggregate": {
+    "total_predicted": 1285,
+    "total_predicted_ms": 84290.1,
+    "gen_tok_s": 15.24,
+    "mean_per_prompt_tok_s": 16.42,
+    "total_draft": 3250,
+    "total_draft_accepted": 849,
+    "accept_rate": 0.2612,
+    "wall_s_prompts": 90.89,
+    "load_s": 5.4,
+    "vram_after_load_mib": "10079",
+    "pcie_rx_mbps_mean": 727.1,
+    "pcie_tx_mbps_mean": 313.4,
+    "pcie_rx_mbps_max": 8521.0,
+    "pcie_samples": 87,
+    "pcie_rx_mb_per_token": 51.429
+   },
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 7.078,
+     "prompt_n": 20,
+     "prompt_ms": 431.316,
+     "predicted_n": 192,
+     "predicted_ms": 6644.916,
+     "predicted_per_second": 28.743779454849392,
+     "draft_n": 252,
+     "draft_n_accepted": 163,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.6468
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 2.926,
+     "prompt_n": 30,
+     "prompt_ms": 422.667,
+     "predicted_n": 58,
+     "predicted_ms": 2412.348,
+     "predicted_per_second": 23.628431718806738,
+     "draft_n": 90,
+     "draft_n_accepted": 47,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.5222
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 18.21,
+     "prompt_n": 17,
+     "prompt_ms": 272.647,
+     "predicted_n": 192,
+     "predicted_ms": 17849.964,
+     "predicted_per_second": 10.700301692485207,
+     "draft_n": 715,
+     "draft_n_accepted": 93,
+     "content_sha_head": "831f0ad0dba4",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1301
+    },
+    {
+     "name": "summarize",
+     "wall_s": 4.808,
+     "prompt_n": 52,
+     "prompt_ms": 735.1,
+     "predicted_n": 53,
+     "predicted_ms": 3982.078,
+     "predicted_per_second": 13.058508647997352,
+     "draft_n": 150,
+     "draft_n_accepted": 35,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.2333
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 10.393,
+     "prompt_n": 14,
+     "prompt_ms": 241.569,
+     "predicted_n": 192,
+     "predicted_ms": 10061.898,
+     "predicted_per_second": 18.982502108449122,
+     "draft_n": 382,
+     "draft_n_accepted": 142,
+     "content_sha_head": "5e109f03f7b3",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3717
+    },
+    {
+     "name": "translation",
+     "wall_s": 2.4,
+     "prompt_n": 15,
+     "prompt_ms": 255.13,
+     "predicted_n": 22,
+     "predicted_ms": 2053.938,
+     "predicted_per_second": 10.22426188132261,
+     "draft_n": 75,
+     "draft_n_accepted": 14,
+     "content_sha_head": "ea7c29be75f5",
+     "stop_type": "eos",
+     "truncated": false,
+     "accept_rate": 0.1867
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 15.154,
+     "prompt_n": 11,
+     "prompt_ms": 209.214,
+     "predicted_n": 192,
+     "predicted_ms": 14856.565,
+     "predicted_per_second": 12.856269265472871,
+     "draft_n": 576,
+     "draft_n_accepted": 110,
+     "content_sha_head": "0c5bde99ab37",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.191
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 11.964,
+     "prompt_n": 50,
+     "prompt_ms": 653.017,
+     "predicted_n": 192,
+     "predicted_ms": 11220.293,
+     "predicted_per_second": 17.02272837260132,
+     "draft_n": 435,
+     "draft_n_accepted": 133,
+     "content_sha_head": "725dc400481e",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.3057
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 17.958,
+     "prompt_n": 721,
+     "prompt_ms": 2655.219,
+     "predicted_n": 192,
+     "predicted_ms": 15208.064,
+     "predicted_per_second": 12.559126526558542,
+     "draft_n": 575,
+     "draft_n_accepted": 112,
+     "content_sha_head": "bf9c4e9711ed",
+     "stop_type": "limit",
+     "truncated": false,
+     "accept_rate": 0.1948
+    }
+   ],
+   "telemetry": {
+    "samples": 98,
+    "samples_under_load": 26,
+    "temp_start": 51,
+    "temp_end": 50,
+    "temp_max": 59,
+    "vram_peak_mib": 10117,
+    "pcie_gen_under_load": [
+     3
+    ],
+    "pcie_gen_under_load_share": {
+     "3": 1.0
+    },
+    "pcie_gen_gpu_under_load": [
+     3
+    ],
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1963.8,
+     "median": 1965.0,
+     "min": 1875,
+     "max": 1980
+    },
+    "mem_clock": {
+     "mean": 7301,
+     "median": 7301.0,
+     "min": 7301,
+     "max": 7301
+    },
+    "power": {
+     "mean": 85.6,
+     "median": 88.255,
+     "min": 51.51,
+     "max": 103.57
+    },
+    "temp_under_load": {
+     "mean": 54.6,
+     "median": 54.0,
+     "min": 51,
+     "max": 59
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  }
+ ]
+}

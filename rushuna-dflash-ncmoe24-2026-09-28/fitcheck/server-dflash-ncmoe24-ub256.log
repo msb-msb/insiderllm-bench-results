@@ -1,0 +1,38 @@
+0.01.619.681 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.620.089 W srv  llama_server: -----------------
+0.01.620.091 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.01.620.091 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.01.620.091 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.01.620.091 W srv  llama_server: -----------------
+0.01.621.398 I srv    load_model: loading model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'
+0.02.762.499 E llama_init_from_model: failed to initialize the context: dflash requires ctx_other to be set (this warning is normal during memory fitting)
+0.02.823.745 W operator(): failed to measure the memory of the extra model, fitting without it: failed to create llama_context from model
+0.02.823.786 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.03.249.612 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.05.685.076 I cmn          init: llama threadpool init, n_threads = 4
+0.05.788.010 I common_speculative_init_result: loading draft model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-DFlash-Q8_0.gguf'
+0.06.383.436 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 8192, kv_unified = 'false'
+0.06.383.476 I common_speculative_impl_draft_dflash: adding speculative implementation 'draft-dflash'
+0.06.383.480 I common_speculative_impl_draft_dflash: - n_max=15, n_min=0, p_min=0.00
+0.06.383.481 I common_speculative_impl_draft_dflash: - block_size=16, mask_token_id=248077, n_extract=8, sample_from_anchor=true
+0.06.391.681 E ggml_backend_cuda_buffer_type_alloc_buffer: allocating 487.95 MiB on device 0: cudaMalloc failed: out of memory
+0.06.391.685 E ggml_gallocr_reserve_n_impl: failed to allocate CUDA0 buffer of size 511653888
+0.06.391.685 E graph_reserve: failed to allocate compute buffers
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(+0x1d39b)[0x7ba31274739b]
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(ggml_print_backtrace+0x21c)[0x7ba31274781c]
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(+0x31f1f)[0x7ba31275bf1f]
+/lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb0da)[0x7ba3124bb0da]
+/lib/x86_64-linux-gnu/libstdc++.so.6(_ZSt10unexpectedv+0x0)[0x7ba3124a5a55]
+/lib/x86_64-linux-gnu/libstdc++.so.6(+0xbb391)[0x7ba3124bb391]
+/home/minotaur/llama-v0.4.0/libllama.so.0(+0xbcb98)[0x7ba3116bcb98]
+/home/minotaur/llama-v0.4.0/libllama.so.0(_ZN13llama_context6decodeERK11llama_batch+0x3f8)[0x7ba311710348]
+/home/minotaur/llama-v0.4.0/libllama.so.0(llama_decode+0xf)[0x7ba311711a1f]
+/home/minotaur/llama-v0.4.0/libllama-common.so.0(_Z25common_context_can_seq_rmP13llama_context+0xd9)[0x7ba311bfde39]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_ZN19server_context_impl10load_modelER13common_params+0xd05)[0x7ba31296e6c5]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_Z12llama_serverR13common_paramsiPPc+0x3777)[0x7ba3128cfbe7]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_Z12llama_serveriPPc+0xd6)[0x7ba3128d1056]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x7ba31202a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x7ba31202a28b]
+./llama-server(+0x12a5)[0x61893dfeb2a5]
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  failed to allocate compute pp buffers
