@@ -1,0 +1,24 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.4.0/llama-bench",
+  "-m",
+  "/home/minotaur/bench-models/Qwen_Qwen3-14B-Q4_K_M.gguf",
+  "-ngl",
+  "0",
+  "-p",
+  "512",
+  "-n",
+  "128",
+  "-d",
+  "0",
+  "-r",
+  "3",
+  "-o",
+  "json"
+ ],
+ "rc": 0,
+ "stdout": "[\n  {\n    \"build_commit\": \"5266f24\",\n    \"build_number\": 1,\n    \"cpu_info\": \"Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz\",\n    \"gpu_info\": \"NVIDIA GeForce RTX 3060\",\n    \"backends\": \"CUDA\",\n    \"model_filename\": \"/home/minotaur/bench-models/Qwen_Qwen3-14B-Q4_K_M.gguf\",\n    \"model_type\": \"qwen3 14B Q4_K - Medium\",\n    \"model_size\": 8995793920,\n    \"model_n_params\": 14768307200,\n    \"n_batch\": 2048,\n    \"n_ubatch\": 512,\n    \"n_threads\": 4,\n    \"cpu_mask\": \"0x0\",\n    \"cpu_strict\": false,\n    \"poll\": 50,\n    \"type_k\": \"f16\",\n    \"type_v\": \"f16\",\n    \"n_gpu_layers\": 0,\n    \"n_cpu_moe\": 0,\n    \"split_mode\": \"layer\",\n    \"main_gpu\": 0,\n    \"no_kv_offload\": false,\n    \"flash_attn\": -1,\n    \"devices\": \"auto\",\n    \"tensor_split\": \"0.00\",\n    \"tensor_buft_overrides\": \"none\",\n    \"load_mode\": \"auto\",\n    \"lazy_mode\": \"auto\",\n    \"embeddings\": false,\n    \"no_op_offload\": 0,\n    \"no_host\": false,\n    \"fit_target\": 0,\n    \"fit_min_ctx\": 0,\n    \"n_prompt\": 512,\n    \"n_gen\": 0,\n    \"n_depth\": 0,\n    \"test_time\": \"2026-09-29T18:54:15Z\",\n    \"avg_ns\": 1316229025,\n    \"stddev_ns\": 14749381,\n    \"avg_ts\": 389.022707,\n    \"stddev_ts\": 4.370973,\n    \"samples_ns\": [ 1329658211, 1318585649, 1300443215 ],\n    \"samples_ts\": [ 385.061, 388.295, 393.712 ]\n  },\n  {\n    \"build_commit\": \"5266f24\",\n    \"build_number\": 1,\n    \"cpu_info\": \"Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz\",\n    \"gpu_info\": \"NVIDIA GeForce RTX 3060\",\n    \"backends\": \"CUDA\",\n    \"model_filename\": \"/home/minotaur/bench-models/Qwen_Qwen3-14B-Q4_K_M.gguf\",\n    \"model_type\": \"qwen3 14B Q4_K - Medium\",\n    \"model_size\": 8995793920,\n    \"model_n_params\": 14768307200,\n    \"n_batch\": 2048,\n    \"n_ubatch\": 512,\n    \"n_threads\": 4,\n    \"cpu_mask\": \"0x0\",\n    \"cpu_strict\": false,\n    \"poll\": 50,\n    \"type_k\": \"f16\",\n    \"type_v\": \"f16\",\n    \"n_gpu_layers\": 0,\n    \"n_cpu_moe\": 0,\n    \"split_mode\": \"layer\",\n    \"main_gpu\": 0,\n    \"no_kv_offload\": false,\n    \"flash_attn\": -1,\n    \"devices\": \"auto\",\n    \"tensor_split\": \"0.00\",\n    \"tensor_buft_overrides\": \"none\",\n    \"load_mode\": \"auto\",\n    \"lazy_mode\": \"auto\",\n    \"embeddings\": false,\n    \"no_op_offload\": 0,\n    \"no_host\": false,\n    \"fit_target\": 0,\n    \"fit_min_ctx\": 0,\n    \"n_prompt\": 0,\n    \"n_gen\": 128,\n    \"n_depth\": 0,\n    \"test_time\": \"2026-09-29T18:54:21Z\",\n    \"avg_ns\": 42262282221,\n    \"stddev_ns\": 17616141,\n    \"avg_ts\": 3.028706,\n    \"stddev_ts\": 0.001262,\n    \"samples_ns\": [ 42247107074, 42258138868, 42281600721 ],\n    \"samples_ts\": [ 3.02979, 3.029, 3.02732 ]\n  }\n]\n",
+ "stderr_tail": "ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):\n  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB\n",
+ "peak_vram_mib": 1217,
+ "elapsed_s": 138.2
+}

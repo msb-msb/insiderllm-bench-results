@@ -1,0 +1,33 @@
+0.01.570.862 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.575.656 W srv  llama_server: -----------------
+0.01.575.658 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.01.575.658 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.01.575.658 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.01.575.659 W srv  llama_server: -----------------
+0.01.577.165 I srv    load_model: loading model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'
+0.02.280.925 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.02.717.702 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.05.810.947 I cmn          init: llama threadpool init, n_threads = 4
+/home/minotaur/llama-v0.4.0/ggml/src/ggml-cuda/ggml-cuda.cu:108: CUDA error
+0.05.820.472 E CUDA error: out of memory
+0.05.820.478 E   current device: 0, in function ggml_cuda_kernel_can_use_pdl at /home/minotaur/llama-v0.4.0/ggml/src/ggml-cuda/common.cuh:1640
+0.05.820.478 E   cudaFuncGetAttributes(&attr, kernel)
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(+0x1d39b)[0x7502f254739b]
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(ggml_print_backtrace+0x21c)[0x7502f254781c]
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(ggml_abort+0x15b)[0x7502f25479fb]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(_Z15ggml_cuda_errorPKcS0_S0_iS0_+0xb7)[0x7502ed66e597]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(_Z22quantize_row_q8_1_cudaPKfPKiPv9ggml_typellllllllP11CUstream_st+0xc54)[0x7502ed7e89f4]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(_Z23ggml_cuda_mul_mat_vec_qR25ggml_backend_cuda_contextPK11ggml_tensorS3_S3_PS1_PK29ggml_cuda_mm_fusion_args_host+0x4e7)[0x7502ed7d9d87]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(+0x284ad9)[0x7502ed684ad9]
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(ggml_backend_sched_graph_compute_async+0x867)[0x7502f2566cb7]
+/home/minotaur/llama-v0.4.0/libllama.so.0(_ZN13llama_context13graph_computeEP11ggml_cgraphb+0xa1)[0x7502f15050d1]
+/home/minotaur/llama-v0.4.0/libllama.so.0(_ZN13llama_context14process_ubatchERK12llama_ubatch14llm_graph_typeP22llama_memory_context_iR11ggml_status+0x11a)[0x7502f1508a4a]
+/home/minotaur/llama-v0.4.0/libllama.so.0(_ZN13llama_context6decodeERK11llama_batch+0x63d)[0x7502f151058d]
+/home/minotaur/llama-v0.4.0/libllama.so.0(llama_decode+0xf)[0x7502f1511a1f]
+/home/minotaur/llama-v0.4.0/libllama-common.so.0(_Z23common_init_from_paramsR13common_paramsb+0x43b)[0x7502f1a01cdb]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_ZN19server_context_impl10load_modelER13common_params+0x5a6)[0x7502f276df66]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_Z12llama_serverR13common_paramsiPPc+0x3777)[0x7502f26cfbe7]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_Z12llama_serveriPPc+0xd6)[0x7502f26d1056]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x7502f1e2a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x7502f1e2a28b]
+/home/minotaur/llama-v0.4.0/llama-server(+0x12a5)[0x601e4ce0c2a5]

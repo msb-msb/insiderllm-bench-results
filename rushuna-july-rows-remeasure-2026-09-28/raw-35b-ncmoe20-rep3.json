@@ -1,0 +1,28 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.4.0/llama-bench",
+  "-m",
+  "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-ncmoe",
+  "20",
+  "-fa",
+  "1",
+  "-p",
+  "512",
+  "-n",
+  "128",
+  "-d",
+  "0",
+  "-r",
+  "3",
+  "-o",
+  "json"
+ ],
+ "rc": 1,
+ "stdout": "[\n",
+ "stderr_tail": "ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):\n  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB\nllama_bench: error: failed to create context with model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'\n",
+ "peak_vram_mib": 11417,
+ "elapsed_s": 7.8
+}
