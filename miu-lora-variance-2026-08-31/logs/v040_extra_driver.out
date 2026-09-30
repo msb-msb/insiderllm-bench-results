@@ -1,0 +1,15 @@
+2026-09-09T16:37:46-07:00 LAUNCH noadapter_nocache: /home/minotaur/llama-v0.4.0/build/bin/llama-server -m /media/minotaur/Storage_Disk_1/LLM_repo/qwen3.6-27b-gguf/Qwen_Qwen3.6-27B-Q4_K_M.gguf -ngl 99 -fa on -c 4096 --jinja --no-mmap --port 8081
+2026-09-09T16:39:57-07:00 READY noadapter_nocache pid=3107636
+2026-09-09T16:39:57-07:00 RUN baseline_nocache_rep0 --cache-prompt false
+  baseline_nocache_rep0: lora_id=None cache_prompt=False exact 23/47  raw_valid 46/47  tok(p/c) 30630/927  64.5s  build=b1-5266f24  adapters=[]
+2026-09-09T16:41:02-07:00 RUN baseline_nocache_rep1 --cache-prompt false
+  baseline_nocache_rep1: lora_id=None cache_prompt=False exact 23/47  raw_valid 46/47  tok(p/c) 30630/927  64.6s  build=b1-5266f24  adapters=[]
+2026-09-09T16:42:07-07:00 ==== extra compare
+baseline baseline_rep0: exact 23/47
+baseline_nocache_rep0        exact 23/47  preds differ  1  raw differ  3  lora_id=None cache_prompt=False  idx=[28]
+baseline_nocache_rep1        exact 23/47  preds differ  1  raw differ  3  lora_id=None cache_prompt=False  idx=[28]
+baseline baseline_nocache_rep0: exact 23/47
+baseline_nocache_rep1        exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=False  idx=[]
+L_zeroed_nocache_rep0        exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=False  idx=[]
+L_zeroed_nocache_rep1        exact 23/47  preds differ  0  raw differ  0  lora_id=None cache_prompt=False  idx=[]
+2026-09-09T16:42:07-07:00 ==== extra done

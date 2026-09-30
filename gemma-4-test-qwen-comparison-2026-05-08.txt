@@ -1,0 +1,18 @@
+Comparison run on same llama.cpp mainline build b9079 (f9cd456ea)
+
+Model: Qwen3.6-27B-Q4_K_M.gguf (plain, no MTP layer)
+Path: ~/Desktop/lucebox-hub/dflash/models/Qwen3.6-27B-Q4_K_M.gguf
+Size: ~16 GB on disk, ~16 GB on GPU
+
+Server flags: -fa on -c 10000 -np 1 -ngl 99 --no-mmap 
+              --no-cache-prompt --port 8090
+              (no --jinja, no --chat-template-kwargs needed)
+
+Bench script: same am17an gist
+Bench parameters: n_predict=192, temperature=0.0, seed=42, cache_prompt=False
+
+Mean tok/s: 41.27
+Range: 39.9 - 42.1
+Wall time (1581 tok): 40.69s
+
+Comparison vs Gemma 4 26B-A4B Q4_K_XL same build same hardware: 3.10x speedup
