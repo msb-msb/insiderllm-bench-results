@@ -3,9 +3,11 @@
 Phase 0 of the PCIe Gen 4 vs Gen 3 test. RUN AND COMPLETE, 2026-09-21 21:30 to 21:45 PDT.
 Results record; facts as measured. The Gen 3 half has not run: it needs Mark at the BIOS.
 
-**Pre-registered framing.** This is a platform change (Ryzen 7 5700X, DDR4-3200, PCIe 4.0,
+**Pre-registered framing.** This is a platform change (Ryzen 7 5700X, DDR4-3200 [corrected 2026-10-05: runs at DDR4-2133, memory profile not active], PCIe 4.0,
 open frame) and not a build change. Every delta below is reported as "Tamanna vs Miu". Nothing
 is attributed to the bus until the Gen 3 half runs on the same box tomorrow.
+
+**Correction, 2026-10-05:** this record said Tamanna has DDR4-3200. Tamanna runs at DDR4-2133 (memory profile not active; a 2026-10-05 attempt to enable it failed training). Resident-model results are unaffected. The sticks are 2 × 16 GB G.Skill F4-3200C16-16GVK (dual rank) in 2 of 4 slots; dmidecode reads Configured Memory Speed 2133 MT/s. Every Tamanna record from 2026-09-21 on was made at DDR4-2133. The harness docstrings in this directory keep their original pre-registered wording unchanged.
 
 ## Inventory (step 1)
 
@@ -15,7 +17,7 @@ is attributed to the bus until the Gen 3 half runs on the same box tomorrow.
 | PCIe | gen max 4 (host and GPU), x16; idles at gen 1–2, **gen 4 x16 in 100% of under-load samples** | gen max 3, x16 |
 | CPU | AMD Ryzen 7 5700X, 8c/16t, governor `powersave` (amd-pstate) | Intel i7-8086K, 6c/12t, governor `powersave` |
 | RAM | 31 GiB total, 30 available at start, 7 GiB swap | 62 GiB |
-| RAM speed | **not readable without root** (`/sys/firmware/dmi` is 0400 root, no sudo). DDR4-3200 per Mark, unverified from the OS | DDR4-2667 |
+| RAM speed | **not readable without root** (`/sys/firmware/dmi` is 0400 root, no sudo). ~~DDR4-3200 per Mark, unverified from the OS~~ **DDR4-2133** (memory profile not active; dmidecode 2026-10-05) | DDR4-2667 |
 | Disk | 512 GB Micron 2450 NVMe (MTFDKBA512TFH), 419 GB free before the copy, 375 GB after | |
 | OS / kernel | Ubuntu 26.04.1, 7.0.0-31-generic | Ubuntu 24.04, 6.8.0-139-generic |
 | Display | headless: no Xorg / Wayland / display-manager process, card at 1 MiB and 0% before the first load | |
@@ -226,7 +228,7 @@ deficit is the cold-load state, not the platform.
 | RAM / page cache | 31 GiB, models evict each other | 62 GiB, both warm | the cold-load effect above |
 | Kernel / distro | 7.0.0-31, Ubuntu 26.04 | 6.8.0-139, Ubuntu 24.04 | |
 | Concurrent load | nothing else running; headless | Brave closed; an 82 GB download was running on 09-07 | |
-| RAM speed | DDR4-3200 per Mark, not verified from the OS | DDR4-2667 | the cross-rig DDR4 confound note applies |
+| RAM speed | ~~DDR4-3200 per Mark, not verified from the OS~~ **DDR4-2133** (memory profile not active; dmidecode 2026-10-05) | DDR4-2667 | the cross-rig DDR4 confound note applies |
 | Governor | `powersave` (amd-pstate) | `powersave` (intel_pstate) | symmetric in name; not in behaviour necessarily |
 
 ## Files

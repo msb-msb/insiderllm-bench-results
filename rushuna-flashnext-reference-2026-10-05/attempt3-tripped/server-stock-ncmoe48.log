@@ -1,0 +1,24 @@
+0.01.613.421 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.613.837 W srv  llama_server: -----------------
+0.01.613.839 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.01.613.839 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.01.613.839 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.01.613.839 W srv  llama_server: -----------------
+0.01.615.130 I srv    load_model: loading model '/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf'
+0.02.908.220 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.13.595.502 I cmn          init: llama threadpool init, n_threads = 4
+0.14.528.529 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 4096, kv_unified = 'false'
+0.14.537.269 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.14.537.310 I srv  llama_server: model loaded
+0.14.537.316 I srv  llama_server: listening on http://127.0.0.1:8099
+0.14.643.474 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.14.643.547 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.15.085.683 I slot print_timing: id  0 | task 0 | prompt eval time =     442.08 ms /     1 tokens (  442.08 ms per token,     2.26 tokens per second)
+0.15.085.688 I slot print_timing: id  0 | task 0 |        eval time =       0.00 ms /     1 tokens (    0.00 ms per token,     0.00 tokens per second)
+0.15.085.689 I slot print_timing: id  0 | task 0 |       total time =     442.08 ms /     2 tokens
+0.15.085.693 I slot print_timing: id  0 | task 0 |    graphs reused =          0
+0.15.085.725 I slot      release: id  0 | task 0 | stop processing: n_tokens = 1, truncated = 0
+0.15.095.228 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = 57119839248
+0.15.160.161 I slot launch_slot_: id  0 | task 2 | processing task, is_child = 0
+0.27.161.421 W srv          stop: cancel task, id_task = 2
+Received second interrupt, terminating immediately.

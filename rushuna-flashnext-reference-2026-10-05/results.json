@@ -1,0 +1,733 @@
+{
+ "host": "rushuna",
+ "cfg": {
+  "bin": "/home/minotaur/llama-v0.4.0",
+  "model_dir": "/home/minotaur/bench-models/qwen3.8-flash-next",
+  "out": "/home/minotaur/flashnext-reference-2026-10-05",
+  "ncmoe": [
+   48,
+   44,
+   41,
+   38
+  ],
+  "threads": 4,
+  "load_mode": "mmap",
+  "control_mmap": false,
+  "server_stock_first": true,
+  "disk": "nvme0n1"
+ },
+ "model": "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+ "build": "v0.4.0 5266f24",
+ "sweep": [
+  {
+   "tag": "ncmoe48-mmap-rep1",
+   "ncmoe": 48,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "48",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 151.6,
+   "peak_vram_mib": 4929,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 8.653562,
+     "stddev_ts": 1.420169
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 10.980141,
+     "stddev_ts": 0.053446
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe48-mmap-rep2",
+   "ncmoe": 48,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "48",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 152.2,
+   "peak_vram_mib": 4929,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 8.660012,
+     "stddev_ts": 1.32611
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 10.892455,
+     "stddev_ts": 0.125654
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe48-mmap-rep3",
+   "ncmoe": 48,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "48",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 150.9,
+   "peak_vram_mib": 4929,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 8.735863,
+     "stddev_ts": 1.259582
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 10.928515,
+     "stddev_ts": 0.073921
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe44-mmap-rep1",
+   "ncmoe": 44,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "44",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 145.9,
+   "peak_vram_mib": 8779,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 9.167243,
+     "stddev_ts": 1.531615
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 11.609579,
+     "stddev_ts": 0.076138
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe44-mmap-rep2",
+   "ncmoe": 44,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "44",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 145.5,
+   "peak_vram_mib": 8779,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 9.18532,
+     "stddev_ts": 1.468257
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 11.603752,
+     "stddev_ts": 0.058496
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe44-mmap-rep3",
+   "ncmoe": 44,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "44",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 147.1,
+   "peak_vram_mib": 8779,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 9.120448,
+     "stddev_ts": 1.744336
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 11.571334,
+     "stddev_ts": 0.099652
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe41-mmap-rep1",
+   "ncmoe": 41,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "41",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 138.9,
+   "peak_vram_mib": 11665,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 9.553572,
+     "stddev_ts": 1.44434
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 12.143783,
+     "stddev_ts": 0.075025
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe41-mmap-rep2",
+   "ncmoe": 41,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "41",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 141.6,
+   "peak_vram_mib": 11665,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 9.498611,
+     "stddev_ts": 1.818999
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 12.174974,
+     "stddev_ts": 0.026916
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe41-mmap-rep3",
+   "ncmoe": 41,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "41",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 138.4,
+   "peak_vram_mib": 11665,
+   "rc": 0,
+   "rows": [
+    {
+     "depth": 0,
+     "threads": 4,
+     "avg_ts": 9.680003,
+     "stddev_ts": 1.584731
+    },
+    {
+     "depth": 4096,
+     "threads": 4,
+     "avg_ts": 12.119625,
+     "stddev_ts": 0.065627
+    }
+   ],
+   "oom": false
+  },
+  {
+   "tag": "ncmoe38-mmap-rep1",
+   "ncmoe": 38,
+   "load_mode": "mmap",
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/llama-bench",
+    "-m",
+    "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "38",
+    "-fa",
+    "1",
+    "-p",
+    "0",
+    "-n",
+    "128",
+    "-d",
+    "0,4096",
+    "-r",
+    "3",
+    "-t",
+    "4",
+    "-lm",
+    "mmap",
+    "-o",
+    "json"
+   ],
+   "elapsed_s": 20.7,
+   "peak_vram_mib": 113,
+   "rc": 1,
+   "oom": false,
+   "stderr_tail": "ggml_cuda_init: found 1 CUDA devices (Total VRAM: 11909 MiB):\n  Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB\nllama_bench: error: failed to load model '/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf'\n"
+  }
+ ],
+ "control": null,
+ "server": {
+  "stock": {
+   "load": {
+    "load_s": 21.6,
+    "rss_mib": 29846,
+    "vram_mib": 4825,
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0/llama-server",
+     "-m",
+     "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "48",
+     "-fa",
+     "on",
+     "-c",
+     "4096",
+     "-t",
+     "4",
+     "--load-mode",
+     "mmap",
+     "--port",
+     "8099",
+     "--host",
+     "127.0.0.1",
+     "-np",
+     "1",
+     "--no-warmup"
+    ],
+    "mem": {
+     "cached_mib": 30809,
+     "avail_mib": 30806,
+     "free_mib": 325
+    }
+   },
+   "reps": [
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 80460.195,
+     "prefill_tps": 29.119989082800505,
+     "predicted_n": 128,
+     "predicted_ms": 14773.074,
+     "decode_tps": 8.59672130526118,
+     "wall_prefill_s": 80.87,
+     "wall_decode_s": 14.79,
+     "disk_read_prefill_mib": 70813.9,
+     "disk_read_decode_mib": 3719.0,
+     "disk_read_decode_mib_per_s": 251.4,
+     "disk_read_decode_mib_per_token": 29.05,
+     "rep": 1,
+     "rss_after_mib": 29378,
+     "vram_after_mib": 4903,
+     "mem_before": {
+      "cached_mib": 30819,
+      "avail_mib": 30802,
+      "free_mib": 313
+     },
+     "mem_after": {
+      "cached_mib": 30589,
+      "avail_mib": 30512,
+      "free_mib": 254
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 60117.531,
+     "prefill_tps": 38.973656453056925,
+     "predicted_n": 128,
+     "predicted_ms": 15094.757,
+     "decode_tps": 8.413517355728217,
+     "wall_prefill_s": 60.59,
+     "wall_decode_s": 15.11,
+     "disk_read_prefill_mib": 31626.2,
+     "disk_read_decode_mib": 3860.1,
+     "disk_read_decode_mib_per_s": 255.4,
+     "disk_read_decode_mib_per_token": 30.16,
+     "rep": 2,
+     "rss_after_mib": 29181,
+     "vram_after_mib": 4903,
+     "mem_before": {
+      "cached_mib": 30589,
+      "avail_mib": 30512,
+      "free_mib": 254
+     },
+     "mem_after": {
+      "cached_mib": 30640,
+      "avail_mib": 30577,
+      "free_mib": 265
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 59693.682,
+     "prefill_tps": 39.25038499049196,
+     "predicted_n": 128,
+     "predicted_ms": 14722.212,
+     "decode_tps": 8.626421084005583,
+     "wall_prefill_s": 60.19,
+     "wall_decode_s": 14.73,
+     "disk_read_prefill_mib": 29540.7,
+     "disk_read_decode_mib": 3821.2,
+     "disk_read_decode_mib_per_s": 259.4,
+     "disk_read_decode_mib_per_token": 29.85,
+     "rep": 3,
+     "rss_after_mib": 29088,
+     "vram_after_mib": 4903,
+     "mem_before": {
+      "cached_mib": 30640,
+      "avail_mib": 30577,
+      "free_mib": 265
+     },
+     "mem_after": {
+      "cached_mib": 30648,
+      "avail_mib": 30575,
+      "free_mib": 255
+     }
+    }
+   ]
+  },
+  "best": {
+   "load": {
+    "load_s": 22.6,
+    "rss_mib": 22637,
+    "vram_mib": 11561,
+    "cmd": [
+     "/home/minotaur/llama-v0.4.0/llama-server",
+     "-m",
+     "/home/minotaur/bench-models/qwen3.8-flash-next/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf",
+     "-ngl",
+     "99",
+     "-ncmoe",
+     "41",
+     "-fa",
+     "on",
+     "-c",
+     "4096",
+     "-t",
+     "4",
+     "--load-mode",
+     "mmap",
+     "--port",
+     "8099",
+     "--host",
+     "127.0.0.1",
+     "-np",
+     "1",
+     "--no-warmup"
+    ],
+    "mem": {
+     "cached_mib": 30837,
+     "avail_mib": 30786,
+     "free_mib": 265
+    }
+   },
+   "reps": [
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 55923.441,
+     "prefill_tps": 41.89656355373411,
+     "predicted_n": 128,
+     "predicted_ms": 11360.611,
+     "decode_tps": 11.178976201191995,
+     "wall_prefill_s": 56.33,
+     "wall_decode_s": 11.38,
+     "disk_read_prefill_mib": 35199.0,
+     "disk_read_decode_mib": 861.6,
+     "disk_read_decode_mib_per_s": 75.7,
+     "disk_read_decode_mib_per_token": 6.73,
+     "rep": 1,
+     "rss_after_mib": 30107,
+     "vram_after_mib": 11637,
+     "mem_before": {
+      "cached_mib": 30862,
+      "avail_mib": 30777,
+      "free_mib": 231
+     },
+     "mem_after": {
+      "cached_mib": 30551,
+      "avail_mib": 30524,
+      "free_mib": 286
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 33215.899,
+     "prefill_tps": 70.5385092843641,
+     "predicted_n": 128,
+     "predicted_ms": 10673.505,
+     "decode_tps": 11.898621867886884,
+     "wall_prefill_s": 33.68,
+     "wall_decode_s": 10.68,
+     "disk_read_prefill_mib": 5830.9,
+     "disk_read_decode_mib": 264.2,
+     "disk_read_decode_mib_per_s": 24.7,
+     "disk_read_decode_mib_per_token": 2.06,
+     "rep": 2,
+     "rss_after_mib": 30443,
+     "vram_after_mib": 11637,
+     "mem_before": {
+      "cached_mib": 30544,
+      "avail_mib": 30524,
+      "free_mib": 293
+     },
+     "mem_after": {
+      "cached_mib": 30571,
+      "avail_mib": 30514,
+      "free_mib": 261
+     }
+    },
+    {
+     "prompt_n": 2343,
+     "prompt_ms": 33783.28,
+     "prefill_tps": 69.35383420437566,
+     "predicted_n": 128,
+     "predicted_ms": 11185.051,
+     "decode_tps": 11.35444085145432,
+     "wall_prefill_s": 34.04,
+     "wall_decode_s": 11.21,
+     "disk_read_prefill_mib": 5879.0,
+     "disk_read_decode_mib": 698.0,
+     "disk_read_decode_mib_per_s": 62.3,
+     "disk_read_decode_mib_per_token": 5.45,
+     "rep": 3,
+     "rss_after_mib": 30164,
+     "vram_after_mib": 11637,
+     "mem_before": {
+      "cached_mib": 30563,
+      "avail_mib": 30514,
+      "free_mib": 270
+     },
+     "mem_after": {
+      "cached_mib": 30564,
+      "avail_mib": 30585,
+      "free_mib": 336
+     }
+    }
+   ]
+  }
+ },
+ "first_fail": 38,
+ "last_fit": 41
+}
