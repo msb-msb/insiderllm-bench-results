@@ -1,8 +1,10 @@
-# Re-measuring the ten unbacked July 2026 rushuna rows — 2026-09-28
+# Re-measuring the unbacked July 2026 rushuna figures (9 figures across 8 rows) — 2026-09-28
 
-PRE-REGISTRATION, written before the first measured run. Runner: `remeasure.py` (docstring repeats the design).
+PRE-REGISTRATION, written before the first measured run.
+
+*Tally corrected 2026-10-05: "ten" in the 09-28 brief, this record and the v1.11.0 audit changelog was a miscount. The unbacked set was 9 figures across 8 rows, and the result is 8 held (largest move +1.8%), 1 withdrawn (`-ncmoe 20`).* Runner: `remeasure.py` (docstring repeats the design).
 Context: the 2026-09-28 provenance audit (`INSIDERLLM-PROJECT.md`, "Measurement Provenance"; benchmarks.json
-v1.10.0 changelog) found ten rushuna rows labelled measured with no record behind them; the session that
+v1.10.0 changelog) found 9 rushuna figures across 8 rows labelled measured with no record behind them; the session that
 produced them in July is gone. This record re-measures them on the same card so each row either gets a record
 or gets a new value.
 
@@ -69,7 +71,7 @@ Raw per-invocation JSON in `raw-*.json`, priming runs in `raw-prime-*.json`, sum
 | `rushuna-qwen3-14b-q4km-half-ram` | tg128 | 5.7 | 5.70 [5.70..5.71] (`-ngl 20`) | 0.0% | **keep** |
 | `rushuna-qwen3-14b-q4km-all-ram` | tg128 | 3.05 | 3.03 [3.02..3.03] | −0.7% | **keep** |
 
-Nine of ten figures reproduce within 1.8%, on a different build. The `-ngl 20` reading of "half in RAM"
+9 figures across 8 rows: 8 held (largest move +1.8%), 1 withdrawn (`-ncmoe 20`), on a different build. The `-ngl 20` reading of "half in RAM"
 lands on the July figure exactly. By-products, not rows under test: `-ncmoe 24` tg128 at d=0 38.70 (July 38.9,
 09-11 38.55) and at d=4096 38.36 (July 38.5); 14B pp512 1,170 / 579 / 392 at `-ngl 41 / 20 / 0`.
 
@@ -104,10 +106,53 @@ the failure under the pre-registered rule.
 
 ### Actions taken (same commit as this README)
 
-- Nine figures kept; their rows point `raw_log` at this record and carry the file hashes. `rushuna-qwen3-14b-q4km-half-ram`
+- Eight figures kept; their rows point `raw_log` at this record and carry the file hashes. `rushuna-qwen3-14b-q4km-half-ram`
   gets `n_gpu_layers: 20` with the note that this is the re-measure's reading of the July description.
 - `rushuna-qwen36-35b-a3b-udq4km-ncmoe20-d0` becomes `status: failed_to_create_context`, throughput and VRAM
   null, dated 2026-09-28, with the July figure recorded in its notes. Dated corrections on the two pages that
   publish 42.6: `best-way-run-qwen-3-6-35b-moe-locally` (sweep table and the sentence under it) and `/benchmarks/`.
 - Not in scope, found while locating publications: the 14B figure **28.5 tok/s at `-ngl 40`** (the off-by-one
   example) is published in `why-local-llm-slow` and `newsletter-2026-07-28` and has no record either. Listed for the maintainer, not measured here.
+
+## Addendum 2026-10-05: the Qwen3-14B `-ngl 40` figure
+
+PRE-REGISTRATION, written and committed before the first measured run. This closes the out-of-scope item above.
+
+**Figure under test.** Qwen3-14B Q4_K_M, **28.5 tok/s at `-ngl 40`**, published in `why-local-llm-slow` (the
+off-by-one paragraph: "about 20%: 28.5 tok/s at `-ngl 40` against 35.9 at `-ngl 41`") and in
+`newsletter-2026-07-28`. No record, no benchmarks.json row. Named as flagged in `newsletter-2026-10-05`.
+
+**Method: identical to the 09-28 run.** Same box, build (`~/llama-v0.4.0`, v0.4.0 `5266f24`), 14B file
+(sha256 `915913e2…c98eb6`, re-hashed on Rushuna before the run) and runner: a `14b-ngl40` config added to
+`remeasure.py`, run alone as `remeasure.py 14b-ngl40`. `llama-bench -ngl 40 -p 512 -n 128 -d 0 -r 3`, other
+settings at v0.4.0 defaults; block 3 priming; 3 measured invocations; value = mean of the three invocation
+means; spread = max − min; peak VRAM at 0.5 s. Ollama stopped, card at 0 MiB before the first invocation.
+Results append to `results.json` under `configs.14b-ngl40`, raw files `raw-14b-ngl40-rep*.json` and
+`raw-prime-14b-ngl40-rep*.json`.
+
+**Decision rule: the 3% rule above.** |delta| against 28.5 ≤ 3%: keep 28.5 and link this record from both pages.
+|delta| > 3%: replace 28.5 with the new value, with a dated correction (2026-10-05) on both pages. Either way,
+the derived "about 20%" is recomputed from the published 35.9 (itself kept at +0.3% above) and the figure that
+stands; if it no longer rounds to about 20%, that is corrected in the same edit. Also recorded, not ruled on:
+whether llama-bench reports 40 of 41 layers offloaded, which is what the paragraph's claim rests on.
+
+### Addendum results
+
+RUN AND COMPLETE, 2026-10-05 17:25:53 to 17:28:02 (Rushuna's clock, UTC; 10:25-10:28 PDT). Pre-registration
+committed first (`cbf24c10`). Ollama stopped, card at 0 MiB at start. 14B file re-hashed on Rushuna before the run:
+`915913e2…c98eb6`, matching. All measured output resolved to build `5266f24`, 4 threads, flash attention `-1` (auto),
+`n_gpu_layers` 40.
+
+| figure | published | re-measured (mean of 3 [min..max]) | delta | rule |
+|---|---:|---:|---:|---|
+| Qwen3-14B Q4_K_M tg128 at `-ngl 40` | 28.5 | 28.50 [28.48..28.52] | 0.0% | **keep** |
+
+By-product, not under test: pp512 1,111.09 [1,109.38..1,112.02] (against 1,170 at `-ngl 41` on 09-28). Peak VRAM
+8,491 MiB (against 8,693 at `-ngl 41`). Priming invocations: tg128 28.51 / 28.51 / 28.52.
+
+Derived claim: 28.5 against the published 35.9 at `-ngl 41` is 20.6% slower, so "about 20%" stands. Not observable
+here: llama-bench does not print the loader's `offloaded 40/41 layers to GPU` line, so the 40-of-41 split rests on
+the reported `n_gpu_layers` 40 and the model's 40 repeating blocks plus output layer, not on a log line from this run.
+
+Actions: 28.5 kept. `why-local-llm-slow` and `newsletter-2026-07-28` now link this record from the sentence that
+publishes it. No benchmarks.json row added; the v1.11.0 flag is marked closed.

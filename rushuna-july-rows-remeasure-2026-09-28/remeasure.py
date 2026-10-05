@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Re-measure the ten July 2026 rushuna rows that have no docs/bench-results record, 2026-09-28.
+"""Re-measure the July 2026 rushuna figures that have no docs/bench-results record, 2026-09-28: 9 figures
+across 8 rows. Result: 8 held (largest move +1.8%), 1 withdrawn (-ncmoe 20). ("Ten" in the 09-28 brief and
+audit was a miscount, corrected 2026-10-05.)
 
 PRE-REGISTERED in README.md before the first measured run. Rule: new value within 3% of the published value
 -> keep the row, point it at this record; outside 3% -> replace the value and add a dated correction wherever
@@ -15,6 +17,7 @@ Configs (flags the July rows state or imply; everything else at llama-bench v0.4
   35B  -ngl 99 -ncmoe 20 -fa 1 -p 512 -n 128 -d 0             -r 3
   35B  -ngl 99 -ncmoe 24 -fa 1 -p 512 -n 128 -d 0,4096,8192   -r 3
   14B  -ngl 41 / 20 / 0        -p 512 -n 128 -d 0             -r 3
+  14B  -ngl 40                 -p 512 -n 128 -d 0             -r 3   (addendum 2026-10-05, README; run as `remeasure.py 14b-ngl40`)
 Server test (the "-ncmoe 20 OOMs under real context" claim): llama-server -ngl 99 -ncmoe N -fa on -c C -np 1,
 C in {8192, 16384}, N = 20 (the claim) and 24 (control). Loads? Then one request whose prompt fills C - 256
 tokens, n_predict 128, temperature 0. Serves = request returns predicted_n > 0 without the server dying.
@@ -32,6 +35,7 @@ CONFIGS = [
     ("35b-ncmoe20", M35, ["-ngl", "99", "-ncmoe", "20", "-fa", "1", "-p", "512", "-n", "128", "-d", "0"]),
     ("35b-ncmoe24", M35, ["-ngl", "99", "-ncmoe", "24", "-fa", "1", "-p", "512", "-n", "128", "-d", "0,4096,8192"]),
     ("14b-ngl41",   M14, ["-ngl", "41", "-p", "512", "-n", "128", "-d", "0"]),
+    ("14b-ngl40",   M14, ["-ngl", "40", "-p", "512", "-n", "128", "-d", "0"]),  # addendum 2026-10-05, run alone
     ("14b-ngl20",   M14, ["-ngl", "20", "-p", "512", "-n", "128", "-d", "0"]),
     ("14b-ngl0",    M14, ["-ngl", "0",  "-p", "512", "-n", "128", "-d", "0"]),
 ]
