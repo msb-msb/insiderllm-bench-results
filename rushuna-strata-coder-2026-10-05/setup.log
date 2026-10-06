@@ -1,0 +1,657 @@
+Strata - Qwen3.8-Flash-Next on a normal PC (a GPU + system RAM + CPU)
+
+=== Step 1: checking your PC ===
+  [ok] GPU: NVIDIA GeForce RTX 3060, 12.0 GB VRAM, compute capability 8.6, driver 580.173.02
+  [ok] RAM: 31 GB
+  [ok] CPU: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz (AVX2)
+
+=== Step 2: your choices ===
+  [ok] model: Qwen3.8-Flash-Next Coder
+
+  1) IQ1_M    the Coder's only size: half the experts, stored like IQ3_S (3.5 bits); download 58 GB, uses ~23 GB of RAM   <- fits in the low-RAM mode (the GPU holds ~30%, the rest in RAM)
+  [ok] size: IQ1_M
+  [ok] context: 34816 tokens
+  [ok] KV cache: 8-bit
+  [ok] images: off
+  [ok] low-RAM mode: the GPU holds ~30% of IQ1_M's experts (23 GB) and the other ~16 GB stay in RAM (31 GB), read once from a copy in the model folder
+  [ok] experimental speed projection: off
+
+=== Step 3: Python packages ===
+  Installing numpy, jinja2, regex, pyyaml, tqdm, requests, cmake, ninja, pillow, psutil ...
+  > /home/minotaur/strata/.venv/bin/python -m pip install --quiet --disable-pip-version-check numpy==2.5.3; python_version >= "3.12" numpy==2.4.6; python_version == "3.11" numpy==2.2.6; python_version < "3.11" jinja2==3.1.6 regex==2026.9.10 pyyaml==6.0.3 tqdm==4.70.1 requests==2.34.2 cmake==4.4.3 ninja==1.13.2 pillow==12.3.0 psutil==7.2.2 markupsafe==3.0.3 certifi==2026.7.22 charset-normalizer==3.5.1 idna==3.20 urllib3==2.8.0 colorama==0.4.6; sys_platform == "win32"
+  [ok] numpy, jinja2, regex, pyyaml, tqdm, requests, cmake, ninja, pillow, psutil installed
+
+=== Step 4: the Strata engine ===
+  llama.cpp source:   0.01 / 0.04 GB (21%)   
+  [ok] llama.cpp source downloaded
+  [ok] llama.cpp 3cf0325 (gguf-py, ggml, mtmd)
+  No ready-made engine for v0.1.39 (HTTP Error 404: Not Found): the latest release instead
+  [!]  no ready-made engine at https://github.com/Niko1221/Strata/releases/latest/download/ (HTTP Error 404: Not Found): compiling instead
+  [ok] build tools present (CUDA 13.0)
+  Compiling the Strata engine for your GPU (10-20 minutes, once) ...
+  > /home/minotaur/cmake/bin/cmake -G Ninja -DCMAKE_MAKE_PROGRAM=/home/minotaur/strata/.venv/bin/ninja -S /home/minotaur/strata -B /home/minotaur/strata/build -DCMAKE_BUILD_TYPE=Release -DSTRATA_ENABLE_CUDA=ON -DSTRATA_BUILD_TESTS=OFF -DCMAKE_CUDA_ARCHITECTURES=86 -DCMAKE_CUDA_COMPILER=/home/minotaur/cuda-13.0/bin/nvcc -DSTRATA_GGML_DIR=/home/minotaur/strata/third_party/llama.cpp
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- The CUDA compiler identification is NVIDIA 13.0.88
+-- Detecting CUDA compiler ABI info
+-- Detecting CUDA compiler ABI info - done
+-- Check for working CUDA compiler: /home/minotaur/cuda-13.0/bin/nvcc - skipped
+-- Detecting CUDA compile features
+-- Detecting CUDA compile features - done
+-- Found CUDAToolkit: /home/minotaur/cuda-13.0/targets/x86_64-linux/include (found version "13.0.88")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Strata: CUDA enabled, arch 86
+-- strata: pack/full/experts.bin absent - the expert arena load test is NOT registered
+-- The C compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+-- CMAKE_SYSTEM_PROCESSOR: x86_64
+-- GGML_SYSTEM_ARCH: x86
+-- Including CPU backend
+-- x86 detected
+-- Adding CPU backend variant ggml-cpu: -march=native 
+-- ggml version: 0.24.0
+-- ggml commit:  6f32ec0
+-- Configuring done (4.8s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/minotaur/strata/build
+  > /home/minotaur/cmake/bin/cmake --build /home/minotaur/strata/build --target strata -j 4
+[1/131] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o
+[2/131] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o
+[3/131] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-opt.cpp.o
+[4/131] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o
+[5/131] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o
+[6/131] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml.c.o
+[7/131] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend-meta.cpp.o
+[8/131] Building CUDA object CMakeFiles/strata_core.dir/src/core/device.cu.o
+[9/131] Building CXX object CMakeFiles/strata_core.dir/src/platform/memory.cpp.o
+[10/131] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o
+[11/131] Building CXX object CMakeFiles/strata_core.dir/src/core/graph.cpp.o
+[12/131] Building CXX object CMakeFiles/strata_core.dir/src/core/layout.cpp.o
+[13/131] Building CXX object CMakeFiles/strata_core.dir/src/core/weights.cpp.o
+/home/minotaur/strata/src/core/weights.cpp: In member function ‘bool strata::core::WeightTable::load(const std::string&, void*, uint64_t, std::string&, const std::set<std::__cxx11::basic_string<char> >*)’:
+/home/minotaur/strata/src/core/weights.cpp:167:51: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 6 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                ~~~^
+      |                                                   |
+      |                                                   long long unsigned int*
+      |                                                %lu
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+      |                                                         ~~~~~~~~~~
+      |                                                         |
+      |                                                         uint64_t* {aka long unsigned int*}
+/home/minotaur/strata/src/core/weights.cpp:167:56: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 7 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                     ~~~^
+      |                                                        |
+      |                                                        long long unsigned int*
+      |                                                     %lu
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+      |                                                                     ~~~~~~~~~~~~
+      |                                                                     |
+      |                                                                     uint64_t* {aka long unsigned int*}
+/home/minotaur/strata/src/core/weights.cpp:167:61: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 8 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                          ~~~^
+      |                                                             |
+      |                                                             long long unsigned int*
+      |                                                          %lu
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+      |                                                                                   ~~~~~~~~~~
+      |                                                                                   |
+      |                                                                                   uint64_t* {aka long unsigned int*}
+/home/minotaur/strata/src/core/weights.cpp:167:66: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 9 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                               ~~~^
+      |                                                                  |
+      |                                                                  long long unsigned int*
+      |                                                               %lu
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+      |                                                                                               ~~~~~~~~~~~~
+      |                                                                                               |
+      |                                                                                               uint64_t* {aka long unsigned int*}
+/home/minotaur/strata/src/core/weights.cpp:167:71: warning: format ‘%lld’ expects argument of type ‘long long int*’, but argument 10 has type ‘int64_t*’ {aka ‘long int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                    ~~~^
+      |                                                                       |
+      |                                                                       long long int*
+      |                                                                    %ld
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+  169 |                                   &r.ne0, &r.ne1, &r.code_bits, &r.code_bias, &r.group_elems, &r.codebook,
+      |                                   ~~~~~~                               
+      |                                   |
+      |                                   int64_t* {aka long int*}
+/home/minotaur/strata/src/core/weights.cpp:167:76: warning: format ‘%lld’ expects argument of type ‘long long int*’, but argument 11 has type ‘int64_t*’ {aka ‘long int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                         ~~~^
+      |                                                                            |
+      |                                                                            long long int*
+      |                                                                         %ld
+  168 |                                   name, &r.file, &kind, &r.src_off, &r.src_bytes, &r.dst_off, &r.dst_bytes,
+  169 |                                   &r.ne0, &r.ne1, &r.code_bits, &r.code_bias, &r.group_elems, &r.codebook,
+      |                                           ~~~~~~                            
+      |                                           |
+      |                                           int64_t* {aka long int*}
+/home/minotaur/strata/src/core/weights.cpp:167:96: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 17 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                                             ~~~^
+      |                                                                                                |
+      |                                                                                                long long unsigned int*
+      |                                                                                             %lu
+......
+  170 |                                   &r.has_offset, &r.codes_bytes, &r.scales_bytes, &r.offset_bytes,
+      |                                                  ~~~~~~~~~~~~~~                                 
+      |                                                  |
+      |                                                  uint64_t* {aka long unsigned int*}
+/home/minotaur/strata/src/core/weights.cpp:167:101: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 18 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                                                  ~~~^
+      |                                                                                                     |
+      |                                                                                                     long long unsigned int*
+      |                                                                                                  %lu
+......
+  170 |                                   &r.has_offset, &r.codes_bytes, &r.scales_bytes, &r.offset_bytes,
+      |                                                                  ~~~~~~~~~~~~~~~                     
+      |                                                                  |
+      |                                                                  uint64_t* {aka long unsigned int*}
+/home/minotaur/strata/src/core/weights.cpp:167:106: warning: format ‘%llu’ expects argument of type ‘long long unsigned int*’, but argument 19 has type ‘uint64_t*’ {aka ‘long unsigned int*’} [-Wformat=]
+  167 |                                   "%255s %d %d %llu %llu %llu %llu %lld %lld %d %d %d %d %d %llu %llu %llu %d %d",
+      |                                                                                                       ~~~^
+      |                                                                                                          |
+      |                                                                                                          long long unsigned int*
+      |                                                                                                       %lu
+......
+  170 |                                   &r.has_offset, &r.codes_bytes, &r.scales_bytes, &r.offset_bytes,
+      |                                                                                   ~~~~~~~~~~~~~~~         
+      |                                                                                   |
+      |                                                                                   uint64_t* {aka long unsigned int*}
+[14/131] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o
+[15/131] Linking CXX static library ggml/src/libggml-base.a
+[16/131] Building CUDA object CMakeFiles/strata_core.dir/src/core/pinned.cu.o
+[17/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o
+[18/131] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o
+[19/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/hbm.cpp.o
+[20/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/traits.cpp.o
+[21/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/iqp.cpp.o
+[22/131] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/quants.c.o
+[23/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o
+[24/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o
+[25/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o
+[26/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o
+[27/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o
+[28/131] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/quants.c.o
+[29/131] Linking CXX static library libstrata_core.a
+[30/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/dequant_s2.cu.o
+[31/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/repack.cpp.o
+[32/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_gemv.cu.o
+[33/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/repack.cpp.o
+[34/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_gemv_quads.cu.o
+/home/minotaur/strata/src/kernels/cuda/s2_gemv_quads.cu(31): warning #177-D: variable "strata::kernels::<unnamed>::CODES_PER_BYTE_S2" was declared but never referenced
+  constexpr int CODES_PER_BYTE_S2 = 4;
+                ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[35/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_gemv_fast.cu.o
+[36/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s_gemv.cu.o
+[37/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/router_top10.cu.o
+[38/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/rope.cu.o
+[39/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/quantize_act.cu.o
+[40/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_gemv_q8.cu.o
+[41/131] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o
+[42/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/s2_expert_grouped.cu.o
+[43/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/sampler.cu.o
+[44/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/shared_expert.cu.o
+/home/minotaur/strata/src/kernels/cuda/shared_expert.cu(72): warning #177-D: function "strata::kernels::<unnamed>::to_f16_kernel" was declared but never referenced
+            void to_f16_kernel(const float* __restrict__ in, uint16_t* __restrict__ out, int n) {
+                 ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/minotaur/strata/src/kernels/cuda/shared_expert.cu(139): warning #177-D: function "strata::kernels::<unnamed>::native_scalar_sigmoid_multi_kernel" was declared but never referenced
+            void native_scalar_sigmoid_multi_kernel(float* gate) {
+                 ^
+
+[45/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/gdn.cu.o
+/home/minotaur/strata/src/kernels/cuda/gdn.cu(35): warning #177-D: function "strata::kernels::<unnamed>::softplus_f" was declared but never referenced
+                            float softplus_f(float x) { return x > 20.0f ? x : log1pf(expf(x)); }
+                                  ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[46/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/gr.cu.o
+/home/minotaur/strata/src/kernels/cuda/gr.cu(112): warning #177-D: function "strata::kernels::<unnamed>::block_sum" was declared but never referenced
+            double block_sum(double v, double* scratch) {
+                   ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[47/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/elementwise.cu.o
+[48/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa.cu.o
+[49/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/bf16_gemv.cu.o
+[50/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_gr_norm.cu.o
+[51/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_moe.cu.o
+[52/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_bf16.cu.o
+[53/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_gdn.cu.o
+[54/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_gr_postops.cu.o
+[55/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_router.cu.o
+[56/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_qsa.cu.o
+[57/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_gdn_preprocess.cu.o
+[58/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_rope.cu.o
+[59/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_ple_postops.cu.o
+[60/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_flash_attn.cu.o
+[61/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_qsa_indexer.cu.o
+[62/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_qsa_score.cu.o
+[63/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/ple.cu.o
+/home/minotaur/strata/src/kernels/cuda/ple.cu(372): warning #177-D: variable "hc" was declared but never referenced
+      const int n_embd = NG_N_EMBD, hc = NG_HC, hc_dim = NG_HC_DIM;
+                                    ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[64/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/kv_q8.cu.o
+[65/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/kv_stream.cu.o
+[66/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/kv_q4.cu.o
+[67/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/cvec.cu.o
+[68/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa_decode_attn.cu.o
+[69/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/fused_gdn.cu.o
+[70/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa_prompt_attn.cu.o
+[71/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/dequant_bf16.cu.o
+[72/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/qsa_select.cu.o
+[73/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/verify_kernels.cu.o
+[74/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/fused_gr.cu.o
+/home/minotaur/strata/src/kernels/cuda/fused_gr.cu(321): warning #177-D: variable "strata::kernels::<unnamed>::TQ3" was declared but never referenced
+  constexpr int TQ3 = N / 8 / 32;
+                ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+[75/131] Building CXX object CMakeFiles/strata_kernels.dir/src/kernels/ngram.cpp.o
+[76/131] Building CXX object CMakeFiles/strata_kernels.dir/src/ngram/ple_reader.cpp.o
+[77/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/native_mmvq.cu.o
+[78/131] Building CXX object CMakeFiles/strata_kernels.dir/src/platform/direct_file.cpp.o
+[79/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/expert_layout.cpp.o
+[80/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/pool.cpp.o
+[81/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/q2_avx2.cpp.o
+[82/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/expert.cpp.o
+[83/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/native_expert.cpp.o
+[84/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/kq_avx2.cpp.o
+[85/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/kq_avx1.cpp.o
+[86/131] Linking CXX static library ggml/src/libggml-cpu.a
+[87/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx512.cpp.o
+[88/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/layer.cpp.o
+/home/minotaur/strata/src/core/layer.cpp: In function ‘bool strata::core::moe_layer(const WeightTable&, const ModelGeometry&, int64_t, int64_t, const MoEBuffers&, const float*, const float*, float*, void*, std::string&, const Doorbell*)’:
+/home/minotaur/strata/src/core/layer.cpp:500:1: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  500 | if (!moe_route(tables, g, layer, k, b, x, stream, err, db)) return false;    return moe_finish(tables, g, layer, k, b, x, parts, out, stream, err);}
+      | ^~
+/home/minotaur/strata/src/core/layer.cpp:500:78: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  500 | if (!moe_route(tables, g, layer, k, b, x, stream, err, db)) return false;    return moe_finish(tables, g, layer, k, b, x, parts, out, stream, err);}
+      |                                                                              ^~~~~~
+/home/minotaur/strata/src/core/layer.cpp: In function ‘bool strata::core::qsa_layer(const WeightTable&, const ModelGeometry&, int64_t, int64_t, int32_t, const QsaState&, const QsaBuffers&, const float*, float*, void*, std::string&, float*)’:
+/home/minotaur/strata/src/core/layer.cpp:924:1: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  924 | if (!gemv_quantized(*w_attnk, p_k, f_k, b.x_q8_0, b.x_q8k, b.kcur, g.n_embd, g.n_head_kv * g.head_dim,                        v.name("attn_k.weight"), stream, err, x)) return false;    if (!gemv_quantized(*w_attnv, p_v, f_v, b.x_q8_0, b.x_q8k, b.vcur, g.n_embd, g.n_head_kv * g.head_dim,                        v.name("attn_v.weight"), stream, err, x, w_attnk->native_data && w_attnv->native_data)) return false;    dump_slot(dump, g, layer, b.vcur,                            (uint64_t) 2 * g.n_embd + 2 * g.hc + (uint64_t) g.n_head * g.head_dim,                            (uint64_t) g.n_head_kv * g.head_dim, stream);    if (!normalize_rotate(b.kcur, w_kn, (int) g.n_head_kv, (int) g.head_dim)) return false;
+      | ^~
+/home/minotaur/strata/src/core/layer.cpp:924:186: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  924 | if (!gemv_quantized(*w_attnk, p_k, f_k, b.x_q8_0, b.x_q8k, b.kcur, g.n_embd, g.n_head_kv * g.head_dim,                        v.name("attn_k.weight"), stream, err, x)) return false;    if (!gemv_quantized(*w_attnv, p_v, f_v, b.x_q8_0, b.x_q8k, b.vcur, g.n_embd, g.n_head_kv * g.head_dim,                        v.name("attn_v.weight"), stream, err, x, w_attnk->native_data && w_attnv->native_data)) return false;    dump_slot(dump, g, layer, b.vcur,                            (uint64_t) 2 * g.n_embd + 2 * g.hc + (uint64_t) g.n_head * g.head_dim,                            (uint64_t) g.n_head_kv * g.head_dim, stream);    if (!normalize_rotate(b.kcur, w_kn, (int) g.n_head_kv, (int) g.head_dim)) return false;
+      |                                                                                                                                                                                          ^~
+/home/minotaur/strata/src/core/layer.cpp:989:5: warning: this ‘else’ clause does not guard... [-Wmisleading-indentation]
+  989 |     else if (st.kv_int8) kv_gather_q8_step(st.k_q, st.v_q, st.k_scale, st.v_scale, st.page_table, b.ids, st.step, cap, s,                                 b.k_scratch, b.v_scratch, stream);    else kv_gather_step(st.k_pool, st.v_pool, st.page_table, b.ids, st.step, cap, s, b.k_scratch, b.v_scratch,                   stream);    if (native_flash_attn_short) {
+      |     ^~~~
+/home/minotaur/strata/src/core/layer.cpp:989:330: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘else’
+  989 |     else if (st.kv_int8) kv_gather_q8_step(st.k_q, st.v_q, st.k_scale, st.v_scale, st.page_table, b.ids, st.step, cap, s,                                 b.k_scratch, b.v_scratch, stream);    else kv_gather_step(st.k_pool, st.v_pool, st.page_table, b.ids, st.step, cap, s, b.k_scratch, b.v_scratch,                   stream);    if (native_flash_attn_short) {
+      |                                                                                                                                                                                                                                                                                                                                          ^~
+/home/minotaur/strata/src/core/layer.cpp:1013:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 1013 |     if (!w_attno->native_data) quantize_q8_K(b.attn32, b.attn_q8k, g.n_head * g.head_dim, stream);    if (w_attno->native_data) {
+      |     ^~
+/home/minotaur/strata/src/core/layer.cpp:1013:103: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 1013 |     if (!w_attno->native_data) quantize_q8_K(b.attn32, b.attn_q8k, g.n_head * g.head_dim, stream);    if (w_attno->native_data) {
+      |                                                                                                       ^~
+/home/minotaur/strata/src/core/layer.cpp:876:774: warning: unused variable ‘n_bid’ [-Wunused-variable]
+  876 | bool qsa_layer(const WeightTable& tables, const ModelGeometry& g, int64_t layer, int64_t pos, int32_t pos_base,               const QsaState& st, const QsaBuffers& b, const float* x, float* out, void* stream,               std::string& err, float* dump) {    using namespace strata::kernels;    const QsaShapes s = qsa_shapes(g);    const LayerView v(tables, layer);    const int64_t n_kv = pos + 1;    /* P7 audit: RoPE reads cos/sin row pos_base + pos, and the table holds max_cells rows. */    if ((int64_t) pos_base + pos >= st.max_cells || pos_base < 0) {        err = "qsa_layer: position " + std::to_string((long long) pos_base + pos) + " is outside the RoPE table (" + std::to_string((long long) st.max_cells) + " rows)";        return false;    }    const int64_t n_bid = n_kv / s.idx_block;    const int64_t width = qsa_selection_width(n_kv, s);    const int64_t cap = qsa_selection_width(kTopkMaxCells, s);
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ^~~~~
+/home/minotaur/strata/src/core/layer.cpp:876:819: warning: unused variable ‘width’ [-Wunused-variable]
+  876 | bool qsa_layer(const WeightTable& tables, const ModelGeometry& g, int64_t layer, int64_t pos, int32_t pos_base,               const QsaState& st, const QsaBuffers& b, const float* x, float* out, void* stream,               std::string& err, float* dump) {    using namespace strata::kernels;    const QsaShapes s = qsa_shapes(g);    const LayerView v(tables, layer);    const int64_t n_kv = pos + 1;    /* P7 audit: RoPE reads cos/sin row pos_base + pos, and the table holds max_cells rows. */    if ((int64_t) pos_base + pos >= st.max_cells || pos_base < 0) {        err = "qsa_layer: position " + std::to_string((long long) pos_base + pos) + " is outside the RoPE table (" + std::to_string((long long) st.max_cells) + " rows)";        return false;    }    const int64_t n_bid = n_kv / s.idx_block;    const int64_t width = qsa_selection_width(n_kv, s);    const int64_t cap = qsa_selection_width(kTopkMaxCells, s);
+      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ^~~~~
+/home/minotaur/strata/src/core/layer.cpp: In function ‘bool strata::core::block_layer_pre(const WeightTable&, const ModelGeometry&, int64_t, int64_t, int32_t, const GdnBuffers&, const QsaState&, const QsaBuffers&, const MoEBuffers&, int64_t, const BlockBuffers&, void*, std::string&, const Doorbell*, const PleRun*, int, int)’:
+/home/minotaur/strata/src/core/layer.cpp:1198:23: warning: unused variable ‘hcd’ [-Wunused-variable]
+ 1198 |         const int64_t hcd = strata::kernels::NG_HC_DIM;
+      |                       ^~~
+/home/minotaur/strata/src/core/layer.cpp: In function ‘bool strata::core::block_layer(const WeightTable&, const ModelGeometry&, int64_t, int64_t, int32_t, const GdnBuffers&, const QsaState&, const QsaBuffers&, const MoEBuffers&, int64_t, const BlockBuffers&, const float*, void*, std::string&, const Doorbell*, const PleRun*)’:
+/home/minotaur/strata/src/core/layer.cpp:1348:1: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+ 1348 | if (!block_layer_pre(tables, g, layer, pos, pos_base, gb, qst, qb, mb, k, bb, stream, err, db, ple))        return false;    return block_layer_post(tables, g, layer, k, mb, bb, parts, stream, err);}}
+      | ^~
+/home/minotaur/strata/src/core/layer.cpp:1348:126: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+ 1348 | if (!block_layer_pre(tables, g, layer, pos, pos_base, gb, qst, qb, mb, k, bb, stream, err, db, ple))        return false;    return block_layer_post(tables, g, layer, k, mb, bb, parts, stream, err);}}
+      |                                                                                                                              ^~~~~~
+[89/131] Building CXX object CMakeFiles/strata_kernels_cpu.dir/src/kernels/cpu/iq_avx2.cpp.o
+[90/131] Building CUDA object CMakeFiles/strata_kernels.dir/src/kernels/cuda/iq_kernels.cu.o
+[91/131] Linking CXX static library libstrata_kernels.a
+[92/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/session.cpp.o
+[93/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/remote_experts.cpp.o
+[94/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/expert_source.cpp.o
+[95/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/native_head.cpp.o
+[96/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/expert_cache.cpp.o
+[97/131] Building CUDA object CMakeFiles/strata_engine.dir/src/core/remote_expert_opt.cu.o
+/home/minotaur/strata/include/strata/core/expert_source.hpp(414): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/minotaur/strata/include/strata/core/expert_source.hpp(653): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+/home/minotaur/strata/include/strata/core/expert_source.hpp(414): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::FileExpertSource"
+  class FileExpertSource : public ExpertSource {
+        ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/home/minotaur/strata/include/strata/core/expert_source.hpp(653): warning #611-D: overloaded virtual function "strata::core::ExpertSource::prefetch" is only partially overridden in class "strata::core::ArenaExpertSource"
+  class ArenaExpertSource : public ExpertSource {
+        ^
+
+[98/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/native_dense.cpp.o
+[99/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_snapshot.cpp.o
+[100/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/mtp.cpp.o
+[101/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_memory.cpp.o
+[102/131] Linking CXX static library libstrata_kernels_cpu.a
+[103/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/conversation_state.cpp.o
+[104/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/verify.cpp.o
+/home/minotaur/strata/src/core/verify.cpp: In static member function ‘static void strata::core::Verifier::raise_flag(uint32_t*, uint32_t)’:
+/home/minotaur/strata/src/core/verify.cpp:1604:20: warning: unused variable ‘f’ [-Wunused-variable]
+ 1604 |     volatile long* f = (volatile long*) flag;
+      |                    ^
+[105/131] Building CXX object CMakeFiles/strata_engine.dir/src/core/peer_experts.cpp.o
+[106/131] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/moe_fused.cu.o
+[107/131] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/ggml_cuda_host.cu.o
+[108/131] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/moe_mmq.cu.o
+[109/131] Building CUDA object CMakeFiles/strata_mmq.dir/src/prefill/moe_fused_iq.cu.o
+[110/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/quantize.cu.o
+[111/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-q2_0.cu.o
+[112/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-iq2_xxs.cu.o
+[113/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-iq2_xs.cu.o
+[114/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-iq2_s.cu.o
+[115/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-iq3_xxs.cu.o
+[116/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-iq3_s.cu.o
+[117/131] Linking CXX static library libstrata_engine.a
+[118/131] Building CUDA object CMakeFiles/strata_prefill.dir/src/prefill/gemm.cu.o
+[119/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-iq4_nl.cu.o
+[120/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-iq4_xs.cu.o
+[121/131] Building CXX object CMakeFiles/strata_spec.dir/src/spec/suffix_drafter.cpp.o
+[122/131] Building CXX object CMakeFiles/strata_spec.dir/src/spec/controller.cpp.o
+[123/131] Building CXX object CMakeFiles/strata_spec.dir/src/spec/draft_policy.cpp.o
+[124/131] Building CUDA object CMakeFiles/strata_prefill.dir/src/prefill/kernels.cu.o
+[125/131] Linking CXX static library libstrata_spec.a
+[126/131] Building CXX object CMakeFiles/strata_prefill.dir/src/prefill/prefill.cpp.o
+[127/131] Building CUDA object CMakeFiles/strata_mmq.dir/third_party/llama.cpp/ggml/src/ggml-cuda/template-instances/mmq-instance-q8_0.cu.o
+[128/131] Linking CXX static library libstrata_mmq.a
+[129/131] Linking CXX static library libstrata_prefill.a
+[130/131] Building CXX object CMakeFiles/strata.dir/src/program/generate.cpp.o
+/home/minotaur/strata/src/program/generate.cpp: In lambda function:
+/home/minotaur/strata/src/program/generate.cpp:6166:30: warning: unused variable ‘w’ [-Wunused-variable]
+ 6166 |                 const double w = (double) bt_windows, wall = std::chrono::duration<double, std::milli>(Clock::now() - bt_start).count();
+      |                              ^
+/home/minotaur/strata/src/program/generate.cpp: At global scope:
+/home/minotaur/strata/src/program/generate.cpp:1019:5: warning: ‘int {anonymous}::argmax(const std::vector<float>&)’ defined but not used [-Wunused-function]
+ 1019 | int argmax(const std::vector<float>& v) {
+      |     ^~~~~~
+[131/131] Linking CXX executable strata
+  [ok] engine compiled: /home/minotaur/strata/engine/strata
+  [ok] engine: /home/minotaur/strata/engine/strata
+
+=== Step 5: downloading Qwen3.8-Flash-Next Coder IQ1_M ===
+  [ok] model files present
+
+=== Step 6: preparing the model for Strata ===
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/iq_pack.py --gguf /home/minotaur/bench-models/qwen3.8-flash-next-coder/IQ1_M/Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf --out /home/minotaur/Strata-data/packs/coder-iq1_m
+tokenizer/: vocab 248320, merges 247587, pre qwen35, specials {'tokenizer.ggml.eos_token_id': 248046, 'tokenizer.ggml.padding_token_id': 248044, 'tokenizer.ggml.bos_token_id': 248044}
+model shards: Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf, Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00002-of-00002.gguf
+index.txt: 1079 tensors, 302 served natively, 0 in extra.bin, arena 1.37 GiB
+  Writing the experts into one file for the low-RAM mode (one time, 23 GB) ...
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/iq_pack.py --gguf /home/minotaur/bench-models/qwen3.8-flash-next-coder/IQ1_M/Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf --out /home/minotaur/Strata-data/packs/coder-iq1_m --experts-bin
+model shards: Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf, Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00002-of-00002.gguf
+index.txt: 1079 tensors, 302 served natively, 0 in extra.bin, arena 1.37 GiB
+  layer  0  IQ3_XXS /IQ4_NL  blob  2176000  at 0.00 GiB
+  layer  8  IQ2_S   /Q2_0    blob  1510400  at 3.75 GiB
+  layer 16  IQ3_XXS /IQ4_NL  blob  2176000  at 7.17 GiB
+  layer 24  IQ2_S   /IQ4_NL  blob  1971200  at 11.07 GiB
+  layer 32  IQ2_S   /IQ4_NL  blob  1971200  at 15.16 GiB
+  layer 40  IQ3_S   /IQ4_NL  blob  2329600  at 19.04 GiB
+experts.bin: 48 layers, 23.42 GiB
+  [ok] model prepared: /home/minotaur/Strata-data/packs/coder-iq1_m
+  The MTP draft layer (speculative decoding, ~2x faster output) comes from the original Qwen checkpoint:
+  only its ~5 GB of MTP tensors are downloaded.
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/mtp_fetch.py fetch --out /home/minotaur/Strata-data/mtp
+mtp.fc_embedding.weight 100%
+mtp.fc_hidden.weight 100%
+mtp.hyper_connection_mixer.hc_norm.weight 100%
+mtp.hyper_connection_mixer.input_mix_weight_down.weight 100%
+mtp.hyper_connection_mixer.input_mix_weight_up.weight 100%
+mtp.layers.0.attn_hyper_connection.block_inject_weight.weight 100%
+mtp.layers.0.attn_hyper_connection.hc_norm.weight 100%
+mtp.layers.0.attn_hyper_connection.input_mix_weight_down.weight 100%
+mtp.layers.0.attn_hyper_connection.input_mix_weight_up.weight 100%
+mtp.layers.0.mlp.experts.down_proj 4%
+mtp.layers.0.mlp.experts.down_proj 8%
+mtp.layers.0.mlp.experts.down_proj 12%
+mtp.layers.0.mlp.experts.down_proj 16%
+mtp.layers.0.mlp.experts.down_proj 20%
+mtp.layers.0.mlp.experts.down_proj 24%
+mtp.layers.0.mlp.experts.down_proj 28%
+mtp.layers.0.mlp.experts.down_proj 32%
+mtp.layers.0.mlp.experts.down_proj 36%
+mtp.layers.0.mlp.experts.down_proj 40%
+mtp.layers.0.mlp.experts.down_proj 44%
+mtp.layers.0.mlp.experts.down_proj 48%
+mtp.layers.0.mlp.experts.down_proj 52%
+mtp.layers.0.mlp.experts.down_proj 56%
+mtp.layers.0.mlp.experts.down_proj 60%
+mtp.layers.0.mlp.experts.down_proj 64%
+mtp.layers.0.mlp.experts.down_proj 68%
+mtp.layers.0.mlp.experts.down_proj 72%
+mtp.layers.0.mlp.experts.down_proj 76%
+mtp.layers.0.mlp.experts.down_proj 80%
+mtp.layers.0.mlp.experts.down_proj 84%
+mtp.layers.0.mlp.experts.down_proj 88%
+mtp.layers.0.mlp.experts.down_proj 92%
+mtp.layers.0.mlp.experts.down_proj 96%
+mtp.layers.0.mlp.experts.down_proj 100%
+mtp.layers.0.mlp.experts.gate_up_proj 2%
+mtp.layers.0.mlp.experts.gate_up_proj 4%
+mtp.layers.0.mlp.experts.gate_up_proj 6%
+mtp.layers.0.mlp.experts.gate_up_proj 8%
+mtp.layers.0.mlp.experts.gate_up_proj 10%
+mtp.layers.0.mlp.experts.gate_up_proj 12%
+mtp.layers.0.mlp.experts.gate_up_proj 14%
+mtp.layers.0.mlp.experts.gate_up_proj 16%
+mtp.layers.0.mlp.experts.gate_up_proj 18%
+mtp.layers.0.mlp.experts.gate_up_proj 20%
+mtp.layers.0.mlp.experts.gate_up_proj 22%
+mtp.layers.0.mlp.experts.gate_up_proj 24%
+mtp.layers.0.mlp.experts.gate_up_proj 26%
+mtp.layers.0.mlp.experts.gate_up_proj 28%
+mtp.layers.0.mlp.experts.gate_up_proj 30%
+mtp.layers.0.mlp.experts.gate_up_proj 32%
+mtp.layers.0.mlp.experts.gate_up_proj 34%
+mtp.layers.0.mlp.experts.gate_up_proj 36%
+mtp.layers.0.mlp.experts.gate_up_proj 38%
+mtp.layers.0.mlp.experts.gate_up_proj 40%
+mtp.layers.0.mlp.experts.gate_up_proj 42%
+mtp.layers.0.mlp.experts.gate_up_proj 44%
+mtp.layers.0.mlp.experts.gate_up_proj 46%
+mtp.layers.0.mlp.experts.gate_up_proj 48%
+mtp.layers.0.mlp.experts.gate_up_proj 50%
+mtp.layers.0.mlp.experts.gate_up_proj 52%
+mtp.layers.0.mlp.experts.gate_up_proj 54%
+mtp.layers.0.mlp.experts.gate_up_proj 56%
+mtp.layers.0.mlp.experts.gate_up_proj 58%
+mtp.layers.0.mlp.experts.gate_up_proj 60%
+mtp.layers.0.mlp.experts.gate_up_proj 62%
+mtp.layers.0.mlp.experts.gate_up_proj 64%
+mtp.layers.0.mlp.experts.gate_up_proj 66%
+mtp.layers.0.mlp.experts.gate_up_proj 68%
+mtp.layers.0.mlp.experts.gate_up_proj 70%
+mtp.layers.0.mlp.experts.gate_up_proj 72%
+mtp.layers.0.mlp.experts.gate_up_proj 74%
+mtp.layers.0.mlp.experts.gate_up_proj 76%
+mtp.layers.0.mlp.experts.gate_up_proj 78%
+mtp.layers.0.mlp.experts.gate_up_proj 80%
+mtp.layers.0.mlp.experts.gate_up_proj 82%
+mtp.layers.0.mlp.experts.gate_up_proj 84%
+mtp.layers.0.mlp.experts.gate_up_proj 86%
+mtp.layers.0.mlp.experts.gate_up_proj 88%
+mtp.layers.0.mlp.experts.gate_up_proj 90%
+mtp.layers.0.mlp.experts.gate_up_proj 92%
+mtp.layers.0.mlp.experts.gate_up_proj 94%
+mtp.layers.0.mlp.experts.gate_up_proj 96%
+mtp.layers.0.mlp.experts.gate_up_proj 98%
+mtp.layers.0.mlp.experts.gate_up_proj 100%
+mtp.layers.0.mlp.gate.weight 100%
+mtp.layers.0.mlp.shared_expert.down_proj.weight 100%
+mtp.layers.0.mlp.shared_expert.gate_proj.weight 100%
+mtp.layers.0.mlp.shared_expert.up_proj.weight 100%
+mtp.layers.0.mlp.shared_expert_gate.weight 100%
+mtp.layers.0.mlp_hyper_connection.block_inject_weight.weight 100%
+mtp.layers.0.mlp_hyper_connection.hc_norm.weight 100%
+mtp.layers.0.mlp_hyper_connection.input_mix_weight_down.weight 100%
+mtp.layers.0.mlp_hyper_connection.input_mix_weight_up.weight 100%
+mtp.layers.0.self_attn.indexer.index_qk_proj.weight 100%
+mtp.layers.0.self_attn.indexer.k_layernorm.weight 100%
+mtp.layers.0.self_attn.indexer.q_layernorm.weight 100%
+mtp.layers.0.self_attn.k_norm.weight 100%
+mtp.layers.0.self_attn.k_proj.weight 100%
+mtp.layers.0.self_attn.o_proj.weight 100%
+mtp.layers.0.self_attn.q_norm.weight 100%
+mtp.layers.0.self_attn.q_proj.weight 100%
+mtp.layers.0.self_attn.v_proj.weight 100%
+mtp.pre_fc_norm_embedding.weight 100%
+mtp.pre_fc_norm_hidden.weight 100%
+# MTP block in the BF16 checkpoint
+
+31 tensors, 5.214 GB, in 28 shards.
+
+| tensor | dtype | shape | MB |
+|---|---|---|---:|
+| `mtp.fc_embedding.weight` | BF16 | 2560x2560 | 13.1 |
+| `mtp.fc_hidden.weight` | BF16 | 2560x2560 | 13.1 |
+| `mtp.hyper_connection_mixer.hc_norm.weight` | BF16 | 10240 | 0.0 |
+| `mtp.hyper_connection_mixer.input_mix_weight_down.weight` | BF16 | 320x10240 | 6.6 |
+| `mtp.hyper_connection_mixer.input_mix_weight_up.weight` | BF16 | 10240x320 | 6.6 |
+| `mtp.layers.0.attn_hyper_connection.block_inject_weight.weight` | BF16 | 4x10240 | 0.1 |
+| `mtp.layers.0.attn_hyper_connection.hc_norm.weight` | BF16 | 10240 | 0.0 |
+| `mtp.layers.0.attn_hyper_connection.input_mix_weight_down.weight` | BF16 | 320x10240 | 6.6 |
+| `mtp.layers.0.attn_hyper_connection.input_mix_weight_up.weight` | BF16 | 10240x320 | 6.6 |
+| `mtp.layers.0.mlp.experts.down_proj` | BF16 | 512x2560x640 | 1677.7 |
+| `mtp.layers.0.mlp.experts.gate_up_proj` | BF16 | 512x1280x2560 | 3355.4 |
+| `mtp.layers.0.mlp.gate.weight` | BF16 | 512x2560 | 2.6 |
+| `mtp.layers.0.mlp.shared_expert.down_proj.weight` | BF16 | 2560x640 | 3.3 |
+| `mtp.layers.0.mlp.shared_expert.gate_proj.weight` | BF16 | 640x2560 | 3.3 |
+| `mtp.layers.0.mlp.shared_expert.up_proj.weight` | BF16 | 640x2560 | 3.3 |
+| `mtp.layers.0.mlp.shared_expert_gate.weight` | BF16 | 1x2560 | 0.0 |
+| `mtp.layers.0.mlp_hyper_connection.block_inject_weight.weight` | BF16 | 4x10240 | 0.1 |
+| `mtp.layers.0.mlp_hyper_connection.hc_norm.weight` | BF16 | 10240 | 0.0 |
+| `mtp.layers.0.mlp_hyper_connection.input_mix_weight_down.weight` | BF16 | 320x10240 | 6.6 |
+| `mtp.layers.0.mlp_hyper_connection.input_mix_weight_up.weight` | BF16 | 10240x320 | 6.6 |
+| `mtp.layers.0.self_attn.indexer.index_qk_proj.weight` | BF16 | 640x2560 | 3.3 |
+| `mtp.layers.0.self_attn.indexer.k_layernorm.weight` | BF16 | 128 | 0.0 |
+| `mtp.layers.0.self_attn.indexer.q_layernorm.weight` | BF16 | 128 | 0.0 |
+| `mtp.layers.0.self_attn.k_norm.weight` | BF16 | 256 | 0.0 |
+| `mtp.layers.0.self_attn.k_proj.weight` | BF16 | 512x2560 | 2.6 |
+| `mtp.layers.0.self_attn.o_proj.weight` | BF16 | 2560x6144 | 31.5 |
+| `mtp.layers.0.self_attn.q_norm.weight` | BF16 | 256 | 0.0 |
+| `mtp.layers.0.self_attn.q_proj.weight` | BF16 | 12288x2560 | 62.9 |
+| `mtp.layers.0.self_attn.v_proj.weight` | BF16 | 512x2560 | 2.6 |
+| `mtp.pre_fc_norm_embedding.weight` | BF16 | 2560 | 0.0 |
+| `mtp.pre_fc_norm_hidden.weight` | BF16 | 10240 | 0.0 |
+
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/mtp_pack.py --src /home/minotaur/Strata-data/mtp --experts q2_0 --out /home/minotaur/Strata-data/mtp/mtp-q2_0.gguf
+mtp.fc_embedding.weight: BF16 13.1 MB
+mtp.fc_hidden.weight: BF16 13.1 MB
+mtp.hyper_connection_mixer.hc_norm.weight: F32 0.0 MB
+mtp.hyper_connection_mixer.input_mix_weight_down.weight: BF16 6.6 MB
+mtp.hyper_connection_mixer.input_mix_weight_up.weight: BF16 6.6 MB
+mtp.layers.0.attn_hyper_connection.block_inject_weight.weight: BF16 0.1 MB
+mtp.layers.0.attn_hyper_connection.hc_norm.weight: F32 0.0 MB
+mtp.layers.0.attn_hyper_connection.input_mix_weight_down.weight: BF16 6.6 MB
+mtp.layers.0.attn_hyper_connection.input_mix_weight_up.weight: BF16 6.6 MB
+mtp.layers.0.mlp.experts.down_proj: q2_0 235.9 MB
+mtp.layers.0.mlp.experts.gate_up_proj: q2_0 471.9 MB
+mtp.layers.0.mlp.gate.weight: BF16 2.6 MB
+mtp.layers.0.mlp.shared_expert.down_proj.weight: BF16 3.3 MB
+mtp.layers.0.mlp.shared_expert.gate_proj.weight: BF16 3.3 MB
+mtp.layers.0.mlp.shared_expert.up_proj.weight: BF16 3.3 MB
+mtp.layers.0.mlp.shared_expert_gate.weight: BF16 0.0 MB
+mtp.layers.0.mlp_hyper_connection.block_inject_weight.weight: BF16 0.1 MB
+mtp.layers.0.mlp_hyper_connection.hc_norm.weight: F32 0.0 MB
+mtp.layers.0.mlp_hyper_connection.input_mix_weight_down.weight: BF16 6.6 MB
+mtp.layers.0.mlp_hyper_connection.input_mix_weight_up.weight: BF16 6.6 MB
+mtp.layers.0.self_attn.indexer.index_qk_proj.weight: BF16 3.3 MB
+mtp.layers.0.self_attn.indexer.k_layernorm.weight: F32 0.0 MB
+mtp.layers.0.self_attn.indexer.q_layernorm.weight: F32 0.0 MB
+mtp.layers.0.self_attn.k_norm.weight: F32 0.0 MB
+mtp.layers.0.self_attn.k_proj.weight: BF16 2.6 MB
+mtp.layers.0.self_attn.o_proj.weight: BF16 31.5 MB
+mtp.layers.0.self_attn.q_norm.weight: F32 0.0 MB
+mtp.layers.0.self_attn.q_proj.weight: BF16 62.9 MB
+mtp.layers.0.self_attn.v_proj.weight: BF16 2.6 MB
+mtp.pre_fc_norm_embedding.weight: F32 0.0 MB
+mtp.pre_fc_norm_hidden.weight: F32 0.0 MB
+wrote /home/minotaur/Strata-data/mtp/mtp-q2_0.gguf: 0.889 GB of tensor data
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/mtp_rt.py --gguf /home/minotaur/Strata-data/mtp/mtp-q2_0.gguf --out /home/minotaur/Strata-data/mtp/rt
+experts.bin 707788800 B, dense.bin 116099072 B, 29 tensors -> /home/minotaur/Strata-data/mtp/rt
+  fc_embedding.weight q8_0 2560 2560 0 6963200
+  fc_hidden.weight q8_0 2560 2560 6963200 6963200
+  hyper_connection_mixer.hc_norm.weight f32 1 10240 13926400 40960
+  hyper_connection_mixer.input_mix_weight_down.weight bf16 320 10240 13967360 6553600
+  hyper_connection_mixer.input_mix_weight_up.weight bf16 10240 320 20520960 6553600
+  attn_hyper_connection.block_inject_weight.weight bf16 4 10240 27074560 81920
+  attn_hyper_connection.hc_norm.weight f32 1 10240 27156480 40960
+  attn_hyper_connection.input_mix_weight_down.weight bf16 320 10240 27197440 6553600
+  attn_hyper_connection.input_mix_weight_up.weight bf16 10240 320 33751040 6553600
+  mlp.gate.weight bf16 512 2560 40304640 2621440
+  mlp.shared_expert.down_proj.weight q8_0 2560 640 42926080 1740800
+  mlp.shared_expert.gate_proj.weight q8_0 640 2560 44666880 1740800
+  mlp.shared_expert.up_proj.weight q8_0 640 2560 46407680 1740800
+  mlp.shared_expert_gate.weight bf16 1 2560 48148480 5120
+  mlp_hyper_connection.block_inject_weight.weight bf16 4 10240 48153600 81920
+  mlp_hyper_connection.hc_norm.weight f32 1 10240 48235520 40960
+  mlp_hyper_connection.input_mix_weight_down.weight bf16 320 10240 48276480 6553600
+  mlp_hyper_connection.input_mix_weight_up.weight bf16 10240 320 54830080 6553600
+  self_attn.indexer.index_qk_proj.weight q8_0 640 2560 61383680 1740800
+  self_attn.indexer.k_layernorm.weight f32 1 128 63124480 512
+  self_attn.indexer.q_layernorm.weight f32 1 128 63124992 512
+  self_attn.k_norm.weight f32 1 256 63125504 1024
+  self_attn.k_proj.weight q8_0 512 2560 63126528 1392640
+  self_attn.o_proj.weight q8_0 2560 6144 64519168 16711680
+  self_attn.q_norm.weight f32 1 256 81230848 1024
+  self_attn.q_proj.weight q8_0 12288 2560 81231872 33423360
+  self_attn.v_proj.weight q8_0 512 2560 114655232 1392640
+  pre_fc_norm_embedding.weight f32 1 2560 116047872 10240
+  pre_fc_norm_hidden.weight f32 1 10240 116058112 40960
+  [ok] MTP draft layer: /home/minotaur/Strata-data/mtp/rt
+  Tip for a 12 GB card: the draft layer's default token subset (with Chinese, Japanese and Korean) needs up to ~348 MiB of VRAM.
+    For English and code answers, ./setup.sh --draft-vocab en needs up to ~133 MiB (cyrillic: ~193) and leaves the rest to the expert cache - and it is the
+    fix when the start stops with "the draft head does not fit". The model keeps the choice.
+
+=== Step 7: writing the start script ===
+  [ok] start script: run-coder-iq1_m.sh
+
+All set.
+  API (OpenAI):     http://127.0.0.1:8080/v1   (any API key; model name: anything)
+  API (Anthropic):  http://127.0.0.1:8080/v1/messages
+  Next time:        just run ./setup.sh (or run-coder-iq1_m.sh) - it starts right away
+  Several requests at once: left at one at a time - parallel N reduces waiting for several users but costs about 10-25% speed per request on this card (docs/BATCHING.md).

@@ -1,0 +1,43 @@
+0.01.460.859 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.461.312 W srv  llama_server: -----------------
+0.01.461.313 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.01.461.314 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.01.461.314 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.01.461.314 W srv  llama_server: -----------------
+0.01.462.724 I srv    load_model: loading model '/home/minotaur/bench-models/qwen3.8-flash-next-coder/IQ1_M/Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf'
+0.02.372.778 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.02.812.142 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.05.731.415 I cmn          init: llama threadpool init, n_threads = 4
+0.06.293.811 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 34816, kv_unified = 'false'
+0.06.299.703 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.06.299.750 I srv  llama_server: model loaded
+0.06.299.754 I srv  llama_server: listening on http://127.0.0.1:8099
+0.06.715.283 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.06.715.406 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+/home/minotaur/llama-v0.4.0/ggml/src/ggml-cuda/ggml-cuda.cu:108: CUDA error
+0.09.933.954 E CUDA error: out of memory
+0.09.933.960 E   current device: 0, in function alloc at /home/minotaur/llama-v0.4.0/ggml/src/ggml-cuda/ggml-cuda.cu:591
+0.09.933.960 E   cuMemCreate(&handle, reserve_size, &prop, 0)
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(+0x1d39b)[0x7ac9e634739b]
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(ggml_print_backtrace+0x21c)[0x7ac9e634781c]
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(ggml_abort+0x15b)[0x7ac9e63479fb]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(_Z15ggml_cuda_errorPKcS0_S0_iS0_+0xb7)[0x7ac9e146e597]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(_ZN18ggml_cuda_pool_vmm5allocEmPm+0x5e3)[0x7ac9e14889a3]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(_Z24argsort_f32_i32_cuda_cubR14ggml_cuda_poolPKfPiii15ggml_sort_orderP11CUstream_st+0x408)[0x7ac9e12add38]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(_Z18ggml_cuda_op_top_kR25ggml_backend_cuda_contextP11ggml_tensor+0x20f)[0x7ac9e163620f]
+/home/minotaur/llama-v0.4.0/libggml-cuda.so.0(+0x284bc9)[0x7ac9e1484bc9]
+/home/minotaur/llama-v0.4.0/libggml-base.so.0(ggml_backend_sched_graph_compute_async+0x867)[0x7ac9e6366cb7]
+/home/minotaur/llama-v0.4.0/libllama.so.0(_ZN13llama_context13graph_computeEP11ggml_cgraphb+0xa1)[0x7ac9e53050d1]
+/home/minotaur/llama-v0.4.0/libllama.so.0(_ZN13llama_context14process_ubatchERK12llama_ubatch14llm_graph_typeP22llama_memory_context_iR11ggml_status+0x11a)[0x7ac9e5308a4a]
+/home/minotaur/llama-v0.4.0/libllama.so.0(_ZN13llama_context6decodeERK11llama_batch+0x63d)[0x7ac9e531058d]
+/home/minotaur/llama-v0.4.0/libllama.so.0(llama_decode+0xf)[0x7ac9e5311a1f]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_ZNSt17_Function_handlerIFvvEZN19server_context_impl6decodeERiiR11llama_batchEUlvE_E9_M_invokeERKSt9_Any_data+0x49)[0x7ac9e65532d9]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_ZN12server_queue14yield_to_queueEOSt8functionIFvvEE+0xa6)[0x7ac9e6517636]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_ZN19server_context_impl6decodeERiiR11llama_batch+0x159)[0x7ac9e6567d49]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_ZN19server_context_impl12update_slotsEv+0x391)[0x7ac9e65697e1]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_ZN12server_queue10start_loopEl+0x125)[0x7ac9e6518275]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_Z12llama_serverR13common_paramsiPPc+0x3ba0)[0x7ac9e64d0010]
+/home/minotaur/llama-v0.4.0/libllama-server-impl.so(_Z12llama_serveriPPc+0xd6)[0x7ac9e64d1056]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x7ac9e5c2a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x7ac9e5c2a28b]
+/home/minotaur/llama-v0.4.0/llama-server(+0x12a5)[0x5999a800d2a5]
