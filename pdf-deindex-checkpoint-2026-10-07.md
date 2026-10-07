@@ -90,11 +90,26 @@ not been recrawled since before the ship date, so they are on the request-indexi
 |---|---|---|---|
 | newsletter-2026-05-03 | **indexed**, crawled 08-25 | indexed, crawled 09-28 | **Exception removed 2026-10-07**, as the marker says |
 | newsletter-2026-07-06 | **indexed**, crawled 07-09 | not indexed | **Exception removed 2026-10-07**, as the marker says |
-| mycoswarm-wifi-laptop-borrowed-gpu | **indexed**, crawled 09-17 | indexed, crawled 08-02 | Now qualifies for removal on the marker's own rule ("remove once its HTML indexes"). **Not removed**, because the marker named only the two newsletters. Mark's call. |
+| mycoswarm-wifi-laptop-borrowed-gpu | **indexed**, crawled 09-17 | indexed, crawled 08-02 | **Exception removed 2026-10-07** on Mark's approval (same rule as the newsletters) |
 | ai-market-panic-capability-dissipation-gap | not indexed (4 impressions over the window) | indexed, crawled 07-04 | Keep |
-| h-neurons-why-llms-hallucinate | **canonical URL not indexed**. Google indexed a `?utm_source=insiderllm&utm_medium=email&utm_campaign=…` copy instead (crawled 08-02, 8 impressions). | indexed, crawled 09-05 | Keep. The utm copy is a canonicalisation problem separate from this. |
+| h-neurons-why-llms-hallucinate | **canonical URL not indexed**. Google indexed a `?utm_source=insiderllm&utm_medium=email&utm_campaign=…` copy instead (crawled 08-02, 8 impressions). | indexed, crawled 09-05 | Keep. Canonical checked (below): the tag is correct. |
 
-**.htaccess change, deployed 2026-10-07.**
+**h-neurons canonical, checked 2026-10-07 (report only).**
+- Both the clean URL and the `?utm_source=insiderllm&utm_medium=email&utm_campaign=…` copy serve
+  `<link rel=canonical href=https://insiderllm.com/blog/h-neurons-why-llms-hallucinate/>`.
+- og:url is the clean URL, and the sitemap lists the clean URL.
+- No page on the site links to the utm copy. It came from the newsletter email.
+
+So the tag is right and Google indexed the utm copy anyway. Nothing to fix on our side. At the next
+read, check whether the clean URL has replaced it.
+
+**.htaccess change, deployed 2026-10-07 (two deploys the same day).**
+- Second deploy, approved by Mark: `mycoswarm-wifi-laptop-borrowed-gpu` removed too. Two exceptions
+  remain. Checked live: the mycoswarm PDF returns `200` with `x-robots-tag: noindex`, and
+  `ai-market-panic-capability-dissipation-gap` and `h-neurons-why-llms-hallucinate` return `200`
+  without it.
+
+First deploy:
 - `newsletter-2026-05-03` and `newsletter-2026-07-06` were taken out of the exception
   `RewriteCond`. Three exceptions remain.
 - Checked live with `curl -sI`:
@@ -103,6 +118,14 @@ not been recrawled since before the ship date, so they are on the request-indexi
   - `lm-studio-tips-and-tricks.pdf` (control) still has it.
 
 ## 5. For Mark: request indexing (URL Inspection → Request indexing)
+
+**Outcome 2026-10-07: nothing was requested.** Mark tried Request indexing on the top 5 and GSC
+rejected each attempt, because a URL serving noindex can't be submitted for indexing. The live test
+on comfyui-vs-automatic1111-vs-fooocus.pdf confirmed that GSC sees 'noindex' in the X-Robots-Tag.
+So the header is reaching Googlebot, but this route can't force a recrawl. **All 31 de-indexed PDFs
+still in the Indexed list are on natural recrawl:** the 29 below, plus newsletter-2026-05-03.pdf
+and mycoswarm-wifi-laptop-borrowed-gpu.pdf, whose exceptions were removed today. The 10-21 read
+doesn't split requested from not-requested. The table is kept as the full list.
 
 These 30 PDFs are de-indexed and still in Google's index. Each needs a recrawl so Google sees the
 header. Each was last crawled before the header shipped, except newsletter-2026-05-03, whose
@@ -153,6 +176,12 @@ URL to paste for each: `https://insiderllm.com/pdfs/<slug>.pdf`.
 
 ## 6. Verdict: NOT LANDED on the stated criterion. Re-dated to 2026-10-21
 
+**Criterion replaced, approved by Mark 2026-10-07:** landed = no de-indexed PDF left in the Indexed
+list AND PDF share under 5% for two consecutive weeks. The old ≥ 250-of-308 test is retired. The
+reasoning is below. On the new criterion today: 31 de-indexed PDFs are still in the Indexed list,
+and the share wasn't readable.
+
+
 - **Mechanism: landed.** Verified live for the third time.
 - **Excluded ≥ 250 of 308: not met.** The count is 183 (59%), up from 158.
 - **PDF share under 5% for two consecutive weeks: not readable.** That needs the `.pdf`-filtered
@@ -163,8 +192,7 @@ still-indexed PDFs, the count reaches 212. The 96 in neither list are already ou
 they'll never be recrawled into the excluded list. Since the aim is to get the PDFs out of the
 index, a criterion that would actually measure it is: **"0 de-indexed PDFs in the Indexed list, and
 PDF share under 5% for two consecutive weeks."** Today the first part stands at 29, and those 29 are
-exactly the request-indexing list. **This is a proposal for Mark.** The marker still carries the
-criterion as written.
+exactly the request-indexing list. Mark approved it on 2026-10-07, and the marker now carries it.
 
 ## Reproduction
 
