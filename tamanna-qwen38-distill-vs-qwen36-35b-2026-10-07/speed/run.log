@@ -1,0 +1,24 @@
+17:45:02 start  harness: llama-bench -ngl 99 -fa 1 -p 512 -n 128 -d 0,4096,8192 -r 5  build: /home/minotaur/llama-v0.4.0/build/bin
+17:45:02   model qwen3.6-35b-a3b-q4km: /home/minotaur/bench-models/qwen3.6-35b-a3b-Q4_K_M.gguf
+17:45:02   model qwen3.8-distill-q4km: /home/minotaur/bench-models/Qwen3.8-35B-A3B-Distill-Q4_K_M.gguf
+17:45:34   prime-qwen3.6-35b-a3b-q4km  rep1  tg128 d0/4k/8k 184.91/181.88/177.87  pp512 3698/3524/3391  vram 20980 MiB  gen [4]  sm 1920  366.2 W  (28s) build 5266f24/1
+17:45:58         qwen3.6-35b-a3b-q4km  rep1  tg128 d0/4k/8k 184.05/181.39/177.84  pp512 3671/3491/3380  vram 20980 MiB  gen [4]  sm 1920  358.1 W  (21s) build 5266f24/1
+17:46:30   prime-qwen3.8-distill-q4km  rep1  tg128 d0/4k/8k 183.22/180.94/177.82  pp512 3564/3412/3345  vram 20980 MiB  gen [4]  sm 1920  367.2 W  (29s) build 5266f24/1
+17:46:54         qwen3.8-distill-q4km  rep1  tg128 d0/4k/8k 183.46/181.27/177.47  pp512 3663/3479/3349  vram 20980 MiB  gen [4]  sm 1920.0  360.4 W  (22s) build 5266f24/1
+17:47:18   prime-qwen3.8-distill-q4km  rep2  tg128 d0/4k/8k 183.93/180.96/177.44  pp512 3655/3471/3350  vram 20980 MiB  gen [4]  sm 1920  360.7 W  (21s) build 5266f24/1
+17:47:42         qwen3.8-distill-q4km  rep2  tg128 d0/4k/8k 183.94/180.94/177.43  pp512 3658/3453/3341  vram 20980 MiB  gen [4]  sm 1920  360.3 W  (21s) build 5266f24/1
+17:48:16   prime-qwen3.6-35b-a3b-q4km  rep2  tg128 d0/4k/8k 181.04/179.22/175.91  pp512 2882/2843/2845  vram 20980 MiB  gen [4]  sm 1920  357.1 W  (31s) build 5266f24/1
+17:48:41         qwen3.6-35b-a3b-q4km  rep2  tg128 d0/4k/8k 184.01/180.88/177.39  pp512 3654/3483/3355  vram 20980 MiB  gen [4]  sm 1920.0  362.2 W  (22s) build 5266f24/1
+17:49:05   prime-qwen3.6-35b-a3b-q4km  rep3  tg128 d0/4k/8k 183.96/180.92/177.36  pp512 3641/3470/3359  vram 20980 MiB  gen [4]  sm 1920  360.4 W  (21s) build 5266f24/1
+17:49:29         qwen3.6-35b-a3b-q4km  rep3  tg128 d0/4k/8k 183.78/180.97/177.50  pp512 3658/3479/3362  vram 20980 MiB  gen [4]  sm 1920  361.7 W  (21s) build 5266f24/1
+17:50:00   prime-qwen3.8-distill-q4km  rep3  tg128 d0/4k/8k 183.52/181.36/177.37  pp512 3652/3467/3351  vram 20980 MiB  gen [4]  sm 1920.0  361.4 W  (28s) build 5266f24/1
+17:50:24         qwen3.8-distill-q4km  rep3  tg128 d0/4k/8k 183.46/180.89/177.43  pp512 3651/3459/3336  vram 20980 MiB  gen [4]  sm 1920.0  364.9 W  (22s) build 5266f24/1
+17:50:24 summary (mean of 3 measured reps of the per-run 5-repeat average; spread = min..max; delta = distill vs base)
+17:50:24   tg128 d=0     base   183.94 [183.78..184.05]   distill   183.62 [183.46..183.94]   1.00x  -> within 3%
+17:50:24   tg128 d=4096  base   181.08 [180.88..181.39]   distill   181.03 [180.89..181.27]   1.00x  -> within 3%
+17:50:24   tg128 d=8192  base   177.58 [177.39..177.84]   distill   177.44 [177.43..177.47]   1.00x  -> within 3%
+17:50:24   pp512 d=0     base  3661.07 [3654.02..3671.18]   distill  3657.39 [3651.22..3663.44]   1.00x  -> -0.1%
+17:50:24   pp512 d=4096  base  3484.27 [3479.33..3490.64]   distill  3463.89 [3453.42..3479.30]   0.99x  -> -0.6%
+17:50:24   pp512 d=8192  base  3365.84 [3354.82..3380.26]   distill  3342.04 [3335.92..3348.79]   0.99x  -> -0.7%
+17:50:24 peak VRAM measured runs: {'qwen3.6-35b-a3b-q4km': 20980, 'qwen3.8-distill-q4km': 20980}
+17:50:24 done
