@@ -1,0 +1,1894 @@
+{
+ "harness": "llama-bench -ngl 99 -fa 1 -p 512 -n 128 -d 0,4096,8192 -r 5",
+ "order": [
+  [
+   "ornith-1.5-35b-a3b",
+   "qwen3.6-35b-a3b"
+  ],
+  [
+   "qwen3.6-35b-a3b",
+   "ornith-1.5-35b-a3b"
+  ],
+  [
+   "ornith-1.5-35b-a3b",
+   "qwen3.6-35b-a3b"
+  ]
+ ],
+ "started": "2026-10-09T14:21:26-0700",
+ "results": [
+  {
+   "model": "ornith-1.5-35b-a3b",
+   "rep": 1,
+   "tag": "measured",
+   "started": "2026-10-09T14:16:50-0700",
+   "elapsed_s": 20.9,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3662.747111,
+     "stddev_ts": 144.803219,
+     "samples": [
+      3404.92,
+      3744.67,
+      3729.21,
+      3729.28,
+      3705.66
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 177.391835,
+     "stddev_ts": 0.426256,
+     "samples": [
+      176.84,
+      178.039,
+      177.344,
+      177.375,
+      177.36
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3460.216293,
+     "stddev_ts": 100.467892,
+     "samples": [
+      3440.09,
+      3293.8,
+      3504.77,
+      3520.95,
+      3541.47
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 174.786777,
+     "stddev_ts": 0.739721,
+     "samples": [
+      173.464,
+      175.085,
+      175.123,
+      175.137,
+      175.125
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3353.165138,
+     "stddev_ts": 76.913006,
+     "samples": [
+      3320.98,
+      3232.64,
+      3394.26,
+      3418.57,
+      3399.37
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 171.608112,
+     "stddev_ts": 0.709183,
+     "samples": [
+      170.34,
+      171.909,
+      171.924,
+      171.941,
+      171.926
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 24,
+    "samples_under_load": 20,
+    "temp_start": 57,
+    "temp_end": 61,
+    "temp_max": 67,
+    "vram_peak_mib": 21190,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1891.5,
+     "median": 1920.0,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501.0,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 363.9,
+     "median": 395.305,
+     "min": 132.43,
+     "max": 417.87
+    },
+    "temp_under_load": {
+     "mean": 64.2,
+     "median": 65.0,
+     "min": 56,
+     "max": 67
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "qwen3.6-35b-a3b",
+   "rep": 1,
+   "tag": "measured",
+   "started": "2026-10-09T14:17:46-0700",
+   "elapsed_s": 21.7,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3773.750016,
+     "stddev_ts": 143.188395,
+     "samples": [
+      3521.38,
+      3845.96,
+      3869.63,
+      3829.32,
+      3802.46
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 162.941836,
+     "stddev_ts": 0.469677,
+     "samples": [
+      162.118,
+      162.99,
+      163.175,
+      163.213,
+      163.214
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3608.335241,
+     "stddev_ts": 124.873398,
+     "samples": [
+      3571.45,
+      3405.92,
+      3667.22,
+      3710.77,
+      3686.32
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 161.22191,
+     "stddev_ts": 0.608399,
+     "samples": [
+      160.134,
+      161.479,
+      161.494,
+      161.507,
+      161.497
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3461.536131,
+     "stddev_ts": 88.686532,
+     "samples": [
+      3417.93,
+      3326.55,
+      3510.25,
+      3542.79,
+      3510.15
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 157.815133,
+     "stddev_ts": 0.558688,
+     "samples": [
+      156.817,
+      158.038,
+      158.027,
+      158.098,
+      158.096
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 25,
+    "samples_under_load": 21,
+    "temp_start": 59,
+    "temp_end": 61,
+    "temp_max": 69,
+    "vram_peak_mib": 21660,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1901.4,
+     "median": 1920,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 358.7,
+     "median": 385.36,
+     "min": 133.94,
+     "max": 417.59
+    },
+    "temp_under_load": {
+     "mean": 65.3,
+     "median": 66,
+     "min": 57,
+     "max": 69
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "qwen3.6-35b-a3b",
+   "rep": 2,
+   "tag": "measured",
+   "started": "2026-10-09T14:18:36-0700",
+   "elapsed_s": 21.8,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3765.339695,
+     "stddev_ts": 146.579237,
+     "samples": [
+      3505.94,
+      3835.68,
+      3860.4,
+      3823.6,
+      3801.08
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 162.696588,
+     "stddev_ts": 0.476765,
+     "samples": [
+      161.845,
+      162.869,
+      162.927,
+      162.919,
+      162.922
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3605.130806,
+     "stddev_ts": 110.737221,
+     "samples": [
+      3585.52,
+      3421.36,
+      3663.22,
+      3699.77,
+      3655.77
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 160.596793,
+     "stddev_ts": 0.614365,
+     "samples": [
+      159.499,
+      160.82,
+      160.9,
+      160.878,
+      160.888
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3452.990779,
+     "stddev_ts": 90.511331,
+     "samples": [
+      3394.99,
+      3323.22,
+      3492.66,
+      3530.49,
+      3523.59
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 157.801951,
+     "stddev_ts": 0.590142,
+     "samples": [
+      156.746,
+      158.05,
+      158.068,
+      158.072,
+      158.073
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 25,
+    "samples_under_load": 21,
+    "temp_start": 61,
+    "temp_end": 61,
+    "temp_max": 69,
+    "vram_peak_mib": 21660,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1891.4,
+     "median": 1920,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 359.9,
+     "median": 385.55,
+     "min": 135.05,
+     "max": 419.11
+    },
+    "temp_under_load": {
+     "mean": 66.0,
+     "median": 67,
+     "min": 58,
+     "max": 69
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "ornith-1.5-35b-a3b",
+   "rep": 2,
+   "tag": "measured",
+   "started": "2026-10-09T14:19:25-0700",
+   "elapsed_s": 21.0,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3641.417617,
+     "stddev_ts": 129.654462,
+     "samples": [
+      3410.91,
+      3716.89,
+      3695.2,
+      3706.08,
+      3678
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 177.128821,
+     "stddev_ts": 0.527447,
+     "samples": [
+      176.187,
+      177.354,
+      177.396,
+      177.387,
+      177.321
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3435.455365,
+     "stddev_ts": 95.954496,
+     "samples": [
+      3415.96,
+      3275.63,
+      3484.22,
+      3502.43,
+      3499.04
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 174.406167,
+     "stddev_ts": 0.778644,
+     "samples": [
+      173.015,
+      174.69,
+      174.764,
+      174.761,
+      174.8
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3327.476565,
+     "stddev_ts": 69.245798,
+     "samples": [
+      3293.78,
+      3223.33,
+      3353.77,
+      3395.16,
+      3371.35
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 171.296238,
+     "stddev_ts": 0.726096,
+     "samples": [
+      169.999,
+      171.666,
+      171.582,
+      171.595,
+      171.639
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 24,
+    "samples_under_load": 20,
+    "temp_start": 61,
+    "temp_end": 63,
+    "temp_max": 70,
+    "vram_peak_mib": 21190,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1889.2,
+     "median": 1920.0,
+     "min": 1815,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501.0,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 370.6,
+     "median": 404.495,
+     "min": 136.2,
+     "max": 417.96
+    },
+    "temp_under_load": {
+     "mean": 67.3,
+     "median": 68.0,
+     "min": 59,
+     "max": 70
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "ornith-1.5-35b-a3b",
+   "rep": 3,
+   "tag": "measured",
+   "started": "2026-10-09T14:20:13-0700",
+   "elapsed_s": 21.0,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3653.842212,
+     "stddev_ts": 137.346199,
+     "samples": [
+      3410.6,
+      3733.14,
+      3727.49,
+      3714.83,
+      3683.14
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 176.951102,
+     "stddev_ts": 0.539872,
+     "samples": [
+      175.987,
+      177.136,
+      177.216,
+      177.198,
+      177.218
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3449.196347,
+     "stddev_ts": 103.174861,
+     "samples": [
+      3435.92,
+      3275.84,
+      3491.36,
+      3513.14,
+      3529.72
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 174.619453,
+     "stddev_ts": 0.773766,
+     "samples": [
+      173.238,
+      174.882,
+      174.981,
+      174.983,
+      175.013
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3326.753182,
+     "stddev_ts": 68.664192,
+     "samples": [
+      3292.29,
+      3225.39,
+      3361.41,
+      3400.55,
+      3354.12
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 170.785526,
+     "stddev_ts": 0.650088,
+     "samples": [
+      169.623,
+      171.045,
+      171.091,
+      171.103,
+      171.065
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 24,
+    "samples_under_load": 20,
+    "temp_start": 62,
+    "temp_end": 63,
+    "temp_max": 70,
+    "vram_peak_mib": 21190,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1884.8,
+     "median": 1905.0,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501.0,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 369.2,
+     "median": 399.03999999999996,
+     "min": 136.33,
+     "max": 413.59
+    },
+    "temp_under_load": {
+     "mean": 67.2,
+     "median": 68.5,
+     "min": 59,
+     "max": 70
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "qwen3.6-35b-a3b",
+   "rep": 3,
+   "tag": "measured",
+   "started": "2026-10-09T14:21:02-0700",
+   "elapsed_s": 21.8,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3751.754772,
+     "stddev_ts": 146.626284,
+     "samples": [
+      3493.9,
+      3833.59,
+      3849.05,
+      3802.2,
+      3780.03
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 162.634166,
+     "stddev_ts": 0.42519,
+     "samples": [
+      161.886,
+      162.85,
+      162.898,
+      162.695,
+      162.843
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3594.930928,
+     "stddev_ts": 116.18172,
+     "samples": [
+      3594.7,
+      3394.28,
+      3648.72,
+      3665.46,
+      3671.5
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 160.752085,
+     "stddev_ts": 0.605793,
+     "samples": [
+      159.669,
+      160.985,
+      161.036,
+      161.025,
+      161.045
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3454.797436,
+     "stddev_ts": 91.362515,
+     "samples": [
+      3398.15,
+      3321.41,
+      3507.62,
+      3532.97,
+      3513.84
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 157.758782,
+     "stddev_ts": 0.613564,
+     "samples": [
+      156.662,
+      157.991,
+      158.055,
+      158.054,
+      158.032
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 25,
+    "samples_under_load": 21,
+    "temp_start": 61,
+    "temp_end": 62,
+    "temp_max": 70,
+    "vram_peak_mib": 21660,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1888.6,
+     "median": 1920,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 361.3,
+     "median": 388.21,
+     "min": 135.85,
+     "max": 418.39
+    },
+    "temp_under_load": {
+     "mean": 66.7,
+     "median": 67,
+     "min": 58,
+     "max": 70
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  }
+ ],
+ "primes": [
+  {
+   "model": "ornith-1.5-35b-a3b",
+   "rep": 1,
+   "tag": "prime",
+   "started": "2026-10-09T14:16:17-0700",
+   "elapsed_s": 29.8,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3702.828639,
+     "stddev_ts": 153.777963,
+     "samples": [
+      3429.04,
+      3787.52,
+      3771.04,
+      3779.04,
+      3747.5
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 178.402139,
+     "stddev_ts": 0.553335,
+     "samples": [
+      177.434,
+      178.681,
+      178.718,
+      178.731,
+      178.448
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3483.341286,
+     "stddev_ts": 105.654689,
+     "samples": [
+      3462.42,
+      3308.03,
+      3531.77,
+      3546.95,
+      3567.54
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 175.735441,
+     "stddev_ts": 0.741301,
+     "samples": [
+      174.409,
+      176.065,
+      176.07,
+      176.062,
+      176.07
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3367.266874,
+     "stddev_ts": 75.225994,
+     "samples": [
+      3339.48,
+      3247.28,
+      3410.64,
+      3427.74,
+      3411.19
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 171.610227,
+     "stddev_ts": 0.710384,
+     "samples": [
+      170.339,
+      171.924,
+      171.929,
+      171.929,
+      171.93
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 33,
+    "samples_under_load": 20,
+    "temp_start": 41,
+    "temp_end": 59,
+    "temp_max": 65,
+    "vram_peak_mib": 21190,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1907.2,
+     "median": 1920.0,
+     "min": 1845,
+     "max": 1950
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501.0,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 363.4,
+     "median": 389.94500000000005,
+     "min": 127.03,
+     "max": 418.94
+    },
+    "temp_under_load": {
+     "mean": 59.9,
+     "median": 61.0,
+     "min": 47,
+     "max": 65
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "qwen3.6-35b-a3b",
+   "rep": 1,
+   "tag": "prime",
+   "started": "2026-10-09T14:17:14-0700",
+   "elapsed_s": 29.4,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3773.638771,
+     "stddev_ts": 145.439116,
+     "samples": [
+      3516.7,
+      3843.85,
+      3866.92,
+      3837.64,
+      3803.09
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 163.177678,
+     "stddev_ts": 0.437737,
+     "samples": [
+      162.415,
+      163.447,
+      163.474,
+      163.325,
+      163.228
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3609.579591,
+     "stddev_ts": 118.551357,
+     "samples": [
+      3578.38,
+      3415.16,
+      3667.04,
+      3692.48,
+      3694.84
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 161.160737,
+     "stddev_ts": 0.616632,
+     "samples": [
+      160.058,
+      161.448,
+      161.466,
+      161.428,
+      161.404
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3481.267469,
+     "stddev_ts": 89.507419,
+     "samples": [
+      3428.39,
+      3348.8,
+      3536.54,
+      3556.02,
+      3536.59
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 158.385181,
+     "stddev_ts": 0.583869,
+     "samples": [
+      157.341,
+      158.633,
+      158.654,
+      158.649,
+      158.649
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 32,
+    "samples_under_load": 21,
+    "temp_start": 59,
+    "temp_end": 62,
+    "temp_max": 67,
+    "vram_peak_mib": 21660,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1908.6,
+     "median": 1935,
+     "min": 1830,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9512.9,
+     "median": 9501,
+     "min": 9501,
+     "max": 9751
+    },
+    "power": {
+     "mean": 359.8,
+     "median": 382.14,
+     "min": 138.46,
+     "max": 418.71
+    },
+    "temp_under_load": {
+     "mean": 63.5,
+     "median": 65,
+     "min": 55,
+     "max": 67
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "qwen3.6-35b-a3b",
+   "rep": 2,
+   "tag": "prime",
+   "started": "2026-10-09T14:18:11-0700",
+   "elapsed_s": 21.8,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3771.558208,
+     "stddev_ts": 141.566749,
+     "samples": [
+      3521.73,
+      3838.51,
+      3867.03,
+      3828.22,
+      3802.3
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 162.631403,
+     "stddev_ts": 0.4624,
+     "samples": [
+      161.805,
+      162.809,
+      162.841,
+      162.859,
+      162.843
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3613.248325,
+     "stddev_ts": 112.516841,
+     "samples": [
+      3587.39,
+      3426.86,
+      3672.41,
+      3687.23,
+      3692.35
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 160.78391,
+     "stddev_ts": 0.670535,
+     "samples": [
+      159.584,
+      161.083,
+      161.081,
+      161.083,
+      161.088
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3455.533424,
+     "stddev_ts": 88.824059,
+     "samples": [
+      3399.47,
+      3325.82,
+      3515.58,
+      3524.68,
+      3512.13
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 157.845951,
+     "stddev_ts": 0.588791,
+     "samples": [
+      156.793,
+      158.109,
+      158.109,
+      158.109,
+      158.109
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 25,
+    "samples_under_load": 21,
+    "temp_start": 60,
+    "temp_end": 61,
+    "temp_max": 69,
+    "vram_peak_mib": 21660,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1892.9,
+     "median": 1920,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 358.9,
+     "median": 382.55,
+     "min": 134.82,
+     "max": 419.3
+    },
+    "temp_under_load": {
+     "mean": 65.9,
+     "median": 67,
+     "min": 58,
+     "max": 69
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "ornith-1.5-35b-a3b",
+   "rep": 2,
+   "tag": "prime",
+   "started": "2026-10-09T14:19:01-0700",
+   "elapsed_s": 21.0,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3651.800335,
+     "stddev_ts": 134.178709,
+     "samples": [
+      3414.1,
+      3735.53,
+      3705.13,
+      3719.37,
+      3684.88
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 177.380001,
+     "stddev_ts": 0.679789,
+     "samples": [
+      176.175,
+      177.636,
+      177.558,
+      177.747,
+      177.784
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3446.85353,
+     "stddev_ts": 114.51022,
+     "samples": [
+      3419.71,
+      3258.1,
+      3500.36,
+      3523.6,
+      3532.49
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 174.550838,
+     "stddev_ts": 0.61973,
+     "samples": [
+      173.442,
+      174.823,
+      174.827,
+      174.823,
+      174.84
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3332.031458,
+     "stddev_ts": 84.298283,
+     "samples": [
+      3279.21,
+      3208.85,
+      3383.03,
+      3399.38,
+      3389.69
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 171.338968,
+     "stddev_ts": 0.689831,
+     "samples": [
+      170.105,
+      171.647,
+      171.669,
+      171.647,
+      171.627
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 24,
+    "samples_under_load": 20,
+    "temp_start": 61,
+    "temp_end": 63,
+    "temp_max": 70,
+    "vram_peak_mib": 21190,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1885.5,
+     "median": 1920.0,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501.0,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 370.0,
+     "median": 400.56,
+     "min": 135.64,
+     "max": 415.38
+    },
+    "temp_under_load": {
+     "mean": 66.7,
+     "median": 68.0,
+     "min": 58,
+     "max": 70
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "ornith-1.5-35b-a3b",
+   "rep": 3,
+   "tag": "prime",
+   "started": "2026-10-09T14:19:49-0700",
+   "elapsed_s": 21.0,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3647.663669,
+     "stddev_ts": 132.881497,
+     "samples": [
+      3412.32,
+      3731.22,
+      3704.29,
+      3711.49,
+      3679
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 177.05124,
+     "stddev_ts": 0.509301,
+     "samples": [
+      176.141,
+      177.314,
+      177.276,
+      177.263,
+      177.262
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3446.095345,
+     "stddev_ts": 102.671694,
+     "samples": [
+      3414.84,
+      3279.36,
+      3498.49,
+      3514.13,
+      3523.65
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 174.465375,
+     "stddev_ts": 0.810414,
+     "samples": [
+      173.016,
+      174.825,
+      174.835,
+      174.816,
+      174.835
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3333.79016,
+     "stddev_ts": 79.826398,
+     "samples": [
+      3290.55,
+      3213.4,
+      3380,
+      3399.42,
+      3385.58
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 171.30638,
+     "stddev_ts": 0.759327,
+     "samples": [
+      169.95,
+      171.583,
+      171.663,
+      171.67,
+      171.667
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 24,
+    "samples_under_load": 20,
+    "temp_start": 62,
+    "temp_end": 63,
+    "temp_max": 70,
+    "vram_peak_mib": 21190,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1888.5,
+     "median": 1920.0,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501.0,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 371.5,
+     "median": 405.19,
+     "min": 136.14,
+     "max": 416.5
+    },
+    "temp_under_load": {
+     "mean": 67.5,
+     "median": 69.0,
+     "min": 59,
+     "max": 70
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "model": "qwen3.6-35b-a3b",
+   "rep": 3,
+   "tag": "prime",
+   "started": "2026-10-09T14:20:37-0700",
+   "elapsed_s": 21.8,
+   "rows": [
+    {
+     "kind": "pp",
+     "depth": 0,
+     "avg_ts": 3745.80734,
+     "stddev_ts": 148.583501,
+     "samples": [
+      3482.18,
+      3815.81,
+      3837.86,
+      3808.4,
+      3784.78
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 0,
+     "avg_ts": 162.587324,
+     "stddev_ts": 0.451769,
+     "samples": [
+      161.781,
+      162.74,
+      162.804,
+      162.82,
+      162.791
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 4096,
+     "avg_ts": 3597.104161,
+     "stddev_ts": 112.364627,
+     "samples": [
+      3594.21,
+      3404.2,
+      3646.6,
+      3662.24,
+      3678.27
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 4096,
+     "avg_ts": 160.786457,
+     "stddev_ts": 0.620964,
+     "samples": [
+      159.676,
+      161.06,
+      161.065,
+      161.071,
+      161.061
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "pp",
+     "depth": 8192,
+     "avg_ts": 3454.294661,
+     "stddev_ts": 84.706754,
+     "samples": [
+      3407.41,
+      3328.25,
+      3514.49,
+      3528.53,
+      3492.79
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    },
+    {
+     "kind": "tg",
+     "depth": 8192,
+     "avg_ts": 157.394125,
+     "stddev_ts": 0.625307,
+     "samples": [
+      156.276,
+      157.67,
+      157.676,
+      157.681,
+      157.668
+     ],
+     "build_commit": "5266f24",
+     "build_number": 1,
+     "n_threads": 8,
+     "gpu_info": "NVIDIA GeForce RTX 3090"
+    }
+   ],
+   "telemetry": {
+    "samples": 25,
+    "samples_under_load": 21,
+    "temp_start": 62,
+    "temp_end": 62,
+    "temp_max": 70,
+    "vram_peak_mib": 21660,
+    "pcie_gen_under_load": [
+     4
+    ],
+    "pcie_gen_under_load_share": {
+     "4": 1.0
+    },
+    "pcie_width_under_load": [
+     16
+    ],
+    "sm_clock": {
+     "mean": 1884.3,
+     "median": 1905,
+     "min": 1800,
+     "max": 1935
+    },
+    "mem_clock": {
+     "mean": 9501,
+     "median": 9501,
+     "min": 9501,
+     "max": 9501
+    },
+    "power": {
+     "mean": 360.2,
+     "median": 386.06,
+     "min": 136.57,
+     "max": 418.46
+    },
+    "temp_under_load": {
+     "mean": 67,
+     "median": 68,
+     "min": 59,
+     "max": 70
+    },
+    "clock_event_reasons_under_load": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  }
+ ]
+}

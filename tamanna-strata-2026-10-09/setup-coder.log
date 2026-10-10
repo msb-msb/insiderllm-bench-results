@@ -1,0 +1,254 @@
+Strata - Qwen3.8-Flash-Next on a normal PC (a GPU + system RAM + CPU)
+
+=== Step 1: checking your PC ===
+  [ok] GPU: NVIDIA GeForce RTX 3090, 24.0 GB VRAM, compute capability 8.6, driver 580.178.04
+  [ok] RAM: 63 GB
+  [ok] CPU: AMD Ryzen 7 5700X 8-Core Processor (AVX2)
+
+=== Step 2: your choices ===
+  [ok] model: Qwen3.8-Flash-Next Coder
+
+  1) IQ1_M    the Coder's only size: half the experts, stored like IQ3_S (3.5 bits); download 58 GB, uses ~23 GB of RAM
+  [ok] size: IQ1_M
+  [ok] context: 34816 tokens
+  [ok] KV cache: 8-bit
+  [ok] images: off
+  [ok] experimental speed projection: off
+
+=== Step 3: Python packages ===
+  [ok] numpy, jinja2, regex, pyyaml, tqdm, requests, cmake, ninja, pillow, psutil already installed
+
+=== Step 4: the Strata engine ===
+  [ok] llama.cpp 3cf0325 (gguf-py, ggml, mtmd)
+  [ok] engine already built for this PC
+  [ok] engine: /home/minotaur/strata/engine/strata
+
+=== Step 5: downloading Qwen3.8-Flash-Next Coder IQ1_M ===
+  [ok] model files present
+
+=== Step 6: preparing the model for Strata ===
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/iq_pack.py --gguf /home/minotaur/bench-models/qwen3.8-flash-next-coder/IQ1_M/Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf --out /home/minotaur/Strata-data/packs/coder-iq1_m
+tokenizer/: vocab 248320, merges 247587, pre qwen35, specials {'tokenizer.ggml.eos_token_id': 248046, 'tokenizer.ggml.padding_token_id': 248044, 'tokenizer.ggml.bos_token_id': 248044}
+model shards: Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf, Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00002-of-00002.gguf
+index.txt: 1079 tensors, 302 served natively, 0 in extra.bin, arena 1.37 GiB
+  [ok] model prepared: /home/minotaur/Strata-data/packs/coder-iq1_m
+  The MTP draft layer (speculative decoding, ~2x faster output) comes from the original Qwen checkpoint:
+  only its ~5 GB of MTP tensors are downloaded.
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/mtp_fetch.py fetch --out /home/minotaur/Strata-data/mtp
+mtp.fc_embedding.weight 100%
+mtp.fc_hidden.weight 100%
+mtp.hyper_connection_mixer.hc_norm.weight 100%
+mtp.hyper_connection_mixer.input_mix_weight_down.weight 100%
+mtp.hyper_connection_mixer.input_mix_weight_up.weight 100%
+mtp.layers.0.attn_hyper_connection.block_inject_weight.weight 100%
+mtp.layers.0.attn_hyper_connection.hc_norm.weight 100%
+mtp.layers.0.attn_hyper_connection.input_mix_weight_down.weight 100%
+mtp.layers.0.attn_hyper_connection.input_mix_weight_up.weight 100%
+mtp.layers.0.mlp.experts.down_proj 4%
+mtp.layers.0.mlp.experts.down_proj 8%
+mtp.layers.0.mlp.experts.down_proj 12%
+mtp.layers.0.mlp.experts.down_proj 16%
+mtp.layers.0.mlp.experts.down_proj 20%
+mtp.layers.0.mlp.experts.down_proj 24%
+mtp.layers.0.mlp.experts.down_proj 28%
+mtp.layers.0.mlp.experts.down_proj 32%
+mtp.layers.0.mlp.experts.down_proj 36%
+mtp.layers.0.mlp.experts.down_proj 40%
+mtp.layers.0.mlp.experts.down_proj 44%
+mtp.layers.0.mlp.experts.down_proj 48%
+mtp.layers.0.mlp.experts.down_proj 52%
+mtp.layers.0.mlp.experts.down_proj 56%
+mtp.layers.0.mlp.experts.down_proj 60%
+mtp.layers.0.mlp.experts.down_proj 64%
+mtp.layers.0.mlp.experts.down_proj 68%
+mtp.layers.0.mlp.experts.down_proj 72%
+mtp.layers.0.mlp.experts.down_proj 76%
+mtp.layers.0.mlp.experts.down_proj 80%
+mtp.layers.0.mlp.experts.down_proj 84%
+mtp.layers.0.mlp.experts.down_proj 88%
+mtp.layers.0.mlp.experts.down_proj 92%
+mtp.layers.0.mlp.experts.down_proj 96%
+mtp.layers.0.mlp.experts.down_proj 100%
+mtp.layers.0.mlp.experts.gate_up_proj 2%
+mtp.layers.0.mlp.experts.gate_up_proj 4%
+mtp.layers.0.mlp.experts.gate_up_proj 6%
+mtp.layers.0.mlp.experts.gate_up_proj 8%
+mtp.layers.0.mlp.experts.gate_up_proj 10%
+mtp.layers.0.mlp.experts.gate_up_proj 12%
+mtp.layers.0.mlp.experts.gate_up_proj 14%
+mtp.layers.0.mlp.experts.gate_up_proj 16%
+mtp.layers.0.mlp.experts.gate_up_proj 18%
+mtp.layers.0.mlp.experts.gate_up_proj 20%
+mtp.layers.0.mlp.experts.gate_up_proj 22%
+mtp.layers.0.mlp.experts.gate_up_proj 24%
+mtp.layers.0.mlp.experts.gate_up_proj 26%
+mtp.layers.0.mlp.experts.gate_up_proj 28%
+mtp.layers.0.mlp.experts.gate_up_proj 30%
+mtp.layers.0.mlp.experts.gate_up_proj 32%
+mtp.layers.0.mlp.experts.gate_up_proj 34%
+mtp.layers.0.mlp.experts.gate_up_proj 36%
+mtp.layers.0.mlp.experts.gate_up_proj 38%
+mtp.layers.0.mlp.experts.gate_up_proj 40%
+mtp.layers.0.mlp.experts.gate_up_proj 42%
+mtp.layers.0.mlp.experts.gate_up_proj 44%
+mtp.layers.0.mlp.experts.gate_up_proj 46%
+mtp.layers.0.mlp.experts.gate_up_proj 48%
+mtp.layers.0.mlp.experts.gate_up_proj 50%
+mtp.layers.0.mlp.experts.gate_up_proj 52%
+mtp.layers.0.mlp.experts.gate_up_proj 54%
+mtp.layers.0.mlp.experts.gate_up_proj 56%
+mtp.layers.0.mlp.experts.gate_up_proj 58%
+mtp.layers.0.mlp.experts.gate_up_proj 60%
+mtp.layers.0.mlp.experts.gate_up_proj 62%
+mtp.layers.0.mlp.experts.gate_up_proj 64%
+mtp.layers.0.mlp.experts.gate_up_proj 66%
+mtp.layers.0.mlp.experts.gate_up_proj 68%
+mtp.layers.0.mlp.experts.gate_up_proj 70%
+mtp.layers.0.mlp.experts.gate_up_proj 72%
+mtp.layers.0.mlp.experts.gate_up_proj 74%
+mtp.layers.0.mlp.experts.gate_up_proj 76%
+mtp.layers.0.mlp.experts.gate_up_proj 78%
+mtp.layers.0.mlp.experts.gate_up_proj 80%
+mtp.layers.0.mlp.experts.gate_up_proj 82%
+mtp.layers.0.mlp.experts.gate_up_proj 84%
+mtp.layers.0.mlp.experts.gate_up_proj 86%
+mtp.layers.0.mlp.experts.gate_up_proj 88%
+mtp.layers.0.mlp.experts.gate_up_proj 90%
+mtp.layers.0.mlp.experts.gate_up_proj 92%
+mtp.layers.0.mlp.experts.gate_up_proj 94%
+mtp.layers.0.mlp.experts.gate_up_proj 96%
+mtp.layers.0.mlp.experts.gate_up_proj 98%
+mtp.layers.0.mlp.experts.gate_up_proj 100%
+mtp.layers.0.mlp.gate.weight 100%
+mtp.layers.0.mlp.shared_expert.down_proj.weight 100%
+mtp.layers.0.mlp.shared_expert.gate_proj.weight 100%
+mtp.layers.0.mlp.shared_expert.up_proj.weight 100%
+mtp.layers.0.mlp.shared_expert_gate.weight 100%
+mtp.layers.0.mlp_hyper_connection.block_inject_weight.weight 100%
+mtp.layers.0.mlp_hyper_connection.hc_norm.weight 100%
+mtp.layers.0.mlp_hyper_connection.input_mix_weight_down.weight 100%
+mtp.layers.0.mlp_hyper_connection.input_mix_weight_up.weight 100%
+mtp.layers.0.self_attn.indexer.index_qk_proj.weight 100%
+mtp.layers.0.self_attn.indexer.k_layernorm.weight 100%
+mtp.layers.0.self_attn.indexer.q_layernorm.weight 100%
+mtp.layers.0.self_attn.k_norm.weight 100%
+mtp.layers.0.self_attn.k_proj.weight 100%
+mtp.layers.0.self_attn.o_proj.weight 100%
+mtp.layers.0.self_attn.q_norm.weight 100%
+mtp.layers.0.self_attn.q_proj.weight 100%
+mtp.layers.0.self_attn.v_proj.weight 100%
+mtp.pre_fc_norm_embedding.weight 100%
+mtp.pre_fc_norm_hidden.weight 100%
+# MTP block in the BF16 checkpoint
+
+31 tensors, 5.214 GB, in 28 shards.
+
+| tensor | dtype | shape | MB |
+|---|---|---|---:|
+| `mtp.fc_embedding.weight` | BF16 | 2560x2560 | 13.1 |
+| `mtp.fc_hidden.weight` | BF16 | 2560x2560 | 13.1 |
+| `mtp.hyper_connection_mixer.hc_norm.weight` | BF16 | 10240 | 0.0 |
+| `mtp.hyper_connection_mixer.input_mix_weight_down.weight` | BF16 | 320x10240 | 6.6 |
+| `mtp.hyper_connection_mixer.input_mix_weight_up.weight` | BF16 | 10240x320 | 6.6 |
+| `mtp.layers.0.attn_hyper_connection.block_inject_weight.weight` | BF16 | 4x10240 | 0.1 |
+| `mtp.layers.0.attn_hyper_connection.hc_norm.weight` | BF16 | 10240 | 0.0 |
+| `mtp.layers.0.attn_hyper_connection.input_mix_weight_down.weight` | BF16 | 320x10240 | 6.6 |
+| `mtp.layers.0.attn_hyper_connection.input_mix_weight_up.weight` | BF16 | 10240x320 | 6.6 |
+| `mtp.layers.0.mlp.experts.down_proj` | BF16 | 512x2560x640 | 1677.7 |
+| `mtp.layers.0.mlp.experts.gate_up_proj` | BF16 | 512x1280x2560 | 3355.4 |
+| `mtp.layers.0.mlp.gate.weight` | BF16 | 512x2560 | 2.6 |
+| `mtp.layers.0.mlp.shared_expert.down_proj.weight` | BF16 | 2560x640 | 3.3 |
+| `mtp.layers.0.mlp.shared_expert.gate_proj.weight` | BF16 | 640x2560 | 3.3 |
+| `mtp.layers.0.mlp.shared_expert.up_proj.weight` | BF16 | 640x2560 | 3.3 |
+| `mtp.layers.0.mlp.shared_expert_gate.weight` | BF16 | 1x2560 | 0.0 |
+| `mtp.layers.0.mlp_hyper_connection.block_inject_weight.weight` | BF16 | 4x10240 | 0.1 |
+| `mtp.layers.0.mlp_hyper_connection.hc_norm.weight` | BF16 | 10240 | 0.0 |
+| `mtp.layers.0.mlp_hyper_connection.input_mix_weight_down.weight` | BF16 | 320x10240 | 6.6 |
+| `mtp.layers.0.mlp_hyper_connection.input_mix_weight_up.weight` | BF16 | 10240x320 | 6.6 |
+| `mtp.layers.0.self_attn.indexer.index_qk_proj.weight` | BF16 | 640x2560 | 3.3 |
+| `mtp.layers.0.self_attn.indexer.k_layernorm.weight` | BF16 | 128 | 0.0 |
+| `mtp.layers.0.self_attn.indexer.q_layernorm.weight` | BF16 | 128 | 0.0 |
+| `mtp.layers.0.self_attn.k_norm.weight` | BF16 | 256 | 0.0 |
+| `mtp.layers.0.self_attn.k_proj.weight` | BF16 | 512x2560 | 2.6 |
+| `mtp.layers.0.self_attn.o_proj.weight` | BF16 | 2560x6144 | 31.5 |
+| `mtp.layers.0.self_attn.q_norm.weight` | BF16 | 256 | 0.0 |
+| `mtp.layers.0.self_attn.q_proj.weight` | BF16 | 12288x2560 | 62.9 |
+| `mtp.layers.0.self_attn.v_proj.weight` | BF16 | 512x2560 | 2.6 |
+| `mtp.pre_fc_norm_embedding.weight` | BF16 | 2560 | 0.0 |
+| `mtp.pre_fc_norm_hidden.weight` | BF16 | 10240 | 0.0 |
+
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/mtp_pack.py --src /home/minotaur/Strata-data/mtp --experts q2_0 --out /home/minotaur/Strata-data/mtp/mtp-q2_0.gguf
+mtp.fc_embedding.weight: BF16 13.1 MB
+mtp.fc_hidden.weight: BF16 13.1 MB
+mtp.hyper_connection_mixer.hc_norm.weight: F32 0.0 MB
+mtp.hyper_connection_mixer.input_mix_weight_down.weight: BF16 6.6 MB
+mtp.hyper_connection_mixer.input_mix_weight_up.weight: BF16 6.6 MB
+mtp.layers.0.attn_hyper_connection.block_inject_weight.weight: BF16 0.1 MB
+mtp.layers.0.attn_hyper_connection.hc_norm.weight: F32 0.0 MB
+mtp.layers.0.attn_hyper_connection.input_mix_weight_down.weight: BF16 6.6 MB
+mtp.layers.0.attn_hyper_connection.input_mix_weight_up.weight: BF16 6.6 MB
+mtp.layers.0.mlp.experts.down_proj: q2_0 235.9 MB
+mtp.layers.0.mlp.experts.gate_up_proj: q2_0 471.9 MB
+mtp.layers.0.mlp.gate.weight: BF16 2.6 MB
+mtp.layers.0.mlp.shared_expert.down_proj.weight: BF16 3.3 MB
+mtp.layers.0.mlp.shared_expert.gate_proj.weight: BF16 3.3 MB
+mtp.layers.0.mlp.shared_expert.up_proj.weight: BF16 3.3 MB
+mtp.layers.0.mlp.shared_expert_gate.weight: BF16 0.0 MB
+mtp.layers.0.mlp_hyper_connection.block_inject_weight.weight: BF16 0.1 MB
+mtp.layers.0.mlp_hyper_connection.hc_norm.weight: F32 0.0 MB
+mtp.layers.0.mlp_hyper_connection.input_mix_weight_down.weight: BF16 6.6 MB
+mtp.layers.0.mlp_hyper_connection.input_mix_weight_up.weight: BF16 6.6 MB
+mtp.layers.0.self_attn.indexer.index_qk_proj.weight: BF16 3.3 MB
+mtp.layers.0.self_attn.indexer.k_layernorm.weight: F32 0.0 MB
+mtp.layers.0.self_attn.indexer.q_layernorm.weight: F32 0.0 MB
+mtp.layers.0.self_attn.k_norm.weight: F32 0.0 MB
+mtp.layers.0.self_attn.k_proj.weight: BF16 2.6 MB
+mtp.layers.0.self_attn.o_proj.weight: BF16 31.5 MB
+mtp.layers.0.self_attn.q_norm.weight: F32 0.0 MB
+mtp.layers.0.self_attn.q_proj.weight: BF16 62.9 MB
+mtp.layers.0.self_attn.v_proj.weight: BF16 2.6 MB
+mtp.pre_fc_norm_embedding.weight: F32 0.0 MB
+mtp.pre_fc_norm_hidden.weight: F32 0.0 MB
+wrote /home/minotaur/Strata-data/mtp/mtp-q2_0.gguf: 0.889 GB of tensor data
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/mtp_rt.py --gguf /home/minotaur/Strata-data/mtp/mtp-q2_0.gguf --out /home/minotaur/Strata-data/mtp/rt
+experts.bin 707788800 B, dense.bin 116099072 B, 29 tensors -> /home/minotaur/Strata-data/mtp/rt
+  fc_embedding.weight q8_0 2560 2560 0 6963200
+  fc_hidden.weight q8_0 2560 2560 6963200 6963200
+  hyper_connection_mixer.hc_norm.weight f32 1 10240 13926400 40960
+  hyper_connection_mixer.input_mix_weight_down.weight bf16 320 10240 13967360 6553600
+  hyper_connection_mixer.input_mix_weight_up.weight bf16 10240 320 20520960 6553600
+  attn_hyper_connection.block_inject_weight.weight bf16 4 10240 27074560 81920
+  attn_hyper_connection.hc_norm.weight f32 1 10240 27156480 40960
+  attn_hyper_connection.input_mix_weight_down.weight bf16 320 10240 27197440 6553600
+  attn_hyper_connection.input_mix_weight_up.weight bf16 10240 320 33751040 6553600
+  mlp.gate.weight bf16 512 2560 40304640 2621440
+  mlp.shared_expert.down_proj.weight q8_0 2560 640 42926080 1740800
+  mlp.shared_expert.gate_proj.weight q8_0 640 2560 44666880 1740800
+  mlp.shared_expert.up_proj.weight q8_0 640 2560 46407680 1740800
+  mlp.shared_expert_gate.weight bf16 1 2560 48148480 5120
+  mlp_hyper_connection.block_inject_weight.weight bf16 4 10240 48153600 81920
+  mlp_hyper_connection.hc_norm.weight f32 1 10240 48235520 40960
+  mlp_hyper_connection.input_mix_weight_down.weight bf16 320 10240 48276480 6553600
+  mlp_hyper_connection.input_mix_weight_up.weight bf16 10240 320 54830080 6553600
+  self_attn.indexer.index_qk_proj.weight q8_0 640 2560 61383680 1740800
+  self_attn.indexer.k_layernorm.weight f32 1 128 63124480 512
+  self_attn.indexer.q_layernorm.weight f32 1 128 63124992 512
+  self_attn.k_norm.weight f32 1 256 63125504 1024
+  self_attn.k_proj.weight q8_0 512 2560 63126528 1392640
+  self_attn.o_proj.weight q8_0 2560 6144 64519168 16711680
+  self_attn.q_norm.weight f32 1 256 81230848 1024
+  self_attn.q_proj.weight q8_0 12288 2560 81231872 33423360
+  self_attn.v_proj.weight q8_0 512 2560 114655232 1392640
+  pre_fc_norm_embedding.weight f32 1 2560 116047872 10240
+  pre_fc_norm_hidden.weight f32 1 10240 116058112 40960
+  [ok] MTP draft layer: /home/minotaur/Strata-data/mtp/rt
+
+=== Step 7: writing the start script ===
+  [ok] start script: run-coder-iq1_m.sh
+
+All set.
+  API (OpenAI):     http://127.0.0.1:8080/v1   (any API key; model name: anything)
+  API (Anthropic):  http://127.0.0.1:8080/v1/messages
+  Next time:        just run ./setup.sh (or run-coder-iq1_m.sh) - it starts right away
+  Several requests at once (opt-in): --parallel 4 decodes up to 4 together instead of one after the other (each takes ~0.6 GB of VRAM from the expert cache; docs/BATCHING.md).
+SETUP rc=0

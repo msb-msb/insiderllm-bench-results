@@ -1,0 +1,48 @@
+Strata - Qwen3.8-Flash-Next on a normal PC (a GPU + system RAM + CPU)
+
+=== Step 1: checking your PC ===
+  [ok] GPU: NVIDIA GeForce RTX 3090, 24.0 GB VRAM, compute capability 8.6, driver 580.178.04
+  [ok] RAM: 63 GB
+  [ok] CPU: AMD Ryzen 7 5700X 8-Core Processor (AVX2)
+
+=== Step 2: your choices ===
+  [ok] model: Qwen3.8-Flash-Next
+
+  1) Q2_0     2-bit, the fastest; download 66 GB, uses ~34 GB of RAM
+  2) IQ2_XS   2-bit i-quant, a little better quality, close in speed; download 68 GB, uses ~36 GB of RAM
+  3) IQ3_XXS  3-bit i-quant, better quality, slower (more CPU work per token); download 76 GB, uses ~43 GB of RAM
+  4) IQ3_S    3.5-bit i-quant, the best quality (matches the full model), the slowest; needs a 64 GB PC with little else running; download 84 GB, uses ~50 GB of RAM
+  [ok] size: IQ3_XXS
+  [ok] context: 34816 tokens
+  [ok] KV cache: 8-bit
+  [ok] images: off
+  [ok] experimental speed projection: off
+
+=== Step 3: Python packages ===
+  [ok] numpy, jinja2, regex, pyyaml, tqdm, requests, cmake, ninja, pillow, psutil already installed
+
+=== Step 4: the Strata engine ===
+  [ok] llama.cpp 3cf0325 (gguf-py, ggml, mtmd)
+  [ok] engine already built for this PC
+  [ok] engine: /home/minotaur/strata/engine/strata
+
+=== Step 5: downloading Qwen3.8-Flash-Next IQ3_XXS ===
+  [ok] model files present
+
+=== Step 6: preparing the model for Strata ===
+  > /home/minotaur/strata/.venv/bin/python /home/minotaur/strata/tools/iq_pack.py --gguf /home/minotaur/bench-models/qwen3.8-flash-next-ista-iq3xxs/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf --out /home/minotaur/Strata-data/packs/iq3_xxs
+tokenizer/: vocab 248320, merges 247587, pre qwen35, specials {'tokenizer.ggml.eos_token_id': 248046, 'tokenizer.ggml.padding_token_id': 248044, 'tokenizer.ggml.bos_token_id': 248044}
+model shards: Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf, Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00002-of-00002.gguf
+index.txt: 1079 tensors, 302 served natively, 0 in extra.bin, arena 1.43 GiB
+  [ok] model prepared: /home/minotaur/Strata-data/packs/iq3_xxs
+  [ok] MTP draft layer: /home/minotaur/Strata-data/mtp/rt
+
+=== Step 7: writing the start script ===
+  [ok] start script: run-iq3_xxs.sh
+
+All set.
+  API (OpenAI):     http://127.0.0.1:8080/v1   (any API key; model name: anything)
+  API (Anthropic):  http://127.0.0.1:8080/v1/messages
+  Next time:        just run ./setup.sh (or run-iq3_xxs.sh) - it starts right away
+  Several requests at once: left at one at a time - parallel N reduces waiting for several users but costs about 10-25% speed per request on this card (docs/BATCHING.md).
+SETUP rc=0

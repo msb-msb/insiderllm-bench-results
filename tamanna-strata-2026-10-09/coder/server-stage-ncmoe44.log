@@ -1,0 +1,29 @@
+0.00.076.581 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.076.870 W srv  llama_server: -----------------
+0.00.076.871 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.00.076.872 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.00.076.872 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.00.076.872 W srv  llama_server: -----------------
+0.00.078.148 I srv    load_model: loading model '/home/minotaur/bench-models/qwen3.8-flash-next-coder/IQ1_M/Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf'
+0.00.945.898 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.03.070.843 I cmn          init: llama threadpool init, n_threads = 8
+0.03.379.038 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 34816, kv_unified = 'false'
+0.03.383.221 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.03.383.253 I srv  llama_server: model loaded
+0.03.383.257 I srv  llama_server: listening on http://127.0.0.1:8099
+0.04.296.586 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.04.296.650 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.07.938.430 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   4096, progress = 0.13, t =   3.64 s / 1124.73 tokens per second
+0.11.628.631 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   8192, progress = 0.25, t =   7.33 s / 1117.30 tokens per second
+0.15.457.370 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  12288, progress = 0.38, t =  11.16 s / 1101.01 tokens per second
+0.19.422.590 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  16384, progress = 0.50, t =  15.13 s / 1083.18 tokens per second
+0.23.495.369 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  20480, progress = 0.63, t =  19.20 s / 1066.74 tokens per second
+0.27.713.672 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  24576, progress = 0.76, t =  23.42 s / 1049.49 tokens per second
+0.31.900.903 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  28448, progress = 0.87, t =  27.60 s / 1030.57 tokens per second
+0.36.387.091 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  32540, progress = 1.00, t =  32.09 s / 1014.01 tokens per second
+0.37.400.824 I slot print_timing: id  0 | task 0 | prompt eval time =   32318.82 ms / 32544 tokens (    0.99 ms per token,  1006.97 tokens per second)
+0.37.400.827 I slot print_timing: id  0 | task 0 |        eval time =     785.32 ms /    16 tokens (   52.35 ms per token,    19.10 tokens per second)
+0.37.400.828 I slot print_timing: id  0 | task 0 |       total time =   33104.14 ms / 32560 tokens
+0.37.400.833 I slot print_timing: id  0 | task 0 |    graphs reused =         15
+0.37.401.555 I slot      release: id  0 | task 0 | stop processing: n_tokens = 32559, truncated = 0
+0.37.418.788 I srv    operator(): operator(): cleaning up before exit...

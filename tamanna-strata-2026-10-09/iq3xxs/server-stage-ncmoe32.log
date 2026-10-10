@@ -1,0 +1,87 @@
+0.00.083.181 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.083.476 W srv  llama_server: -----------------
+0.00.083.478 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.00.083.478 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.00.083.478 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.00.083.478 W srv  llama_server: -----------------
+0.00.084.747 I srv    load_model: loading model '/home/minotaur/bench-models/qwen3.8-flash-next-ista-iq3xxs/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf'
+0.00.691.122 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.00.945.614 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.04.521.981 I cmn          init: llama threadpool init, n_threads = 8
+0.04.844.371 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 34816, kv_unified = 'false'
+0.04.848.520 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.04.848.549 I srv  llama_server: model loaded
+0.04.848.553 I srv  llama_server: listening on http://127.0.0.1:8099
+0.05.714.436 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.05.714.489 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+/home/minotaur/llama-v0.4.0/ggml/src/ggml-cuda/ggml-cuda.cu:108: CUDA error
+0.06.233.621 E CUDA error: out of memory
+0.06.233.626 E   current device: 0, in function alloc at /home/minotaur/llama-v0.4.0/ggml/src/ggml-cuda/ggml-cuda.cu:591
+0.06.233.627 E   cuMemCreate(&handle, reserve_size, &prop, 0)
+⚠️ warning: The current terminal doesn't support styling.  Styled output might not appear as expected.
+[New LWP 23763]
+[New LWP 23759]
+[New LWP 23758]
+[New LWP 23757]
+[New LWP 23756]
+[New LWP 23755]
+[New LWP 23754]
+[New LWP 23753]
+[New LWP 23746]
+[New LWP 23745]
+[New LWP 23744]
+[New LWP 23743]
+[New LWP 23742]
+[New LWP 23741]
+[New LWP 23740]
+[New LWP 23739]
+[New LWP 23738]
+[New LWP 23737]
+[New LWP 23736]
+[New LWP 23735]
+[New LWP 23734]
+[New LWP 23733]
+[New LWP 23732]
+[New LWP 23731]
+[New LWP 23730]
+[New LWP 23729]
+[New LWP 23725]
+[New LWP 23724]
+[New LWP 23723]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/usr/lib/x86_64-linux-gnu/libthread_db.so.1".
+__syscall_cancel_arch () at ../sysdeps/unix/sysv/linux/x86_64/syscall_cancel.S:56
+⚠️ warning: 56	../sysdeps/unix/sysv/linux/x86_64/syscall_cancel.S: No such file or directory
+#0  __syscall_cancel_arch () at ../sysdeps/unix/sysv/linux/x86_64/syscall_cancel.S:56
+56	in ../sysdeps/unix/sysv/linux/x86_64/syscall_cancel.S
+#1  0x00007192f06a039c in __internal_syscall_cancel (a1=<optimized out>, a2=<optimized out>, a3=<optimized out>, a4=<optimized out>, a5=0, a6=0, nr=61) at ./nptl/cancellation.c:49
+⚠️ warning: 49	./nptl/cancellation.c: No such file or directory
+#2  __syscall_cancel (a1=<optimized out>, a2=<optimized out>, a3=<optimized out>, a4=<optimized out>, a5=a5@entry=0, a6=a6@entry=0, nr=61) at ./nptl/cancellation.c:75
+75	in ./nptl/cancellation.c
+#3  0x00007192f071cacf in __GI___wait4 (pid=<optimized out>, stat_loc=<optimized out>, options=<optimized out>, usage=<optimized out>) at ../sysdeps/unix/sysv/linux/wait4.c:30
+⚠️ warning: 30	../sysdeps/unix/sysv/linux/wait4.c: No such file or directory
+#4  0x00007192f1448833 in ggml_print_backtrace () from /home/minotaur/llama-v0.4.0/build/bin/libggml-base.so.0
+#5  0x00007192f14489db in ggml_abort () from /home/minotaur/llama-v0.4.0/build/bin/libggml-base.so.0
+#6  0x00007192e3e6d667 in ggml_cuda_error(char const*, char const*, char const*, int, char const*) () from /home/minotaur/llama-v0.4.0/build/bin/libggml-cuda.so.0
+#7  0x00007192e3e87973 in ggml_cuda_pool_vmm::alloc(unsigned long, unsigned long*) () from /home/minotaur/llama-v0.4.0/build/bin/libggml-cuda.so.0
+#8  0x00007192e3cad938 in argsort_f32_i32_cuda_cub(ggml_cuda_pool&, float const*, int*, int, int, ggml_sort_order, CUstream_st*) () from /home/minotaur/llama-v0.4.0/build/bin/libggml-cuda.so.0
+#9  0x00007192e40370df in ggml_cuda_op_top_k(ggml_backend_cuda_context&, ggml_tensor*) () from /home/minotaur/llama-v0.4.0/build/bin/libggml-cuda.so.0
+#10 0x00007192e3e83c19 in ggml_backend_cuda_graph_compute(ggml_backend*, ggml_cgraph*) () from /home/minotaur/llama-v0.4.0/build/bin/libggml-cuda.so.0
+#11 0x00007192f1467c4f in ggml_backend_sched_graph_compute_async () from /home/minotaur/llama-v0.4.0/build/bin/libggml-base.so.0
+#12 0x00007192efd03ed1 in llama_context::graph_compute(ggml_cgraph*, bool) () from /home/minotaur/llama-v0.4.0/build/bin/libllama.so.0
+#13 0x00007192efd0784a in llama_context::process_ubatch(llama_ubatch const&, llm_graph_type, llama_memory_context_i*, ggml_status&) () from /home/minotaur/llama-v0.4.0/build/bin/libllama.so.0
+#14 0x00007192efd0f2ed in llama_context::decode(llama_batch const&) () from /home/minotaur/llama-v0.4.0/build/bin/libllama.so.0
+#15 0x00007192efd1079f in llama_decode () from /home/minotaur/llama-v0.4.0/build/bin/libllama.so.0
+#16 0x00007192f0f48379 in std::_Function_handler<void (), server_context_impl::decode(int&, int, llama_batch&)::{lambda()#1}>::_M_invoke(std::_Any_data const&) () from /home/minotaur/llama-v0.4.0/build/bin/libllama-server-impl.so
+#17 0x00007192f0f0c9c6 in server_queue::yield_to_queue(std::function<void ()>&&) () from /home/minotaur/llama-v0.4.0/build/bin/libllama-server-impl.so
+#18 0x00007192f0f5cb39 in server_context_impl::decode(int&, int, llama_batch&) () from /home/minotaur/llama-v0.4.0/build/bin/libllama-server-impl.so
+#19 0x00007192f0f5e621 in server_context_impl::update_slots() () from /home/minotaur/llama-v0.4.0/build/bin/libllama-server-impl.so
+#20 0x00007192f0f0d605 in server_queue::start_loop(long) () from /home/minotaur/llama-v0.4.0/build/bin/libllama-server-impl.so
+#21 0x00007192f0ec56a0 in llama_server(common_params&, int, char**) () from /home/minotaur/llama-v0.4.0/build/bin/libllama-server-impl.so
+#22 0x00007192f0ec66e6 in llama_server(int, char**) () from /home/minotaur/llama-v0.4.0/build/bin/libllama-server-impl.so
+#23 0x00007192f062a601 in __libc_start_call_main (main=main@entry=0x64710418d270 <main>, argc=argc@entry=25, argv=argv@entry=0x7ffe2c940318) at ../sysdeps/nptl/libc_start_call_main.h:59
+⚠️ warning: 59	../sysdeps/nptl/libc_start_call_main.h: No such file or directory
+#24 0x00007192f062a718 in __libc_start_main_impl (main=0x64710418d270 <main>, argc=25, argv=0x7ffe2c940318, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7ffe2c940308) at ../csu/libc-start.c:360
+⚠️ warning: 360	../csu/libc-start.c: No such file or directory
+#25 0x000064710418d2a5 in _start ()
+[Inferior 1 (process 23721) detached]

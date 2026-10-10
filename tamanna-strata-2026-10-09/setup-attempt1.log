@@ -1,0 +1,157 @@
+Strata - Qwen3.8-Flash-Next on a normal PC (a GPU + system RAM + CPU)
+
+=== Step 1: checking your PC ===
+  [ok] GPU: NVIDIA GeForce RTX 3090, 24.0 GB VRAM, compute capability 8.6, driver 580.178.04
+  [ok] RAM: 63 GB
+  [ok] CPU: AMD Ryzen 7 5700X 8-Core Processor (AVX2)
+
+=== Step 2: your choices ===
+  [ok] model: Qwen3.8-Flash-Next Coder
+
+  1) IQ1_M    the Coder's only size: half the experts, stored like IQ3_S (3.5 bits); download 58 GB, uses ~23 GB of RAM
+  [ok] size: IQ1_M
+  [ok] context: 34816 tokens
+  [ok] KV cache: 8-bit
+  [ok] images: off
+  [ok] experimental speed projection: off
+
+=== Step 3: Python packages ===
+  Installing numpy, jinja2, regex, pyyaml, tqdm, requests, cmake, ninja, pillow, psutil ...
+  > /home/minotaur/strata/.venv/bin/python -m pip install --quiet --disable-pip-version-check numpy==2.5.3; python_version >= "3.12" numpy==2.4.6; python_version == "3.11" numpy==2.2.6; python_version < "3.11" jinja2==3.1.6 regex==2026.9.10 pyyaml==6.0.3 tqdm==4.70.1 requests==2.34.2 cmake==4.4.3 ninja==1.13.2 pillow==12.3.0 psutil==7.2.2 markupsafe==3.0.3 certifi==2026.7.22 charset-normalizer==3.5.1 idna==3.20 urllib3==2.8.0 colorama==0.4.6; sys_platform == "win32"
+  [ok] numpy, jinja2, regex, pyyaml, tqdm, requests, cmake, ninja, pillow, psutil installed
+
+=== Step 4: the Strata engine ===
+  llama.cpp source:     8.4 MB     llama.cpp source:    33.6 MB   
+  [ok] llama.cpp source downloaded
+  [ok] llama.cpp 3cf0325 (gguf-py, ggml, mtmd)
+  No ready-made engine for v0.1.39 (HTTP Error 404: Not Found): the latest release instead
+  [!]  no ready-made engine at https://github.com/Niko1221/Strata/releases/latest/download/ (HTTP Error 404: Not Found): compiling instead
+  [ok] build tools present (CUDA 13.0)
+  Compiling the Strata engine for your GPU (10-20 minutes, once) ...
+  > /usr/bin/cmake -G Ninja -DCMAKE_MAKE_PROGRAM=/home/minotaur/strata/.venv/bin/ninja -S /home/minotaur/strata -B /home/minotaur/strata/build -DCMAKE_BUILD_TYPE=Release -DSTRATA_ENABLE_CUDA=ON -DSTRATA_BUILD_TESTS=OFF -DCMAKE_CUDA_ARCHITECTURES=86 -DCMAKE_CUDA_COMPILER=/home/minotaur/cuda-13.0/bin/nvcc -DSTRATA_GGML_DIR=/home/minotaur/strata/third_party/llama.cpp
+-- The CXX compiler identification is GNU 13.4.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++-13 - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+CMake Error at /usr/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:928 (message):
+  Compiling the CUDA compiler identification source file
+  "CMakeCUDACompilerId.cu" failed.
+
+  Compiler: /home/minotaur/cuda-13.0/bin/nvcc
+
+  Build flags:
+
+  Id flags: --keep;--keep-dir;tmp;-ccbin=/usr/bin/g++-13 -v
+
+
+
+  The output was:
+
+  2
+
+  #$ _NVVM_BRANCH_=nvvm
+
+  #$ _SPACE_=
+
+  #$ _CUDART_=cudart
+
+  #$ _HERE_=/home/minotaur/cuda-13.0/bin
+
+  #$ _THERE_=/home/minotaur/cuda-13.0/bin
+
+  #$ _TARGET_SIZE_=
+
+  #$ _TARGET_DIR_=
+
+  #$ _TARGET_DIR_=targets/x86_64-linux
+
+  #$ TOP=/home/minotaur/cuda-13.0/bin/..
+
+  #$ CICC_PATH=/home/minotaur/cuda-13.0/bin/../nvvm/bin
+
+  #$ NVVMIR_LIBRARY_DIR=/home/minotaur/cuda-13.0/bin/../nvvm/libdevice
+
+  #$ LD_LIBRARY_PATH=/home/minotaur/cuda-13.0/bin/../lib:
+
+  #$
+  PATH=/home/minotaur/cuda-13.0/bin/../nvvm/bin:/home/minotaur/cuda-13.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+
+  #$
+  INCLUDES="-I/home/minotaur/cuda-13.0/bin/../targets/x86_64-linux/include"
+
+  #$ SYSTEM_INCLUDES="-isystem"
+  "/home/minotaur/cuda-13.0/bin/../targets/x86_64-linux/include/cccl"
+
+  #$ LIBRARIES=
+  "-L/home/minotaur/cuda-13.0/bin/../targets/x86_64-linux/lib/stubs"
+  "-L/home/minotaur/cuda-13.0/bin/../targets/x86_64-linux/lib"
+
+  #$ CUDAFE_FLAGS=
+
+  #$ PTXAS_FLAGS=
+
+  #$ rm tmp/a_dlink.reg.c
+
+  #$ "/usr/bin"/g++-13 -D__CUDA_ARCH_LIST__=750 -E -x c++ -D__CUDACC__
+  -D__NVCC__ "-I/home/minotaur/cuda-13.0/bin/../targets/x86_64-linux/include"
+  "-isystem"
+  "/home/minotaur/cuda-13.0/bin/../targets/x86_64-linux/include/cccl"
+  -D__CUDACC_VER_MAJOR__=13 -D__CUDACC_VER_MINOR__=0
+  -D__CUDACC_VER_BUILD__=88 -D__CUDA_API_VER_MAJOR__=13
+  -D__CUDA_API_VER_MINOR__=0 -D__NVCC_DIAG_PRAGMA_SUPPORT__=1
+  -D__CUDACC_DEVICE_ATOMIC_BUILTINS__=1 -include "cuda_runtime.h" -m64
+  "CMakeCUDACompilerId.cu" -o "tmp/CMakeCUDACompilerId.cpp4.ii"
+
+  #$ cudafe++ --c++17 --static-host-stub --device-hidden-visibility
+  --gnu_version=130400 --display_error_number --orig_src_file_name
+  "CMakeCUDACompilerId.cu" --orig_src_path_name
+  "/home/minotaur/strata/build/CMakeFiles/4.2.3/CompilerIdCUDA/CMakeCUDACompilerId.cu"
+  --allow_managed --m64 --parse_templates --gen_c_file_name
+  "tmp/CMakeCUDACompilerId.cudafe1.cpp" --stub_file_name
+  "CMakeCUDACompilerId.cudafe1.stub.c" --gen_module_id_file
+  --module_id_file_name "tmp/CMakeCUDACompilerId.module_id"
+  "tmp/CMakeCUDACompilerId.cpp4.ii"
+
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h(206): error: exception
+  specification is incompatible with that of previous function "rsqrt"
+  (declared at line 629 of
+  /home/minotaur/cuda-13.0/bin/../targets/x86_64-linux/include/crt/math_functions.h)
+
+     extern double rsqrt (double __x) noexcept (true); extern double __rsqrt (double __x) noexcept (true);
+                                      ^
+
+
+
+  /usr/include/x86_64-linux-gnu/bits/mathcalls.h(206): error: exception
+  specification is incompatible with that of previous function "rsqrtf"
+  (declared at line 653 of
+  /home/minotaur/cuda-13.0/bin/../targets/x86_64-linux/include/crt/math_functions.h)
+
+     extern float rsqrtf (float __x) noexcept (true); extern float __rsqrtf (float __x) noexcept (true);
+                                     ^
+
+
+
+  2 errors detected in the compilation of "CMakeCUDACompilerId.cu".
+
+  # --error 0x2 --
+
+
+
+
+
+Call Stack (most recent call first):
+  /usr/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:8 (CMAKE_DETERMINE_COMPILER_ID_BUILD)
+  /usr/share/cmake-4.2/Modules/CMakeDetermineCompilerId.cmake:53 (__determine_compiler_id_test)
+  /usr/share/cmake-4.2/Modules/CMakeDetermineCUDACompiler.cmake:163 (CMAKE_DETERMINE_COMPILER_ID)
+  CMakeLists.txt:134 (enable_language)
+
+
+-- Configuring incomplete, errors occurred!
+
+  [X]  command failed (exit 1): cmake
+
+Setup stopped. Fix the item above and run it again - everything already done is kept and skipped.
+SETUP rc=1

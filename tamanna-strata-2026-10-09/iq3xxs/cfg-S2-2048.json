@@ -1,0 +1,39 @@
+{
+ "exe": "/home/minotaur/strata/engine/strata",
+ "args": [
+  "--pack",
+  "/home/minotaur/Strata-data/packs/iq3_xxs",
+  "--native",
+  "/home/minotaur/bench-models/qwen3.8-flash-next-ista-iq3xxs/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf",
+  "--ple-gguf",
+  "/home/minotaur/bench-models/qwen3.8-flash-next-ista-iq3xxs/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00002-of-00002.gguf",
+  "--expert-profile",
+  "/home/minotaur/strata/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "2048",
+  "--spec",
+  "4",
+  "--spec-min-p",
+  "0.5",
+  "--mtp",
+  "/home/minotaur/Strata-data/mtp/rt",
+  "--max-context",
+  "34816",
+  "--kv",
+  "int8"
+ ],
+ "cwd": "/home/minotaur/strata",
+ "tokenizer": "/home/minotaur/Strata-data/packs/iq3_xxs/tokenizer",
+ "model_name": "qwen3.8-flash-next-iq3_xxs",
+ "log": "/home/minotaur/strata/strata-iq3_xxs-S2-2048.log",
+ "lib_dirs": [
+  "/home/minotaur/cuda-13.0/bin",
+  "/home/minotaur/cuda-13.0/lib64"
+ ],
+ "port": 8080,
+ "gpu": 0,
+ "gpus_asked": true,
+ "open_browser": false
+}

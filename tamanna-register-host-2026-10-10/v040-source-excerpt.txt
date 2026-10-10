@@ -1,0 +1,35 @@
+bool ggml_backend_cuda_register_host_buffer(void * buffer, size_t size) {
+    if (getenv("GGML_CUDA_REGISTER_HOST") == nullptr) {
+        return false;
+    }
+
+#if CUDART_VERSION >= 11010 || defined(GGML_USE_MUSA) || defined(GGML_USE_HIP)
+    cudaError_t err = cudaHostRegister(buffer, size, cudaHostRegisterPortable | cudaHostRegisterReadOnly);
+    if (err != cudaSuccess) {
+        // clear the error
+        (void)cudaGetLastError();
+
+        GGML_LOG_DEBUG("%s: failed to register %.2f MiB of pinned memory: %s\n", __func__,
+                           size / 1024.0 / 1024.0, cudaGetErrorString(err));
+        return false;
+    }
+    return true;
+#else
+    GGML_UNUSED(buffer);
+    GGML_UNUSED(size);
+    return false;
+#endif // CUDART_VERSION >= 11010 || defined(GGML_USE_MUSA)
+---
+    }
+    if (strcmp(name, "ggml_backend_comm_allreduce_tensor") == 0) {
+        return (void *)ggml_backend_cuda_comm_allreduce_tensor;
+    }
+    if (strcmp(name, "ggml_backend_register_host_buffer") == 0) {
+        return (void *)ggml_backend_cuda_register_host_buffer;
+    }
+    if (strcmp(name, "ggml_backend_unregister_host_buffer") == 0) {
+        return (void *)ggml_backend_cuda_unregister_host_buffer;
+    }
+    if (strcmp(name, "ggml_backend_get_features") == 0) {
+---
+0

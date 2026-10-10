@@ -343,3 +343,7 @@ llama.cpp's highest (9.2). S3's spread is wide (up to 30% within a cell), much w
 approximate. Drafting as shipped adds 43–55% over S3 (S1 ÷ S3: 1.43 / 1.54 / 1.55).
 
 S3 prefill (909 / 1,011 / 1,086 tok/s) is within 3% of S1's at each length. S1 remains the prefill figure.
+
+
+**Dated note 2026-10-10:** `GGML_CUDA_REGISTER_HOST=1` is a no-op for model weights on llama.cpp v0.4.0 (nothing calls
+the registration function; `../tamanna-register-host-2026-10-10/`). So L3 here is a repeat of L2, not a pinned-memory arm; "L3 adds nothing" says nothing about pinning.
