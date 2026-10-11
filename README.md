@@ -23,6 +23,7 @@ root of this repo:
 Three rigs appear: **miu** (RTX 3090 on an i7-8086K, PCIe 3.0, the bench box until September 2026), **rushuna** (RTX 3060 12 GB
 and GTX 1650 4 GB on an i7-7700, the offload box), and **tamanna** (the same RTX 3090 on a Ryzen 7 5700X, PCIe 4.0, from
 2026-09-21). The rig block in each README and in each dataset row says which.
+From 2026-10-10, miu also hosts the ESP32 board records: the ESP32-S3 board is the device under test; miu builds and flashes it.
 
 ## The pinned build
 
