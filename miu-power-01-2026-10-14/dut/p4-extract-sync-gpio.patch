@@ -1,0 +1,49 @@
+--- a/p4/tools/extract_s3_interactive.sh	2026-10-14 15:27:07.642304941 -0700
++++ b/p4/tools/extract_s3_interactive.sh	2026-10-14 15:27:07.663304729 -0700
+@@ -6,29 +6,35 @@
+ set -euo pipefail
+ TOP="$HOME/Desktop/esp32-llm"
+ S="$TOP/builds/no-display+logit-checksum+simd-head+int4-head+simd-core+eot-flag+head-traffic+int4-core+interactive+prefill-skip+sample-profile+fast-sample/firmware/esp32_tinystories/esp32_tinystories.ino"
+-OUT="$TOP/p4/pr24/firmware/esp32_tinystories/ia_s3_port.h"
++OUT="${OUT:-$TOP/p4/pr24/firmware/esp32_tinystories/ia_s3_port.h}"
++# Line ranges: the original S3 sketch, or (SYNC_GPIO_SKETCH=<path>) the same sketch
++# with tools/power-logger/dut/s3-sync-gpio.patch applied, which adds 19 lines after
++# line 156 (the SYNC_GPIO block, inside the first range), 2 inside the last, and
++# 1 in setup() (outside the ranges: the P4 sketch calls SYNC_INIT() in its own setup()).
++L=(106 155 800 817 833 1329)
++if [ -n "${SYNC_GPIO_SKETCH:-}" ]; then S="$SYNC_GPIO_SKETCH"; L=(106 174 819 836 852 1350); fi
+ want(){ local got; got=$(sed -n "${1}p" "$S"); [[ "$got" == "$2"* ]] || { echo "line $1 is '$got', expected '$2'" >&2; exit 1; }; }
+-want 106 "// Interactive serial mode (tools/chat.py)"
+-want 155 "#endif"
+-want 800 "// One prompt position."
+-want 817 "}"
+-want 833 "#if INTERACTIVE"
+-want 1329 "#endif  // INTERACTIVE"
++want ${L[0]} "// Interactive serial mode (tools/chat.py)"
++want ${L[1]} "#endif"
++want ${L[2]} "// One prompt position."
++want ${L[3]} "}"
++want ${L[4]} "#if INTERACTIVE"
++want ${L[5]} "#endif  // INTERACTIVE"
+ {
+ cat <<HDR
+ // ia_s3_port.h - insiderllm-p4 (Miu, 2026-10-11). The S3 firmware's interactive line protocol,
+ // PREFILL_SKIP, splitmix64 PRNG, ia_sample and FAST_SAMPLE, copied VERBATIM from our S3 board
+ // build (esp32_tinystories.ino sha256 $(sha256sum "$S" | cut -d' ' -f1),
+-// lines 106-155, 800-817, 833-1329) by p4/tools/extract_s3_interactive.sh. Do not edit by hand:
++// lines ${L[0]}-${L[1]}, ${L[2]}-${L[3]}, ${L[4]}-${L[5]}) by p4/tools/extract_s3_interactive.sh. Do not edit by hand:
+ // re-run the script. Included by the P4 sketch, which builds on esp32-ai PR #24 (Barkin Sarikartal).
+ // Requires from the sketch: model, s, blink(), llm_profile_reset(), and with LOGIT_CHECKSUM
+ // logit_hash[] / fnv1a64() / LOGIT_CHECKSUM_TOKENS; VOCAB_EOT_ID from generated/vocab.h.
+ #ifndef IA_S3_PORT_H
+ #define IA_S3_PORT_H
+ HDR
+-sed -n '106,155p' "$S"; echo
+-sed -n '800,817p' "$S"; echo
+-sed -n '833,1329p' "$S"
++sed -n "${L[0]},${L[1]}p" "$S"; echo
++sed -n "${L[2]},${L[3]}p" "$S"; echo
++sed -n "${L[4]},${L[5]}p" "$S"
+ echo "#endif  // IA_S3_PORT_H"
+ } > "$OUT"
+ echo "wrote $OUT ($(wc -l < "$OUT") lines, sha256 $(sha256sum "$OUT" | cut -c1-16))"

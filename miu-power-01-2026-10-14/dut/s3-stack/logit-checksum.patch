@@ -1,0 +1,54 @@
+--- a/esp32_tinystories.ino
++++ b/esp32_tinystories.ino
+@@ -35,6 +35,22 @@
+ #include "display.h"
+ #endif
+ 
++// Correctness gate: -DLOGIT_CHECKSUM=1 prints a 64-bit FNV-1a hash of the raw
++// logits bytes behind each of the first LOGIT_CHECKSUM_TOKENS generated tokens.
++// Hashing runs outside the timed llm_forward call (it is in total wall time).
++#ifndef LOGIT_CHECKSUM
++#define LOGIT_CHECKSUM 0
++#endif
++#if LOGIT_CHECKSUM
++#define LOGIT_CHECKSUM_TOKENS 20
++static uint64_t logit_hash[LOGIT_CHECKSUM_TOKENS];
++static uint64_t fnv1a64(const void *p, size_t n, uint64_t h) {
++  const uint8_t *b = (const uint8_t *)p;
++  for (size_t i = 0; i < n; i++) { h ^= b[i]; h *= 1099511628211ULL; }
++  return h;
++}
++#endif
++
+ static const int PROMPT_IDS[] = {433, 447, 259, 405}; // "Once upon a time"
+ static const int N_GENERATE = 200;
+ 
+@@ -267,6 +283,11 @@
+ 
+   int64_t t_start = esp_timer_get_time();
+   for (int step = 0; step < N_GENERATE && pos < model.c.seq_len; step++) {
++#if LOGIT_CHECKSUM
++    if (step < LOGIT_CHECKSUM_TOKENS)
++      logit_hash[step] = fnv1a64(s.logits, (size_t)model.out_vocab * sizeof(float),
++                                 14695981039346656037ULL);
++#endif
+     int best = 0; float bv = -1e30f;
+     for (int v = 0; v < model.out_vocab; v++)
+       if (s.logits[v] > bv) { bv = s.logits[v]; best = v; }
+@@ -283,6 +304,16 @@
+   int64_t total_us = esp_timer_get_time() - t_start;
+ 
+   Serial.printf("\n\n--- %d tokens in %.2f s ---\n", decoded, total_us / 1e6);
++#if LOGIT_CHECKSUM
++  {
++    int n = decoded < LOGIT_CHECKSUM_TOKENS ? decoded : LOGIT_CHECKSUM_TOKENS;
++    for (int i = 0; i < n; i++)
++      Serial.printf("logit_hash[%02d] %016llx\n", i, (unsigned long long)logit_hash[i]);
++    Serial.printf("logit_hash_all %016llx (n=%d)\n",
++                  (unsigned long long)fnv1a64(logit_hash, n * sizeof(uint64_t),
++                                              14695981039346656037ULL), n);
++  }
++#endif
+   Serial.printf("throughput: %.2f tok/s   (%.1f ms/token)\n",
+                 decoded * 1e6 / total_us, decode_us / 1000.0 / decoded);
+   if (s.profile.calls) {

@@ -1,0 +1,10 @@
+--- a/firmware/esp32_tinystories/esp32_tinystories.ino	2026-10-14 15:27:36.537017693 -0700
++++ b/firmware/esp32_tinystories/esp32_tinystories.ino	2026-10-14 15:27:36.556017507 -0700
+@@ -634,6 +634,7 @@
+ #endif
+ 
+ void setup() {
++  SYNC_INIT();   // [insiderllm-p4] power-01: sync pin driven low from boot (ia_s3_port.h; no-op without SYNC_GPIO)
+   // Must be requested before begin(); a failed request falls back to 256.
+ #if INTERACTIVE
+ #undef SERIAL_RX_BYTES

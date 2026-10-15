@@ -1,0 +1,206 @@
+--- a/esp32_tinystories.ino
++++ b/esp32_tinystories.ino
+@@ -38,6 +38,12 @@
+ // Correctness gate: -DLOGIT_CHECKSUM=1 prints a 64-bit FNV-1a hash of the raw
+ // logits bytes behind each of the first LOGIT_CHECKSUM_TOKENS generated tokens.
+ // Hashing runs outside the timed llm_forward call (it is in total wall time).
++// Output head on the S3 PIE int8 MAC (head_dot96_s8.S). 0 keeps the original
++// scalar head; the layers use the scalar path either way.
++#ifndef HEAD_SIMD
++#define HEAD_SIMD 1
++#endif
++
+ #ifndef LOGIT_CHECKSUM
+ #define LOGIT_CHECKSUM 0
+ #endif
+@@ -103,6 +109,18 @@
+ static float *job_y;
+ static int job_split;
+ 
++#if HEAD_SIMD
++typedef void (*range_fn)(const QT *, const int8_t *, float, float *, int, int);
++static range_fn job_fn;
++
++static void worker_main(void *) {
++  for (;;) {
++    ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
++    job_fn(job_t, job_xq, job_xs, job_y, 0, job_split);
++    xTaskNotifyGive(main_h);
++  }
++}
++#else
+ static void worker_main(void *) {
+   for (;;) {
+     ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+@@ -110,18 +128,87 @@
+     xTaskNotifyGive(main_h);
+   }
+ }
++#endif
+ 
+ static void matvec_par(const QT *t, const float *x, float *y) {
+   static int8_t xq[LLM_Q8_MAX_INPUT];
+   float xs;
+   if (t->w8 == NULL || t->rows < 128) { MATVEC(t, x, y); return; }
+   quantize_act(x, t->cols, xq, &xs);   // once; both cores read the result
++#if HEAD_SIMD
++  job_fn = matvec_i8_range;
++#endif
+   job_t = t; job_xq = xq; job_xs = xs; job_y = y; job_split = t->rows / 2;
+   xTaskNotifyGive(worker_h);
+   matvec_i8_range(t, xq, xs, y, job_split, t->rows);
+   ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+ }
+ 
++#if HEAD_SIMD
++// ---- SIMD output head ---------------------------------------------------------
++// Same arithmetic as matvec_i8_range for a one-group, 96-column tensor: the
++// int32 row dots come from the PIE kernel (exact), and the float tail below is
++// the same expression, so logits are bit-identical to the scalar head.
++extern "C" void llm_head_dot96_s8(const int8_t *w, const int8_t *x, int32_t *out,
++                                  uint32_t rows);
++#define HEAD_COLS 96
++#define HEAD_BLOCK 64
++
++static void head_i8_range_simd(const QT *t, const int8_t *xq, float x_scale,
++                               float *y, int row_begin, int row_end) {
++  int32_t d[HEAD_BLOCK];
++  for (int r0 = row_begin; r0 < row_end; r0 += HEAD_BLOCK) {
++    int n = row_end - r0 < HEAD_BLOCK ? row_end - r0 : HEAD_BLOCK;
++    llm_head_dot96_s8(t->w8 + (size_t)r0 * HEAD_COLS, xq, d, (uint32_t)n);
++    for (int i = 0; i < n; i++) {
++      float acc = 0.f;
++      acc += (float)d[i] * t->scale8[r0 + i];
++      y[r0 + i] = acc * x_scale;
++    }
++  }
++}
++
++static void matvec_par_head(const QT *t, const float *x, float *y) {
++  static int8_t xq[LLM_Q8_MAX_INPUT] __attribute__((aligned(16)));
++  float xs;
++  quantize_act(x, t->cols, xq, &xs);   // once; both cores read the result
++  job_fn = head_i8_range_simd;
++  job_t = t; job_xq = xq; job_xs = xs; job_y = y; job_split = t->rows / 2;
++  xTaskNotifyGive(worker_h);
++  head_i8_range_simd(t, xq, xs, y, job_split, t->rows);
++  ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
++}
++
++// Preconditions of the kernel, then every row against the scalar llm_dot_i8 on
++// a fixed activation that includes both int8 extremes.
++static bool head_simd_check(const QT *t) {
++  if (t->w8 == NULL || t->cols != HEAD_COLS || t->n_groups != 1 ||
++      ((uintptr_t)t->w8 & 15) != 0) {
++    Serial.printf("FATAL: SIMD head needs staged, 16B-aligned, %d-col, 1-group "
++                  "weights (cols=%d groups=%d w8=%p)\n",
++                  HEAD_COLS, t->cols, t->n_groups, t->w8);
++    return false;
++  }
++  static int8_t xt[HEAD_COLS] __attribute__((aligned(16)));
++  for (int j = 0; j < HEAD_COLS; j++)
++    xt[j] = (j % 3 == 0) ? 127 : (j % 3 == 1) ? -127 : (int8_t)(j * 37 - 90);
++  int32_t d[HEAD_BLOCK];
++  int bad = 0;
++  for (int r0 = 0; r0 < t->rows; r0 += HEAD_BLOCK) {
++    int n = t->rows - r0 < HEAD_BLOCK ? t->rows - r0 : HEAD_BLOCK;
++    llm_head_dot96_s8(t->w8 + (size_t)r0 * HEAD_COLS, xt, d, (uint32_t)n);
++    for (int i = 0; i < n; i++)
++      if (d[i] != llm_dot_i8(t->w8 + (size_t)(r0 + i) * HEAD_COLS, xt, HEAD_COLS)) {
++        if (bad < 4) Serial.printf("simd head mismatch row %d\n", r0 + i);
++        bad++;
++      }
++  }
++  Serial.printf("simd head selftest: %d/%d rows %s\n", t->rows - bad, t->rows,
++                bad ? "FAIL" : "ok");
++  return bad == 0;
++}
++#endif
++
+ // Copy RMSNorm weights from mapped flash to internal SRAM.
+ static void copy_norms_to_sram() {
+   Cfg *c = &model.c;
+@@ -235,7 +322,19 @@
+   // The tied head is read per token, not per position, so the core helper does
+   // not walk it. Stage it too: it is 85%% of the dense MACs.
+   {
++#if HEAD_SIMD
++    // 16-byte aligned for ee.vld.128.
++    size_t hb = llm_stage_int8_bytes(&model.out_head);
++    void *b = heap_caps_aligned_alloc(16, hb, MALLOC_CAP_SPIRAM);
++    if (!b) {
++      Serial.printf("FATAL: required PSRAM allocation failed: staged head (%u bytes)\n",
++                    (unsigned)hb);
++      while (1) delay(1000);
++    }
++    psram_used += hb;
++#else
+     void *b = ps_or_die(llm_stage_int8_bytes(&model.out_head), "staged head");
++#endif
+     llm_stage_int8(&model.out_head, b);
+     ++staged;
+   }
+@@ -246,7 +345,13 @@
+   if (xTaskCreatePinnedToCore(worker_main, "mv", 4096, NULL, 2, &worker_h, 0) == pdPASS) {
+     // After the worker exists: matvec_par notifies worker_h.
+     model.layer_matvec = matvec_par;
++#if HEAD_SIMD
++    if (!head_simd_check(&model.out_head)) while (1) delay(1000);
++    model.head_matvec  = matvec_par_head;
++    Serial.println("head   -> PIE int8 (head_dot96_s8)");
++#else
+     model.head_matvec  = matvec_par;
++#endif
+   } else {
+     Serial.println("dual-core worker failed; running single core");
+   }
+--- a/head_dot96_s8.S
++++ b/head_dot96_s8.S
+@@ -0,0 +1,47 @@
++/* ESP32-S3 int8 dot products for the 96-column output head.
++ *
++ * C interface (extern "C" from C++):
++ *   void llm_head_dot96_s8(const int8_t *w, const int8_t *x, int32_t *out,
++ *                          uint32_t rows);
++ *
++ * out[r] = sum_{j<96} w[r*96 + j] * x[j] for r in [0, rows), exactly: the
++ * 40-bit ACCX holds every int8 product sum, and |sum| <= 96*128*128 fits the
++ * low 32 bits read back with rur.accx_0.
++ *
++ * w and x must be 16-byte aligned (ee.vld.128 ignores the low four address
++ * bits); every row is 96 = 6*16 bytes, so rows stay aligned. The caller checks
++ * this. x is loaded once into q0..q5 and reused for every row; q6/q7 stream
++ * the weights. q0..q7 and ACCX are scratch. Kept in IRAM.
++ */
++
++.section .iram1,"ax"
++.align 4
++.global llm_head_dot96_s8
++.type llm_head_dot96_s8,@function
++llm_head_dot96_s8:
++    entry a1,16
++
++    /* activation: 96 bytes -> q0..q5 */
++    ee.vld.128.ip q0,a3,16
++    ee.vld.128.ip q1,a3,16
++    ee.vld.128.ip q2,a3,16
++    ee.vld.128.ip q3,a3,16
++    ee.vld.128.ip q4,a3,16
++    ee.vld.128.ip q5,a3,16
++
++    loopnez a5,.Lhead_rows_end
++    ee.zero.accx
++    ee.vld.128.ip q6,a2,16
++    ee.vld.128.ip q7,a2,16
++    ee.vmulas.s8.accx.ld.ip q6,a2,16,q0,q6
++    ee.vmulas.s8.accx.ld.ip q7,a2,16,q1,q7
++    ee.vmulas.s8.accx.ld.ip q6,a2,16,q2,q6
++    ee.vmulas.s8.accx.ld.ip q7,a2,16,q3,q7
++    ee.vmulas.s8.accx q4,q6
++    ee.vmulas.s8.accx q5,q7
++    rur.accx_0 a8
++    s32i a8,a4,0
++    addi a4,a4,4
++.Lhead_rows_end:
++    retw.n
++.size llm_head_dot96_s8,.-llm_head_dot96_s8

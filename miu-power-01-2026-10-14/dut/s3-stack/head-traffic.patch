@@ -1,0 +1,141 @@
+diff -ru a/esp32_tinystories.ino b/esp32_tinystories.ino
+--- a/esp32_tinystories.ino	2026-10-11 09:19:49.012791075 -0700
++++ b/esp32_tinystories.ino	2026-10-11 09:21:33.909316112 -0700
+@@ -56,6 +56,19 @@
+ #if CORE_SIMD && !HEAD_SIMD
+ #error "CORE_SIMD uses the HEAD_SIMD worker plumbing and kernels"
+ #endif
++// Head side traffic. HEAD_SC16=1 keeps the int4 head's row scales as the file's
++// fp16 (half the bytes) and widens each one per row with an exact bit shift;
++// 0 keeps the fp32 copies. LOGITS_SRAM=1 puts the logits buffer in internal
++// SRAM instead of PSRAM. Neither changes a value.
++#ifndef HEAD_SC16
++#define HEAD_SC16 1
++#endif
++#ifndef LOGITS_SRAM
++#define LOGITS_SRAM 1
++#endif
++#if HEAD_SC16 && !(HEAD_SIMD && HEAD_INT4)
++#error "HEAD_SC16 applies to the packed int4 head"
++#endif
+ 
+ #ifndef LOGIT_CHECKSUM
+ #define LOGIT_CHECKSUM 0
+@@ -202,7 +215,19 @@
+                                   uint32_t rows);
+ #define HEAD4_ROW_BYTES (HEAD_COLS / 2)
+ static const uint8_t *head4_w;     // rows * 48 B, 16-byte aligned, PSRAM
++#if HEAD_SC16
++static const uint16_t *head4_sc16; // rows fp16 scales as in the file, PSRAM
++
++// fp16 -> fp32 for a normal half: rebias the exponent (15 -> 127) and widen the
++// mantissa. Equal bit for bit to half2float on every normal input; the boot
++// check confirms every head scale is normal and converts identically.
++static inline float half2float_normal(uint16_t h) {
++  uint32_t f = ((uint32_t)(h & 0x8000u) << 16) | (((uint32_t)(h & 0x7FFFu) << 13) + 0x38000000u);
++  float out; memcpy(&out, &f, 4); return out;
++}
++#else
+ static const float *head4_sc;      // rows fp32 scales, PSRAM
++#endif
+ 
+ static inline int head_code(const QT *t, int r, int j) {   // file code, 0..15
+   uint8_t b = t->codes[(size_t)r * t->row_bytes + (j >> 1)];
+@@ -210,12 +235,20 @@
+ }
+ 
+ static size_t head4_bytes(const QT *t) {
++#if HEAD_SC16
++  return (size_t)t->rows * HEAD4_ROW_BYTES + (size_t)t->rows * sizeof(uint16_t);
++#else
+   return (size_t)t->rows * HEAD4_ROW_BYTES + (size_t)t->rows * sizeof(float);
++#endif
+ }
+ 
+ static void head4_stage(const QT *t, void *buffer) {
+   uint8_t *w = (uint8_t *)buffer;
++#if HEAD_SC16
++  uint16_t *sc = (uint16_t *)(w + (size_t)t->rows * HEAD4_ROW_BYTES);
++#else
+   float *sc = (float *)(w + (size_t)t->rows * HEAD4_ROW_BYTES);
++#endif
+   for (int r = 0; r < t->rows; r++) {
+     uint8_t *dst = w + (size_t)r * HEAD4_ROW_BYTES;
+     for (int c = 0; c < 3; c++)
+@@ -224,10 +257,18 @@
+         int hi = head_code(t, r, 32 * c + 16 + k) - 8;
+         dst[16 * c + k] = (uint8_t)((lo & 0xF) | ((hi & 0xF) << 4));
+       }
++#if HEAD_SC16
++    sc[r] = t->scales[r];
++#else
+     sc[r] = half2float(t->scales[r]);
++#endif
+   }
+   head4_w = w;
++#if HEAD_SC16
++  head4_sc16 = sc;
++#else
+   head4_sc = sc;
++#endif
+ }
+ 
+ static void head_i4_range_simd(const QT *t, const int8_t *xq, float x_scale,
+@@ -238,7 +279,11 @@
+     llm_head_dot96_s4(head4_w + (size_t)r0 * HEAD4_ROW_BYTES, xq, d, (uint32_t)n);
+     for (int i = 0; i < n; i++) {
+       float acc = 0.f;
++#if HEAD_SC16
++      acc += (float)d[i] * half2float_normal(head4_sc16[r0 + i]);
++#else
+       acc += (float)d[i] * head4_sc[r0 + i];
++#endif
+       y[r0 + i] = acc * x_scale;
+     }
+   }
+@@ -295,6 +340,24 @@
+   }
+   Serial.printf("simd head selftest: %d/%d rows %s\n", t->rows - bad, t->rows,
+                 bad ? "FAIL" : "ok");
++#if HEAD_SC16
++  // Every staged fp16 scale equals the file's, is a normal half, and widens to
++  // exactly the fp32 value half2float (the fp32 staging) gives.
++  int sbad = 0;
++  for (int r = 0; r < t->rows; r++) {
++    uint16_t h = head4_sc16[r];
++    unsigned e = (h >> 10) & 0x1F;
++    float a = half2float_normal(h), b = half2float(t->scales[r]);
++    if (h != t->scales[r] || e == 0 || e == 0x1F || memcmp(&a, &b, 4) != 0) {
++      if (sbad < 4) Serial.printf("head scale mismatch row %d: %04x vs %04x\n",
++                                  r, h, t->scales[r]);
++      sbad++;
++    }
++  }
++  Serial.printf("head fp16 scale selftest: %d/%d rows %s\n", t->rows - sbad, t->rows,
++                sbad ? "FAIL" : "ok");
++  bad += sbad;
++#endif
+   return bad == 0;
+ }
+ #else
+@@ -509,7 +572,19 @@
+   s.scores = (float *)sram_or_die(S * 4, "scores");
+   // logits: out_vocab floats, 99 KiB here, read once per token. Left in PSRAM
+   // rather than spend a fifth of internal SRAM on it.
+-  s.logits = (float *)ps_or_die((size_t)model.out_vocab * 4, "logits");
++  {
++    const uint32_t caps = MALLOC_CAP_INTERNAL | MALLOC_CAP_8BIT;
++    size_t f0 = heap_caps_get_free_size(caps), b0 = heap_caps_get_largest_free_block(caps);
++#if LOGITS_SRAM
++    s.logits = (float *)sram_or_die((size_t)model.out_vocab * 4, "logits");
++#else
++    s.logits = (float *)ps_or_die((size_t)model.out_vocab * 4, "logits");
++#endif
++    Serial.printf("logits -> %s %u B; internal free %u -> %u B, largest block %u -> %u B\n",
++                  LOGITS_SRAM ? "SRAM  " : "PSRAM ", (unsigned)model.out_vocab * 4,
++                  (unsigned)f0, (unsigned)heap_caps_get_free_size(caps),
++                  (unsigned)b0, (unsigned)heap_caps_get_largest_free_block(caps));
++  }
+   // KV cache: 1.1MB, read once per position rather than per matvec.
+   s.kcache = (float *)ps_or_die((size_t)L * S * D * 4, "kcache");
+   s.vcache = (float *)ps_or_die((size_t)L * S * D * 4, "vcache");

@@ -1,0 +1,334 @@
+{
+ "current": {
+  "gain": 1.065383625415554,
+  "offset_A": 6.234642123705697e-05,
+  "method": "least squares gain + offset (zero point included)",
+  "points_used": 6
+ },
+ "voltage": {
+  "gain": 0.9516431835429968,
+  "offset_V": 0.01157143660722637,
+  "method": "least squares gain + offset",
+  "points": [
+   {
+    "label": "open",
+    "dmm_V": 5.09,
+    "logger_raw_V": 5.336751506024096,
+    "calibrated_V": 5.090254629577879,
+    "residual_mV": 0.25462957787958374,
+    "uncalibrated_error_pct": 4.847770255876152,
+    "excluded": null
+   },
+   {
+    "label": "AA cell",
+    "dmm_V": 1.405,
+    "logger_raw_V": 1.4646699879227054,
+    "calibrated_V": 1.4054146467538724,
+    "residual_mV": 0.41464675387237193,
+    "uncalibrated_error_pct": 4.246974229374049,
+    "excluded": null
+   },
+   {
+    "label": "2xAA",
+    "dmm_V": 2.808,
+    "logger_raw_V": 2.9378230574324324,
+    "calibrated_V": 2.8073307236682465,
+    "residual_mV": -0.6692763317532879,
+    "uncalibrated_error_pct": 4.623328256140763,
+    "excluded": null
+   },
+   {
+    "label": "1x100 load",
+    "dmm_V": 5.052,
+    "logger_raw_V": 5.309622347066167,
+    "calibrated_V": 5.064437350380313,
+    "residual_mV": 12.437350380313461,
+    "uncalibrated_error_pct": 5.099413045648602,
+    "excluded": "measured at the cable end under load: includes the female breakout + cable drop that the INA226's VBUS pin (before the shunt) doesn't see; kept as a cross-check"
+   }
+  ]
+ },
+ "residuals": [
+  {
+   "label": "2x100 series",
+   "dmm_mA": 25.93,
+   "logger_raw_mA": 24.282223543400715,
+   "calibrated_mA": 25.932229773056232,
+   "residual_mA": 0.0022297730562330365,
+   "residual_pct_of_reading": 0.008599201913740983,
+   "uncalibrated_error_pct": -6.354710592361291,
+   "logger_sd_mA": 0.04445123146109081,
+   "excluded": null,
+   "in_pass_range": true,
+   "pass": true
+  },
+  {
+   "label": "1x100",
+   "dmm_mA": 51.34,
+   "logger_raw_mA": 48.10794917257683,
+   "calibrated_mA": 51.31576772202416,
+   "residual_mA": -0.024232277975842764,
+   "residual_pct_of_reading": -0.04719960649755115,
+   "uncalibrated_error_pct": -6.295385328054483,
+   "logger_sd_mA": 0.05460114147722218,
+   "excluded": null,
+   "in_pass_range": true,
+   "pass": true
+  },
+  {
+   "label": "2x100 parallel",
+   "dmm_mA": 99.2,
+   "logger_raw_mA": 93.16401066350711,
+   "calibrated_mA": 99.31775786017761,
+   "residual_mA": 0.11775786017760581,
+   "residual_pct_of_reading": 0.11870752034032843,
+   "uncalibrated_error_pct": -6.0846666698516945,
+   "logger_sd_mA": 0.1086250720800401,
+   "excluded": null,
+   "in_pass_range": true,
+   "pass": true
+  },
+  {
+   "label": "3x100 parallel",
+   "dmm_mA": 145.5,
+   "logger_raw_mA": 136.44693087008343,
+   "calibrated_mA": 145.43067230843204,
+   "residual_mA": -0.06932769156794971,
+   "residual_pct_of_reading": -0.047647897984845165,
+   "uncalibrated_error_pct": -6.2220406391179015,
+   "logger_sd_mA": 0.10901127862865283,
+   "excluded": null,
+   "in_pass_range": true,
+   "pass": true
+  },
+  {
+   "label": "1x100 repeat",
+   "dmm_mA": 51.29,
+   "logger_raw_mA": 48.075933997509345,
+   "calibrated_mA": 51.28165927874245,
+   "residual_mA": -0.008340721257549255,
+   "residual_pct_of_reading": -0.01626188585991276,
+   "uncalibrated_error_pct": -6.266457403959164,
+   "logger_sd_mA": 0.04884149142907281,
+   "excluded": null,
+   "in_pass_range": true,
+   "pass": true
+  },
+  {
+   "label": "zero",
+   "dmm_mA": 0.0,
+   "logger_raw_mA": -0.07549709020368575,
+   "calibrated_mA": -0.018086942432470852,
+   "residual_mA": -0.018086942432470852,
+   "residual_pct_of_reading": null,
+   "logger_sd_mA": 0.032166764952024154,
+   "in_pass_range": false,
+   "pass": null
+  }
+ ],
+ "pass_criterion": "|residual| <= 0.5% of reading for every point at 20-250 mA",
+ "pass": true,
+ "points_in_pass_range": 5,
+ "load_crosscheck": [
+  {
+   "label": "2x100 series",
+   "load_ohm": 194.77,
+   "vbus_V": 5.090521376445119,
+   "v_over_r_mA": 26.1360649814916,
+   "dmm_mA": 25.93,
+   "dmm_vs_v_over_r_pct": -0.7884315471266556,
+   "implied_series_ohm": 1.54783171789893
+  },
+  {
+   "label": "1x100",
+   "load_ohm": 98.6,
+   "vbus_V": 5.0636507760985126,
+   "v_over_r_mA": 51.35548454460966,
+   "dmm_mA": 51.34,
+   "dmm_vs_v_over_r_pct": -0.03015168632322096,
+   "implied_series_ohm": 0.029738529382797196
+  },
+  {
+   "label": "2x100 parallel",
+   "load_ohm": 49.68,
+   "vbus_V": 5.009433151331985,
+   "v_over_r_mA": 100.83400063067602,
+   "dmm_mA": 99.2,
+   "dmm_vs_v_over_r_pct": -1.6204857691413665,
+   "implied_series_ohm": 0.8183180577821076
+  },
+  {
+   "label": "3x100 parallel",
+   "load_ohm": 33.05,
+   "vbus_V": 4.9597728777256584,
+   "v_over_r_mA": 150.06877088428618,
+   "dmm_mA": 145.5,
+   "dmm_vs_v_over_r_pct": -3.0444514587309235,
+   "implied_series_ohm": 1.0377861012072813
+  },
+  {
+   "label": "1x100 repeat",
+   "load_ohm": 98.6,
+   "vbus_V": 5.065630762254685,
+   "v_over_r_mA": 51.37556554010837,
+   "dmm_mA": 51.29,
+   "dmm_vs_v_over_r_pct": -0.1665490962655447,
+   "implied_series_ohm": 0.16449136780434515
+  }
+ ],
+ "fitted": "2026-10-13T20:05:30-07:00",
+ "session": "2026-10-13",
+ "logger_uid": [
+  "E66038B7130A6739"
+ ],
+ "dmm": "Aneng SZ20, DC mA auto-ranging (same range for all current points), DC current \u00b1(0.5% + 3 digits), DC volts \u00b1(0.2% + 10 digits)",
+ "points": [
+  {
+   "session": "2026-10-13",
+   "kind": "zero",
+   "label": "zero",
+   "time": 1791941468.520262,
+   "logger_raw_A": -7.549709020368575e-05,
+   "logger_std_A": 3.216676495202415e-05,
+   "logger_raw_V": 5.366779370756547,
+   "logger_std_V": 0.02440917906948226,
+   "n": 8248,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9"
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "vbus",
+   "label": "open",
+   "dmm_V": 5.09,
+   "time": 1791943236.8200407,
+   "logger_raw_A": -5.1897590361445786e-05,
+   "logger_std_A": 3.274833381544194e-05,
+   "logger_raw_V": 5.336751506024096,
+   "logger_std_V": 0.02736038624880319,
+   "n": 830,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9"
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "vbus",
+   "label": "AA cell",
+   "dmm_V": 1.405,
+   "time": 1791944602.0673301,
+   "logger_raw_A": -0.0001007548309178744,
+   "logger_std_A": 3.733503539527692e-05,
+   "logger_raw_V": 1.4646699879227054,
+   "logger_std_V": 0.026183248731398653,
+   "n": 4140,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9",
+   "note": "male breakout unplugged; single cell into the female side; 5 s capture from frames (script), not the cal-vbus keypress window"
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "vbus",
+   "label": "2xAA",
+   "time": 1791945071.8807366,
+   "logger_raw_A": -9.689309845559846e-05,
+   "logger_std_A": 3.654056970302963e-05,
+   "logger_raw_V": 2.9378230574324324,
+   "logger_std_V": 0.027213721131959388,
+   "n": 4144,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9",
+   "note": "male breakout unplugged; two cells in series into the female side; 5 s capture from frames (script), not the cal-vbus keypress window",
+   "dmm_V": 2.808
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "vbus",
+   "label": "1x100 load",
+   "dmm_V": 5.052,
+   "time": 1791946102.039777,
+   "logger_raw_A": 0.04829872034956305,
+   "logger_std_A": 6.971552108768169e-05,
+   "logger_raw_V": 5.309622347066167,
+   "logger_std_V": 0.026859630959216715,
+   "n": 801,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9",
+   "exclude_from_fit": "measured at the cable end under load: includes the female breakout + cable drop that the INA226's VBUS pin (before the shunt) doesn't see; kept as a cross-check"
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "current",
+   "label": "2x100 series",
+   "dmm_A": 0.025929999999999998,
+   "load_ohm": 194.77,
+   "time": 1791946228.850118,
+   "logger_raw_A": 0.024282223543400715,
+   "logger_std_A": 4.445123146109081e-05,
+   "logger_raw_V": 5.337031807372177,
+   "logger_std_V": 0.02665950943109738,
+   "n": 841,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9"
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "current",
+   "label": "1x100",
+   "dmm_A": 0.051340000000000004,
+   "load_ohm": 98.6,
+   "time": 1791946382.6501565,
+   "logger_raw_A": 0.04810794917257683,
+   "logger_std_A": 5.460114147722218e-05,
+   "logger_raw_V": 5.308795803782506,
+   "logger_std_V": 0.027440560900061108,
+   "n": 846,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9"
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "current",
+   "label": "2x100 parallel",
+   "dmm_A": 0.0992,
+   "load_ohm": 49.68,
+   "time": 1791946459.4180863,
+   "logger_raw_A": 0.09316401066350712,
+   "logger_std_A": 0.00010862507208004011,
+   "logger_raw_V": 5.251823163507109,
+   "logger_std_V": 0.02604828090254718,
+   "n": 844,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9"
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "current",
+   "label": "3x100 parallel",
+   "dmm_A": 0.1455,
+   "load_ohm": 33.05,
+   "time": 1791946550.785942,
+   "logger_raw_A": 0.13644693087008344,
+   "logger_std_A": 0.00010901127862865283,
+   "logger_raw_V": 5.199639451728248,
+   "logger_std_V": 0.021490488628396528,
+   "n": 839,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9"
+  },
+  {
+   "session": "2026-10-13",
+   "kind": "current",
+   "label": "1x100 repeat",
+   "dmm_A": 0.05129,
+   "load_ohm": 98.6,
+   "time": 1791946847.9302416,
+   "logger_raw_A": 0.04807593399750935,
+   "logger_std_A": 4.884149142907281e-05,
+   "logger_raw_V": 5.310876400996264,
+   "logger_std_V": 0.026653676806328963,
+   "n": 803,
+   "logger_uid": "E66038B7130A6739",
+   "logger_src": "5a14af1eb9d5e3f9"
+  }
+ ]
+}

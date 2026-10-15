@@ -1,0 +1,243 @@
+diff -ru a/esp32_tinystories.ino b/esp32_tinystories.ino
+--- a/esp32_tinystories.ino	2026-10-11 11:48:33.425849484 -0700
++++ b/esp32_tinystories.ino	2026-10-11 11:48:33.427849472 -0700
+@@ -139,6 +139,21 @@
+ #define SAMPLE_PROFILE 0
+ #endif
+ 
++// Fast sampling for t>0, top_p<1 (FAST_SAMPLE=1; 0 = ia_sample only). One
++// fused pass after the max: tokens with (l - max)/t < -24 are dropped (their
++// total probability is < 25,352 e^-24 = 9.57e-7); the rest go into the
++// normaliser through a fast exp (within 1 ulp of expf); the few with weight
++// >= 2^-10 are recomputed with expf and are the only candidates for top-p,
++// selected with a heap, and for the draw, which is ia_sample's on those exact
++// weights. If the candidates overflow or cannot reach top_p, ia_sample runs on
++// the untouched logits. t=0 never comes here.
++#ifndef FAST_SAMPLE
++#define FAST_SAMPLE 0
++#endif
++#if FAST_SAMPLE && !INTERACTIVE
++#error "FAST_SAMPLE is the INTERACTIVE sampler"
++#endif
++
+ static const int PROMPT_IDS[] = {433, 447, 259, 405}; // "Once upon a time"
+ static const int N_GENERATE = 200;
+ 
+@@ -845,8 +860,9 @@
+ }
+ 
+ static void ia_ready_line() {
+-  Serial.printf("R ready vocab=%d seq_len=%d checksum=%d prefill_skip=%d sample_profile=%d\n",
+-                model.out_vocab, model.c.seq_len, LOGIT_CHECKSUM, PREFILL_SKIP, SAMPLE_PROFILE);
++  Serial.printf("R ready vocab=%d seq_len=%d checksum=%d prefill_skip=%d sample_profile=%d "
++                "fast_sample=%d\n", model.out_vocab, model.c.seq_len, LOGIT_CHECKSUM,
++                PREFILL_SKIP, SAMPLE_PROFILE, FAST_SAMPLE);
+ }
+ 
+ // splitmix64: small, deterministic, seeded straight from s=.
+@@ -865,20 +881,46 @@
+   return (x < y) - (x > y);
+ }
+ 
++#if FAST_SAMPLE
++static uint32_t fs_fallbacks;   // t>0 tokens that went through ia_sample instead
++#endif
+ #if SAMPLE_PROFILE
+ #include "esp_cpu.h"
+ enum { SP_MAX, SP_SCALE, SP_EXP, SP_NORM, SP_SELECT, SP_CUMSUM, SP_DRAW, SP_TOTAL, SP_N };
+ static uint64_t sp_cyc[SP_N];
+ static uint32_t sp_tokens, sp_passes, sp_bisect, sp_surv_max;
+ static uint64_t sp_cand, sp_surv, sp_nucleus;
++#if FAST_SAMPLE
++enum { FP_MAX, FP_FUSED, FP_SELECT, FP_DRAW, FP_TOTAL, FP_N };
++static uint64_t fp_cyc[FP_N], fp_cand, fp_nucleus;
++static uint32_t fp_tokens;
++#endif
+ #define SP_T(x) uint32_t x = esp_cpu_get_cycle_count()
+ #define SP_ADD(i, a, b) (sp_cyc[i] += (uint32_t)((b) - (a)))
+ static void sp_reset() {
++#if FAST_SAMPLE
++  memset(fp_cyc, 0, sizeof(fp_cyc));
++  fp_cand = fp_nucleus = 0;
++  fp_tokens = 0;
++#endif
+   memset(sp_cyc, 0, sizeof(sp_cyc));
+   sp_tokens = sp_passes = sp_bisect = sp_surv_max = 0;
+   sp_cand = sp_surv = sp_nucleus = 0;
+ }
+ static void sp_report() {
++#if FAST_SAMPLE
++  // Fast-path tokens only; fallback tokens are counted, and their time is in
++  // the S line's ia_sample fields only if every token fell back.
++  if (fp_tokens) {
++    double kc = (double)fp_tokens * getCpuFrequencyMhz() * 1000.0;
++    Serial.printf("S fast=1 tok=%u max=%.4f fused=%.4f select=%.4f draw=%.4f total=%.4f "
++                  "fallback=%u cand=%.1f nucleus=%.1f\n", fp_tokens,
++                  fp_cyc[FP_MAX] / kc, fp_cyc[FP_FUSED] / kc, fp_cyc[FP_SELECT] / kc,
++                  fp_cyc[FP_DRAW] / kc, fp_cyc[FP_TOTAL] / kc, fs_fallbacks,
++                  (double)fp_cand / fp_tokens, (double)fp_nucleus / fp_tokens);
++    return;
++  }
++#endif
+   if (!sp_tokens) return;
+   double k = (double)sp_tokens * getCpuFrequencyMhz() * 1000.0;   // cycles per ms * tokens
+   Serial.printf("S tok=%u max=%.4f scale=%.4f exp=%.4f norm=%.4f select=%.4f cumsum=%.4f "
+@@ -1030,6 +1072,123 @@
+ }
+ #endif  // SAMPLE_PROFILE
+ 
++#if FAST_SAMPLE
++#define FS_C 24.0f                 // 25,352 * e^-24 = 9.57e-7 < 1e-6
++#define FS_G 0.0009765625f         // 2^-10: weights recomputed with expf
++#define FS_CAND_MAX 1024
++static float fs_w[FS_CAND_MAX], fs_heap[FS_CAND_MAX];
++static uint16_t fs_id[FS_CAND_MAX];
++
++// exp(s) for s in [-24, 0]: Cody-Waite reduction s = k ln2 + r, |r| <= ln2/2,
++// degree-6 near-minimax polynomial for exp(r), times 2^k from the exponent
++// bits. Host check over all 1,103,101,953 floats in [-24, 0]: within 1 ulp of
++// glibc expf everywhere (99.25% identical), max rel error 1.04e-7. The boot
++// self-test repeats the comparison against this toolchain's expf.
++static inline float fs_exp(float s) {
++  float kf = (float)(int)(s * 1.44269504f - 0.5f);   // round(s / ln2), s <= 0
++  float r = s - kf * 0.693145751953125f;              // ln2 high part, exact product
++  r = r - kf * 1.428606765330187e-06f;                // ln2 low part
++  float p = 0.001351682236418128f;
++  p = p * r + 0.008370536379516125f;
++  p = p * r + 0.04167335852980614f;
++  p = p * r + 0.16666476428508759f;
++  p = p * r + 0.4999997317790985f;
++  p = p * r + 1.0f;
++  p = p * r + 1.0f;
++  union { uint32_t u; float f; } b;
++  b.u = (uint32_t)((int)kf + 127) << 23;
++  return p * b.f;
++}
++
++// Every 4,099th float in [-24, 0] (about 269k values) against expf.
++static bool fs_exp_check() {
++  uint32_t hi; float m24 = -24.0f; memcpy(&hi, &m24, 4);
++  uint32_t n = 0, same = 0, maxulp = 0;
++  for (uint32_t u = 0x80000000u; u <= hi; u += 4099) {
++    float x; memcpy(&x, &u, 4);
++    float a = fs_exp(x), e = expf(x);
++    int32_t ia, ie; memcpy(&ia, &a, 4); memcpy(&ie, &e, 4);
++    uint32_t d = ia > ie ? ia - ie : ie - ia;
++    if (d == 0) same++;
++    if (d > maxulp) maxulp = d;
++    n++;
++  }
++  Serial.printf("fast exp selftest: %u values, %.2f%% identical to expf, max %u ulp %s\n",
++                n, 100.0 * same / n, maxulp, maxulp <= 1 ? "ok" : "FAIL");
++  return maxulp <= 1;
++}
++
++static void fs_sift(float *h, int n, int i) {   // max-heap
++  for (;;) {
++    int a = 2 * i + 1, b = a + 1, m = i;
++    if (a < n && h[a] > h[m]) m = a;
++    if (b < n && h[b] > h[m]) m = b;
++    if (m == i) return;
++    float tmp = h[i]; h[i] = h[m]; h[m] = tmp;
++    i = m;
++  }
++}
++
++static int fs_sample(float *l, int V, float temp, float top_p) {
++  if (!(top_p < 1.f)) { fs_fallbacks++; return ia_sample(l, V, temp, top_p); }
++  SP_T(t0);
++  float mx = l[0];
++  for (int v = 1; v < V; v++) if (l[v] > mx) mx = l[v];
++  SP_T(t1);
++  float inv = 1.f / temp, Z = 0.f;
++  int k = 0;
++  for (int v = 0; v < V; v++) {
++    float sc = (l[v] - mx) * inv;
++    if (sc >= -FS_C) {
++      float w = fs_exp(sc);
++      if (w >= FS_G) {
++        if (k == FS_CAND_MAX) { fs_fallbacks++; return ia_sample(l, V, temp, top_p); }
++        w = expf(sc);
++        fs_w[k] = w; fs_id[k] = (uint16_t)v; k++;
++      }
++      Z += w;
++    }
++  }
++  SP_T(t2);
++  // Top-p: pop candidates largest first until the running sum reaches target.
++  float target = top_p * Z, acc = 0.f, tau = -1.f;
++  memcpy(fs_heap, fs_w, k * sizeof(float));
++  for (int i = k / 2 - 1; i >= 0; i--) fs_sift(fs_heap, k, i);
++  for (int n = k; n > 0;) {
++    float top = fs_heap[0];
++    acc += top;
++    if (acc >= target) { tau = top; break; }
++    fs_heap[0] = fs_heap[--n];
++    fs_sift(fs_heap, n, 0);
++  }
++  if (tau < 0.f) { fs_fallbacks++; return ia_sample(l, V, temp, top_p); }
++  SP_T(t3);
++  // ia_sample's draw over the nucleus (candidates are in id order).
++  float tot = 0.f;
++  for (int i = 0; i < k; i++) if (fs_w[i] >= tau) tot += fs_w[i];
++  float r = ia_uniform() * tot;
++  int last = 0, pick = -1;
++  acc = 0.f;
++  for (int i = 0; i < k; i++)
++    if (fs_w[i] >= tau) {
++      acc += fs_w[i];
++      last = fs_id[i];
++      if (acc > r) { pick = fs_id[i]; break; }
++    }
++  if (pick < 0) pick = last;
++#if SAMPLE_PROFILE
++  SP_T(t4);
++  fp_cyc[FP_MAX] += (uint32_t)(t1 - t0); fp_cyc[FP_FUSED] += (uint32_t)(t2 - t1);
++  fp_cyc[FP_SELECT] += (uint32_t)(t3 - t2); fp_cyc[FP_DRAW] += (uint32_t)(t4 - t3);
++  fp_cyc[FP_TOTAL] += (uint32_t)(t4 - t0);
++  fp_cand += k;
++  for (int i = 0; i < k; i++) if (fs_w[i] >= tau) fp_nucleus++;
++  fp_tokens++;
++#endif
++  return pick;
++}
++#endif  // FAST_SAMPLE
++
+ static void ia_cmd_prompt(char *p) {
+   int n = 0;
+   char *end;
+@@ -1080,6 +1239,9 @@
+     Serial.println("E need t >= 0 and 0 < p <= 1"); return;
+   }
+   ia_rng = seed;
++#if FAST_SAMPLE
++  fs_fallbacks = 0;
++#endif
+ #if SAMPLE_PROFILE
+   sp_reset();
+ #endif
+@@ -1100,7 +1262,11 @@
+         if (s.logits[v] > bv) { bv = s.logits[v]; best = v; }
+       tok = best;
+     } else {
++#if FAST_SAMPLE
++      tok = fs_sample(s.logits, model.out_vocab, temp, top_p);
++#else
+       tok = ia_sample(s.logits, model.out_vocab, temp, top_p);
++#endif
+     }
+     if (eot && tok == VOCAB_EOT_ID) break;
+     if (ttft_us < 0) ttft_us = esp_timer_get_time() - t_g;
+@@ -1315,6 +1481,12 @@
+                 heap_caps_get_free_size(MALLOC_CAP_SPIRAM) / 1048576.0);
+ 
+ #if INTERACTIVE
++#if FAST_SAMPLE
++  if (!fs_exp_check()) {
++    Serial.println("FATAL: fast exp selftest failed");
++    while (1) delay(1000);
++  }
++#endif
+   ia_reset_kv();
+   ia_ready = true;
+   ia_ready_line();
