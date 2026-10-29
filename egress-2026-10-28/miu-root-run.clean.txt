@@ -1,0 +1,232 @@
+Script started on 2026-10-28 10:56:29-07:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="104" LINES="27"]
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ sudo -vsudo -v
+
+[sudo] password for minotaur: 
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ ss -ltn | grep -E ':8080|:8888'          # both must be listening first
+ss -ltn | grep -E ':8080|:8888'          # both must be listening first
+
+LISTEN 0      1024       127.0.0.1:8888       0.0.0.0:*          
+LISTEN 0      512        127.0.0.1:8080       0.0.0.0:*          
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ # --- B1. dedicated user + the rule -------------------------------------
+
+sudo useradd --create-home --shell /bin/bash agent
+
+sudo install -o agent -g agent -m 755 "$E/fake-agent.sh" /home/agent/fake-agent.sh
+
+sha256sum /home/agent/fake-agent.sh "$E/agent-egress.nft"
+# --- B1. dedicated user + the rule -------------------------------------
+
+sudo useradd --create-home --shell /bin/bash agent
+
+sudo install -o agent -g agent -m 755 "$E/fake-agent.sh" /home/agent/fake-agent.sh
+
+sha256sum /home/agent/fake-agent.sh "$E/agent-egress.nft"
+
+install: cannot stat '/fake-agent.sh': No such file or directory
+sha256sum: /home/agent/fake-agent.sh: Permission denied
+sha256sum: /agent-egress.nft: No such file or directory
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ grep -n '^E=' "$F"     # check the value the file uses; it should be this directory
+
+E=$PWD
+
+ls "$E/fake-agent.sh" "$E/agent-egress.nft"
+grep -n '^E=' "$F"     # check the value the file uses; it should be this directory
+
+E=$PWD
+
+ls "$E/fake-agent.sh" "$E/agent-egress.nft"
+
+grep: : No such file or directory
+/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress/agent-egress.nft
+/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress/fake-agent.sh
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ sudo install -o agent -g agent -m 755 "$E/fake-agent.sh" /home/agent/fake-agent.sh
+
+sudo sha256sum /home/agent/fake-agent.sh "$E/agent-egress.nft"
+sudo install -o agent -g agent -m 755 "$E/fake-agent.sh" /home/agent/fake-agent.sh
+
+sudo sha256sum /home/agent/fake-agent.sh "$E/agent-egress.nft"
+
+7276e33a3578d2b9f2b7ec6649abea58f3520444a8ccea8c3cc9307a4fd42335  /home/agent/fake-agent.sh
+16ce33972be760c7140f631edce6204044d45cffac576353f33db5412c281888  /tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress/agent-egress.nft
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ clear
+
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ E=/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress
+
+
+sudo install -o agent -g agent -m 755 "$E/fake-agent.sh" /home/agent/fake-agent.sh
+
+sudo sha256sum /home/agent/fake-agent.sh "$E/agent-egress.nft"
+
+#   expect 7276e33a…42335 and 16ce3397…281888
+
+
+cat "$E/agent-egress.nft"
+
+sudo nft -c -f "$E/agent-egress.nft" && echo "syntax OK"
+E=/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress
+
+
+sudo install -o agent -g agent -m 755 "$E/fake-agent.sh" /home/agent/fake-agent.sh
+
+sudo sha256sum /home/agent/fake-agent.sh "$E/agent-egress.nft"
+
+#   expect 7276e33a…42335 and 16ce3397…281888
+
+
+cat "$E/agent-egress.nft"
+
+sudo nft -c -f "$E/agent-egress.nft" && echo "syntax OK"
+
+7276e33a3578d2b9f2b7ec6649abea58f3520444a8ccea8c3cc9307a4fd42335  /home/agent/fake-agent.sh
+16ce33972be760c7140f631edce6204044d45cffac576353f33db5412c281888  /tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress/agent-egress.nft
+# agent-egress.nft: default-deny outbound for the "agent" user only.
+table inet agent_egress {
+  chain output {
+    type filter hook output priority filter; policy accept;
+
+    # Everyone except the agent user is untouched.
+    meta skuid != "agent" accept
+
+    # No DNS for the agent, not even the local stub: names resolve at the proxy.
+    meta l4proto { tcp, udp } th dport { 53, 853 } counter log prefix "agent-egress-dns " reject
+
+    # Loopback: llama-server on 127.0.0.1:8080 and the proxy on 127.0.0.1:8888.
+    oif "lo" accept
+
+    # Uncomment for a llama-server on another box on the LAN:
+    # ip daddr 192.168.x.x tcp dport 8080 accept
+
+    # Everything else: log it, then refuse it.
+    counter log prefix "agent-egress-drop " flags skuid reject
+  }
+}
+syntax OK
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ sudo nft -f "$E/agent-egress.nft"
+
+sudo nft list table inet agent_egress
+sudo nft -f "$E/agent-egress.nft"
+
+sudo nft list table inet agent_egress
+
+table inet agent_egress {
+	chain output {
+		type filter hook output priority filter; policy accept;
+		meta skuid != 1002 accept
+		meta l4proto { tcp, udp } th dport { 53, 853 } counter packets 0 bytes 0 log prefix "agent-egress-dns " reject
+		oif "lo" accept
+		counter packets 0 bytes 0 log prefix "agent-egress-drop " flags skuid reject
+	}
+}
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ # agent user, no proxy: outside should be blocked, the local model should work
+
+sudo -u agent -i /home/agent/fake-agent.sh
+
+
+# agent user through the allowlist proxy
+
+P='https_proxy=http://127.0.0.1:8888 http_proxy=http://127.0.0.1:8888 no_proxy=127.0.0.1,localhost'
+
+sudo -u agent -i env $P /home/agent/fake-agent.sh
+
+sudo -u agent -i env $P curl -sS -m 10 -o /dev/null -w 'allowlisted: HTTP %{http_code}\n' https://huggingface.co/api/models/Qwen/Qwen3.8-Flash-Next
+
+sudo -u agent -i env $P curl -sS -m 10 --noproxy '*' -o /dev/null -w 'HTTP %{http_code}\n' https://huggingface.co/ ; echo "(tool ignoring the proxy, exit $?)"
+
+tail -4 "$E/tpd/tinyproxy.log"
+
+
+# control: your own user is not affected
+
+curl -sS -m 5 -o /dev/null -w 'minotaur -> example.com: HTTP %{http_code}\n' https://example.com/
+
+
+# what the firewall logged
+
+journalctl -k --since "-10 min" --no-pager -g agent-egress | tail -6
+
+sudo nft list table inet agent_egress | grep -E 'counter|log'
+# agent user, no proxy: outside should be blocked, the local model should work
+
+sudo -u agent -i /home/agent/fake-agent.sh
+
+
+# agent user through the allowlist proxy
+
+P='https_proxy=http://127.0.0.1:8888 http_proxy=http://127.0.0.1:8888 no_proxy=127.0.0.1,localhost'
+
+sudo -u agent -i env $P /home/agent/fake-agent.sh
+
+sudo -u agent -i env $P curl -sS -m 10 -o /dev/null -w 'allowlisted: HTTP %{http_code}\n' https://huggingface.co/api/models/Qwen/Qwen3.8-Flash-Next
+
+sudo -u agent -i env $P curl -sS -m 10 --noproxy '*' -o /dev/null -w 'HTTP %{http_code}\n' https://huggingface.co/ ; echo "(tool ignoring the proxy, exit $?)"
+
+tail -4 "$E/tpd/tinyproxy.log"
+
+
+# control: your own user is not affected
+
+curl -sS -m 5 -o /dev/null -w 'minotaur -> example.com: HTTP %{http_code}\n' https://example.com/
+
+
+# what the firewall logged
+
+journalctl -k --since "-10 min" --no-pager -g agent-egress | tail -6
+
+sudo nft list table inet agent_egress | grep -E 'counter|log'
+
+outside, by name:              curl: (6) Could not resolve host: example.com
+outside, by IP:                curl: (7) Failed to connect to 1.1.1.1 port 80 after 0 ms: Couldn't connect to server
+llama-server (http://127.0.0.1:8080): model says: ' Paris.\nThe'
+outside, by name:              curl: (56) CONNECT tunnel failed, response 403
+outside, by IP:                HTTP 403
+llama-server (http://127.0.0.1:8080): model says: ' Paris.\nThe'
+allowlisted: HTTP 200
+curl: (6) Could not resolve host: huggingface.co
+HTTP 000
+(tool ignoring the proxy, exit 6)
+NOTICE    Oct 28 11:03:12.394 [760456]: Proxying refused on filtered domain "1.1.1.1"
+CONNECT   Oct 28 11:03:12.616 [760456]: Connect (file descriptor 2): 127.0.0.1
+CONNECT   Oct 28 11:03:12.631 [760456]: Request (file descriptor 2): CONNECT huggingface.co:443 HTTP/1.1
+CONNECT   Oct 28 11:03:12.659 [760456]: Established connection to host "huggingface.co" using file descriptor 3.
+minotaur -> example.com: HTTP 200
+Oct 28 11:03:12 Miu kernel: agent-egress-dns IN= OUT=lo SRC=127.0.0.1 DST=127.0.0.53 LEN=71 TOS=0x00 PREC=0x00 TTL=64 ID=12629 DF PROTO=UDP SPT=40351 DPT=53 LEN=51 
+Oct 28 11:03:12 Miu kernel: agent-egress-dns IN= OUT=lo SRC=127.0.0.1 DST=127.0.0.53 LEN=71 TOS=0x00 PREC=0x00 TTL=64 ID=47997 DF PROTO=UDP SPT=50683 DPT=53 LEN=51 
+Oct 28 11:03:12 Miu kernel: agent-egress-dns IN= OUT=lo SRC=127.0.0.1 DST=127.0.0.53 LEN=79 TOS=0x00 PREC=0x00 TTL=64 ID=12142 DF PROTO=UDP SPT=55912 DPT=53 LEN=59 
+Oct 28 11:03:12 Miu kernel: agent-egress-dns IN= OUT=lo SRC=127.0.0.1 DST=127.0.0.53 LEN=79 TOS=0x00 PREC=0x00 TTL=64 ID=30790 DF PROTO=UDP SPT=50728 DPT=53 LEN=59 
+Oct 28 11:03:12 Miu kernel: agent-egress-drop IN= OUT=wlp2s0 SRC=192.168.x.x DST=104.20.23.154 LEN=52 TOS=0x00 PREC=0x00 TTL=64 ID=44542 DF PROTO=TCP SPT=58640 DPT=443 WINDOW=462 RES=0x00 ACK URGP=0 
+Oct 28 11:03:13 Miu kernel: agent-egress-drop IN= OUT=wlp2s0 SRC=192.168.x.x DST=108.138.246.85 LEN=52 TOS=0x00 PREC=0x00 TTL=64 ID=0 DF PROTO=TCP SPT=37276 DPT=443 WINDOW=288 RES=0x00 ACK URGP=0 
+		meta l4proto { tcp, udp } th dport { 53, 853 } counter packets 8 bytes 588 log prefix "agent-egress-dns " reject
+		counter packets 24 bytes 1256 log prefix "agent-egress-drop " flags skuid reject
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ printf '%s\n' '# agent-egress test' \
+
+  '0.0.0.0 routify-file-proxy-sg.oss-ap-southeast-1.aliyuncs.com' \
+
+  '0.0.0.0 routify-file-proxy-sg.ap-southeast-1.oss.aliyuncs.com' | sudo tee -a /etc/hosts
+
+getent hosts routify-file-proxy-sg.oss-ap-southeast-1.aliyuncs.com   # should show 0.0.0.0
+
+getent hosts example.com                                             # should still resolve normally
+printf '%s\n' '# agent-egress test' \
+
+  '0.0.0.0 routify-file-proxy-sg.oss-ap-southeast-1.aliyuncs.com' \
+
+  '0.0.0.0 routify-file-proxy-sg.ap-southeast-1.oss.aliyuncs.com' | sudo tee -a /etc/hosts
+
+getent hosts routify-file-proxy-sg.oss-ap-southeast-1.aliyuncs.com   # should show 0.0.0.0
+
+getent hosts example.com                                             # should still resolve normally
+
+# agent-egress test
+
+0.0.0.0 routify-file-proxy-sg.oss-ap-southeast-1.aliyuncs.com
+
+0.0.0.0 routify-file-proxy-sg.ap-southeast-1.oss.aliyuncs.com
+
+0.0.0.0         routify-file-proxy-sg.oss-ap-southeast-1.aliyuncs.com
+2606:4700:10::ac42:93f3 example.com
+2606:4700:10::6814:179a example.com
+minotaur@Miu:/tmp/claude-1000/-home-minotaur-Desktop-InsiderLLM/2af3e31d-5e96-40f7-be1f-07b6ab2627a8/scratchpad/egress$ exit
+
+exit
+
+Script done on 2026-10-28 11:04:39-07:00 [COMMAND_EXIT_CODE="0"]

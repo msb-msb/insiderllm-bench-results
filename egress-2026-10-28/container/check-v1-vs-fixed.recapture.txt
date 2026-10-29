@@ -1,0 +1,15 @@
+# captured 2026-10-28T17:24:52-07:00 on Miu, image egress-nft-check cf8b08057baa, kernel 6.8.0-147-generic
+=== agent-egress.v1.nft
+root -> example.com: HTTP 200
+drop counter after root's request: 1 rule, packets 4
+agent: curl: (7) Failed to connect to 1.1.1.1 port 80 after 0 ms: Could not connect to server
+agent: HTTP 000
+agent: curl: (6) Could not resolve host: example.com
+drop counter after agent's requests: packets 5; dns: packets 4
+=== agent-egress.nft
+root -> example.com: HTTP 200
+drop counter after root's request: 1 rule, packets 0
+agent: curl: (7) Failed to connect to 1.1.1.1 port 80 after 0 ms: Could not connect to server
+agent: HTTP 000
+agent: curl: (6) Could not resolve host: example.com
+drop counter after agent's requests: packets 1; dns: packets 4

@@ -1,0 +1,29 @@
+# agent-egress.nft: default-deny outbound for the "agent" user only.
+# The first two lines make a reload replace the table in one step.
+table inet agent_egress
+delete table inet agent_egress
+
+table inet agent_egress {
+  chain output {
+    type filter hook output priority filter; policy accept;
+
+    # Only packets from a socket the agent user owns go to the agent chain.
+    # Packets the kernel sends for a closed socket (the last ACKs of a
+    # connection) have no owner, so they skip it and leave by the policy.
+    meta skuid "agent" jump agent
+  }
+
+  chain agent {
+    # No DNS for the agent, not even the local stub: names resolve at the proxy.
+    meta l4proto { tcp, udp } th dport { 53, 853 } counter log prefix "agent-egress-dns " reject
+
+    # Loopback: llama-server on 127.0.0.1:8080 and the proxy on 127.0.0.1:8888.
+    oif "lo" accept
+
+    # Uncomment for a llama-server on another box on the LAN:
+    # ip daddr 192.168.x.x tcp dport 8080 accept
+
+    # Everything else: log it, then refuse it.
+    counter log prefix "agent-egress-drop " flags skuid reject
+  }
+}

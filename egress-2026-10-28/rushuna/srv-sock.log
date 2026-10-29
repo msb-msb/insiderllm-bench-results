@@ -1,0 +1,19 @@
+0.01.620.960 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.621.374 W srv  llama_server: -----------------
+0.01.621.375 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.01.621.375 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.01.621.376 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.01.621.376 W srv  llama_server: -----------------
+0.01.622.694 I srv    load_model: loading model '/home/minotaur/bench-models/Qwen3.5-0.8B-Q8_0.gguf'
+0.02.867.709 I cmn          init: llama threadpool init, n_threads = 4
+0.02.921.516 I srv    load_model: initializing, n_slots = 4, n_ctx_slot = 2048, kv_unified = 'true'
+0.02.926.110 I srv  llama_server: model loaded
+0.02.926.130 I srv  llama_server: listening on unix:///home/minotaur/egress-test/llama.sock
+0.02.951.395 I slot get_availabl: id  3 | task -1 | selected slot by LRU, t_last = -1
+0.02.951.430 I slot launch_slot_: id  3 | task 0 | processing task, is_child = 0
+0.02.997.392 I slot print_timing: id  3 | task 0 | prompt eval time =      26.36 ms /     5 tokens (    5.27 ms per token,   189.65 tokens per second)
+0.02.997.395 I slot print_timing: id  3 | task 0 |        eval time =      19.57 ms /     4 tokens (    6.52 ms per token,   153.28 tokens per second)
+0.02.997.396 I slot print_timing: id  3 | task 0 |       total time =      45.94 ms /     9 tokens
+0.02.997.399 I slot print_timing: id  3 | task 0 |    graphs reused =          3
+0.02.997.435 I slot      release: id  3 | task 0 | stop processing: n_tokens = 8, truncated = 0
+0.03.020.537 I srv    operator(): operator(): cleaning up before exit...

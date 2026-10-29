@@ -1,0 +1,21 @@
+# agent-egress.nft: default-deny outbound for the "agent" user only.
+table inet agent_egress {
+  chain output {
+    type filter hook output priority filter; policy accept;
+
+    # Everyone except the agent user is untouched.
+    meta skuid != "agent" accept
+
+    # No DNS for the agent, not even the local stub: names resolve at the proxy.
+    meta l4proto { tcp, udp } th dport { 53, 853 } counter log prefix "agent-egress-dns " reject
+
+    # Loopback: llama-server on 127.0.0.1:8080 and the proxy on 127.0.0.1:8888.
+    oif "lo" accept
+
+    # Uncomment for a llama-server on another box on the LAN:
+    # ip daddr 192.168.x.x tcp dport 8080 accept
+
+    # Everything else: log it, then refuse it.
+    counter log prefix "agent-egress-drop " flags skuid reject
+  }
+}
