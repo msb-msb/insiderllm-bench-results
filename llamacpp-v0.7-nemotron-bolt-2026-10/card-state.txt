@@ -1,0 +1,30 @@
+== 2026-11-03T12:44:31-08:00 card state record
+-- guard
+compute-apps: []
+pgrep esp32-llm: [479248 bash -c cd ~/llamacpp-v0.7-nemotron-bolt-2026-10 && { echo "== $(date -Is) card state record" echo "-- guard"; nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,noheader; echo "compute-apps: [$(nvidia-smi --query-compute-apps=pid --format=csv,noheader)]"; echo "pgrep esp32-llm: [$(pgrep -af esp32-llm)]" echo "-- lsmod (gpu|unlock)"; lsmod | grep -i -E "gpu|unlock|nvidia"; echo "modinfo gpu_unlock: $(modinfo gpu_unlock 2>&1 | head -1)"; echo "find gpu_unlock module files: [$(find /lib/modules/$(uname -r) -iname "*unlock*" 2>/dev/null)]"; echo "kernel cmdline: $(cat /proc/cmdline)"; echo "initramfs hooks mentioning unlock: [$(ls /etc/initramfs-tools/hooks /etc/initramfs-tools/scripts/* 2>/dev/null | grep -i unlock)]"; echo "modprobe.d: [$(grep -ril unlock /etc/modprobe.d 2>/dev/null)]" echo "-- driver/card"; nvidia-smi --query-gpu=name,driver_version,vbios_version,pcie.link.gen.max,pcie.link.width.max,memory.total,power.limit,clocks.max.sm,clocks.max.mem,display_active --format=csv echo "-- uname"; uname -a; echo "-- stream_read (4 threads x3)"; for i in 1 2 3; do OMP_NUM_THREADS=4 ~/stream_read; done echo "-- free"; free -m | head -2 } 2>&1 | tee card-state.txt
+479249 bash -c cd ~/llamacpp-v0.7-nemotron-bolt-2026-10 && { echo "== $(date -Is) card state record" echo "-- guard"; nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv,noheader; echo "compute-apps: [$(nvidia-smi --query-compute-apps=pid --format=csv,noheader)]"; echo "pgrep esp32-llm: [$(pgrep -af esp32-llm)]" echo "-- lsmod (gpu|unlock)"; lsmod | grep -i -E "gpu|unlock|nvidia"; echo "modinfo gpu_unlock: $(modinfo gpu_unlock 2>&1 | head -1)"; echo "find gpu_unlock module files: [$(find /lib/modules/$(uname -r) -iname "*unlock*" 2>/dev/null)]"; echo "kernel cmdline: $(cat /proc/cmdline)"; echo "initramfs hooks mentioning unlock: [$(ls /etc/initramfs-tools/hooks /etc/initramfs-tools/scripts/* 2>/dev/null | grep -i unlock)]"; echo "modprobe.d: [$(grep -ril unlock /etc/modprobe.d 2>/dev/null)]" echo "-- driver/card"; nvidia-smi --query-gpu=name,driver_version,vbios_version,pcie.link.gen.max,pcie.link.width.max,memory.total,power.limit,clocks.max.sm,clocks.max.mem,display_active --format=csv echo "-- uname"; uname -a; echo "-- stream_read (4 threads x3)"; for i in 1 2 3; do OMP_NUM_THREADS=4 ~/stream_read; done echo "-- free"; free -m | head -2 } 2>&1 | tee card-state.txt]
+-- lsmod (gpu|unlock)
+nvidia_uvm           2113536  0
+nvidia_drm            143360  0
+nvidia_modeset       1646592  1 nvidia_drm
+nvidia              104226816  3 nvidia_uvm,nvidia_drm,nvidia_modeset
+drm_ttm_helper         20480  2 nvidia_drm
+video                  77824  1 nvidia_modeset
+modinfo gpu_unlock: modinfo: ERROR: Module gpu_unlock not found.
+find gpu_unlock module files: []
+kernel cmdline: BOOT_IMAGE=/boot/vmlinuz-7.0.0-38-generic root=UUID=37214335-7313-4ff8-a60c-8ddcc87e4b4a ro quiet splash
+initramfs hooks mentioning unlock: []
+modprobe.d: []
+-- driver/card
+name, driver_version, vbios_version, pcie.link.gen.max, pcie.link.width.max, memory.total [MiB], power.limit [W], clocks.max.sm [MHz], clocks.max.memory [MHz], display_active
+NVIDIA GeForce RTX 3090, 580.178.04, 94.02.42.80.14, 4, 16, 24576 MiB, 420.00 W, 2100 MHz, 9751 MHz, Enabled
+-- uname
+Linux Tamanna 7.0.0-38-generic #38-Ubuntu SMP PREEMPT_DYNAMIC Fri Sep  4 09:10:14 UTC 2026 x86_64 GNU/Linux
+-- stream_read (4 threads x3)
+threads 4 read 42.03 GB/s (best of 8) sink 163678951424
+threads 4 read 42.00 GB/s (best of 8) sink 163678951424
+threads 4 read 42.08 GB/s (best of 8) sink 163678951424
+-- free
+               total        used        free      shared  buff/cache   available
+Mem:           64220        1858        6006           1       57067       62362
+NOTE (added 2026-11-03 12:45): the two PIDs on the pgrep line above are this record command's own bash -c (its text contains the search string); no other match. Re-checked: []

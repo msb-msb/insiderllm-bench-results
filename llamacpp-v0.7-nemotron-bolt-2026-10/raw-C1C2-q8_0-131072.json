@@ -1,0 +1,126 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/bench-models/nemotron-3.5-bolt-24gb/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB.gguf",
+  "-ngl",
+  "99",
+  "-fa",
+  "on",
+  "-c",
+  "131072",
+  "-np",
+  "1",
+  "-ctk",
+  "q8_0",
+  "-ctv",
+  "q8_0",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "-t",
+  "8",
+  "--port",
+  "8081"
+ ],
+ "load_ok": true,
+ "load_s": 3.2,
+ "rc_at_load": null,
+ "vram_after_load_mib": 21784,
+ "requests": [
+  {
+   "i": 0,
+   "discard": true,
+   "prompt_n": 4096,
+   "prompt_per_second": 1557.1900475178672,
+   "predicted_n": 128,
+   "predicted_per_second": 88.00395255547541,
+   "content_head": "proj.url;\n        task.local_path = params.mmproj.path.empty() ? get_default_local_path(params.mmproj.url) : params.mmproj.path;\n        task.opts       = opts;\n        tasks.push_back(std::move(task)"
+  },
+  {
+   "i": 1,
+   "discard": false,
+   "prompt_n": 4096,
+   "prompt_per_second": 1608.277603792017,
+   "predicted_n": 128,
+   "predicted_per_second": 88.33934550978759,
+   "content_head": "proj.url;\n        task.local_path = params.mmproj.path.empty() ? get_default_local_path(params.mmproj.url) : params.mmproj.path;\n        task.opts       = opts;\n        tasks.push_back(std::move(task)"
+  },
+  {
+   "i": 2,
+   "discard": false,
+   "prompt_n": 4096,
+   "prompt_per_second": 1604.6346361326423,
+   "predicted_n": 128,
+   "predicted_per_second": 88.12944897582477,
+   "content_head": "proj.url;\n        task.local_path = params.mmproj.path.empty() ? get_default_local_path(params.mmproj.url) : params.mmproj.path;\n        task.opts       = opts;\n        tasks.push_back(std::move(task)"
+  },
+  {
+   "i": 3,
+   "discard": false,
+   "prompt_n": 4096,
+   "prompt_per_second": 1603.14429198831,
+   "predicted_n": 128,
+   "predicted_per_second": 88.14021372960804,
+   "content_head": "proj.url;\n        task.local_path = params.mmproj.path.empty() ? get_default_local_path(params.mmproj.url) : params.mmproj.path;\n        task.opts       = opts;\n        tasks.push_back(std::move(task)"
+  }
+ ],
+ "vram_after_first_request_mib": 21848,
+ "rc": 0,
+ "meta": {
+  "name": "C1C2-q8_0-131072",
+  "attempt": 1,
+  "started": "2026-11-03T12:58:13-0800",
+  "elapsed_s": 19.7,
+  "nvme_read_mib": 0.0,
+  "mem_available_mib": [
+   62489,
+   62113
+  ],
+  "cpu_tctl_max": 56.375,
+  "cpu_tctl_mean": 53.1,
+  "cpu_mhz_mean": 2141,
+  "telemetry": {
+   "samples": 23,
+   "samples_under_load": 18,
+   "peak_vram_mib": 21848.0,
+   "memory_total_mib": 24576.0,
+   "pcie_gen_under_load": [
+    "4"
+   ],
+   "pcie_width_under_load": [
+    "16"
+   ],
+   "gpu_temp_max": 70.0,
+   "power_w": {
+    "mean": 381.0,
+    "median": 412.93,
+    "min": 134.59,
+    "max": 417.56
+   },
+   "sm_clock_mhz": {
+    "mean": 1864.2,
+    "median": 1867.5,
+    "min": 1800.0,
+    "max": 1935.0
+   },
+   "mem_clock_mhz": {
+    "mean": 9501.0,
+    "median": 9501.0,
+    "min": 9501.0,
+    "max": 9501.0
+   },
+   "pstates_under_load": [
+    "P2"
+   ],
+   "reasons_under_load": [
+    "0x0000000000000000",
+    "0x0000000000000004"
+   ]
+  },
+  "esp32_taint": []
+ },
+ "headroom_after_first_mib": 2728.0,
+ "headroom_peak_sampler_mib": 2728.0
+}

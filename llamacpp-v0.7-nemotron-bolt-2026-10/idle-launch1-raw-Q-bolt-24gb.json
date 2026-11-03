@@ -1,0 +1,80 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/bench-models/nemotron-3.5-bolt-24gb/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB.gguf",
+  "-ngl",
+  "99",
+  "-fa",
+  "on",
+  "-c",
+  "4096",
+  "--jinja",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "--host",
+  "0.0.0.0",
+  "--port",
+  "8081"
+ ],
+ "load_ok": true,
+ "load_s": 3.3,
+ "rc_at_load": null,
+ "vram_after_load_mib": 21612,
+ "rc": 0,
+ "meta": {
+  "name": "Q-bolt-24gb",
+  "attempt": 1,
+  "started": "2026-11-03T13:02:52-0800",
+  "elapsed_s": 6654.7,
+  "nvme_read_mib": 4.4,
+  "mem_available_mib": [
+   62238,
+   62596
+  ],
+  "cpu_tctl_max": 46.125,
+  "cpu_tctl_mean": 26.6,
+  "cpu_mhz_mean": 1949,
+  "telemetry": {
+   "samples": 6639,
+   "samples_under_load": 3,
+   "peak_vram_mib": 21612.0,
+   "memory_total_mib": 24576.0,
+   "pcie_gen_under_load": [
+    "4"
+   ],
+   "pcie_width_under_load": [
+    "16"
+   ],
+   "gpu_temp_max": 55.0,
+   "power_w": {
+    "mean": 120.7,
+    "median": 129.81,
+    "min": 85.22,
+    "max": 146.99
+   },
+   "sm_clock_mhz": {
+    "mean": 1900.0,
+    "median": 1950.0,
+    "min": 1800.0,
+    "max": 1950.0
+   },
+   "mem_clock_mhz": {
+    "mean": 9584.3,
+    "median": 9501.0,
+    "min": 9501.0,
+    "max": 9751.0
+   },
+   "pstates_under_load": [
+    "P0",
+    "P2"
+   ],
+   "reasons_under_load": [
+    "0x0000000000000000"
+   ]
+  },
+  "esp32_taint": []
+ }
+}

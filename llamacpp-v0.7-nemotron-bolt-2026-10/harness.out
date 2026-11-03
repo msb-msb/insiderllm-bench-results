@@ -1,0 +1,96 @@
+12:47:16 arm A start: llama-bench -ngl 99 -ncmoe 0 -fa 1 -p 512 -n 128 -d 0,4096 -r 5 -t 8 -lm mmap  order (v04 prime, v04, v07 prime, v07) x 3
+12:47:47   prime-A-v04-rep1             pp512@d0 3754.87  tg128@d0 163.18  pp512@d4096 3610.12  tg128@d4096 161.16
+12:47:47     vram 21580/24576  pwr 378W (max 418)  sm 1935MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 64C  cpu 45.5C 2075MHz  nvme 20996.2MiB  avail 62456->62598  (28s)
+12:48:05   A-v04-rep1                   pp512@d0 3775.08  tg128@d0 163.03  pp512@d4096 3611.59  tg128@d4096 160.88
+12:48:05     vram 21580/24576  pwr 345W (max 396)  sm 1920MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 66C  cpu 47.125C 2066MHz  nvme 0.2MiB  avail 62597->62526  (14s)
+12:48:23   prime-A-v07-rep1             pp512@d0 4363.52  tg128@d0 162.27  pp512@d4096 4116.09  tg128@d4096 160.17
+12:48:23     vram 21586/24576  pwr 356W (max 402)  sm 1920MHz  mem 9501  ['P0', 'P2']  pcie ['4']x['16']  gpu 65C  cpu 48.625C 2047MHz  nvme 52.7MiB  avail 62531->62596  (14s)
+12:48:41   A-v07-rep1                   pp512@d0 4366.63  tg128@d0 162.36  pp512@d4096 4111.12  tg128@d4096 160.12
+12:48:41     vram 21586/24576  pwr 342W (max 397)  sm 1920MHz  mem 9501  ['P0', 'P2']  pcie ['4']x['16']  gpu 65C  cpu 50.875C 2112MHz  nvme 0.0MiB  avail 62595->62475  (14s)
+12:49:00   prime-A-v04-rep2             pp512@d0 3767.85  tg128@d0 162.97  pp512@d4096 3597.74  tg128@d4096 160.81
+12:49:00     vram 21580/24576  pwr 350W (max 400)  sm 1920MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 65C  cpu 51.375C 2055MHz  nvme 0.0MiB  avail 62470->62416  (14s)
+12:49:18   A-v04-rep2                   pp512@d0 3762.09  tg128@d0 162.96  pp512@d4096 3591.52  tg128@d4096 160.83
+12:49:18     vram 21580/24576  pwr 345W (max 392)  sm 1920MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 66C  cpu 52.0C 2061MHz  nvme 0.0MiB  avail 62402->62409  (14s)
+12:49:36   prime-A-v07-rep2             pp512@d0 4358.53  tg128@d0 162.27  pp512@d4096 4113.29  tg128@d4096 160.15
+12:49:36     vram 21586/24576  pwr 344W (max 398)  sm 1920MHz  mem 9501  ['P0', 'P2']  pcie ['4']x['16']  gpu 66C  cpu 52.0C 2053MHz  nvme 8.2MiB  avail 62384->62459  (14s)
+12:49:54   A-v07-rep2                   pp512@d0 4365.05  tg128@d0 162.30  pp512@d4096 4111.33  tg128@d4096 160.15
+12:49:54     vram 21586/24576  pwr 342W (max 398)  sm 1920MHz  mem 9501  ['P0', 'P2']  pcie ['4']x['16']  gpu 66C  cpu 52.25C 2032MHz  nvme 0.0MiB  avail 62458->62510  (14s)
+12:50:12   prime-A-v04-rep3             pp512@d0 3763.97  tg128@d0 162.90  pp512@d4096 3592.69  tg128@d4096 160.85
+12:50:12     vram 21580/24576  pwr 349W (max 400)  sm 1920MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 66C  cpu 52.875C 2053MHz  nvme 0.0MiB  avail 62510->62486  (14s)
+12:50:30   A-v04-rep3                   pp512@d0 3767.48  tg128@d0 162.81  pp512@d4096 3600.55  tg128@d4096 160.85
+12:50:30     vram 21580/24576  pwr 348W (max 396)  sm 1920MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 67C  cpu 53.375C 2054MHz  nvme 1.2MiB  avail 62478->62507  (14s)
+12:50:48   prime-A-v07-rep3             pp512@d0 4357.43  tg128@d0 162.19  pp512@d4096 4113.03  tg128@d4096 160.16
+12:50:48     vram 21586/24576  pwr 344W (max 398)  sm 1920MHz  mem 9501  ['P0', 'P2']  pcie ['4']x['16']  gpu 66C  cpu 54.0C 2106MHz  nvme 0.0MiB  avail 62503->62523  (14s)
+12:51:06   A-v07-rep3                   pp512@d0 4355.15  tg128@d0 162.07  pp512@d4096 4107.72  tg128@d4096 160.13
+12:51:06     vram 21586/24576  pwr 343W (max 396)  sm 1920MHz  mem 9501  ['P0', 'P2']  pcie ['4']x['16']  gpu 66C  cpu 54.75C 2045MHz  nvme 0.0MiB  avail 62536->62408  (14s)
+12:51:06 arm A drift check vs 10-09 (v0.4.0 cells, >2% is reported first):
+12:51:06   v04 rep1 tg d=0: 163.03 vs 162.9 (+0.08%)
+12:51:06   v04 rep2 tg d=0: 162.96 vs 162.9 (+0.04%)
+12:51:06   v04 rep3 tg d=0: 162.81 vs 162.9 (-0.06%)
+12:51:06   v04 rep1 tg d=4096: 160.88 vs 160.69 (+0.12%)
+12:51:06   v04 rep2 tg d=4096: 160.83 vs 160.69 (+0.09%)
+12:51:06   v04 rep3 tg d=4096: 160.85 vs 160.69 (+0.10%)
+12:51:06   v04 rep1 pp d=0: 3775.08 vs 3768.8 (+0.17%)
+12:51:06   v04 rep2 pp d=0: 3762.09 vs 3768.8 (-0.18%)
+12:51:06   v04 rep3 pp d=0: 3767.48 vs 3768.8 (-0.04%)
+12:51:06   v04 rep1 pp d=4096: 3611.59 vs 3605.0 (+0.18%)
+12:51:06   v04 rep2 pp d=4096: 3591.52 vs 3605.0 (-0.37%)
+12:51:06   v04 rep3 pp d=4096: 3600.55 vs 3605.0 (-0.12%)
+12:51:06   tg d=0: v04 162.94 [162.81..163.03]  v07 162.24 [162.07..162.36]  ratio 0.9957  MOVED
+12:51:06   tg d=4096: v04 160.85 [160.83..160.88]  v07 160.13 [160.12..160.15]  ratio 0.9955  MOVED
+12:51:06   pp d=0: v04 3768.22 [3762.09..3775.08]  v07 4362.28 [4355.15..4366.63]  ratio 1.1577  MOVED
+12:51:06   pp d=4096: v04 3601.22 [3591.52..3611.59]  v07 4110.06 [4107.72..4111.33]  ratio 1.1413  MOVED
+12:51:06 arm A done
+12:51:06 arm B start: common -m /home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf -ngl 99 -ncmoe 20 -fa on -c 8192 -np 1 --fit off -lm mmap -t 8 --port 8081
+12:51:06   expert tensor bytes (*_exps) 19568525312 = 18662 MiB of 21099 MiB; 10% = 1866 MiB
+12:51:36   prime-B1         gen   70.22  prompt   310.97  per-prompt 69.50  load 3.0s
+12:51:36     vram 12130/24576  pwr 181W (max 200)  sm 1935MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 58C  cpu 58.75C 3021MHz  nvme 11.4MiB  avail 62424->62466  (25s)
+12:52:05   prime-B2         gen   70.09  prompt   314.12  per-prompt 69.34  load 3.0s
+12:52:05     vram 12254/24576  pwr 198W (max 207)  sm 1890MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 55C  cpu 58.375C 3048MHz  nvme 17.1MiB  avail 62464->62564  (25s)
+12:52:05   B3 size rule (from the B2 priming run's peak, before any B3 run): free = 24576 - 12254 - 1024 = 11298 MiB; 10% of experts = 1866 MiB; M = min = 1866 MiB
+12:52:33   prime-B3         gen   73.61  prompt   300.60  per-prompt 74.07  load 3.0s
+12:52:33     vram 14134/24576  pwr 237W (max 269)  sm 1935MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 63C  cpu 52.875C 2052MHz  nvme 0.0MiB  avail 62560->62285  (24s)
+12:53:02   B1-rep1          gen   70.21  prompt   316.48  per-prompt 69.44  load 3.0s
+12:53:02     vram 12130/24576  pwr 211W (max 211)  sm 1920MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 64C  cpu 56.375C 2992MHz  nvme 0.0MiB  avail 62277->62488  (25s)
+12:53:31   B2-rep1          gen   70.07  prompt   318.46  per-prompt 69.30  load 3.0s
+12:53:31     vram 12254/24576  pwr 183W (max 207)  sm 1935MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 60C  cpu 58.5C 3037MHz  nvme 0.0MiB  avail 62488->62254  (25s)
+12:53:59   B3-rep1          gen   73.62  prompt   301.59  per-prompt 74.07  load 3.0s
+12:53:59     vram 14134/24576  pwr 237W (max 264)  sm 1935MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 59C  cpu 53.0C 2038MHz  nvme 0.0MiB  avail 62257->62351  (24s)
+12:54:28   B1-rep2          gen   70.28  prompt   317.04  per-prompt 69.53  load 3.0s
+12:54:28     vram 12130/24576  pwr 201W (max 206)  sm 1942MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 60C  cpu 59.0C 2978MHz  nvme 0.0MiB  avail 62362->62349  (25s)
+12:54:58   B2-rep2          gen   70.05  prompt   318.88  per-prompt 69.32  load 3.0s
+12:54:58     vram 12254/24576  pwr 201W (max 206)  sm 1935MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 63C  cpu 57.75C 3047MHz  nvme 0.0MiB  avail 62351->62309  (25s)
+12:55:26   B3-rep2          gen   73.54  prompt   300.88  per-prompt 74.00  load 3.0s
+12:55:26     vram 14134/24576  pwr 243W (max 272)  sm 1920MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 64C  cpu 51.875C 2104MHz  nvme 0.0MiB  avail 62316->62249  (24s)
+12:55:55   B1-rep3          gen   70.18  prompt   317.46  per-prompt 69.47  load 3.0s
+12:55:55     vram 12130/24576  pwr 202W (max 208)  sm 1935MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 60C  cpu 57.5C 2979MHz  nvme 0.0MiB  avail 62255->62395  (25s)
+12:56:24   B2-rep3          gen   70.08  prompt   319.43  per-prompt 69.27  load 3.0s
+12:56:24     vram 12254/24576  pwr 182W (max 206)  sm 1950MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 58C  cpu 59.625C 3040MHz  nvme 0.1MiB  avail 62411->62388  (25s)
+12:56:52   B3-rep3          gen   73.60  prompt   300.88  per-prompt 74.05  load 3.0s
+12:56:52     vram 14134/24576  pwr 242W (max 268)  sm 1935MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 63C  cpu 54.0C 2075MHz  nvme 0.0MiB  avail 62402->62494  (24s)
+12:56:52   B1: gen 70.22 [70.18..70.28]  prompt 317.0 [316.5..317.5]
+12:56:52   B2: gen 70.07 [70.05..70.08]  prompt 318.9 [318.5..319.4]
+12:56:52   B3: gen 73.59 [73.54..73.62]  prompt 301.1 [300.9..301.6]
+12:56:52 arm B done
+12:56:52 arm C start (v0.7.0 only, text only, no mmproj, no drafter)
+12:57:25   C1C2-f16-32768: loaded  decode 89.80 [89.76..89.87]  pp4096 1603.3  prompt_n [4096, 4096, 4096]  used after 1st req 21402 -> headroom 3174 MiB (sampler peak 21402 -> 3174)
+12:57:25     vram 21402/24576  pwr 391W (max 419)  sm 1860MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 73C  cpu 54.0C 2017MHz  nvme 21014.2MiB  avail 62513->62355  (30s)
+12:57:48   C1C2-f16-131072: loaded  decode 89.80 [89.75..89.86]  pp4096 1605.2  prompt_n [4096, 4096, 4096]  used after 1st req 22266 -> headroom 2310 MiB (sampler peak 22266 -> 2310)
+12:57:48     vram 22266/24576  pwr 380W (max 417)  sm 1830MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 71C  cpu 54.625C 2073MHz  nvme 0.0MiB  avail 62367->62406  (20s)
+12:58:12   C1C2-q8_0-32768: loaded  decode 88.12 [88.09..88.14]  pp4096 1604.4  prompt_n [4096, 4096, 4096]  used after 1st req 21284 -> headroom 3292 MiB (sampler peak 21284 -> 3292)
+12:58:12     vram 21284/24576  pwr 382W (max 417)  sm 1868MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 70C  cpu 56.375C 2111MHz  nvme 2.8MiB  avail 62411->62483  (20s)
+12:58:35   C1C2-q8_0-131072: loaded  decode 88.20 [88.13..88.34]  pp4096 1605.4  prompt_n [4096, 4096, 4096]  used after 1st req 21848 -> headroom 2728 MiB (sampler peak 21848 -> 2728)
+12:58:35     vram 21848/24576  pwr 381W (max 418)  sm 1868MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 70C  cpu 56.375C 2141MHz  nvme 0.0MiB  avail 62489->62113  (20s)
+12:58:35   C2 prompt: {'n_tokens': 4096, 'tokens_sha256': '75cc6b84369e3e1f8ba24d4610895dee9f8d8e68207f96f81b7465f22db8464f', 'text_sha256': 'eb6da1fd4df7a4491c9600bbb7631714b682329319e5a90904259ae9b071e731'}
+12:59:12   C3-f16-short                 pp4096@d0 1708.97  tg128@d0 90.90  pp4096@d4096 1688.51  tg128@d4096 91.07
+12:59:12     vram 21358/24576  pwr 393W (max 420)  sm 1845MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 72C  cpu 56.0C 2029MHz  nvme 0.1MiB  avail 62124->62431  (34s)
+13:00:30   C3-f16-deep                  tg128@d102400 82.42
+13:00:30     vram 22188/24576  pwr 406W (max 419)  sm 1830MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 74C  cpu 56.125C 2017MHz  nvme 0.2MiB  avail 62427->62188  (75s)
+13:01:07   C3-q8_0-short                pp4096@d0 1701.64  tg128@d0 90.54  pp4096@d4096 1684.59  tg128@d4096 89.42
+13:01:07     vram 21330/24576  pwr 393W (max 419)  sm 1830MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 73C  cpu 58.0C 2049MHz  nvme 0.0MiB  avail 62184->62228  (34s)
+13:02:25   C3-q8_0-deep                 tg128@d102400 60.61
+13:02:25     vram 21814/24576  pwr 407W (max 419)  sm 1830MHz  mem 9501  ['P2']  pcie ['4']x['16']  gpu 74C  cpu 57.0C 2011MHz  nvme 1.7MiB  avail 62220->62048  (76s)
+13:02:38   C4 code_python: 192 tok @ 90.5  head: ' The function should be named `fib_memo`. The function should take an integer `n` as input and return the n-th Fibonacci'
+13:02:38   C4 code_cpp: 41 tok @ 89.9  head: '</think>```cpp\ntemplate <typename T>\nT clamp(T x, T lo, T hi) {\n    return x < lo ? lo : (x > hi ? hi : x);\n}\n```'
+13:02:38   C4 explain_concept: 147 tok @ 90.6  head: '</think>Speculative decoding is an inference optimization technique that accelerates text generation by using a smaller,'
+13:02:38 arm C done

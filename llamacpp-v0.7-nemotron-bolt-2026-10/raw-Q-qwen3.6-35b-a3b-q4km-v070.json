@@ -1,0 +1,80 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/bench-models/qwen3.6-35b-a3b-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-fa",
+  "on",
+  "-c",
+  "4096",
+  "--jinja",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "--host",
+  "0.0.0.0",
+  "--port",
+  "8081"
+ ],
+ "load_ok": true,
+ "load_s": 15.5,
+ "rc_at_load": null,
+ "vram_after_load_mib": 20666,
+ "rc": 0,
+ "meta": {
+  "name": "Q-qwen3.6-35b-a3b-q4km-v070",
+  "attempt": 1,
+  "started": "2026-11-03T14:55:00-0800",
+  "elapsed_s": 40.8,
+  "nvme_read_mib": 20194.8,
+  "mem_available_mib": [
+   62309,
+   62513
+  ],
+  "cpu_tctl_max": 49.75,
+  "cpu_tctl_mean": 44.2,
+  "cpu_mhz_mean": 2076,
+  "telemetry": {
+   "samples": 44,
+   "samples_under_load": 22,
+   "peak_vram_mib": 20692.0,
+   "memory_total_mib": 24576.0,
+   "pcie_gen_under_load": [
+    "4"
+   ],
+   "pcie_width_under_load": [
+    "16"
+   ],
+   "gpu_temp_max": 62.0,
+   "power_w": {
+    "mean": 300.9,
+    "median": 308.44,
+    "min": 140.88,
+    "max": 330.0
+   },
+   "sm_clock_mhz": {
+    "mean": 1937.0,
+    "median": 1935.0,
+    "min": 1935.0,
+    "max": 1950.0
+   },
+   "mem_clock_mhz": {
+    "mean": 9501.0,
+    "median": 9501.0,
+    "min": 9501.0,
+    "max": 9501.0
+   },
+   "pstates_under_load": [
+    "P2"
+   ],
+   "reasons_under_load": [
+    "0x0000000000000000",
+    "0x0000000000000004"
+   ]
+  },
+  "esp32_taint": []
+ }
+}

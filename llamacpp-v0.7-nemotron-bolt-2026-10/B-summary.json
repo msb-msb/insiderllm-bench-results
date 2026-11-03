@@ -1,0 +1,2500 @@
+{
+ "summary": {
+  "size_rule": {
+   "b2_prime_peak_vram_mib": 12254.0,
+   "memory_total_mib": 24576.0,
+   "margin_mib": 1024,
+   "free_mib": 11298.0,
+   "expert_bytes": 19568525312,
+   "ten_pct_expert_mib": 1866.2,
+   "M": 1866
+  },
+  "B1|gen_tok_s": {
+   "mean": 70.22,
+   "min": 70.18,
+   "max": 70.28,
+   "reps": [
+    70.21,
+    70.28,
+    70.18
+   ]
+  },
+  "B1|prompt_tok_s": {
+   "mean": 316.99,
+   "min": 316.48,
+   "max": 317.46,
+   "reps": [
+    316.48,
+    317.04,
+    317.46
+   ]
+  },
+  "B2|gen_tok_s": {
+   "mean": 70.07,
+   "min": 70.05,
+   "max": 70.08,
+   "reps": [
+    70.07,
+    70.05,
+    70.08
+   ]
+  },
+  "B2|prompt_tok_s": {
+   "mean": 318.92,
+   "min": 318.46,
+   "max": 319.43,
+   "reps": [
+    318.46,
+    318.88,
+    319.43
+   ]
+  },
+  "B3|gen_tok_s": {
+   "mean": 73.59,
+   "min": 73.54,
+   "max": 73.62,
+   "reps": [
+    73.62,
+    73.54,
+    73.6
+   ]
+  },
+  "B3|prompt_tok_s": {
+   "mean": 301.12,
+   "min": 300.88,
+   "max": 301.59,
+   "reps": [
+    301.59,
+    300.88,
+    300.88
+   ]
+  }
+ },
+ "results": [
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 12106,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 2.946,
+     "prompt_n": 20,
+     "prompt_ms": 214.988,
+     "prompt_per_second": 93.02844809942881,
+     "predicted_n": 192,
+     "predicted_ms": 2729.493,
+     "predicted_per_second": 69.97636557411944,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.086,
+     "prompt_n": 30,
+     "prompt_ms": 189.302,
+     "prompt_per_second": 158.47693104140475,
+     "predicted_n": 58,
+     "predicted_ms": 826.565,
+     "predicted_per_second": 68.96009388251377,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.949,
+     "prompt_n": 17,
+     "prompt_ms": 141.502,
+     "prompt_per_second": 120.13964466933328,
+     "predicted_n": 192,
+     "predicted_ms": 2739.825,
+     "predicted_per_second": 69.71248163660088,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.199,
+     "prompt_n": 52,
+     "prompt_ms": 381.608,
+     "prompt_per_second": 136.26548709670655,
+     "predicted_n": 53,
+     "predicted_ms": 746.977,
+     "predicted_per_second": 69.6139238557546,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.926,
+     "prompt_n": 14,
+     "prompt_ms": 129.243,
+     "prompt_per_second": 108.32308132742199,
+     "predicted_n": 192,
+     "predicted_ms": 2728.824,
+     "predicted_per_second": 69.99352101857797,
+     "content_sha_head": "8ec5586ea9fd",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.519,
+     "prompt_n": 15,
+     "prompt_ms": 138.293,
+     "prompt_per_second": 108.46535977959837,
+     "predicted_n": 22,
+     "predicted_ms": 310.907,
+     "predicted_per_second": 67.54431389450865,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.94,
+     "prompt_n": 11,
+     "prompt_ms": 120.178,
+     "prompt_per_second": 91.53089583784055,
+     "predicted_n": 192,
+     "predicted_ms": 2752.208,
+     "predicted_per_second": 69.39882450745002,
+     "content_sha_head": "16c703338a70",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.141,
+     "prompt_n": 50,
+     "prompt_ms": 344.172,
+     "prompt_per_second": 145.27619910974744,
+     "predicted_n": 192,
+     "predicted_ms": 2728.265,
+     "predicted_per_second": 70.00786213949159,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 4.09,
+     "prompt_n": 721,
+     "prompt_ms": 1279.317,
+     "prompt_per_second": 563.5819738188424,
+     "predicted_n": 192,
+     "predicted_ms": 2738.353,
+     "predicted_per_second": 69.74995553896814,
+     "content_sha_head": "b11891880aec",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 70.21,
+    "total_predicted": 1285,
+    "prompt_tok_s": 316.48,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 69.44
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B1-rep1",
+    "attempt": 1,
+    "started": "2026-11-03T12:52:34-0800",
+    "elapsed_s": 25.2,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62277,
+     62488
+    ],
+    "cpu_tctl_max": 56.375,
+    "cpu_tctl_mean": 53.3,
+    "cpu_mhz_mean": 2992,
+    "telemetry": {
+     "samples": 29,
+     "samples_under_load": 1,
+     "peak_vram_mib": 12130.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 64.0,
+     "power_w": {
+      "mean": 210.9,
+      "median": 210.92,
+      "min": 210.92,
+      "max": 210.92
+     },
+     "sm_clock_mhz": {
+      "mean": 1920.0,
+      "median": 1920.0,
+      "min": 1920.0,
+      "max": 1920.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B1",
+   "rep": 1
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 12230,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 2.961,
+     "prompt_n": 20,
+     "prompt_ms": 217.913,
+     "prompt_per_second": 91.77974696323761,
+     "predicted_n": 192,
+     "predicted_ms": 2742.302,
+     "predicted_per_second": 69.6495134379802,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.087,
+     "prompt_n": 30,
+     "prompt_ms": 188.777,
+     "prompt_per_second": 158.91766475788896,
+     "predicted_n": 58,
+     "predicted_ms": 828.314,
+     "predicted_per_second": 68.81448339639316,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.96,
+     "prompt_n": 17,
+     "prompt_ms": 142.137,
+     "prompt_per_second": 119.60291831120679,
+     "predicted_n": 192,
+     "predicted_ms": 2750.354,
+     "predicted_per_second": 69.44560591109362,
+     "content_sha_head": "49f65a54cac6",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.198,
+     "prompt_n": 52,
+     "prompt_ms": 379.871,
+     "prompt_per_second": 136.88857533215224,
+     "predicted_n": 53,
+     "predicted_ms": 749.505,
+     "predicted_per_second": 69.37912355487956,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.932,
+     "prompt_n": 14,
+     "prompt_ms": 130.278,
+     "prompt_per_second": 107.46250326225457,
+     "predicted_n": 192,
+     "predicted_ms": 2732.852,
+     "predicted_per_second": 69.89035630176826,
+     "content_sha_head": "a2768f1be593",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.522,
+     "prompt_n": 15,
+     "prompt_ms": 140.9,
+     "prompt_per_second": 106.45848119233499,
+     "predicted_n": 22,
+     "predicted_ms": 311.094,
+     "predicted_per_second": 67.50371270419873,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.938,
+     "prompt_n": 11,
+     "prompt_ms": 118.434,
+     "prompt_per_second": 92.87873414728878,
+     "predicted_n": 192,
+     "predicted_ms": 2751.92,
+     "predicted_per_second": 69.40608738626122,
+     "content_sha_head": "6253e6282ba1",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.139,
+     "prompt_n": 50,
+     "prompt_ms": 342.541,
+     "prompt_per_second": 145.96792792687592,
+     "predicted_n": 192,
+     "predicted_ms": 2727.657,
+     "predicted_per_second": 70.02346702682925,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 4.074,
+     "prompt_n": 721,
+     "prompt_ms": 1259.461,
+     "prompt_per_second": 572.467110930787,
+     "predicted_n": 192,
+     "predicted_ms": 2743.667,
+     "predicted_per_second": 69.61486215346105,
+     "content_sha_head": "3432133286f2",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 70.07,
+    "total_predicted": 1285,
+    "prompt_tok_s": 318.46,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 69.3
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B2-rep1",
+    "attempt": 1,
+    "started": "2026-11-03T12:53:03-0800",
+    "elapsed_s": 25.2,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62488,
+     62254
+    ],
+    "cpu_tctl_max": 58.5,
+    "cpu_tctl_mean": 55.7,
+    "cpu_mhz_mean": 3037,
+    "telemetry": {
+     "samples": 29,
+     "samples_under_load": 3,
+     "peak_vram_mib": 12254.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 60.0,
+     "power_w": {
+      "mean": 183.2,
+      "median": 195.56,
+      "min": 147.36,
+      "max": 206.63
+     },
+     "sm_clock_mhz": {
+      "mean": 1935.0,
+      "median": 1935.0,
+      "min": 1935.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B2",
+   "rep": 1
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081",
+    "--moe-cache-mib",
+    "1866"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 14098,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 3.196,
+     "prompt_n": 20,
+     "prompt_ms": 274.807,
+     "prompt_per_second": 72.77834989647279,
+     "predicted_n": 192,
+     "predicted_ms": 2919.972,
+     "predicted_per_second": 65.41158613849721,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.09,
+     "prompt_n": 30,
+     "prompt_ms": 306.672,
+     "prompt_per_second": 97.82438566285802,
+     "predicted_n": 58,
+     "predicted_ms": 714.034,
+     "predicted_per_second": 79.82813143351717,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.845,
+     "prompt_n": 17,
+     "prompt_ms": 226.147,
+     "prompt_per_second": 75.17234365257997,
+     "predicted_n": 192,
+     "predicted_ms": 2551.64,
+     "predicted_per_second": 74.85381950431879,
+     "content_sha_head": "bdbc1d061b94",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.182,
+     "prompt_n": 52,
+     "prompt_ms": 334.882,
+     "prompt_per_second": 155.27857573712532,
+     "predicted_n": 53,
+     "predicted_ms": 778.074,
+     "predicted_per_second": 66.83168953081584,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.802,
+     "prompt_n": 14,
+     "prompt_ms": 177.86,
+     "prompt_per_second": 78.71359496232992,
+     "predicted_n": 192,
+     "predicted_ms": 2556.305,
+     "predicted_per_second": 74.71721879822636,
+     "content_sha_head": "eceb5fdb8f75",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.531,
+     "prompt_n": 15,
+     "prompt_ms": 202.915,
+     "prompt_per_second": 73.92257841953528,
+     "predicted_n": 22,
+     "predicted_ms": 259.49,
+     "predicted_per_second": 80.92797410304829,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.733,
+     "prompt_n": 11,
+     "prompt_ms": 155.705,
+     "prompt_per_second": 70.64641469445425,
+     "predicted_n": 192,
+     "predicted_ms": 2511.125,
+     "predicted_per_second": 76.06152620837274,
+     "content_sha_head": "8bb700757180",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 2.997,
+     "prompt_n": 50,
+     "prompt_ms": 298.611,
+     "prompt_per_second": 167.44192276908754,
+     "predicted_n": 192,
+     "predicted_ms": 2629.757,
+     "predicted_per_second": 72.63028485141402,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 3.712,
+     "prompt_n": 721,
+     "prompt_ms": 1106.08,
+     "prompt_per_second": 651.8515839722263,
+     "predicted_n": 192,
+     "predicted_ms": 2534.643,
+     "predicted_per_second": 75.35577988695054,
+     "content_sha_head": "b359d12a942a",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 73.62,
+    "total_predicted": 1285,
+    "prompt_tok_s": 301.59,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 74.07
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B3-rep1",
+    "attempt": 1,
+    "started": "2026-11-03T12:53:32-0800",
+    "elapsed_s": 24.5,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62257,
+     62351
+    ],
+    "cpu_tctl_max": 53.0,
+    "cpu_tctl_mean": 51.6,
+    "cpu_mhz_mean": 2038,
+    "telemetry": {
+     "samples": 28,
+     "samples_under_load": 17,
+     "peak_vram_mib": 14134.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 59.0,
+     "power_w": {
+      "mean": 237.2,
+      "median": 239.26,
+      "min": 171.2,
+      "max": 263.52
+     },
+     "sm_clock_mhz": {
+      "mean": 1935.0,
+      "median": 1935.0,
+      "min": 1935.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B3",
+   "rep": 1
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 12106,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 2.948,
+     "prompt_n": 20,
+     "prompt_ms": 212.384,
+     "prompt_per_second": 94.16905228265783,
+     "predicted_n": 192,
+     "predicted_ms": 2734.748,
+     "predicted_per_second": 69.84190133789292,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.085,
+     "prompt_n": 30,
+     "prompt_ms": 188.598,
+     "prompt_per_second": 159.06849489390132,
+     "predicted_n": 58,
+     "predicted_ms": 827.063,
+     "predicted_per_second": 68.91857089484114,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.949,
+     "prompt_n": 17,
+     "prompt_ms": 140.582,
+     "prompt_per_second": 120.92586533126574,
+     "predicted_n": 192,
+     "predicted_ms": 2740.393,
+     "predicted_per_second": 69.69803236251151,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.198,
+     "prompt_n": 52,
+     "prompt_ms": 380.124,
+     "prompt_per_second": 136.7974660900127,
+     "predicted_n": 53,
+     "predicted_ms": 746.927,
+     "predicted_per_second": 69.61858387767478,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.917,
+     "prompt_n": 14,
+     "prompt_ms": 128.297,
+     "prompt_per_second": 109.12180331574393,
+     "predicted_n": 192,
+     "predicted_ms": 2719.366,
+     "predicted_per_second": 70.23695964427003,
+     "content_sha_head": "8ec5586ea9fd",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.516,
+     "prompt_n": 15,
+     "prompt_ms": 137.222,
+     "prompt_per_second": 109.3119179140371,
+     "predicted_n": 22,
+     "predicted_ms": 308.772,
+     "predicted_per_second": 68.01134817923905,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.933,
+     "prompt_n": 11,
+     "prompt_ms": 116.748,
+     "prompt_per_second": 94.22002946517286,
+     "predicted_n": 192,
+     "predicted_ms": 2749.69,
+     "predicted_per_second": 69.46237575872189,
+     "content_sha_head": "16c703338a70",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.137,
+     "prompt_n": 50,
+     "prompt_ms": 344.328,
+     "prompt_per_second": 145.21038079970262,
+     "predicted_n": 192,
+     "predicted_ms": 2724.025,
+     "predicted_per_second": 70.11683079266894,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 4.089,
+     "prompt_n": 721,
+     "prompt_ms": 1285.107,
+     "prompt_per_second": 561.0427769827727,
+     "predicted_n": 192,
+     "predicted_ms": 2733.558,
+     "predicted_per_second": 69.87230561780655,
+     "content_sha_head": "b11891880aec",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 70.28,
+    "total_predicted": 1285,
+    "prompt_tok_s": 317.04,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 69.53
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B1-rep2",
+    "attempt": 1,
+    "started": "2026-11-03T12:54:00-0800",
+    "elapsed_s": 25.2,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62362,
+     62349
+    ],
+    "cpu_tctl_max": 59.0,
+    "cpu_tctl_mean": 56.0,
+    "cpu_mhz_mean": 2978,
+    "telemetry": {
+     "samples": 29,
+     "samples_under_load": 2,
+     "peak_vram_mib": 12130.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 60.0,
+     "power_w": {
+      "mean": 200.9,
+      "median": 200.925,
+      "min": 195.97,
+      "max": 205.88
+     },
+     "sm_clock_mhz": {
+      "mean": 1942.5,
+      "median": 1942.5,
+      "min": 1935.0,
+      "max": 1950.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B1",
+   "rep": 2
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 12230,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 2.958,
+     "prompt_n": 20,
+     "prompt_ms": 218.635,
+     "prompt_per_second": 91.47666201660302,
+     "predicted_n": 192,
+     "predicted_ms": 2738.423,
+     "predicted_per_second": 69.74817257961973,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.092,
+     "prompt_n": 30,
+     "prompt_ms": 190.752,
+     "prompt_per_second": 157.2722697533971,
+     "predicted_n": 58,
+     "predicted_ms": 830.003,
+     "predicted_per_second": 68.67445057427503,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.96,
+     "prompt_n": 17,
+     "prompt_ms": 143.762,
+     "prompt_per_second": 118.25099817754344,
+     "predicted_n": 192,
+     "predicted_ms": 2748.237,
+     "predicted_per_second": 69.49910069619177,
+     "content_sha_head": "49f65a54cac6",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.196,
+     "prompt_n": 52,
+     "prompt_ms": 379.188,
+     "prompt_per_second": 137.1351414074285,
+     "predicted_n": 53,
+     "predicted_ms": 748.006,
+     "predicted_per_second": 69.5181589452491,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.928,
+     "prompt_n": 14,
+     "prompt_ms": 128.372,
+     "prompt_per_second": 109.05805004206523,
+     "predicted_n": 192,
+     "predicted_ms": 2731.524,
+     "predicted_per_second": 69.92433527949964,
+     "content_sha_head": "a2768f1be593",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.517,
+     "prompt_n": 15,
+     "prompt_ms": 137.662,
+     "prompt_per_second": 108.96253141752989,
+     "predicted_n": 22,
+     "predicted_ms": 309.639,
+     "predicted_per_second": 67.82091403214712,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.945,
+     "prompt_n": 11,
+     "prompt_ms": 117.472,
+     "prompt_per_second": 93.6393353309725,
+     "predicted_n": 192,
+     "predicted_ms": 2760.369,
+     "predicted_per_second": 69.19364766087432,
+     "content_sha_head": "6253e6282ba1",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.143,
+     "prompt_n": 50,
+     "prompt_ms": 342.516,
+     "prompt_per_second": 145.97858202244566,
+     "predicted_n": 192,
+     "predicted_ms": 2731.96,
+     "predicted_per_second": 69.91317588837317,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 4.075,
+     "prompt_n": 721,
+     "prompt_ms": 1258.084,
+     "prompt_per_second": 573.0936884977473,
+     "predicted_n": 192,
+     "predicted_ms": 2745.607,
+     "predicted_per_second": 69.56567345581506,
+     "content_sha_head": "3432133286f2",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 70.05,
+    "total_predicted": 1285,
+    "prompt_tok_s": 318.88,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 69.32
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B2-rep2",
+    "attempt": 1,
+    "started": "2026-11-03T12:54:30-0800",
+    "elapsed_s": 25.2,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62351,
+     62309
+    ],
+    "cpu_tctl_max": 57.75,
+    "cpu_tctl_mean": 55.8,
+    "cpu_mhz_mean": 3047,
+    "telemetry": {
+     "samples": 29,
+     "samples_under_load": 2,
+     "peak_vram_mib": 12254.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 63.0,
+     "power_w": {
+      "mean": 201.1,
+      "median": 201.14499999999998,
+      "min": 196.26,
+      "max": 206.03
+     },
+     "sm_clock_mhz": {
+      "mean": 1935.0,
+      "median": 1935.0,
+      "min": 1935.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B2",
+   "rep": 2
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081",
+    "--moe-cache-mib",
+    "1866"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 14098,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 3.197,
+     "prompt_n": 20,
+     "prompt_ms": 274.455,
+     "prompt_per_second": 72.87169116977283,
+     "predicted_n": 192,
+     "predicted_ms": 2921.432,
+     "predicted_per_second": 65.37889637684533,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.091,
+     "prompt_n": 30,
+     "prompt_ms": 307.41,
+     "prompt_per_second": 97.58953840148335,
+     "predicted_n": 58,
+     "predicted_ms": 713.635,
+     "predicted_per_second": 79.87276408808424,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.85,
+     "prompt_n": 17,
+     "prompt_ms": 226.969,
+     "prompt_per_second": 74.90009648894784,
+     "predicted_n": 192,
+     "predicted_ms": 2554.947,
+     "predicted_per_second": 74.75693233558269,
+     "content_sha_head": "bdbc1d061b94",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.183,
+     "prompt_n": 52,
+     "prompt_ms": 335.837,
+     "prompt_per_second": 154.83701914917057,
+     "predicted_n": 53,
+     "predicted_ms": 777.982,
+     "predicted_per_second": 66.83959268980517,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.803,
+     "prompt_n": 14,
+     "prompt_ms": 177.696,
+     "prompt_per_second": 78.78624167116874,
+     "predicted_n": 192,
+     "predicted_ms": 2557.214,
+     "predicted_per_second": 74.69065944422329,
+     "content_sha_head": "eceb5fdb8f75",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.532,
+     "prompt_n": 15,
+     "prompt_ms": 202.948,
+     "prompt_per_second": 73.91055836963163,
+     "predicted_n": 22,
+     "predicted_ms": 259.949,
+     "predicted_per_second": 80.78507707281044,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.736,
+     "prompt_n": 11,
+     "prompt_ms": 155.274,
+     "prompt_per_second": 70.84251065857774,
+     "predicted_n": 192,
+     "predicted_ms": 2514.106,
+     "predicted_per_second": 75.97133931504877,
+     "content_sha_head": "8bb700757180",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.004,
+     "prompt_n": 50,
+     "prompt_ms": 299.468,
+     "prompt_per_second": 166.9627472718287,
+     "predicted_n": 192,
+     "predicted_ms": 2636.135,
+     "predicted_per_second": 72.45455942127394,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 3.72,
+     "prompt_n": 721,
+     "prompt_ms": 1110.842,
+     "prompt_per_second": 649.0572016542405,
+     "predicted_n": 192,
+     "predicted_ms": 2538.179,
+     "predicted_per_second": 75.25079988448411,
+     "content_sha_head": "b359d12a942a",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 73.54,
+    "total_predicted": 1285,
+    "prompt_tok_s": 300.88,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 74.0
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B3-rep2",
+    "attempt": 1,
+    "started": "2026-11-03T12:54:59-0800",
+    "elapsed_s": 24.5,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62316,
+     62249
+    ],
+    "cpu_tctl_max": 51.875,
+    "cpu_tctl_mean": 50.5,
+    "cpu_mhz_mean": 2104,
+    "telemetry": {
+     "samples": 28,
+     "samples_under_load": 21,
+     "peak_vram_mib": 14134.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 64.0,
+     "power_w": {
+      "mean": 243.4,
+      "median": 245.28,
+      "min": 148.53,
+      "max": 271.94
+     },
+     "sm_clock_mhz": {
+      "mean": 1927.1,
+      "median": 1920.0,
+      "min": 1920.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B3",
+   "rep": 2
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 12106,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 2.95,
+     "prompt_n": 20,
+     "prompt_ms": 213.193,
+     "prompt_per_second": 93.81171051582369,
+     "predicted_n": 192,
+     "predicted_ms": 2735.226,
+     "predicted_per_second": 69.82969597393414,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.089,
+     "prompt_n": 30,
+     "prompt_ms": 190.38,
+     "prompt_per_second": 157.5795776867318,
+     "predicted_n": 58,
+     "predicted_ms": 826.96,
+     "predicted_per_second": 68.92715488052626,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.954,
+     "prompt_n": 17,
+     "prompt_ms": 140.781,
+     "prompt_per_second": 120.75493141830218,
+     "predicted_n": 192,
+     "predicted_ms": 2744.979,
+     "predicted_per_second": 69.58158878446794,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.196,
+     "prompt_n": 52,
+     "prompt_ms": 379.403,
+     "prompt_per_second": 137.05742969876357,
+     "predicted_n": 53,
+     "predicted_ms": 746.975,
+     "predicted_per_second": 69.61411024465343,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.924,
+     "prompt_n": 14,
+     "prompt_ms": 127.505,
+     "prompt_per_second": 109.79961570134505,
+     "predicted_n": 192,
+     "predicted_ms": 2728.288,
+     "predicted_per_second": 70.00727195955852,
+     "content_sha_head": "8ec5586ea9fd",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.515,
+     "prompt_n": 15,
+     "prompt_ms": 137.143,
+     "prompt_per_second": 109.37488606782702,
+     "predicted_n": 22,
+     "predicted_ms": 308.61,
+     "predicted_per_second": 68.04704967434625,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.943,
+     "prompt_n": 11,
+     "prompt_ms": 117.563,
+     "prompt_per_second": 93.56685351683778,
+     "predicted_n": 192,
+     "predicted_ms": 2758.224,
+     "predicted_per_second": 69.2474577844294,
+     "content_sha_head": "16c703338a70",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.137,
+     "prompt_n": 50,
+     "prompt_ms": 343.015,
+     "prompt_per_second": 145.76622013614568,
+     "predicted_n": 192,
+     "predicted_ms": 2725.264,
+     "predicted_per_second": 70.0849532375579,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 4.086,
+     "prompt_n": 721,
+     "prompt_ms": 1280.55,
+     "prompt_per_second": 563.0393190425989,
+     "predicted_n": 192,
+     "predicted_ms": 2734.366,
+     "predicted_per_second": 69.85165848317305,
+     "content_sha_head": "b11891880aec",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 70.18,
+    "total_predicted": 1285,
+    "prompt_tok_s": 317.46,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 69.47
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B1-rep3",
+    "attempt": 1,
+    "started": "2026-11-03T12:55:27-0800",
+    "elapsed_s": 25.2,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62255,
+     62395
+    ],
+    "cpu_tctl_max": 57.5,
+    "cpu_tctl_mean": 54.5,
+    "cpu_mhz_mean": 2979,
+    "telemetry": {
+     "samples": 29,
+     "samples_under_load": 2,
+     "peak_vram_mib": 12130.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 60.0,
+     "power_w": {
+      "mean": 202.2,
+      "median": 202.195,
+      "min": 196.39,
+      "max": 208.0
+     },
+     "sm_clock_mhz": {
+      "mean": 1935.0,
+      "median": 1935.0,
+      "min": 1935.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B1",
+   "rep": 3
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 12230,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 2.967,
+     "prompt_n": 20,
+     "prompt_ms": 217.184,
+     "prompt_per_second": 92.08781494032709,
+     "predicted_n": 192,
+     "predicted_ms": 2748.054,
+     "predicted_per_second": 69.50372882046713,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.09,
+     "prompt_n": 30,
+     "prompt_ms": 188.659,
+     "prompt_per_second": 159.01706253080957,
+     "predicted_n": 58,
+     "predicted_ms": 832.051,
+     "predicted_per_second": 68.50541613434753,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.959,
+     "prompt_n": 17,
+     "prompt_ms": 142.003,
+     "prompt_per_second": 119.71578065252145,
+     "predicted_n": 192,
+     "predicted_ms": 2749.378,
+     "predicted_per_second": 69.47025836389176,
+     "content_sha_head": "49f65a54cac6",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.196,
+     "prompt_n": 52,
+     "prompt_ms": 378.994,
+     "prompt_per_second": 137.20533834308722,
+     "predicted_n": 53,
+     "predicted_ms": 746.457,
+     "predicted_per_second": 69.66241859879403,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.922,
+     "prompt_n": 14,
+     "prompt_ms": 128.412,
+     "prompt_per_second": 109.0240787465346,
+     "predicted_n": 192,
+     "predicted_ms": 2726.288,
+     "predicted_per_second": 70.05862916903864,
+     "content_sha_head": "a2768f1be593",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.522,
+     "prompt_n": 15,
+     "prompt_ms": 139.422,
+     "prompt_per_second": 107.58703791367216,
+     "predicted_n": 22,
+     "predicted_ms": 312.651,
+     "predicted_per_second": 67.16754464242878,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.937,
+     "prompt_n": 11,
+     "prompt_ms": 117.746,
+     "prompt_per_second": 93.42143257520426,
+     "predicted_n": 192,
+     "predicted_ms": 2752.697,
+     "predicted_per_second": 69.38649622533828,
+     "content_sha_head": "6253e6282ba1",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.134,
+     "prompt_n": 50,
+     "prompt_ms": 341.804,
+     "prompt_per_second": 146.28266491907644,
+     "predicted_n": 192,
+     "predicted_ms": 2724.155,
+     "predicted_per_second": 70.11348473196276,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 4.074,
+     "prompt_n": 721,
+     "prompt_ms": 1257.257,
+     "prompt_per_second": 573.4706587435982,
+     "predicted_n": 192,
+     "predicted_ms": 2744.401,
+     "predicted_per_second": 69.59624340612032,
+     "content_sha_head": "3432133286f2",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 70.08,
+    "total_predicted": 1285,
+    "prompt_tok_s": 319.43,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 69.27
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B2-rep3",
+    "attempt": 1,
+    "started": "2026-11-03T12:55:56-0800",
+    "elapsed_s": 25.2,
+    "nvme_read_mib": 0.1,
+    "mem_available_mib": [
+     62411,
+     62388
+    ],
+    "cpu_tctl_max": 59.625,
+    "cpu_tctl_mean": 57.1,
+    "cpu_mhz_mean": 3040,
+    "telemetry": {
+     "samples": 29,
+     "samples_under_load": 3,
+     "peak_vram_mib": 12254.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 58.0,
+     "power_w": {
+      "mean": 181.6,
+      "median": 192.12,
+      "min": 146.59,
+      "max": 206.07
+     },
+     "sm_clock_mhz": {
+      "mean": 1950.0,
+      "median": 1950.0,
+      "min": 1950.0,
+      "max": 1950.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B2",
+   "rep": 3
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081",
+    "--moe-cache-mib",
+    "1866"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 14098,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 3.196,
+     "prompt_n": 20,
+     "prompt_ms": 276.195,
+     "prompt_per_second": 72.41260703488477,
+     "predicted_n": 192,
+     "predicted_ms": 2918.067,
+     "predicted_per_second": 65.45428874662576,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.091,
+     "prompt_n": 30,
+     "prompt_ms": 308.096,
+     "prompt_per_second": 97.3722476111342,
+     "predicted_n": 58,
+     "predicted_ms": 713.888,
+     "predicted_per_second": 79.84445739387691,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.847,
+     "prompt_n": 17,
+     "prompt_ms": 226.379,
+     "prompt_per_second": 75.09530477650313,
+     "predicted_n": 192,
+     "predicted_ms": 2553.473,
+     "predicted_per_second": 74.80008600051772,
+     "content_sha_head": "bdbc1d061b94",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.183,
+     "prompt_n": 52,
+     "prompt_ms": 335.473,
+     "prompt_per_second": 155.00502275891057,
+     "predicted_n": 53,
+     "predicted_ms": 778.486,
+     "predicted_per_second": 66.79632003658384,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.803,
+     "prompt_n": 14,
+     "prompt_ms": 178.137,
+     "prompt_per_second": 78.59119666324233,
+     "predicted_n": 192,
+     "predicted_ms": 2556.799,
+     "predicted_per_second": 74.70278265909835,
+     "content_sha_head": "eceb5fdb8f75",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.531,
+     "prompt_n": 15,
+     "prompt_ms": 203.344,
+     "prompt_per_second": 73.76662207884176,
+     "predicted_n": 22,
+     "predicted_ms": 259.588,
+     "predicted_per_second": 80.89742206881674,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.734,
+     "prompt_n": 11,
+     "prompt_ms": 155.685,
+     "prompt_per_second": 70.65549025275396,
+     "predicted_n": 192,
+     "predicted_ms": 2511.505,
+     "predicted_per_second": 76.05001781800155,
+     "content_sha_head": "8bb700757180",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 2.999,
+     "prompt_n": 50,
+     "prompt_ms": 299.339,
+     "prompt_per_second": 167.03469978853406,
+     "predicted_n": 192,
+     "predicted_ms": 2631.341,
+     "predicted_per_second": 72.58656327705151,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 3.715,
+     "prompt_n": 721,
+     "prompt_ms": 1108.297,
+     "prompt_per_second": 650.5476420129262,
+     "predicted_n": 192,
+     "predicted_ms": 2535.492,
+     "predicted_per_second": 75.33054728628605,
+     "content_sha_head": "b359d12a942a",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 73.6,
+    "total_predicted": 1285,
+    "prompt_tok_s": 300.88,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 74.05
+   },
+   "rc": 0,
+   "meta": {
+    "name": "B3-rep3",
+    "attempt": 1,
+    "started": "2026-11-03T12:56:25-0800",
+    "elapsed_s": 24.5,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62402,
+     62494
+    ],
+    "cpu_tctl_max": 54.0,
+    "cpu_tctl_mean": 51.4,
+    "cpu_mhz_mean": 2075,
+    "telemetry": {
+     "samples": 28,
+     "samples_under_load": 19,
+     "peak_vram_mib": 14134.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 63.0,
+     "power_w": {
+      "mean": 241.6,
+      "median": 242.78,
+      "min": 168.3,
+      "max": 267.81
+     },
+     "sm_clock_mhz": {
+      "mean": 1938.2,
+      "median": 1935.0,
+      "min": 1935.0,
+      "max": 1950.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B3",
+   "rep": 3
+  }
+ ],
+ "primes": [
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.4.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 12106,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 2.977,
+     "prompt_n": 20,
+     "prompt_ms": 234.164,
+     "prompt_per_second": 85.41022531217438,
+     "predicted_n": 192,
+     "predicted_ms": 2737.641,
+     "predicted_per_second": 69.76809596291113,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.086,
+     "prompt_n": 30,
+     "prompt_ms": 189.637,
+     "prompt_per_second": 158.1969763284591,
+     "predicted_n": 58,
+     "predicted_ms": 826.22,
+     "predicted_per_second": 68.98888915785142,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.958,
+     "prompt_n": 17,
+     "prompt_ms": 148.495,
+     "prompt_per_second": 114.48196908986834,
+     "predicted_n": 192,
+     "predicted_ms": 2741.764,
+     "predicted_per_second": 69.66318034666733,
+     "content_sha_head": "47038f813378",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.2,
+     "prompt_n": 52,
+     "prompt_ms": 384.366,
+     "prompt_per_second": 135.28772055800982,
+     "predicted_n": 53,
+     "predicted_ms": 746.445,
+     "predicted_per_second": 69.66353850585106,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.929,
+     "prompt_n": 14,
+     "prompt_ms": 135.024,
+     "prompt_per_second": 103.68527076667851,
+     "predicted_n": 192,
+     "predicted_ms": 2726.203,
+     "predicted_per_second": 70.06081351975624,
+     "content_sha_head": "8ec5586ea9fd",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.523,
+     "prompt_n": 15,
+     "prompt_ms": 145.167,
+     "prompt_per_second": 103.32926904875075,
+     "predicted_n": 22,
+     "predicted_ms": 308.655,
+     "predicted_per_second": 68.03712883316325,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.939,
+     "prompt_n": 11,
+     "prompt_ms": 124.253,
+     "prompt_per_second": 88.52904960041205,
+     "predicted_n": 192,
+     "predicted_ms": 2748.865,
+     "predicted_per_second": 69.4832230757058,
+     "content_sha_head": "16c703338a70",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.14,
+     "prompt_n": 50,
+     "prompt_ms": 344.38,
+     "prompt_per_second": 145.1884546140891,
+     "predicted_n": 192,
+     "predicted_ms": 2727.053,
+     "predicted_per_second": 70.0389761401777,
+     "content_sha_head": "9cc41f6c4b4a",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 4.093,
+     "prompt_n": 721,
+     "prompt_ms": 1285.151,
+     "prompt_per_second": 561.0235684367051,
+     "predicted_n": 192,
+     "predicted_ms": 2736.57,
+     "predicted_per_second": 69.79540081196535,
+     "content_sha_head": "b11891880aec",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 70.22,
+    "total_predicted": 1285,
+    "prompt_tok_s": 310.97,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 69.5
+   },
+   "rc": 0,
+   "meta": {
+    "name": "prime-B1",
+    "attempt": 1,
+    "started": "2026-11-03T12:51:08-0800",
+    "elapsed_s": 25.3,
+    "nvme_read_mib": 11.4,
+    "mem_available_mib": [
+     62424,
+     62466
+    ],
+    "cpu_tctl_max": 58.75,
+    "cpu_tctl_mean": 55.8,
+    "cpu_mhz_mean": 3021,
+    "telemetry": {
+     "samples": 29,
+     "samples_under_load": 3,
+     "peak_vram_mib": 12130.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 58.0,
+     "power_w": {
+      "mean": 181.2,
+      "median": 198.15,
+      "min": 145.58,
+      "max": 199.86
+     },
+     "sm_clock_mhz": {
+      "mean": 1920.0,
+      "median": 1935.0,
+      "min": 1890.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B1"
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 12230,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 2.978,
+     "prompt_n": 20,
+     "prompt_ms": 230.924,
+     "prompt_per_second": 86.60858117822313,
+     "predicted_n": 192,
+     "predicted_ms": 2740.52,
+     "predicted_per_second": 69.69480244625107,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.091,
+     "prompt_n": 30,
+     "prompt_ms": 189.167,
+     "prompt_per_second": 158.5900289162486,
+     "predicted_n": 58,
+     "predicted_ms": 831.999,
+     "predicted_per_second": 68.50969772800208,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.973,
+     "prompt_n": 17,
+     "prompt_ms": 149.49,
+     "prompt_per_second": 113.71998126965013,
+     "predicted_n": 192,
+     "predicted_ms": 2755.996,
+     "predicted_per_second": 69.30343875680516,
+     "content_sha_head": "49f65a54cac6",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.197,
+     "prompt_n": 52,
+     "prompt_ms": 380.618,
+     "prompt_per_second": 136.61991813314137,
+     "predicted_n": 53,
+     "predicted_ms": 746.797,
+     "predicted_per_second": 69.63070285499272,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.932,
+     "prompt_n": 14,
+     "prompt_ms": 135.663,
+     "prompt_per_second": 103.19689229930046,
+     "predicted_n": 192,
+     "predicted_ms": 2728.455,
+     "predicted_per_second": 70.00298703845216,
+     "content_sha_head": "a2768f1be593",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.524,
+     "prompt_n": 15,
+     "prompt_ms": 145.181,
+     "prompt_per_second": 103.31930486771684,
+     "predicted_n": 22,
+     "predicted_ms": 309.644,
+     "predicted_per_second": 67.8198188887884,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.951,
+     "prompt_n": 11,
+     "prompt_ms": 125.411,
+     "prompt_per_second": 87.71160424524165,
+     "predicted_n": 192,
+     "predicted_ms": 2758.488,
+     "predicted_per_second": 69.24083048394628,
+     "content_sha_head": "6253e6282ba1",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.136,
+     "prompt_n": 50,
+     "prompt_ms": 343.513,
+     "prompt_per_second": 145.5548989412337,
+     "predicted_n": 192,
+     "predicted_ms": 2723.529,
+     "predicted_per_second": 70.12960023557672,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 4.069,
+     "prompt_n": 721,
+     "prompt_ms": 1260.709,
+     "prompt_per_second": 571.9004147666114,
+     "predicted_n": 192,
+     "predicted_ms": 2738.172,
+     "predicted_per_second": 69.75456618503148,
+     "content_sha_head": "3432133286f2",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 70.09,
+    "total_predicted": 1285,
+    "prompt_tok_s": 314.12,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 69.34
+   },
+   "rc": 0,
+   "meta": {
+    "name": "prime-B2",
+    "attempt": 1,
+    "started": "2026-11-03T12:51:37-0800",
+    "elapsed_s": 25.3,
+    "nvme_read_mib": 17.1,
+    "mem_available_mib": [
+     62464,
+     62564
+    ],
+    "cpu_tctl_max": 58.375,
+    "cpu_tctl_mean": 56.4,
+    "cpu_mhz_mean": 3048,
+    "telemetry": {
+     "samples": 29,
+     "samples_under_load": 2,
+     "peak_vram_mib": 12254.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 55.0,
+     "power_w": {
+      "mean": 197.8,
+      "median": 197.8,
+      "min": 188.52,
+      "max": 207.08
+     },
+     "sm_clock_mhz": {
+      "mean": 1890.0,
+      "median": 1890.0,
+      "min": 1860.0,
+      "max": 1920.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B2"
+  },
+  {
+   "cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "-ngl",
+    "99",
+    "-ncmoe",
+    "20",
+    "-fa",
+    "on",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "--fit",
+    "off",
+    "-lm",
+    "mmap",
+    "-t",
+    "8",
+    "--port",
+    "8081",
+    "--moe-cache-mib",
+    "1866"
+   ],
+   "load_ok": true,
+   "load_s": 3.0,
+   "rc_at_load": null,
+   "vram_after_load_mib": 14098,
+   "results": [
+    {
+     "name": "code_python",
+     "wall_s": 3.196,
+     "prompt_n": 20,
+     "prompt_ms": 276.143,
+     "prompt_per_second": 72.4262429248614,
+     "predicted_n": 192,
+     "predicted_ms": 2918.213,
+     "predicted_per_second": 65.45101402810555,
+     "content_sha_head": "0ccf99f9ef64",
+     "stop_type": "limit"
+    },
+    {
+     "name": "code_cpp",
+     "wall_s": 1.089,
+     "prompt_n": 30,
+     "prompt_ms": 306.898,
+     "prompt_per_second": 97.75234768555025,
+     "predicted_n": 58,
+     "predicted_ms": 713.36,
+     "predicted_per_second": 79.90355500728946,
+     "content_sha_head": "76bc655434db",
+     "stop_type": "eos"
+    },
+    {
+     "name": "explain_concept",
+     "wall_s": 2.845,
+     "prompt_n": 17,
+     "prompt_ms": 226.607,
+     "prompt_per_second": 75.01974784538871,
+     "predicted_n": 192,
+     "predicted_ms": 2550.692,
+     "predicted_per_second": 74.88163996280225,
+     "content_sha_head": "bdbc1d061b94",
+     "stop_type": "limit"
+    },
+    {
+     "name": "summarize",
+     "wall_s": 1.184,
+     "prompt_n": 52,
+     "prompt_ms": 336.718,
+     "prompt_per_second": 154.43189850260453,
+     "predicted_n": 53,
+     "predicted_ms": 778.656,
+     "predicted_per_second": 66.78173673611968,
+     "content_sha_head": "f20f600450b0",
+     "stop_type": "eos"
+    },
+    {
+     "name": "qa_factual",
+     "wall_s": 2.803,
+     "prompt_n": 14,
+     "prompt_ms": 177.902,
+     "prompt_per_second": 78.6950118604625,
+     "predicted_n": 192,
+     "predicted_ms": 2556.551,
+     "predicted_per_second": 74.71002925425701,
+     "content_sha_head": "eceb5fdb8f75",
+     "stop_type": "limit"
+    },
+    {
+     "name": "translation",
+     "wall_s": 0.531,
+     "prompt_n": 15,
+     "prompt_ms": 203.027,
+     "prompt_per_second": 73.88179897255046,
+     "predicted_n": 22,
+     "predicted_ms": 259.4,
+     "predicted_per_second": 80.95605242868157,
+     "content_sha_head": "f7a880da21ea",
+     "stop_type": "eos"
+    },
+    {
+     "name": "creative_short",
+     "wall_s": 2.734,
+     "prompt_n": 11,
+     "prompt_ms": 155.727,
+     "prompt_per_second": 70.6364342727979,
+     "predicted_n": 192,
+     "predicted_ms": 2511.556,
+     "predicted_per_second": 76.04847353592753,
+     "content_sha_head": "8bb700757180",
+     "stop_type": "limit"
+    },
+    {
+     "name": "stepwise_math",
+     "wall_s": 3.0,
+     "prompt_n": 50,
+     "prompt_ms": 300.205,
+     "prompt_per_second": 166.5528555487084,
+     "predicted_n": 192,
+     "predicted_ms": 2631.335,
+     "predicted_per_second": 72.58672878975881,
+     "content_sha_head": "6d64e94ec81d",
+     "stop_type": "limit"
+    },
+    {
+     "name": "long_code_review",
+     "wall_s": 3.718,
+     "prompt_n": 721,
+     "prompt_ms": 1110.596,
+     "prompt_per_second": 649.2009695694924,
+     "predicted_n": 192,
+     "predicted_ms": 2536.493,
+     "predicted_per_second": 75.30081888654927,
+     "content_sha_head": "b359d12a942a",
+     "stop_type": "limit"
+    }
+   ],
+   "aggregate": {
+    "gen_tok_s": 73.61,
+    "total_predicted": 1285,
+    "prompt_tok_s": 300.6,
+    "total_prompt": 930,
+    "mean_per_prompt_tok_s": 74.07
+   },
+   "rc": 0,
+   "meta": {
+    "name": "prime-B3",
+    "attempt": 1,
+    "started": "2026-11-03T12:52:06-0800",
+    "elapsed_s": 24.5,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62560,
+     62285
+    ],
+    "cpu_tctl_max": 52.875,
+    "cpu_tctl_mean": 50.7,
+    "cpu_mhz_mean": 2052,
+    "telemetry": {
+     "samples": 28,
+     "samples_under_load": 20,
+     "peak_vram_mib": 14134.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 63.0,
+     "power_w": {
+      "mean": 236.7,
+      "median": 241.08499999999998,
+      "min": 144.51,
+      "max": 268.88
+     },
+     "sm_clock_mhz": {
+      "mean": 1938.8,
+      "median": 1935.0,
+      "min": 1935.0,
+      "max": 1950.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000"
+     ]
+    },
+    "esp32_taint": []
+   },
+   "config": "B3"
+  }
+ ]
+}

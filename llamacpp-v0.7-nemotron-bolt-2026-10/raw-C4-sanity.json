@@ -1,0 +1,135 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/bench-models/nemotron-3.5-bolt-24gb/NVIDIA-Nemotron-3.5-Bolt-74B-A9B-24GB.gguf",
+  "-ngl",
+  "99",
+  "-fa",
+  "on",
+  "-c",
+  "32768",
+  "-np",
+  "1",
+  "-ctk",
+  "f16",
+  "-ctv",
+  "f16",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "-t",
+  "8",
+  "--port",
+  "8081"
+ ],
+ "load_ok": true,
+ "load_s": 3.2,
+ "rc_at_load": null,
+ "vram_after_load_mib": 21338,
+ "outputs": [
+  {
+   "name": "code_python",
+   "content": " The function should be named `fib_memo`. The function should take an integer `n` as input and return the n-th Fibonacci number. The function should use a dictionary to store previously computed Fibonacci numbers. The function should handle the case where `n` is less than 0 by returning None. The function should handle the case where `n` is 0 or 1 by returning `n`. The function should handle the case where `n` is greater than 1 by computing the n-th Fibonacci number using memoization. The function should not use any external libraries. The function should not use any global variables. The function should not use any recursion. The function should not use any loops. The function should not use any list comprehensions. The function should not use any generator expressions. The function should not use any map, filter, or reduce functions. The function should not use any lambda functions. The function should not use",
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 21,
+    "prompt_ms": 200.74,
+    "prompt_per_token_ms": 9.55904761904762,
+    "prompt_per_second": 104.61293215104114,
+    "predicted_n": 192,
+    "predicted_ms": 2110.396,
+    "predicted_per_token_ms": 11.049193717277488,
+    "predicted_per_second": 90.50434136531722
+   },
+   "stop_type": "limit"
+  },
+  {
+   "name": "code_cpp",
+   "content": "</think>```cpp\ntemplate <typename T>\nT clamp(T x, T lo, T hi) {\n    return x < lo ? lo : (x > hi ? hi : x);\n}\n```",
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 31,
+    "prompt_ms": 151.889,
+    "prompt_per_token_ms": 4.899645161290323,
+    "prompt_per_second": 204.09641251176845,
+    "predicted_n": 41,
+    "predicted_ms": 444.727,
+    "predicted_per_token_ms": 11.118174999999999,
+    "predicted_per_second": 89.94281885291427
+   },
+   "stop_type": "eos"
+  },
+  {
+   "name": "explain_concept",
+   "content": "</think>Speculative decoding is an inference optimization technique that accelerates text generation by using a smaller, faster model to predict upcoming tokens, which are then verified by the larger, more accurate model.\n\nIn the first step, the small \"draft\" model generates a sequence of candidate tokens in parallel. These candidates are then fed to the large \"target\" model, which processes them in a single forward pass to determine which tokens are actually correct.\n\nIf the target model accepts a candidate, it is appended to the output; if it rejects one, the process stops at that point, and the target model provides the correct token. This allows the system to generate multiple tokens per large model pass, significantly reducing the number of expensive computations required.",
+   "timings": {
+    "cache_n": 0,
+    "prompt_n": 17,
+    "prompt_ms": 141.851,
+    "prompt_per_token_ms": 8.344176470588236,
+    "prompt_per_second": 119.84406172674144,
+    "predicted_n": 147,
+    "predicted_ms": 1611.663,
+    "predicted_per_token_ms": 11.038787671232877,
+    "predicted_per_second": 90.58965801163146
+   },
+   "stop_type": "eos"
+  }
+ ],
+ "rc": 0,
+ "meta": {
+  "name": "C4-sanity",
+  "attempt": 1,
+  "started": "2026-11-03T13:02:27-0800",
+  "elapsed_s": 8.6,
+  "nvme_read_mib": 0.1,
+  "mem_available_mib": [
+   62036,
+   62085
+  ],
+  "cpu_tctl_max": 58.5,
+  "cpu_tctl_mean": 54.9,
+  "cpu_mhz_mean": 2132,
+  "telemetry": {
+   "samples": 12,
+   "samples_under_load": 7,
+   "peak_vram_mib": 21356.0,
+   "memory_total_mib": 24576.0,
+   "pcie_gen_under_load": [
+    "4"
+   ],
+   "pcie_width_under_load": [
+    "16"
+   ],
+   "gpu_temp_max": 68.0,
+   "power_w": {
+    "mean": 312.6,
+    "median": 361.13,
+    "min": 137.71,
+    "max": 408.09
+   },
+   "sm_clock_mhz": {
+    "mean": 1892.1,
+    "median": 1905.0,
+    "min": 1800.0,
+    "max": 1920.0
+   },
+   "mem_clock_mhz": {
+    "mean": 9501.0,
+    "median": 9501.0,
+    "min": 9501.0,
+    "max": 9501.0
+   },
+   "pstates_under_load": [
+    "P2"
+   ],
+   "reasons_under_load": [
+    "0x0000000000000000",
+    "0x0000000000000004"
+   ]
+  },
+  "esp32_taint": []
+ }
+}

@@ -1,0 +1,881 @@
+{
+ "summary": {
+  "v04|tg|0": {
+   "mean": 162.935198,
+   "min": 162.809515,
+   "max": 163.031121,
+   "reps": [
+    163.031121,
+    162.964958,
+    162.809515
+   ]
+  },
+  "v04|tg|4096": {
+   "mean": 160.851849,
+   "min": 160.828985,
+   "max": 160.878651,
+   "reps": [
+    160.878651,
+    160.828985,
+    160.847911
+   ]
+  },
+  "v04|pp|0": {
+   "mean": 3768.216495,
+   "min": 3762.085024,
+   "max": 3775.084396,
+   "reps": [
+    3775.084396,
+    3762.085024,
+    3767.480065
+   ]
+  },
+  "v04|pp|4096": {
+   "mean": 3601.217762333333,
+   "min": 3591.522609,
+   "max": 3611.585344,
+   "reps": [
+    3611.585344,
+    3591.522609,
+    3600.545334
+   ]
+  },
+  "v07|tg|0": {
+   "mean": 162.24239366666666,
+   "min": 162.067692,
+   "max": 162.361457,
+   "reps": [
+    162.361457,
+    162.298032,
+    162.067692
+   ]
+  },
+  "v07|tg|4096": {
+   "mean": 160.132474,
+   "min": 160.121614,
+   "max": 160.147062,
+   "reps": [
+    160.121614,
+    160.147062,
+    160.128746
+   ]
+  },
+  "v07|pp|0": {
+   "mean": 4362.276665666666,
+   "min": 4355.148503,
+   "max": 4366.628108,
+   "reps": [
+    4366.628108,
+    4365.053386,
+    4355.148503
+   ]
+  },
+  "v07|pp|4096": {
+   "mean": 4110.056680333333,
+   "min": 4107.71705,
+   "max": 4111.32819,
+   "reps": [
+    4111.124801,
+    4111.32819,
+    4107.71705
+   ]
+  }
+ },
+ "results": [
+  {
+   "build": "v04",
+   "rep": 1,
+   "rc": 0,
+   "rows": [
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 0,
+     "avg_ts": 3775.084396,
+     "stddev_ts": 150.012393,
+     "samples": [
+      3511.14,
+      3861.77,
+      3870.66,
+      3829.41,
+      3802.44
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 0,
+     "avg_ts": 163.031121,
+     "stddev_ts": 0.469707,
+     "samples": [
+      162.195,
+      163.188,
+      163.309,
+      163.249,
+      163.215
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 4096,
+     "avg_ts": 3611.585344,
+     "stddev_ts": 114.74799,
+     "samples": [
+      3591.96,
+      3419.3,
+      3667.42,
+      3686.94,
+      3692.3
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 4096,
+     "avg_ts": 160.878651,
+     "stddev_ts": 0.638307,
+     "samples": [
+      159.737,
+      161.154,
+      161.172,
+      161.169,
+      161.161
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    }
+   ],
+   "meta": {
+    "name": "A-v04-rep1",
+    "attempt": 1,
+    "started": "2026-11-03T12:47:48-0800",
+    "elapsed_s": 14.5,
+    "nvme_read_mib": 0.2,
+    "mem_available_mib": [
+     62597,
+     62526
+    ],
+    "cpu_tctl_max": 47.125,
+    "cpu_tctl_mean": 44.1,
+    "cpu_mhz_mean": 2066,
+    "telemetry": {
+     "samples": 18,
+     "samples_under_load": 12,
+     "peak_vram_mib": 21580.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 66.0,
+     "power_w": {
+      "mean": 344.7,
+      "median": 379.53,
+      "min": 148.82,
+      "max": 396.04
+     },
+     "sm_clock_mhz": {
+      "mean": 1916.2,
+      "median": 1920.0,
+      "min": 1845.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   }
+  },
+  {
+   "build": "v07",
+   "rep": 1,
+   "rc": 0,
+   "rows": [
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 0,
+     "avg_ts": 4366.628108,
+     "stddev_ts": 186.935392,
+     "samples": [
+      4037.35,
+      4461.4,
+      4490.94,
+      4442.35,
+      4401.1
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 0,
+     "avg_ts": 162.361457,
+     "stddev_ts": 0.47992,
+     "samples": [
+      161.503,
+      162.58,
+      162.575,
+      162.585,
+      162.564
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 4096,
+     "avg_ts": 4111.124801,
+     "stddev_ts": 132.502542,
+     "samples": [
+      4071.04,
+      3895.45,
+      4185.05,
+      4194.74,
+      4209.35
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 4096,
+     "avg_ts": 160.121614,
+     "stddev_ts": 0.6515,
+     "samples": [
+      158.956,
+      160.407,
+      160.415,
+      160.41,
+      160.419
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    }
+   ],
+   "meta": {
+    "name": "A-v07-rep1",
+    "attempt": 1,
+    "started": "2026-11-03T12:48:25-0800",
+    "elapsed_s": 14.2,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62595,
+     62475
+    ],
+    "cpu_tctl_max": 50.875,
+    "cpu_tctl_mean": 47.5,
+    "cpu_mhz_mean": 2112,
+    "telemetry": {
+     "samples": 18,
+     "samples_under_load": 13,
+     "peak_vram_mib": 21586.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 65.0,
+     "power_w": {
+      "mean": 342.1,
+      "median": 377.8,
+      "min": 149.47,
+      "max": 397.0
+     },
+     "sm_clock_mhz": {
+      "mean": 1913.1,
+      "median": 1920.0,
+      "min": 1830.0,
+      "max": 1950.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9520.2,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9751.0
+     },
+     "pstates_under_load": [
+      "P0",
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   }
+  },
+  {
+   "build": "v04",
+   "rep": 2,
+   "rc": 0,
+   "rows": [
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 0,
+     "avg_ts": 3762.085024,
+     "stddev_ts": 159.641685,
+     "samples": [
+      3479.02,
+      3833.66,
+      3863.81,
+      3829.7,
+      3804.24
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 0,
+     "avg_ts": 162.964958,
+     "stddev_ts": 0.46831,
+     "samples": [
+      162.131,
+      163.106,
+      163.219,
+      163.193,
+      163.177
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 4096,
+     "avg_ts": 3591.522609,
+     "stddev_ts": 113.938033,
+     "samples": [
+      3584.99,
+      3396.37,
+      3649.9,
+      3671.07,
+      3655.28
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 4096,
+     "avg_ts": 160.828985,
+     "stddev_ts": 0.687245,
+     "samples": [
+      159.6,
+      161.139,
+      161.141,
+      161.137,
+      161.129
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    }
+   ],
+   "meta": {
+    "name": "A-v04-rep2",
+    "attempt": 1,
+    "started": "2026-11-03T12:49:01-0800",
+    "elapsed_s": 14.5,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62402,
+     62409
+    ],
+    "cpu_tctl_max": 52.0,
+    "cpu_tctl_mean": 49.4,
+    "cpu_mhz_mean": 2061,
+    "telemetry": {
+     "samples": 18,
+     "samples_under_load": 12,
+     "peak_vram_mib": 21580.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 66.0,
+     "power_w": {
+      "mean": 345.3,
+      "median": 382.32,
+      "min": 148.02,
+      "max": 391.71
+     },
+     "sm_clock_mhz": {
+      "mean": 1917.5,
+      "median": 1920.0,
+      "min": 1845.0,
+      "max": 1950.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   }
+  },
+  {
+   "build": "v07",
+   "rep": 2,
+   "rc": 0,
+   "rows": [
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 0,
+     "avg_ts": 4365.053386,
+     "stddev_ts": 181.147102,
+     "samples": [
+      4046.62,
+      4450.54,
+      4489.99,
+      4442.57,
+      4395.54
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 0,
+     "avg_ts": 162.298032,
+     "stddev_ts": 0.46472,
+     "samples": [
+      161.467,
+      162.528,
+      162.484,
+      162.515,
+      162.496
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 4096,
+     "avg_ts": 4111.32819,
+     "stddev_ts": 127.591967,
+     "samples": [
+      4068.27,
+      3905.11,
+      4190.51,
+      4195.7,
+      4197.05
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 4096,
+     "avg_ts": 160.147062,
+     "stddev_ts": 0.657746,
+     "samples": [
+      158.971,
+      160.45,
+      160.449,
+      160.439,
+      160.427
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    }
+   ],
+   "meta": {
+    "name": "A-v07-rep2",
+    "attempt": 1,
+    "started": "2026-11-03T12:49:37-0800",
+    "elapsed_s": 14.2,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62458,
+     62510
+    ],
+    "cpu_tctl_max": 52.25,
+    "cpu_tctl_mean": 49.8,
+    "cpu_mhz_mean": 2032,
+    "telemetry": {
+     "samples": 18,
+     "samples_under_load": 13,
+     "peak_vram_mib": 21586.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 66.0,
+     "power_w": {
+      "mean": 342.5,
+      "median": 377.85,
+      "min": 148.05,
+      "max": 397.74
+     },
+     "sm_clock_mhz": {
+      "mean": 1913.1,
+      "median": 1920.0,
+      "min": 1830.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9520.2,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9751.0
+     },
+     "pstates_under_load": [
+      "P0",
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   }
+  },
+  {
+   "build": "v04",
+   "rep": 3,
+   "rc": 0,
+   "rows": [
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 0,
+     "avg_ts": 3767.480065,
+     "stddev_ts": 149.543777,
+     "samples": [
+      3503.3,
+      3837.3,
+      3867.88,
+      3826.56,
+      3802.35
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 0,
+     "avg_ts": 162.809515,
+     "stddev_ts": 0.387192,
+     "samples": [
+      162.159,
+      163.148,
+      163.052,
+      162.861,
+      162.827
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 4096,
+     "avg_ts": 3600.545334,
+     "stddev_ts": 111.305019,
+     "samples": [
+      3592.76,
+      3409.85,
+      3666.94,
+      3666.49,
+      3666.68
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 4096,
+     "avg_ts": 160.847911,
+     "stddev_ts": 0.704016,
+     "samples": [
+      159.589,
+      161.151,
+      161.168,
+      161.16,
+      161.171
+     ],
+     "build_commit": "5266f24",
+     "type_k": "f16",
+     "type_v": "f16"
+    }
+   ],
+   "meta": {
+    "name": "A-v04-rep3",
+    "attempt": 1,
+    "started": "2026-11-03T12:50:13-0800",
+    "elapsed_s": 14.5,
+    "nvme_read_mib": 1.2,
+    "mem_available_mib": [
+     62478,
+     62507
+    ],
+    "cpu_tctl_max": 53.375,
+    "cpu_tctl_mean": 51.1,
+    "cpu_mhz_mean": 2054,
+    "telemetry": {
+     "samples": 18,
+     "samples_under_load": 12,
+     "peak_vram_mib": 21580.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 67.0,
+     "power_w": {
+      "mean": 347.5,
+      "median": 383.905,
+      "min": 150.17,
+      "max": 395.99
+     },
+     "sm_clock_mhz": {
+      "mean": 1915.0,
+      "median": 1920.0,
+      "min": 1830.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9501.0,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9501.0
+     },
+     "pstates_under_load": [
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   }
+  },
+  {
+   "build": "v07",
+   "rep": 3,
+   "rc": 0,
+   "rows": [
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 0,
+     "avg_ts": 4355.148503,
+     "stddev_ts": 191.696584,
+     "samples": [
+      4016.47,
+      4443.82,
+      4479.85,
+      4440.43,
+      4395.17
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 0,
+     "avg_ts": 162.067692,
+     "stddev_ts": 0.401605,
+     "samples": [
+      161.447,
+      162.515,
+      162.307,
+      162.033,
+      162.035
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "pp",
+     "n_prompt": 512,
+     "n_gen": 0,
+     "depth": 4096,
+     "avg_ts": 4107.71705,
+     "stddev_ts": 143.403777,
+     "samples": [
+      4077.68,
+      3870.48,
+      4169.81,
+      4201.12,
+      4219.5
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    },
+    {
+     "kind": "tg",
+     "n_prompt": 0,
+     "n_gen": 128,
+     "depth": 4096,
+     "avg_ts": 160.128746,
+     "stddev_ts": 0.644232,
+     "samples": [
+      158.976,
+      160.415,
+      160.404,
+      160.423,
+      160.426
+     ],
+     "build_commit": "620d222",
+     "type_k": "f16",
+     "type_v": "f16"
+    }
+   ],
+   "meta": {
+    "name": "A-v07-rep3",
+    "attempt": 1,
+    "started": "2026-11-03T12:50:49-0800",
+    "elapsed_s": 14.2,
+    "nvme_read_mib": 0.0,
+    "mem_available_mib": [
+     62536,
+     62408
+    ],
+    "cpu_tctl_max": 54.75,
+    "cpu_tctl_mean": 52.1,
+    "cpu_mhz_mean": 2045,
+    "telemetry": {
+     "samples": 18,
+     "samples_under_load": 13,
+     "peak_vram_mib": 21586.0,
+     "memory_total_mib": 24576.0,
+     "pcie_gen_under_load": [
+      "4"
+     ],
+     "pcie_width_under_load": [
+      "16"
+     ],
+     "gpu_temp_max": 66.0,
+     "power_w": {
+      "mean": 343.4,
+      "median": 379.02,
+      "min": 149.89,
+      "max": 396.36
+     },
+     "sm_clock_mhz": {
+      "mean": 1909.6,
+      "median": 1920.0,
+      "min": 1830.0,
+      "max": 1935.0
+     },
+     "mem_clock_mhz": {
+      "mean": 9520.2,
+      "median": 9501.0,
+      "min": 9501.0,
+      "max": 9751.0
+     },
+     "pstates_under_load": [
+      "P0",
+      "P2"
+     ],
+     "reasons_under_load": [
+      "0x0000000000000000",
+      "0x0000000000000004"
+     ]
+    },
+    "esp32_taint": []
+   }
+  }
+ ]
+}

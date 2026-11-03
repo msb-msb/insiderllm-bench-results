@@ -1,0 +1,200 @@
+{
+ "cmd": [
+  "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-ncmoe",
+  "20",
+  "-fa",
+  "on",
+  "-c",
+  "8192",
+  "-np",
+  "1",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "-t",
+  "8",
+  "--port",
+  "8081"
+ ],
+ "load_ok": true,
+ "load_s": 3.0,
+ "rc_at_load": null,
+ "vram_after_load_mib": 12230,
+ "results": [
+  {
+   "name": "code_python",
+   "wall_s": 2.961,
+   "prompt_n": 20,
+   "prompt_ms": 217.913,
+   "prompt_per_second": 91.77974696323761,
+   "predicted_n": 192,
+   "predicted_ms": 2742.302,
+   "predicted_per_second": 69.6495134379802,
+   "content_sha_head": "0ccf99f9ef64",
+   "stop_type": "limit"
+  },
+  {
+   "name": "code_cpp",
+   "wall_s": 1.087,
+   "prompt_n": 30,
+   "prompt_ms": 188.777,
+   "prompt_per_second": 158.91766475788896,
+   "predicted_n": 58,
+   "predicted_ms": 828.314,
+   "predicted_per_second": 68.81448339639316,
+   "content_sha_head": "76bc655434db",
+   "stop_type": "eos"
+  },
+  {
+   "name": "explain_concept",
+   "wall_s": 2.96,
+   "prompt_n": 17,
+   "prompt_ms": 142.137,
+   "prompt_per_second": 119.60291831120679,
+   "predicted_n": 192,
+   "predicted_ms": 2750.354,
+   "predicted_per_second": 69.44560591109362,
+   "content_sha_head": "49f65a54cac6",
+   "stop_type": "limit"
+  },
+  {
+   "name": "summarize",
+   "wall_s": 1.198,
+   "prompt_n": 52,
+   "prompt_ms": 379.871,
+   "prompt_per_second": 136.88857533215224,
+   "predicted_n": 53,
+   "predicted_ms": 749.505,
+   "predicted_per_second": 69.37912355487956,
+   "content_sha_head": "f20f600450b0",
+   "stop_type": "eos"
+  },
+  {
+   "name": "qa_factual",
+   "wall_s": 2.932,
+   "prompt_n": 14,
+   "prompt_ms": 130.278,
+   "prompt_per_second": 107.46250326225457,
+   "predicted_n": 192,
+   "predicted_ms": 2732.852,
+   "predicted_per_second": 69.89035630176826,
+   "content_sha_head": "a2768f1be593",
+   "stop_type": "limit"
+  },
+  {
+   "name": "translation",
+   "wall_s": 0.522,
+   "prompt_n": 15,
+   "prompt_ms": 140.9,
+   "prompt_per_second": 106.45848119233499,
+   "predicted_n": 22,
+   "predicted_ms": 311.094,
+   "predicted_per_second": 67.50371270419873,
+   "content_sha_head": "f7a880da21ea",
+   "stop_type": "eos"
+  },
+  {
+   "name": "creative_short",
+   "wall_s": 2.938,
+   "prompt_n": 11,
+   "prompt_ms": 118.434,
+   "prompt_per_second": 92.87873414728878,
+   "predicted_n": 192,
+   "predicted_ms": 2751.92,
+   "predicted_per_second": 69.40608738626122,
+   "content_sha_head": "6253e6282ba1",
+   "stop_type": "limit"
+  },
+  {
+   "name": "stepwise_math",
+   "wall_s": 3.139,
+   "prompt_n": 50,
+   "prompt_ms": 342.541,
+   "prompt_per_second": 145.96792792687592,
+   "predicted_n": 192,
+   "predicted_ms": 2727.657,
+   "predicted_per_second": 70.02346702682925,
+   "content_sha_head": "6d64e94ec81d",
+   "stop_type": "limit"
+  },
+  {
+   "name": "long_code_review",
+   "wall_s": 4.074,
+   "prompt_n": 721,
+   "prompt_ms": 1259.461,
+   "prompt_per_second": 572.467110930787,
+   "predicted_n": 192,
+   "predicted_ms": 2743.667,
+   "predicted_per_second": 69.61486215346105,
+   "content_sha_head": "3432133286f2",
+   "stop_type": "limit"
+  }
+ ],
+ "aggregate": {
+  "gen_tok_s": 70.07,
+  "total_predicted": 1285,
+  "prompt_tok_s": 318.46,
+  "total_prompt": 930,
+  "mean_per_prompt_tok_s": 69.3
+ },
+ "rc": 0,
+ "meta": {
+  "name": "B2-rep1",
+  "attempt": 1,
+  "started": "2026-11-03T12:53:03-0800",
+  "elapsed_s": 25.2,
+  "nvme_read_mib": 0.0,
+  "mem_available_mib": [
+   62488,
+   62254
+  ],
+  "cpu_tctl_max": 58.5,
+  "cpu_tctl_mean": 55.7,
+  "cpu_mhz_mean": 3037,
+  "telemetry": {
+   "samples": 29,
+   "samples_under_load": 3,
+   "peak_vram_mib": 12254.0,
+   "memory_total_mib": 24576.0,
+   "pcie_gen_under_load": [
+    "4"
+   ],
+   "pcie_width_under_load": [
+    "16"
+   ],
+   "gpu_temp_max": 60.0,
+   "power_w": {
+    "mean": 183.2,
+    "median": 195.56,
+    "min": 147.36,
+    "max": 206.63
+   },
+   "sm_clock_mhz": {
+    "mean": 1935.0,
+    "median": 1935.0,
+    "min": 1935.0,
+    "max": 1935.0
+   },
+   "mem_clock_mhz": {
+    "mean": 9501.0,
+    "median": 9501.0,
+    "min": 9501.0,
+    "max": 9501.0
+   },
+   "pstates_under_load": [
+    "P2"
+   ],
+   "reasons_under_load": [
+    "0x0000000000000000",
+    "0x0000000000000004"
+   ]
+  },
+  "esp32_taint": []
+ }
+}
