@@ -1,0 +1,105 @@
+20:41:45 start server-prep.log: ready in 20.1s card 2367 MiB mem {'avail_mib': 30749, 'free_mib': 258, 'cached_mib': 30651, 'swapused_mib': 294}
+20:41:50 day-0 load check: loaded, completion '\n    if n <= 0:\n        return "Invalid input"\n    elif n == 1:\n        return 0\n    elif n == 2:\n        return 1\n    else:\n        a, b = 0'
+20:41:51 corpus 600000 chars = 135682 tokens
+20:41:51 prompt-4096: 17250 chars, re-tokenizes to 4096
+20:41:51 prompt-16384: 69292 chars, re-tokenizes to 16384
+20:41:51 prompt-32512: 137108 chars, re-tokenizes to 32512
+20:43:10   sweep ncmoe48-rep1 (72s) peak 2459 MiB: tg128@d0 16.68+-0.08  tg128@d4096 16.65+-0.07
+20:44:17   sweep ncmoe48-rep2 (67s) peak 2459 MiB: tg128@d0 16.50+-0.11  tg128@d4096 16.61+-0.11
+20:45:24   sweep ncmoe48-rep3 (67s) peak 2459 MiB: tg128@d0 16.60+-0.12  tg128@d4096 16.57+-0.11
+20:46:28   sweep ncmoe44-rep1 (64s) peak 4513 MiB: tg128@d0 17.68+-0.11  tg128@d4096 17.62+-0.05
+20:47:32   sweep ncmoe44-rep2 (64s) peak 4513 MiB: tg128@d0 17.75+-0.11  tg128@d4096 17.48+-0.16
+20:48:35   sweep ncmoe44-rep3 (63s) peak 4513 MiB: tg128@d0 17.66+-0.05  tg128@d4096 17.66+-0.10
+20:49:36   sweep ncmoe40-rep1 (61s) peak 6611 MiB: tg128@d0 18.79+-0.12  tg128@d4096 18.82+-0.08
+20:50:36   sweep ncmoe40-rep2 (60s) peak 6611 MiB: tg128@d0 18.78+-0.14  tg128@d4096 18.87+-0.06
+20:51:36   sweep ncmoe40-rep3 (60s) peak 6611 MiB: tg128@d0 18.85+-0.03  tg128@d4096 18.90+-0.00
+20:52:33   sweep ncmoe36-rep1 (57s) peak 8703 MiB: tg128@d0 20.19+-0.13  tg128@d4096 20.19+-0.11
+20:53:30   sweep ncmoe36-rep2 (57s) peak 8703 MiB: tg128@d0 20.32+-0.03  tg128@d4096 20.21+-0.02
+20:54:27   sweep ncmoe36-rep3 (57s) peak 8703 MiB: tg128@d0 20.25+-0.11  tg128@d4096 20.21+-0.05
+20:55:21   sweep ncmoe32-rep1 (53s) peak 10801 MiB: tg128@d0 21.90+-0.08  tg128@d4096 21.80+-0.07
+20:56:14   sweep ncmoe32-rep2 (53s) peak 10801 MiB: tg128@d0 21.94+-0.05  tg128@d4096 21.80+-0.08
+20:57:07   sweep ncmoe32-rep3 (53s) peak 10801 MiB: tg128@d0 21.94+-0.06  tg128@d4096 21.85+-0.04
+20:57:10   sweep ncmoe28-rep1 FAILED rc=1 oom=False peak 113 MiB: Device 0: NVIDIA GeForce RTX 3060, compute capability 8.6, VMM: yes, VRAM: 11909 MiB
+llama_bench: error: failed to load model '/home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-UD-IQ3_XXS.gguf'
+20:58:02   sweep ncmoe30-rep1 (52s) peak 11849 MiB: tg128@d0 22.78+-0.04  tg128@d4096 22.51+-0.04
+20:58:54   sweep ncmoe30-rep2 (52s) peak 11849 MiB: tg128@d0 22.75+-0.08  tg128@d4096 22.65+-0.09
+20:59:46   sweep ncmoe30-rep3 (52s) peak 11849 MiB: tg128@d0 22.76+-0.09  tg128@d4096 22.69+-0.09
+20:59:46 sweep result: lowest fitting N = 30, first failure 28
+20:59:55 start server-stage-ncmoe48.log: ready in 5.1s card 4263 MiB mem {'avail_mib': 30135, 'free_mib': 416, 'cached_mib': 30216, 'swapused_mib': 119}
+21:00:44 stage -ncmoe 48: served=True pp 668.0895179590096 card 4375 
+21:00:55 start server-stage-ncmoe46.log: ready in 5.1s card 5311 MiB mem {'avail_mib': 30103, 'free_mib': 514, 'cached_mib': 30086, 'swapused_mib': 119}
+21:01:44 stage -ncmoe 46: served=True pp 679.8369519536689 card 5423 
+21:01:54 start server-stage-ncmoe44.log: ready in 4.9s card 6359 MiB mem {'avail_mib': 30055, 'free_mib': 466, 'cached_mib': 30086, 'swapused_mib': 119}
+21:02:42 stage -ncmoe 44: served=True pp 691.9490445312665 card 6471 
+21:02:51 start server-stage-ncmoe42.log: ready in 5.6s card 7407 MiB mem {'avail_mib': 30060, 'free_mib': 600, 'cached_mib': 29956, 'swapused_mib': 119}
+21:03:38 stage -ncmoe 42: served=True pp 705.5972203759006 card 7519 
+21:03:48 start server-stage-ncmoe40.log: ready in 6.1s card 8455 MiB mem {'avail_mib': 30113, 'free_mib': 653, 'cached_mib': 29956, 'swapused_mib': 119}
+21:04:35 stage -ncmoe 40: served=True pp 718.4999891250118 card 8569 
+21:04:43 start server-stage-ncmoe38.log: ready in 4.6s card 9503 MiB mem {'avail_mib': 30036, 'free_mib': 576, 'cached_mib': 29956, 'swapused_mib': 118}
+21:05:29 stage -ncmoe 38: served=True pp 730.9192265630589 card 9617 
+21:05:39 start server-stage-ncmoe36.log: ready in 6.1s card 10551 MiB mem {'avail_mib': 30029, 'free_mib': 568, 'cached_mib': 29957, 'swapused_mib': 118}
+21:06:23 stage -ncmoe 36: served=True pp 745.7100360379156 card 10661 
+21:06:34 start server-stage-ncmoe34.log: ready in 6.2s card 11599 MiB mem {'avail_mib': 30081, 'free_mib': 620, 'cached_mib': 29957, 'swapused_mib': 118}
+21:07:17 stage -ncmoe 34: served=True pp 760.1785049300984 card 11711 
+21:07:29 start server-stage-ncmoe32.log: FAILED in 7.0s card 0 MiB mem {'avail_mib': 30872, 'free_mib': 1411, 'cached_mib': 29609, 'swapused_mib': 118}
+21:07:32 stage result: N = 34
+21:07:39 start server-llama-L1.log: ready in 6.1s card 10609 MiB mem {'avail_mib': 30426, 'free_mib': 965, 'cached_mib': 29664, 'swapused_mib': 118}
+21:08:10   L1-4096-prime1: prompt_n 4123 cache_n 0 pp 226.38075375951007 tg 20.828548212616514 ttft 18.23 rx 4943.7 MB/s swap in/out 16/0 KiB nvme 2.4 MiB card 10637 avail 30150 
+21:08:41   L1-4096-rep1: prompt_n 4122 cache_n 0 pp 227.76868250239207 tg 20.8405679389847 ttft 18.4 rx 6316.7 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 10637 avail 29810 
+21:09:12   L1-4096-prime2: prompt_n 4123 cache_n 0 pp 227.7236002178812 tg 20.845106390561927 ttft 18.44 rx 6411.7 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 10637 avail 29540 
+21:09:43   L1-4096-rep2: prompt_n 4124 cache_n 0 pp 228.32986778349724 tg 20.84583061315681 ttft 18.37 rx 6155.6 MB/s swap in/out 0/0 KiB nvme 0.1 MiB card 10637 avail 29213 
+21:10:13   L1-4096-prime3: prompt_n 4121 cache_n 0 pp 228.35675564729968 tg 20.821949306800565 ttft 18.35 rx 6473.5 MB/s swap in/out 20/0 KiB nvme 0.2 MiB card 10637 avail 28878 
+21:10:44   L1-4096-rep3: prompt_n 4123 cache_n 0 pp 227.91835691373447 tg 20.84170747690943 ttft 18.36 rx 6033.2 MB/s swap in/out 32/0 KiB nvme 0.0 MiB card 10637 avail 28547 
+21:12:08   L1-16384-prime1: prompt_n 16410 cache_n 0 pp 230.77380340724233 tg 20.44273349008768 ttft 71.45 rx 6434.8 MB/s swap in/out 88/0 KiB nvme 0.1 MiB card 10637 avail 28238 
+21:13:33   L1-16384-rep1: prompt_n 16412 cache_n 0 pp 230.67585805670572 tg 20.37438532277221 ttft 71.66 rx 6558.2 MB/s swap in/out 1260/1136 KiB nvme 2.5 MiB card 10637 avail 27627 
+21:15:00   L1-16384-prime2: prompt_n 16411 cache_n 0 pp 227.40953819429174 tg 20.330991734614702 ttft 73.59 rx 6049.8 MB/s swap in/out 1080/383428 KiB nvme 62.0 MiB card 10637 avail 27340 
+21:16:24   L1-16384-rep2: prompt_n 16409 cache_n 0 pp 230.81103204433293 tg 20.347618718181412 ttft 71.58 rx 6801.2 MB/s swap in/out 776/0 KiB nvme 1.9 MiB card 10637 avail 26748 
+21:17:48   L1-16384-prime3: prompt_n 16410 cache_n 0 pp 231.00844844773374 tg 20.42414624265392 ttft 71.4 rx 6651.9 MB/s swap in/out 960/0 KiB nvme 1.2 MiB card 10637 avail 26091 
+21:19:12   L1-16384-rep3: prompt_n 16409 cache_n 0 pp 231.1331297106193 tg 20.40721435841999 ttft 71.5 rx 6559.0 MB/s swap in/out 1736/0 KiB nvme 1.8 MiB card 10637 avail 25447 
+21:21:48   L1-32512-prime1: prompt_n 32540 cache_n 0 pp 228.11421949566608 tg 19.89366950670253 ttft 143.18 rx 6513.5 MB/s swap in/out 6484/0 KiB nvme 8.4 MiB card 10641 avail 24846 
+21:24:24   L1-32512-rep1: prompt_n 32540 cache_n 0 pp 228.4684478578938 tg 19.898207015483536 ttft 143.13 rx 6491.3 MB/s swap in/out 588/0 KiB nvme 0.7 MiB card 10641 avail 23862 
+21:27:01   L1-32512-prime2: prompt_n 32539 cache_n 0 pp 228.40620091774383 tg 19.89014710752801 ttft 143.14 rx 6245.8 MB/s swap in/out 68/0 KiB nvme 0.2 MiB card 10641 avail 22832 
+21:29:37   L1-32512-rep2: prompt_n 32540 cache_n 0 pp 228.62077163458946 tg 19.941529870378492 ttft 143.08 rx 6199.6 MB/s swap in/out 88/0 KiB nvme 0.1 MiB card 10641 avail 22431 
+21:32:13   L1-32512-prime3: prompt_n 32537 cache_n 0 pp 228.34421906049 tg 19.951581033698456 ttft 143.24 rx 6159.1 MB/s swap in/out 104/0 KiB nvme 0.2 MiB card 10641 avail 22359 
+21:34:49   L1-32512-rep3: prompt_n 32540 cache_n 0 pp 228.1747631040735 tg 19.95448030903621 ttft 143.36 rx 6223.4 MB/s swap in/out 268/0 KiB nvme 0.3 MiB card 10641 avail 22338 
+21:35:06 start server-llama-L2.log: ready in 8.5s card 11599 MiB mem {'avail_mib': 30090, 'free_mib': 2745, 'cached_mib': 27859, 'swapused_mib': 118}
+21:35:24   L2-4096-prime1: prompt_n 4123 cache_n 0 pp 685.6486405764306 tg 20.84705082903407 ttft 6.02 rx 24.0 MB/s swap in/out 0/0 KiB nvme 0.1 MiB card 11705 avail 29757 
+21:35:43   L2-4096-rep1: prompt_n 4122 cache_n 0 pp 696.876953203918 tg 20.824462520622344 ttft 6.1 rx 4271.3 MB/s swap in/out 16/0 KiB nvme 0.1 MiB card 11705 avail 29469 
+21:36:02   L2-4096-prime2: prompt_n 4120 cache_n 0 pp 702.3009390206755 tg 20.8082461365819 ttft 6.08 rx 4910.3 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11705 avail 29124 
+21:36:21   L2-4096-rep2: prompt_n 4123 cache_n 0 pp 698.1237184273846 tg 20.82980043580844 ttft 6.12 rx 1357.3 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11705 avail 28804 
+21:36:40   L2-4096-prime3: prompt_n 4121 cache_n 0 pp 701.0092594120401 tg 20.85215478807996 ttft 6.09 rx 4367.2 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11705 avail 28431 
+21:36:59   L2-4096-rep3: prompt_n 4124 cache_n 0 pp 694.699697357547 tg 20.767914402963996 ttft 6.15 rx 2118.8 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11705 avail 28057 
+21:37:33   L2-16384-prime1: prompt_n 16410 cache_n 0 pp 766.3481535072407 tg 20.358834436768856 ttft 21.63 rx 3768.7 MB/s swap in/out 8/0 KiB nvme 0.0 MiB card 11709 avail 27729 
+21:38:08   L2-16384-rep1: prompt_n 16410 cache_n 0 pp 766.403343368033 tg 20.370108088586484 ttft 21.91 rx 3955.8 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11709 avail 27210 
+21:38:42   L2-16384-prime2: prompt_n 16411 cache_n 0 pp 764.4292721027241 tg 20.425157257691154 ttft 21.95 rx 4280.6 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11709 avail 26537 
+21:39:17   L2-16384-rep2: prompt_n 16410 cache_n 0 pp 764.8821668957974 tg 20.39826859496166 ttft 21.89 rx 3208.2 MB/s swap in/out 8/0 KiB nvme 0.0 MiB card 11709 avail 25914 
+21:39:51   L2-16384-prime3: prompt_n 16412 cache_n 0 pp 764.9041541817845 tg 20.40198307275467 ttft 21.94 rx 4216.9 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11709 avail 25289 
+21:40:27   L2-16384-rep3: prompt_n 16410 cache_n 0 pp 734.5095691691824 tg 20.320188800850676 ttft 23.0 rx 3633.0 MB/s swap in/out 16/332 KiB nvme 77.3 MiB card 11709 avail 24682 
+21:41:28   L2-32512-prime1: prompt_n 32539 cache_n 0 pp 707.8983806968671 tg 19.368490003656465 ttft 47.61 rx 3904.8 MB/s swap in/out 18496/262456 KiB nvme 245.1 MiB card 11709 avail 24284 
+21:42:25   L2-32512-rep1: prompt_n 32538 cache_n 0 pp 759.0086085124433 tg 19.901497732087755 ttft 43.89 rx 3740.6 MB/s swap in/out 39668/360 KiB nvme 41.3 MiB card 11709 avail 23251 
+21:43:21   L2-32512-prime2: prompt_n 32540 cache_n 0 pp 759.7506430212842 tg 19.88063355758948 ttft 43.53 rx 3352.4 MB/s swap in/out 560/336 KiB nvme 2.3 MiB card 11709 avail 22228 
+21:44:18   L2-32512-rep2: prompt_n 32540 cache_n 0 pp 759.6215441275804 tg 19.895986901418507 ttft 43.54 rx 3488.8 MB/s swap in/out 480/0 KiB nvme 1.6 MiB card 11709 avail 21885 
+21:45:14   L2-32512-prime3: prompt_n 32538 cache_n 0 pp 760.3451384600228 tg 19.8797315222768 ttft 43.53 rx 3401.7 MB/s swap in/out 544/0 KiB nvme 1.1 MiB card 11709 avail 21881 
+21:46:10   L2-32512-rep3: prompt_n 32537 cache_n 0 pp 759.6360984247631 tg 19.862230893059646 ttft 43.56 rx 3279.7 MB/s swap in/out 152/0 KiB nvme 0.5 MiB card 11709 avail 21868 
+19:37:55 P4 RE-RUN L1 -ncmoe 34 lengths [16384]
+19:38:02 start server-rerun-L1.log: ready in 6.7s card 10609 MiB mem {'avail_mib': 30493, 'free_mib': 266, 'cached_mib': 30377, 'swapused_mib': 93}
+19:39:26   L1-rerun-16384-prime1: prompt_n 16410 cache_n 0 pp 231.12330347960145 tg 20.14739040728226 ttft 71.04 rx 5876.2 MB/s swap in/out 24/0 KiB nvme 15.6 MiB card 10637 avail 30193 
+19:40:50   L1-rerun-16384-rep1: prompt_n 16411 cache_n 0 pp 230.03656910023938 tg 20.435228699459575 ttft 71.87 rx 6309.7 MB/s swap in/out 48/0 KiB nvme 18.4 MiB card 10637 avail 29571 
+19:42:15   L1-rerun-16384-prime2: prompt_n 16408 cache_n 0 pp 232.29434139450478 tg 20.11362700595963 ttft 71.14 rx 6477.5 MB/s swap in/out 20/0 KiB nvme 8.3 MiB card 10637 avail 28939 
+19:43:38   L1-rerun-16384-rep2: prompt_n 16409 cache_n 0 pp 232.2005322796381 tg 20.408935848471895 ttft 71.15 rx 6250.6 MB/s swap in/out 12/0 KiB nvme 6.9 MiB card 10637 avail 28319 
+19:45:02   L1-rerun-16384-prime3: prompt_n 16412 cache_n 0 pp 232.15674150387946 tg 20.28521328072118 ttft 71.06 rx 6323.4 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 10637 avail 27654 
+19:46:26   L1-rerun-16384-rep3: prompt_n 16411 cache_n 0 pp 231.8621715517845 tg 20.450821108487435 ttft 71.18 rx 6219.5 MB/s swap in/out 36/0 KiB nvme 6.8 MiB card 10637 avail 27042 
+19:46:34 P4 RE-RUN L2 -ncmoe 34 lengths [16384, 32512]
+19:46:41 start server-rerun-L2.log: ready in 7.2s card 11599 MiB mem {'avail_mib': 29935, 'free_mib': 2397, 'cached_mib': 27980, 'swapused_mib': 93}
+19:47:16   L2-rerun-16384-prime1: prompt_n 16411 cache_n 0 pp 761.7371859568916 tg 20.371007981440812 ttft 21.58 rx 3032.4 MB/s swap in/out 0/0 KiB nvme 0.1 MiB card 11711 avail 29687 
+19:47:50   L2-rerun-16384-rep1: prompt_n 16410 cache_n 0 pp 764.6238861233205 tg 20.426709965951478 ttft 21.89 rx 3331.5 MB/s swap in/out 12/0 KiB nvme 0.0 MiB card 11711 avail 29133 
+19:48:25   L2-rerun-16384-prime2: prompt_n 16410 cache_n 0 pp 765.8541254638935 tg 20.41538666862441 ttft 21.91 rx 3070.8 MB/s swap in/out 16/0 KiB nvme 0.0 MiB card 11711 avail 28443 
+19:48:59   L2-rerun-16384-rep2: prompt_n 16410 cache_n 0 pp 766.9837115281251 tg 20.445677278694784 ttft 21.88 rx 3006.2 MB/s swap in/out 4/0 KiB nvme 0.0 MiB card 11711 avail 27832 
+19:49:34   L2-rerun-16384-prime3: prompt_n 16410 cache_n 0 pp 765.8331452585268 tg 20.36498363254286 ttft 21.9 rx 3003.2 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11711 avail 27266 
+19:50:09   L2-rerun-16384-rep3: prompt_n 16411 cache_n 0 pp 766.0658636457846 tg 20.221026124296984 ttft 21.89 rx 3115.8 MB/s swap in/out 0/0 KiB nvme 0.1 MiB card 11711 avail 26619 
+19:51:05   L2-rerun-32512-prime1: prompt_n 32540 cache_n 0 pp 761.7596291602429 tg 19.75532526097172 ttft 43.12 rx 2519.5 MB/s swap in/out 44/0 KiB nvme 0.0 MiB card 11711 avail 25968 
+19:52:02   L2-rerun-32512-rep1: prompt_n 32540 cache_n 0 pp 760.4587440498017 tg 19.940020418580907 ttft 43.43 rx 3697.7 MB/s swap in/out 12/0 KiB nvme 0.0 MiB card 11711 avail 24996 
+19:52:58   L2-rerun-32512-prime2: prompt_n 32537 cache_n 0 pp 760.2988694033112 tg 19.93708325632146 ttft 43.51 rx 3624.3 MB/s swap in/out 20/0 KiB nvme 0.0 MiB card 11711 avail 23960 
+19:53:55   L2-rerun-32512-rep2: prompt_n 32537 cache_n 0 pp 760.4172453385736 tg 19.92992014823484 ttft 43.5 rx 3654.6 MB/s swap in/out 0/0 KiB nvme 0.0 MiB card 11711 avail 22959 
+19:54:51   L2-rerun-32512-prime3: prompt_n 32539 cache_n 0 pp 760.4958192479135 tg 19.938009210891124 ttft 43.49 rx 3726.6 MB/s swap in/out 12/0 KiB nvme 0.0 MiB card 11711 avail 21986 
+19:55:48   L2-rerun-32512-rep3: prompt_n 32540 cache_n 0 pp 761.0258413176927 tg 19.867215323840284 ttft 43.49 rx 3784.1 MB/s swap in/out 20/0 KiB nvme 0.0 MiB card 11711 avail 21594 

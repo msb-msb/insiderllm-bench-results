@@ -1,0 +1,19 @@
+0.01.614.523 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.614.939 W srv  llama_server: -----------------
+0.01.614.941 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.01.614.941 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.01.614.941 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.01.614.941 W srv  llama_server: -----------------
+0.01.616.241 I srv    load_model: loading model '/home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-UD-IQ3_XXS.gguf'
+0.02.163.191 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.02.313.096 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.02.396.038 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.05.345.466 E ggml_backend_cuda_buffer_type_alloc_buffer: allocating 1464.17 MiB on device 0: cudaMalloc failed: out of memory
+0.05.345.487 E ggml_gallocr_reserve_n_impl: failed to allocate CUDA0 buffer of size 1535295616
+0.05.345.487 E graph_reserve: failed to allocate compute buffers
+0.05.353.813 E llama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers
+0.05.353.832 E cmn  common_init_: failed to create context with model '/home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-UD-IQ3_XXS.gguf'
+0.05.353.835 E cmn  common_init_: failed to create context with model '/home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-UD-IQ3_XXS.gguf'
+0.05.353.839 E srv    load_model: failed to create_context with model '/home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-UD-IQ3_XXS.gguf'
+0.05.353.840 I srv    operator(): operator(): cleaning up before exit...
+0.05.354.330 E srv  llama_server: exiting due to model loading error

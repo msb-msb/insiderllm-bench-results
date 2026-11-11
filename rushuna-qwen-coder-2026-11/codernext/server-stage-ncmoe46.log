@@ -1,0 +1,29 @@
+0.01.621.759 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.622.177 W srv  llama_server: -----------------
+0.01.622.178 W srv  llama_server: CORS is set to allow all origins ('*') and no API key is set
+0.01.622.179 W srv  llama_server: this can be a security risk (cross-origin attacks)
+0.01.622.179 W srv  llama_server: more info: https://github.com/ggml-org/llama.cpp/pull/25655
+0.01.622.179 W srv  llama_server: -----------------
+0.01.623.490 I srv    load_model: loading model '/home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-UD-IQ3_XXS.gguf'
+0.02.359.499 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden
+0.02.442.615 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.04.637.746 I cmn          init: llama threadpool init, n_threads = 4
+0.04.922.059 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 34816, kv_unified = 'false'
+0.04.925.434 I srv  llama_server: model loaded
+0.04.925.439 I srv  llama_server: listening on http://127.0.0.1:8099
+0.05.240.893 I slot get_availabl: id  0 | task -1 | selected slot by LRU, t_last = -1
+0.05.241.010 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.10.768.764 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   4096, progress = 0.13, t =   5.53 s / 740.99 tokens per second
+0.16.450.448 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   8192, progress = 0.25, t =  11.21 s / 730.82 tokens per second
+0.22.271.091 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  12288, progress = 0.38, t =  17.03 s / 721.55 tokens per second
+0.28.166.759 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  16384, progress = 0.50, t =  22.93 s / 714.66 tokens per second
+0.34.149.298 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  20480, progress = 0.63, t =  28.91 s / 708.45 tokens per second
+0.40.282.948 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  24576, progress = 0.76, t =  35.04 s / 701.33 tokens per second
+0.46.332.653 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  28443, progress = 0.87, t =  41.09 s / 692.19 tokens per second
+0.52.690.872 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =  32535, progress = 1.00, t =  47.45 s / 685.67 tokens per second
+0.54.009.485 I slot print_timing: id  0 | task 0 | prompt eval time =   47862.95 ms / 32539 tokens (    1.47 ms per token,   679.84 tokens per second)
+0.54.009.488 I slot print_timing: id  0 | task 0 |        eval time =     905.49 ms /    16 tokens (   60.37 ms per token,    16.57 tokens per second)
+0.54.009.489 I slot print_timing: id  0 | task 0 |       total time =   48768.43 ms / 32555 tokens
+0.54.009.493 I slot print_timing: id  0 | task 0 |    graphs reused =         15
+0.54.010.718 I slot      release: id  0 | task 0 | stop processing: n_tokens = 32554, truncated = 0
+0.54.029.068 I srv    operator(): operator(): cleaning up before exit...
