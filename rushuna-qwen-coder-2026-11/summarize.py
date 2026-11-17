@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Summary tables for the Rushuna Qwen Coder record (lock 918e33f8, P4), from the raw files in this directory.
 
-P4 void rules, applied per cell to its 3 measured requests (as in the Strata records): prompt_n within +-3 tokens
-of the cell's median over all 6 requests (primes included; the reading the Tamanna Strata record used when it passed
-a 4,123..4,127 cell; a spread of 4 is flagged, since a strict pairwise reading would void it), cache_n 0, swap-out 0, PCIe gen 3 x16 during every prefill.
+P4 void rules, with amendment A1 (2026-11-17, the stricter prompt_n reading): prompt_n max - min <= 3 across all 6
+requests of the cell (primes included); cache_n 0 on all 6; swap-out 0 on the 3 measured; PCIe gen 3 x16 during every
+prefill. (Until 2026-11-17 this script used the centre reading, +-3 of the cell median, and flagged a spread of 4.)
 NVMe reads: flag > 64 MiB, void > 1 GiB. The harness counts NVMe reads over the whole request (prefill + decode),
-which can only over-state reads during decode. A void cell gets one re-run (rerun-*.json); void twice = void.
+which can only over-state reads during decode. A void cell gets one re-run: rerun-*.json (2026-11-10, swap-out voids) or rerun-a1-*.json (2026-11-17, the
+cells A1 voided); void twice = void.
 usage: python3 summarize.py  (prints Markdown)"""
 import json, os, statistics as st
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -16,10 +17,8 @@ def verdict(cell):
     reqs = [x for pair in cell for x in (pair["prime"], pair["measured"])]
     meas = [p["measured"] for p in cell]
     pn = [x["timings"]["prompt_n"] for x in reqs]
-    why, flag = [], []  # (prompt_n read as +-3 of the cell median, as the Tamanna Strata record passed 4,123..4,127)
-    med = st.median(pn)
-    if any(abs(x - med) > 3 for x in pn): why.append(f"prompt_n off the cell median by > 3 ({min(pn)}..{max(pn)})")
-    elif max(pn) - min(pn) > 3: flag.append(f"prompt_n spread {max(pn) - min(pn)} ({min(pn)}..{max(pn)}): void only under a strict pairwise reading")
+    why, flag = [], []
+    if max(pn) - min(pn) > 3: why.append(f"prompt_n spread {max(pn) - min(pn)} ({min(pn)}..{max(pn)})")
     if any(x["timings"]["cache_n"] for x in reqs): why.append("cache_n > 0")
     if any(x["swapout_kib"] > 0 for x in meas): why.append("swap-out " + "/".join(str(x["swapout_kib"]) for x in meas) + " KiB")
     if any(x["prefill_pcie_links"] != [["3", "16"]] for x in reqs): why.append("PCIe not gen 3 x16")
@@ -51,9 +50,11 @@ for model in ("coder30b", "codernext"):
     print("|---|---:|---:|---:|---|---|---|---|")
     for arm in ("L1", "L2"):
         R = J(model, f"results-{arm}.json")
-        RR = J(model, f"rerun-{arm}.json")["cells"] if os.path.exists(os.path.join(HERE, model, f"rerun-{arm}.json")) else {}
+        opt = lambda f: J(model, f)["cells"] if os.path.exists(os.path.join(HERE, model, f)) else {}
+        RR, RA = opt(f"rerun-{arm}.json"), opt(f"rerun-a1-{arm}.json")
         for n, cell in R["cells"].items():
-            for label, c in [("", cell)] + ([(" **re-run**", RR[n])] if n in RR else []):
+            for label, c in ([("", cell)] + ([(" **re-run** 11-10", RR[n])] if n in RR else [])
+                             + ([(" **re-run** 11-17 (A1)", RA[n])] if n in RA else [])):
                 tg, pp = cellstats(c); meas = [p["measured"] for p in c]
                 links = sorted({f"gen {g} x{w}" for x in meas for g, w in x["prefill_pcie_links"]})
                 print(f"| {arm}{label} | {int(n):,} | {fmt(tg)} | {fmt(pp)} | {' / '.join(str(x['swapout_kib']) for x in meas)} | "

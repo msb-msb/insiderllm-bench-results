@@ -1,0 +1,64 @@
+10:58:27 === chain start
+10:59:08 L1 re-runs done; starting L2-16K re-run
+11:00:13 L2 re-run done
+11:00:13 LLM_repo anchors verified against upstream
+11:00:13 Tamanna free 79 GiB; copying
+11:06:05 anchors on Tamanna, sha256 OK: Qwen3.6-27B-UD-Q4_K_XL.gguf: OK Qwen3.8-27B-UD-Q4_K_XL.gguf: OK ; df /dev/nvme0n1p2  468G  398G   47G  90% /
+11:06:05 === HumanEval run start
+11:06:06 engine identity:
+d0b4463179cdc7c3386b19b3a11d0099f22beddf3a63967a35fede9e23a6efa2  /home/minotaur/llama-v0.4.0/build/bin/llama-server
+3b0868379b29df08fe65f8471e591f77334ae33e77daffa5f3a2026fe38ba2b2  /home/minotaur/llama-v0.4.0/build/bin/libggml-cuda.so.0.23.0
+version: 0.4.0-dev (build 1, commit 5266f24)
+built with GNU 13.4.0 for Linux x86_64
+NVIDIA GeForce RTX 3090, 580.178.04, 7 MiB
+/dev/nvme0n1p2  468G  398G   47G  90% /
+11:06:06 --- A36: Qwen3.6-27B-UD-Q4_K_XL.gguf ncmoe=None
+11:06:22   sha256 before load OK
+11:16:53 === chain done (he_run rc=143)
+11:16:59 attempt 1 stopped: launch ssh held open by the backgrounded && list; fixed (braces), restarting he_run.py; A36 had not generated
+11:17:04 === HumanEval run start
+11:17:05 engine identity:
+d0b4463179cdc7c3386b19b3a11d0099f22beddf3a63967a35fede9e23a6efa2  /home/minotaur/llama-v0.4.0/build/bin/llama-server
+3b0868379b29df08fe65f8471e591f77334ae33e77daffa5f3a2026fe38ba2b2  /home/minotaur/llama-v0.4.0/build/bin/libggml-cuda.so.0.23.0
+version: 0.4.0-dev (build 1, commit 5266f24)
+built with GNU 13.4.0 for Linux x86_64
+NVIDIA GeForce RTX 3090, 580.178.04, 7 MiB
+/dev/nvme0n1p2  468G  398G   47G  90% /
+11:17:05 --- A36: Qwen3.6-27B-UD-Q4_K_XL.gguf ncmoe=None
+11:17:14   sha256 before load OK
+11:17:26   server ready in 3s: -m /home/minotaur/bench-models/qwen-coder/Qwen3.6-27B-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099
+11:22:39   A36: 164 prompts in 310s, 9905 generated tokens (31.9 tok/s), -> /home/minotaur/tamanna-qwen-coder-he-2026-11/gen-A36.json
+11:23:08   A36: 137/164 (83.54%), out_sha16 fb4c378aba80b1f6, ok
+11:23:08 --- A38: Qwen3.8-27B-UD-Q4_K_XL.gguf ncmoe=None
+11:23:20   sha256 before load OK
+11:23:31   server ready in 3s: -m /home/minotaur/bench-models/qwen-coder/Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099
+11:28:29   A38: 164 prompts in 295s, 9247 generated tokens (31.4 tok/s), -> /home/minotaur/tamanna-qwen-coder-he-2026-11/gen-A38.json
+11:28:50   A38: 130/164 (79.27%), out_sha16 f808f176bd7ebb8b, ok
+11:28:50 --- C30: Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf ncmoe=None
+11:28:59   sha256 before load OK
+11:29:11   server ready in 3s: -m /home/minotaur/bench-models/qwen-coder/Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099
+11:31:23   C30: 164 prompts in 130s, 20476 generated tokens (158.1 tok/s), -> /home/minotaur/tamanna-qwen-coder-he-2026-11/gen-C30.json
+11:31:50   C30: 100/164 (60.98%), out_sha16 95e9fbae93faac6b, ok
+11:31:50 --- CN: Qwen3-Coder-Next-Q4_K_M-00001-of-00004.gguf ncmoe=28
+11:32:25   sha256 before load OK
+11:33:13   server ready in 39s: -m /home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-Q4_K_M-00001-of-00004.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099 -ncmoe 28
+11:39:26   CN: 164 prompts in 370s, 11875 generated tokens (32.1 tok/s), -> /home/minotaur/tamanna-qwen-coder-he-2026-11/gen-CN.json
+11:40:09   CN: 120/164 (73.17%), out_sha16 6ce432fc3cb6648a, ok
+11:40:09 --- CN3: Qwen3-Coder-Next-UD-IQ3_XXS.gguf ncmoe=search
+11:40:30   sha256 before load OK
+11:40:42   CN3 search: -ncmoe 0 loaded=False answered=False
+11:41:02   CN3 search: -ncmoe 2 loaded=False answered=False
+11:41:23   CN3 search: -ncmoe 4 loaded=False answered=False
+11:41:46   CN3 search: -ncmoe 6 loaded=False answered=False
+11:42:14   CN3 search: -ncmoe 8 loaded=True answered=True
+11:42:22   CN3 N = 8
+11:42:52   server ready in 7s: -m /home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-UD-IQ3_XXS.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099 -ncmoe 8
+11:46:21   CN3: 164 prompts in 206s, 12829 generated tokens (62.3 tok/s), -> /home/minotaur/tamanna-qwen-coder-he-2026-11/gen-CN3.json
+11:46:48   CN3: 113/164 (68.9%), out_sha16 8545c3d6690e6f88, ok
+11:46:48 --- A36-drift: Qwen3.6-27B-UD-Q4_K_XL.gguf ncmoe=None
+11:47:01   sha256 before load OK
+11:47:13   server ready in 3s: -m /home/minotaur/bench-models/qwen-coder/Qwen3.6-27B-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099
+11:52:26   A36-drift: 164 prompts in 310s, 9905 generated tokens (32.0 tok/s), -> /home/minotaur/tamanna-qwen-coder-he-2026-11/gen-A36-drift.json
+11:52:55   A36-drift: 137/164 (83.54%), out_sha16 fb4c378aba80b1f6, ok
+11:52:55 drift check A36 vs A36-drift: byte-identical
+11:52:55 === HumanEval run ALL DONE
