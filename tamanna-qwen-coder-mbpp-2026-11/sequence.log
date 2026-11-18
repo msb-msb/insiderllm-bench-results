@@ -1,0 +1,50 @@
+14:04:28 === MBPP run start
+14:04:29 engine identity:
+d0b4463179cdc7c3386b19b3a11d0099f22beddf3a63967a35fede9e23a6efa2  /home/minotaur/llama-v0.4.0/build/bin/llama-server
+3b0868379b29df08fe65f8471e591f77334ae33e77daffa5f3a2026fe38ba2b2  /home/minotaur/llama-v0.4.0/build/bin/libggml-cuda.so.0.23.0
+version: 0.4.0-dev (build 1, commit 5266f24)
+built with GNU 13.4.0 for Linux x86_64
+NVIDIA GeForce RTX 3090, 580.178.04, 7 MiB
+/dev/nvme0n1p2  468G  398G   47G  90% /
+14:04:29 --- A36: Qwen3.6-27B-UD-Q4_K_XL.gguf ncmoe=None
+14:04:38   sha256 before load OK
+14:04:50   server ready in 3s: -m /home/minotaur/bench-models/qwen-coder/Qwen3.6-27B-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099
+14:11:32   A36: 257 prompts in 400s, 12559 generated tokens (31.4 tok/s), -> /home/minotaur/tamanna-qwen-coder-mbpp-2026-11/gen-A36.json
+14:11:57   A36: cut 217/257 (84.44%), raw 217/257 (84.44%), out_sha16 fdf81a5b2437a4a9, ok
+14:11:57 --- A38: Qwen3.8-27B-UD-Q4_K_XL.gguf ncmoe=None
+14:12:10   sha256 before load OK
+14:12:22   server ready in 3s: -m /home/minotaur/bench-models/qwen-coder/Qwen3.8-27B-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099
+14:18:50   A38: 257 prompts in 385s, 11930 generated tokens (31.0 tok/s), -> /home/minotaur/tamanna-qwen-coder-mbpp-2026-11/gen-A38.json
+14:19:15   A38: cut 204/257 (79.38%), raw 204/257 (79.38%), out_sha16 e0cf559224620dc3, ok
+14:19:15 --- C30: Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf ncmoe=None
+14:19:28   sha256 before load OK
+14:19:40   server ready in 3s: -m /home/minotaur/bench-models/qwen-coder/Qwen3-Coder-30B-A3B-Instruct-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099
+14:22:12   C30: 257 prompts in 149s, 24196 generated tokens (162.7 tok/s), -> /home/minotaur/tamanna-qwen-coder-mbpp-2026-11/gen-C30.json
+14:22:33   C30: cut 205/257 (79.77%), raw 205/257 (79.77%), out_sha16 5a76b994686963b9, ok
+14:22:33 --- CN: Qwen3-Coder-Next-Q4_K_M-00001-of-00004.gguf ncmoe=28
+14:23:07   sha256 before load OK
+14:23:41   server ready in 25s: -m /home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-Q4_K_M-00001-of-00004.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099 -ncmoe 28
+14:31:41   CN: 257 prompts in 478s, 16848 generated tokens (35.3 tok/s), -> /home/minotaur/tamanna-qwen-coder-mbpp-2026-11/gen-CN.json
+14:32:27   CN: cut 198/257 (77.04%), raw 198/257 (77.04%), out_sha16 9c39d4bbcf2dee70, ok
+14:32:27 --- CN3: Qwen3-Coder-Next-UD-IQ3_XXS.gguf ncmoe=8
+14:32:49   sha256 before load OK
+14:33:07   server ready in 10s: -m /home/minotaur/bench-models/qwen-coder/Qwen3-Coder-Next-UD-IQ3_XXS.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099 -ncmoe 8
+14:37:54   CN3: 257 prompts in 284s, 18355 generated tokens (64.6 tok/s), -> /home/minotaur/tamanna-qwen-coder-mbpp-2026-11/gen-CN3.json
+14:38:23   CN3: cut 190/257 (73.93%), raw 190/257 (73.93%), out_sha16 d72e2c24a42f9a9e, ok
+14:38:23 --- A36-drift: Qwen3.6-27B-UD-Q4_K_XL.gguf ncmoe=None
+14:38:36   sha256 before load OK
+14:38:48   server ready in 3s: -m /home/minotaur/bench-models/qwen-coder/Qwen3.6-27B-UD-Q4_K_XL.gguf -ngl 99 -fa on -c 4096 --no-jinja --no-mmap --host 192.168.x.x --port 8099
+14:45:30   A36-drift: 257 prompts in 400s, 12559 generated tokens (31.4 tok/s), -> /home/minotaur/tamanna-qwen-coder-mbpp-2026-11/gen-A36-drift.json
+14:45:56   A36-drift: cut 217/257 (84.44%), raw 217/257 (84.44%), out_sha16 fdf81a5b2437a4a9, ok
+14:45:56 drift check A36 vs A36-drift: byte-identical
+14:45:56   McNemar cut: C30 205 vs A36 217: only 12/24 p=0.0652
+14:45:56   McNemar cut: CN 198 vs A36 217: only 12/31 p=0.0054
+14:45:56   McNemar cut: CN3 190 vs CN 198: only 22/30 p=0.332
+14:45:56   McNemar cut: A38 204 vs A36 217: only 8/21 p=0.0241
+14:45:56   McNemar cut: CN 198 vs C30 205: only 19/26 p=0.371
+14:45:56   McNemar raw: C30 205 vs A36 217: only 12/24 p=0.0652
+14:45:56   McNemar raw: CN 198 vs A36 217: only 12/31 p=0.0054
+14:45:56   McNemar raw: CN3 190 vs CN 198: only 22/30 p=0.332
+14:45:56   McNemar raw: A38 204 vs A36 217: only 8/21 p=0.0241
+14:45:56   McNemar raw: CN 198 vs C30 205: only 19/26 p=0.371
+14:45:56 === MBPP run ALL DONE
