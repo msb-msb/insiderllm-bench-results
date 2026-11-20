@@ -196,3 +196,27 @@ egress-watch logs, the machine-state block, and every void and deviation. Machin
 2. No run on a rig until both model shards on that rig hash to the values in H2.
 3. No deletion of existing files on either rig without Mark's say-so (H4).
 4. The draft article is written only after the record exists, on a local branch, previewed on the LAN, not deployed.
+
+## A1. Amendment (2026-11-19, Mark): Rushuna runs with swap off and non-essential services stopped
+
+**Written after one measured request existed, not before.** Arm U's first Rushuna pass (started 2026-11-20 02:00 UTC,
+Rushuna's clock) showed the engine's own memory going to swap: `/swap.img` (4 GiB, on the NVMe) full, `strata-host`
+holding 3.7 GiB of it, 0.4-4.3 GiB of swap-out per request. Under H6 every Rushuna cell in every arm would be void.
+That was seen at U's first priming request and first measured request (4K rep 1); Mark decided this amendment then. The
+pass was allowed to finish and is **discarded: it is not scored**. It stays in the record, unaltered, as
+`rushuna/U-superseded-swap-on/`, and the write-up reports it as a superseded run.
+
+Changes, Rushuna only, the same for all three arms (U re-run first, then H, then B), from before U's re-run until after
+B's last request:
+- **Swap off:** `swapoff -a` (Mark, by hand; no sudo in the sessions). H6's swap rule is unchanged; with no swap device,
+  swap-out is 0 by construction, and `memwatch.py`'s 2 GiB MemAvailable floor remains the stop rule.
+- **Non-essential services stopped:** `mycoswarm` (Mark's mycoSwarm node daemon, ~47 MB RSS, and inbound LAN traffic on
+  port 7890), `fwupd`, `ModemManager`, and the `apt-daily`, `apt-daily-upgrade` and `fwupd-refresh` timers (so no package
+  or firmware job starts mid-arm). `ollama` was already inactive before U's first pass; the stop command includes it so
+  it stays so. Storage, thermal and SMART services (`multipathd`, `thermald`, `smartmontools`) keep running.
+- The state of swap and of those units is recorded in every arm's machine-state file. After B, swap and the stopped
+  units are restored (ollama to its prior state, inactive).
+
+Nothing else changes: arms, flags, cells, void rules, predictions and order stay as locked. Tamanna is unaffected
+(64 GB; the model is meant to sit in RAM there). The text above this section is byte-identical to the lock as committed
+in c06003fc (sha256 `1ca64bda12295de692623a68b39294f65e371da95c5837b9ff2c7656c04f3b68`, the `.sha256` file beside it).
