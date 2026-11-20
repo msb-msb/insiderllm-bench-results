@@ -1,0 +1,36 @@
+cell               decode tok/s mean (min..max)       prefill  TTFT s  accept  peakMiB  void/flags
+V-off-short     44.02 (44.01..44.03)             332.9   0.255   0.000    18086  ok
+V-off-long      43.35 (43.34..43.36)            1540.5   2.854   0.000    18088  ok
+V-mtp-short     74.49 (73.22..75.54)             329.6   0.254   0.319    19584  ok (rerun)
+V-mtp-long      75.02 (71.13..81.85)            1500.2   2.925   0.334    19586  ok
+Z-off-short     44.02 (44.00..44.04)             326.5   0.259   0.000    18086  ok
+Z-off-long      43.36 (43.35..43.38)            1552.9   2.834   0.000    18088  ok
+Z-mtp-short     71.85 (71.18..73.15)             332.6   0.258   0.303    19584  ok
+Z-mtp-long      78.34 (72.86..82.00)            1503.9   2.931   0.357    19586  ok
+O-off-short     43.93 (43.92..43.94)             314.7   0.254   0.000    18086  ok
+O-off-long      43.26 (43.24..43.28)            1543.6   2.847   0.000    18088  ok
+O-mtp-short     52.63 (51.88..53.88)             323.9   0.265   0.303    19544  ok
+O-mtp-long      58.49 (54.85..61.02)            1457.3   3.008   0.363    19546  ok
+
+Predictions (decode, both prompts must hold; void cells can't score):
+  P1 off: V within ±3% of O: HOLDS
+      short: V/O = 1.002 (ranges apart) holds
+      long: V/O = 1.002 (ranges apart) holds
+  P1 off: V within ±3% of Z: HOLDS
+      short: V/Z = 1.000 (ranges overlap) holds
+      long: V/Z = 1.000 (ranges overlap) holds
+  P2 mtp: V faster than O, V/O in [1.30,1.70]: MISSES
+      short: V/O = 1.415 (ranges apart) holds
+      long: V/O = 1.283 (ranges apart) MISSES
+  P3 mtp: V within ±3% of Z: MISSES
+      short: V/Z = 1.037 (ranges apart) MISSES
+      long: V/Z = 0.958 (ranges overlap) MISSES
+
+Descriptive: MTP on / MTP off, per arm (decode):
+  V: short 1.692x, long 1.730x
+  Z: short 1.632x, long 1.807x
+  O: short 1.198x, long 1.352x
+Descriptive: prefill V/O and V/Z (long prompt):
+  off: V/O 0.998, V/Z 0.992
+  mtp: V/O 1.029, V/Z 0.998
+Descriptive: peak MiB, mtp − off: {'V': 1498, 'Z': 1498, 'O': 1458}

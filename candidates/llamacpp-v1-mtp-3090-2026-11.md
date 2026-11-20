@@ -158,3 +158,30 @@ Machine names only.
    shards under `~/bench-models/`) are not touched. Nothing that exists on Tamanna is deleted.
 3. The article draft is written only after the record exists, on a local branch, previewed on the LAN, not
    deployed. It links to none of the frozen 8 (open-threads.md).
+
+## A1. Amendment (2026-11-20, Mark): how M5's PCIe check is read
+
+Written during round 1, after the first setup (V-mtp) and before any cell was summarized or any arm compared.
+
+- **What came up:** M4's cool-down (≤ 50 °C before every measured request) leaves the card idle long enough for the
+  PCIe link to drop to gen 1 to save power. A measured request's first sample, taken as the request goes out, reads
+  gen 1; later samples in the same prefill read gen 4 x16 (V-mtp round 1: short `[[1,16],[4,16]]`, TTFT 0.26 s;
+  long `[[1,16],[4,16]]`, TTFT 2.95 s). Priming requests, which have no cool-down before them, read gen 4 x16
+  throughout. Read literally, M5 voids every measured cell, and a re-run can't change that, because the cool-down
+  causes it every time.
+- **Decision (Mark):** the PCIe check passes if the link **reaches gen 4 x16 during the prefill** and no sample shows
+  a width below x16. A gen-1 sample at the start of a request is the link waking from idle, not a degraded link.
+  A request whose prefill never reaches gen 4 x16 still voids its cell.
+- **Unchanged:** every other M5 rule, the harness, and the raw samples. The per-request `pcie_prefill` sample sets and
+  the minimum reading stay in the record, and the write-up says how the check was read.
+
+## D1. Deviations, recorded 2026-11-20
+
+- **Builds, M3.** The recipe's flags are unchanged, with one addition on all three arms: `-DLLAMA_USE_PREBUILT_UI=OFF`.
+  The first attempt used `git clone --depth 1`, so CMake saw build number 1, and the web-UI step fetched "latest" UI
+  assets that don't match the b12199 tree (CMake error in `scripts/ui-assets.cmake`). The second attempt used a full
+  clone (correct build numbers), but no prebuilt UI exists for b12352 and "latest" again didn't match. The third
+  attempt turned the prebuilt UI download off on all three arms; each tree then builds "without an embedded UI" (its
+  own fallback; "UI: embedded 0 assets" in all three logs). The UI isn't in the inference path. All three built on
+  Tamanna with nvcc 12.4 and gcc 13.4.0, so the Rushuna fallback wasn't needed. `--version`: `0.9.0-dev (build 12199,
+  commit 372dc5ca1)`, `0.9.0-dev (build 12352, commit 5676dfbe0)`, `1.0.0-dev (build 12359, commit b1b770d90)`.
