@@ -1,0 +1,71 @@
+# machine state 2026-11-20T16:01:31
+7.0.0-38-generic
+name, driver_version, pcie.link.gen.max, pcie.link.width.max
+NVIDIA GeForce RTX 3090, 580.178.04, 4, 16
+MemTotal:       65762092 kB
+MemAvailable:   63951676 kB
+SwapTotal:       8388604 kB
+SwapFree:        8327888 kB
+/dev/nvme0n1p2  468G  357G   88G  81% /
+# swap (lock A1: off on Rushuna)
+NAME      TYPE SIZE  USED PRIO
+/swap.img file   8G 59.3M   -1
+Filename				Type		Size		Used		Priority
+/swap.img                               file		8388604		60716		-1
+# units (lock A1: stopped on Rushuna)
+mycoswarm inactive
+ollama inactive
+fwupd active
+ModemManager active
+apt-daily.timer active
+apt-daily-upgrade.timer active
+fwupd-refresh.timer active
+/home/minotaur/bench-models/qwen3.8-flash-next-iq3s
+6e55eafa18f55afd880b6f887b9fb0f27b537846b65b856d88f9b16be272c967  /home/minotaur/hotrod-2026-11/H/src/strata-iq3_s.json
+{
+ "exe": "/home/minotaur/hotrod-2026-11/H/src/engine/strata",
+ "args": [
+  "--pack",
+  "/home/minotaur/hotrod-2026-11/H/data/packs/iq3_s",
+  "--native",
+  "/home/minotaur/bench-models/qwen3.8-flash-next-iq3s/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+  "--ple-gguf",
+  "/home/minotaur/bench-models/qwen3.8-flash-next-iq3s/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+  "--expert-profile",
+  "/home/minotaur/hotrod-2026-11/H/src/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto:16384",
+  "--spec",
+  "4",
+  "--spec-min-p",
+  "0.5",
+  "--mtp",
+  "/home/minotaur/hotrod-2026-11/H/data/mtp/rt",
+  "--max-context",
+  "131072",
+  "--kv",
+  "int8"
+ ],
+ "cwd": "/home/minotaur/hotrod-2026-11/H/src",
+ "tokenizer": "/home/minotaur/hotrod-2026-11/H/data/packs/iq3_s/tokenizer",
+ "model_name": "qwen3.8-flash-next-iq3_s",
+ "log": "/home/minotaur/hotrod-2026-11/H/src/strata-iq3_s.log",
+ "lib_dirs": [
+  "/home/minotaur/cuda-13.0/bin",
+  "/home/minotaur/cuda-13.0/lib64"
+ ],
+ "port": 8080,
+ "env": {
+  "STRATA_ROUTE_RESIDENT": "1e30",
+  "STRATA_ROUTE_RESIDENT_RANKS": "3-9",
+  "STRATA_ROUTE_RESIDENT_EDGE": "1",
+  "STRATA_SWAP2_MAX": "2",
+  "STRATA_SWAP2_GAP": "1",
+  "STRATA_KV_GROW_INIT": "4096"
+ },
+ "gpu": 0,
+ "gpus_asked": true,
+ "open_browser": false
+}

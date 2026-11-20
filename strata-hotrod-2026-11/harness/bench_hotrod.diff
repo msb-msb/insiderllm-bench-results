@@ -1,0 +1,232 @@
+--- tamanna-strata-2026-10-09/bench_strata.py	2026-10-09 16:44:48.098173743 -0700
++++ strata-hotrod-2026-11/harness/bench_hotrod.py	2026-11-20 07:53:41.970436685 -0800
+@@ -1,15 +1,17 @@
+ #!/usr/bin/env python3
+-"""Strata v0.1.39 vs llama.cpp v0.4.0, Tamanna (RTX 3090 24 GB, PCIe 4.0 x16, 64 GB DDR4-3000), 2026-10-09.
++"""Strata HotRod vs upstream Strata, Rushuna (RTX 3060 12 GB) and Tamanna (RTX 3090 24 GB), 2026-11.
+ 
+-Pre-registered in docs/candidates/strata-2026-10-05.md section B6. This is Rushuna's bench_coder.py
+-(../rushuna-strata-coder-2026-10-05/) with four changes: llama.cpp is the ~/llama-v0.4.0/build/bin build; -t 8;
+-the model is picked by the directory the script runs from (coder/ or iq3xxs/); `prep` does not re-cut the prompts,
+-it tokenizes Rushuna's exact prompt files on this file and records the counts.
+-
+-  bench_coder.py prep                  # cut the corpus into 4,096 / 16,384 / 32,512-token prompts (llama.cpp tokenizer)
+-  bench_coder.py stage                 # lowest -ncmoe N that loads at -c 34816 with -b/-ub 4096 and serves a 32,512 prompt
+-  bench_coder.py strata ARM [CFG]      # S1 stock, S2-2048 / S2-4096 / S2-8192 (32K only), S0 (--spec 0)
+-  bench_coder.py llama ARM N           # L1 defaults, L2 -b 4096 -ub 4096, L3 = L2 + GGML_CUDA_REGISTER_HOST=1
++Pre-registered in docs/candidates/strata-hotrod-2026-11.md (lock c06003fc), section H5 step 2 ("our cells"). This is
++../../tamanna-strata-2026-10-09/bench_strata.py with these changes only (the diff is in bench_hotrod.diff):
++  - Strata arms only; the llama.cpp, prep and stage modes are gone;
++  - the server is started from the arm's own install: `strata ARM CFG ROOT`, where ROOT is the folder holding the
++    arm's .venv and serve/server.py (upstream 0.2.16: <clone>/terminal), and CFG is the config its setup wrote;
++  - results and logs go to the current directory (one per arm and rig), not the script's folder;
++  - the NVMe device counted is the one holding the model shard (MODEL_DIR env), found from /proc/self/mountinfo;
++  - each request also keeps the first 200 characters of the answer (H5's sanity check);
++  - an egress watch (H3): `ss -tnpH` every 2 s for the server and engine processes, non-loopback peers logged.
++
++  bench_hotrod.py strata ARM CFG ROOT
+ 
+ Every request: a fresh 8-hex nonce line first (defeats prefix caches), chat completion, streamed, thinking off,
+ temperature 0, max_tokens 256. Per cell: (priming request, measured request) x 3. Recorded per request: engine
+@@ -19,20 +21,28 @@
+ """
+ import json, os, random, signal, subprocess, sys, threading, time, urllib.request
+ 
+-HERE = os.path.dirname(os.path.abspath(__file__))
+-HOME = os.path.expanduser("~")
+-LLAMA = f"{HOME}/llama-v0.4.0/build/bin"
+-MODEL = os.path.basename(HERE)
+-assert MODEL in ("coder", "iq3xxs"), MODEL
+-SHARD1 = {"coder": f"{HOME}/bench-models/qwen3.8-flash-next-coder/IQ1_M/Qwen3.8-Flash-Next-GSQ-RCO-IQ1_M-00001-of-00002.gguf",
+-          "iq3xxs": f"{HOME}/bench-models/qwen3.8-flash-next-ista-iq3xxs/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf"}[MODEL]
+-STRATA = f"{HOME}/strata"
++SCRIPT = os.path.dirname(os.path.abspath(__file__))     # prompts live beside the script
++HERE = os.getcwd()                                      # results and logs: the arm's run folder
+ PORT = 8099
+-CTX = 34816
+-LENGTHS = [4096, 16384, 32512]
++LENGTHS = [int(x) for x in os.environ.get("HOTROD_LENGTHS", "4096,16384,32512").split(",")]   # H6 re-run of a void cell: one length
+ REPS = 3
+-DISK = "nvme0n1"
+-LENV = dict(os.environ, LD_LIBRARY_PATH=LLAMA)
++
++
++def model_disk():
++    """The whole-disk name (e.g. nvme0n1) under the filesystem holding MODEL_DIR."""
++    st = os.stat(os.path.realpath(os.environ["MODEL_DIR"]))
++    major, minor = os.major(st.st_dev), os.minor(st.st_dev)
++    dev = os.path.basename(os.path.realpath(f"/sys/dev/block/{major}:{minor}"))
++    while True:                                         # a partition or a dm device: walk to the disk
++        slaves = f"/sys/class/block/{dev}/slaves"
++        if os.path.isdir(slaves) and os.listdir(slaves):
++            dev = os.listdir(slaves)[0]; continue
++        if os.path.exists(f"/sys/class/block/{dev}/partition"):
++            dev = os.path.basename(os.path.dirname(os.path.realpath(f"/sys/class/block/{dev}"))); continue
++        return dev
++
++
++DISK = model_disk()
+ 
+ 
+ def log(s):
+@@ -164,7 +174,7 @@
+             "messages": [{"role": "user", "content": f"request {nonce}\n{prompt}\n\nSummarise what this code does."}]}
+     req = urllib.request.Request(f"http://127.0.0.1:{PORT}/v1/chat/completions", data=json.dumps(body).encode(),
+                                  headers={"Content-Type": "application/json"})
+-    t0 = time.time(); ttft = None; timings = usage = None; nchunks = 0; err = None
++    t0 = time.time(); ttft = None; timings = usage = None; nchunks = 0; err = None; text = ""; d_ttft = None
+     try:
+         with urllib.request.urlopen(req, timeout=3600) as r:
+             for raw in r:
+@@ -179,14 +189,17 @@
+                     d = c.get("delta") or {}
+                     if ttft is None and (d.get("content") or d.get("reasoning_content")):
+                         ttft = time.time() - t0
++                        d_ttft = disk_read_bytes()       # H6 (Tamanna): NVMe reads during the decode, first token -> end
+                     if d.get("content") or d.get("reasoning_content"):
+                         nchunks += 1
++                        if len(text) < 200:
++                            text += d.get("content") or d.get("reasoning_content") or ""
+                 timings = o.get("timings") or timings
+                 usage = o.get("usage") or usage
+     except Exception as e:
+         err = repr(e)[:300]
+     return {"nonce": nonce, "t0": t0, "ttft_s": ttft, "total_s": time.time() - t0, "content_chunks": nchunks,
+-            "timings": timings, "usage": usage, "error": err}
++            "timings": timings, "usage": usage, "error": err, "answer_head": text[:200], "_d_ttft": d_ttft}
+ 
+ 
+ def measured_request(prompt, pids, tag):
+@@ -198,19 +211,19 @@
+     rx = [x[1] for x in s.rx if r["t0"] <= x[0] <= t_pf_end]
+     links = sorted({(g, w) for t, g, w in s.links if r["t0"] <= t <= t_pf_end})
+     r.update({"tag": tag, "swapin_kib": (v1["pswpin"] - v0["pswpin"]) * 4, "swapout_kib": (v1["pswpout"] - v0["pswpout"]) * 4,
+-              "nvme_read_mib": round((d1 - d0) / 2**20, 1), "mem_before": m0, "mem_after": m1, "peak_card_mib": s.peak,
++              "nvme_read_mib": round((d1 - d0) / 2**20, 1), "nvme_read_decode_mib": round((d1 - r.pop("_d_ttft")) / 2**20, 1) if r.get("_d_ttft") is not None else None, "mem_before": m0, "mem_after": m1, "peak_card_mib": s.peak,
+               "prefill_rx_mb_s_mean": round(sum(rx) / len(rx), 1) if rx else None, "prefill_rx_samples": len(rx),
+               "prefill_pcie_links": links, "procs": {p: proc_status(p) for p in pids}})
+     t = r["timings"] or {}
+     log(f"  {tag}: prompt_n {t.get('prompt_n')} cache_n {t.get('cache_n')} pp {t.get('prompt_per_second')} "
+         f"tg {t.get('predicted_per_second')} ttft {r['ttft_s'] and round(r['ttft_s'], 2)} rx {r['prefill_rx_mb_s_mean']} MB/s "
+-        f"swap in/out {r['swapin_kib']}/{r['swapout_kib']} KiB nvme {r['nvme_read_mib']} MiB card {s.peak} "
++        f"swap in/out {r['swapin_kib']}/{r['swapout_kib']} KiB nvme {r['nvme_read_mib']} MiB (decode {r['nvme_read_decode_mib']}) card {s.peak} "
+         f"avail {m1['avail_mib']} {r['error'] or ''}")
+     return r
+ 
+ 
+ def prompts():
+-    return {n: open(os.path.join(HERE, f"prompt-{n}.txt"), encoding="utf-8").read() for n in LENGTHS}
++    return {n: open(os.path.join(SCRIPT, f"prompt-{n}.txt"), encoding="utf-8").read() for n in LENGTHS}
+ 
+ 
+ def run_cells(arm, server_pid, lengths, out):
+@@ -227,19 +240,40 @@
+     return R
+ 
+ 
+-def llama_cmd(ncmoe, arm, ctx=CTX):
+-    cmd = [f"{LLAMA}/llama-server", "-m", SHARD1, "-ngl", "99", "-ncmoe", str(ncmoe), "-fa", "on", "-c", str(ctx), "-np", "1",
+-           "--lazy-mode", "on", "-t", "8", "--host", "127.0.0.1", "--port", str(PORT)]
+-    if arm in ("L2", "L3"):
+-        cmd += ["-b", "4096", "-ub", "4096"]
+-    env = dict(LENV, **({"GGML_CUDA_REGISTER_HOST": "1"} if arm == "L3" else {}))
+-    return cmd, env
++class EgressWatch:
++    """H3: every 2 s, `ss -tnpH`; any TCP socket of the server/engine processes whose peer is not loopback is logged."""
++    def __init__(self, root_pid, path):
++        self.root = root_pid; self.path = path; self.stop = False; self.hits = 0
++        self.t = threading.Thread(target=self.run, daemon=True)
+ 
++    def run(self):
++        with open(self.path, "a") as f:
++            f.write(f"{time.strftime('%H:%M:%S')} watch start, root pid {self.root}\n")
++            while not self.stop:
++                pids = {self.root, *child_pids(self.root)}
++                out = subprocess.run(["ss", "-tnpH"], capture_output=True, text=True).stdout
++                for line in out.splitlines():
++                    if not any(f"pid={p}," in line for p in pids):
++                        continue
++                    peer = line.split()[4] if len(line.split()) > 4 else ""
++                    if peer.startswith(("127.", "[::1]", "[::ffff:127.")) or peer in ("*:*", "0.0.0.0:*"):
++                        continue
++                    self.hits += 1
++                    f.write(f"{time.strftime('%H:%M:%S')} NON-LOOPBACK {line}\n"); f.flush()
++                time.sleep(2)
++            f.write(f"{time.strftime('%H:%M:%S')} watch end, {self.hits} non-loopback lines\n")
+ 
+-def start(cmd, env, logname, timeout):
++    def __enter__(self):
++        self.t.start(); return self
++
++    def __exit__(self, *a):
++        self.stop = True; self.t.join()
++
++
++def start(cmd, env, logname, timeout, cwd):
+     lf = open(os.path.join(HERE, logname), "w")
+     t0 = time.time()
+-    p = subprocess.Popen(cmd, stdout=lf, stderr=subprocess.STDOUT, env=env, cwd=HERE if "llama" in cmd[0] else STRATA)
++    p = subprocess.Popen(cmd, stdout=lf, stderr=subprocess.STDOUT, env=env, cwd=cwd)
+     ok = wait_health(p, timeout)
+     log(f"start {logname}: {'ready' if ok else 'FAILED'} in {time.time() - t0:.1f}s card {gpu_q('memory.used')[0]} MiB mem {meminfo()}")
+     return p, ok
+@@ -247,51 +281,15 @@
+ 
+ def main():
+     what = sys.argv[1]
+-    if what == "prep":
+-        cmd, env = llama_cmd(48, "L1", ctx=4096)
+-        p, ok = start(cmd, env, "server-prep.log", 900)
+-        assert ok, "prep server did not start"
+-        meta = {}
+-        for n in LENGTHS:
+-            text = open(os.path.join(HERE, f"prompt-{n}.txt"), encoding="utf-8").read()
+-            back = len(http("/tokenize", {"content": text})["tokens"])
+-            meta[n] = {"target": n, "tokens_on_this_file": back, "chars": len(text)}
+-            log(f"prompt-{n}: {len(text)} chars, tokenizes to {back} on {os.path.basename(SHARD1)}")
+-        json.dump(meta, open(os.path.join(HERE, "prompts-tokens.json"), "w"), indent=1)
+-        stop_server(p)
+-    elif what == "stage":
+-        P = prompts(); found = None; trail = []
+-        for n in range(48, -1, -2):  # Rushuna stopped at 30 (12 GB never got near it); 24 GB needs the full range
+-            cmd, env = llama_cmd(n, "L2")
+-            p, ok = start(cmd, env, f"server-stage-ncmoe{n}.log", 900)
+-            served = None
+-            if ok:
+-                r = chat(P[32512], max_tokens=16)
+-                served = r["error"] is None and bool(r["timings"])
+-                log(f"stage -ncmoe {n}: served={served} pp {(r['timings'] or {}).get('prompt_per_second')} card {gpu_q('memory.used')[0]} {r['error'] or ''}")
+-            trail.append({"ncmoe": n, "loaded": ok, "served": served})
+-            stop_server(p)
+-            if not (ok and served):
+-                break
+-            found = n
+-        json.dump({"lowest_ncmoe_that_serves_32512_with_ub4096": found, "trail": trail},
+-                  open(os.path.join(HERE, "stage.json"), "w"), indent=1)
+-        log(f"stage result: N = {found}")
+-    elif what == "strata":
+-        arm = sys.argv[2]; cfg = sys.argv[3]
+-        cmd = [f"{STRATA}/.venv/bin/python", f"{STRATA}/serve/server.py", "--engine", "strata", "--config", cfg, "--port", str(PORT)]
+-        p, ok = start(cmd, dict(os.environ), f"server-strata-{arm}.log", 1800)
+-        assert ok, f"strata {arm} did not start"
+-        lengths = [32512] if arm.startswith("S2-") else LENGTHS
+-        run_cells(arm, p.pid, lengths, os.path.join(HERE, f"results-{arm}.json"))
+-        stop_server(p)
+-    elif what == "llama":
+-        arm, n = sys.argv[2], int(sys.argv[3])
+-        cmd, env = llama_cmd(n, arm)
+-        p, ok = start(cmd, env, f"server-llama-{arm}.log", 900)
+-        assert ok, f"llama {arm} did not start"
++    assert what == "strata", "usage: bench_hotrod.py strata ARM CFG ROOT"
++    arm, cfg, root = sys.argv[2], os.path.abspath(sys.argv[3]), os.path.abspath(sys.argv[4])
++    log(f"arm {arm} cfg {cfg} root {root} disk {DISK}")
++    cmd = [f"{root}/.venv/bin/python", f"{root}/serve/server.py", "--engine", "strata", "--config", cfg, "--port", str(PORT)]
++    p, ok = start(cmd, dict(os.environ), f"server-strata-{arm}.log", 3600, root)
++    assert ok, f"strata {arm} did not start"
++    with EgressWatch(p.pid, os.path.join(HERE, f"egress-{arm}.log")):
+         run_cells(arm, p.pid, LENGTHS, os.path.join(HERE, f"results-{arm}.json"))
+-        stop_server(p)
++    stop_server(p)
+ 
+ 
+ if __name__ == "__main__":

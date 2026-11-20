@@ -1,0 +1,57 @@
+server ready after 33s on 8080
+Using the Strata server already running at http://127.0.0.1:8080.
+Running the suite (about 3-10 minutes) ...
+warming up (not measured) ...
+  calibrated: about 1.08 tokens per word
+chat: 3 short questions x 3 runs, up to 100 new tokens
+  run 1 q1: decode 92.3 tok/s, first token 0.427 s, 100 tokens
+  run 1 q2: decode 87.0 tok/s, first token 0.397 s, 100 tokens
+  run 1 q3: decode 83.3 tok/s, first token 0.415 s, 100 tokens
+  run 2 q1: decode 108.8 tok/s, first token 0.382 s, 100 tokens
+  run 2 q2: decode 90.5 tok/s, first token 0.328 s, 100 tokens
+  run 2 q3: decode 97.0 tok/s, first token 0.353 s, 100 tokens
+  run 3 q1: decode 100.4 tok/s, first token 0.379 s, 100 tokens
+  run 3 q2: decode 100.6 tok/s, first token 0.312 s, 100 tokens
+  run 3 q3: decode 90.5 tok/s, first token 0.343 s, 100 tokens
+4K prompt: 3 fresh prompts of about 4096 tokens, 24 new tokens
+  run 1: 4019 tokens, prompt 2233.5 tok/s (0 reused), first token 1.816 s
+  run 2: 4019 tokens, prompt 2354.3 tok/s (0 reused), first token 1.723 s
+  run 3: 4019 tokens, prompt 2357.0 tok/s (0 reused), first token 1.721 s
+16K prompt: 3 fresh prompts of about 16384 tokens, 24 new tokens
+  run 1: 16058 tokens, prompt 2857.3 tok/s (0 reused), first token 5.643 s
+  run 2: 16058 tokens, prompt 2891.8 tok/s (0 reused), first token 5.575 s
+  run 3: 16058 tokens, prompt 2905.7 tok/s (0 reused), first token 5.549 s
+agent: a session of 6 turns with four tools, x 3 runs
+  run 1 turn 0: prompt 609, reused 0, read 609, first token 1.017 s
+  run 1 turn 1: prompt 3752, reused 631, read 3121, first token 1.857 s
+  run 1 turn 2: prompt 5285, reused 3815, read 1470, first token 1.633 s
+  run 1 turn 3: prompt 8718, reused 5349, read 3369, first token 1.852 s
+  run 1 turn 4: prompt 11636, reused 8774, read 2862, first token 1.77 s
+  run 1 turn 5: prompt 14581, reused 11682, read 2899, first token 1.709 s
+  run 2 turn 0: prompt 609, reused 0, read 609, first token 1.019 s
+  run 2 turn 1: prompt 3757, reused 634, read 3123, first token 1.642 s
+  run 2 turn 2: prompt 5290, reused 3750, read 1540, first token 1.56 s
+  run 2 turn 3: prompt 8723, reused 5283, read 3440, first token 1.698 s
+  run 2 turn 4: prompt 11635, reused 8773, read 2862, first token 1.62 s
+  run 2 turn 5: prompt 14558, reused 11659, read 2899, first token 1.624 s
+  run 3 turn 0: prompt 609, reused 0, read 609, first token 1.008 s
+  run 3 turn 1: prompt 3743, reused 623, read 3120, first token 1.643 s
+  run 3 turn 2: prompt 5276, reused 3736, read 1540, first token 1.559 s
+  run 3 turn 3: prompt 8709, reused 5339, read 3370, first token 1.695 s
+  run 3 turn 4: prompt 11622, reused 8760, read 2862, first token 1.621 s
+  run 3 turn 5: prompt 14562, reused 11663, read 2899, first token 1.633 s
+
+Results (median, range over the runs):
+  chat decode tok/s                     92.30   (83.30 - 108.80, n=9)
+  chat first token (s)                   0.38   (0.31 - 0.43, n=9)
+  4K prompt tok/s                     2354.30   (2233.50 - 2357.00, n=3)
+  4K first token (s)                     1.72   (1.72 - 1.82, n=3)
+  16K prompt tok/s                    2891.80   (2857.30 - 2905.70, n=3)
+  16K first token (s)                    5.58   (5.55 - 5.64, n=3)
+  agent cache hit %                     68.59   (68.46 - 68.80, n=3)
+  agent re-read tokens/session          74.00   (3.00 - 145.00, n=3)
+  agent turn first token (s)             1.64   (1.56 - 1.86, n=15)
+  agent decode tok/s                   103.40   (72.90 - 123.50, n=15)
+
+Report: /home/minotaur/hotrod-2026-11/rec/tamanna/B/strata-bench-B/2026-11-20-community-rtx-3090-qwen3-8-flash-next-iq3-s/README.md
+Share it: open a pull request that adds the folder /home/minotaur/hotrod-2026-11/rec/tamanna/B/strata-bench-B/2026-11-20-community-rtx-3090-qwen3-8-flash-next-iq3-s (see docs/COMMUNITY_BENCHMARKS.md), or paste README.md into a GitHub issue. Home folders, user and host names and IP addresses are already replaced; read it once before you share it.

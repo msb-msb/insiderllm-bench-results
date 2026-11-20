@@ -1,0 +1,479 @@
+// ===== common/arg.cpp =====
+#include "arg.h"
+
+#include "build-info.h"
+#include "chat.h"
+#include "common.h"
+#include "download.h"
+#include "json-schema-to-grammar.h"
+#include "json.h"
+#include "llama.h"
+#include "log.h"
+#include "sampling.h"
+#include "speculative.h"
+#include "preset.h"
+
+// fix problem with std::min and std::max
+#if defined(_WIN32)
+#define WIN32_LEAN_AND_MEAN
+#ifndef NOMINMAX
+#   define NOMINMAX
+#endif
+#include <windows.h>
+#include <shellapi.h>
+#endif
+
+#include <algorithm>
+#include <cinttypes>
+#include <climits>
+#include <cmath>
+#include <cstdarg>
+#include <filesystem>
+#include <fstream>
+#include <list>
+#include <numeric>
+#include <regex>
+#include <set>
+#include <string>
+#include <system_error>
+#include <thread> // for hardware_concurrency
+#include <vector>
+
+#ifndef __EMSCRIPTEN__
+#ifdef __linux__
+#include <linux/limits.h>
+#elif defined(_WIN32)
+#   if !defined(PATH_MAX)
+#   define PATH_MAX MAX_PATH
+#   endif
+#elif defined(_AIX)
+#include <sys/limits.h>
+#else
+#include <sys/syslimits.h>
+#endif
+#endif
+
+#define LLAMA_MAX_URL_LENGTH 2084 // Maximum URL Length in Chrome: 2083
+
+using json = common_json;
+using namespace common_arg_utils;
+
+static std::initializer_list<enum llama_example> mmproj_examples = {
+    LLAMA_EXAMPLE_MTMD,
+    LLAMA_EXAMPLE_SERVER,
+    LLAMA_EXAMPLE_CLI,
+    LLAMA_EXAMPLE_TTS,
+};
+
+static std::string read_file(const std::string & fname) {
+    std::ifstream file(fname);
+    if (!file) {
+        throw std::runtime_error(string_format("error: failed to open file '%s'\n", fname.c_str()));
+    }
+    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    file.close();
+    return content;
+}
+
+static const std::vector<common_arg> & get_common_arg_defs() {
+    static const std::vector<common_arg> options = [] {
+        common_params params;
+        auto ctx = common_params_parser_init(params, LLAMA_EXAMPLE_SERVER, nullptr);
+        return ctx.options;
+    }();
+    return options;
+}
+
+common_arg & common_arg::set_examples(std::initializer_list<enum llama_example> examples) {
+    this->examples = examples;
+    return *this;
+}
+
+common_arg & common_arg::set_excludes(std::initializer_list<enum llama_example> excludes) {
+    this->excludes = excludes;
+    return *this;
+}
+
+common_arg & common_arg::set_env(const char * env) {
+    help = help + "\n(env: " + env + ")";
+    this->env = env;
+    return *this;
+}
+
+common_arg & common_arg::set_sampling() {
+    is_sampling = true;
+    return *this;
+}
+
+common_arg & common_arg::set_spec() {
+    is_spec = true;
+    return *this;
+}
+
+common_arg & common_arg::set_preset_only() {
+    is_preset_only = true;
+    return *this;
+}
+
+bool common_arg::in_example(enum llama_example ex) {
+    return examples.find(ex) != examples.end();
+}
+
+bool common_arg::is_exclude(enum llama_example ex) {
+    return excludes.find(ex) != excludes.end();
+}
+
+bool common_arg::get_value_from_env(std::string & output) const {
+    if (env == nullptr) return false;
+    if (!args_neg.empty()) {
+        // for compatibility, we need to check LLAMA_ARG_NO_ env as well
+        std::string neg_env = env;
+        string_replace_all(neg_env, "LLAMA_ARG_", "LLAMA_ARG_NO_");
+        char * neg_value = std::getenv(neg_env.c_str());
+        if (neg_value) {
+            output = "0"; // falsey
+            return true;
+        }
+    }
+    char * value = std::getenv(env);
+    if (value) {
+        output = value;
+        return true;
+    }
+    return false;
+}
+
+bool common_arg::has_value_from_env() const {
+    if (env != nullptr && !args_neg.empty()) {
+        // for compatibility, we need to check LLAMA_ARG_NO_ env as well
+        std::string neg_env = env;
+        string_replace_all(neg_env, "LLAMA_ARG_", "LLAMA_ARG_NO_");
+        if (std::getenv(neg_env.c_str())) {
+            return true;
+        }
+    }
+    return env != nullptr && std::getenv(env);
+}
+
+static std::vector<std::string> break_str_into_lines(std::string input, size_t max_char_per_line) {
+    std::vector<std::string> result;
+    std::istringstream iss(input);
+    std::string line;
+    auto add_line = [&](const std::string& l) {
+        if (l.length() <= max_char_per_line) {
+            result.push_back(l);
+        } else {
+            std::istringstream line_stream(l);
+            std::string word, current_line;
+            while (line_stream >> word) {
+                if (current_line.length() + !current_line.empty() + word.length() > max_char_per_line) {
+                    if (!current_line.empty()) result.push_back(current_line);
+                    current_line = word;
+                } else {
+                    current_line += (!current_line.empty() ? " " : "") + word;
+                }
+            }
+            if (!current_line.empty()) result.push_back(current_line);
+        }
+    };
+    while (std::getline(iss, line)) {
+        add_line(line);
+    }
+    return result;
+}
+
+std::string common_arg::to_string() const {
+    // params for printing to console
+    const static int n_leading_spaces = 40;
+    const static int n_char_per_line_help = 70; // TODO: detect this based on current console
+    std::string leading_spaces(n_leading_spaces, ' ');
+
+    std::ostringstream ss;
+    auto all_args = get_args(); // also contains args_neg
+    for (const auto & arg : all_args) {
+        if (arg == all_args.front()) {
+            if (all_args.size() == 1) {
+                ss << arg;
+            } else {
+                // first arg is usually abbreviation, we need padding to make it more beautiful
+                auto tmp = std::string(arg) + ", ";
+                auto spaces = std::string(std::max(0, 7 - (int)tmp.size()), ' ');
+                ss << tmp << spaces;
+            }
+        } else {
+            ss << arg << (arg != all_args.back() ? ", " : "");
+        }
+    }
+    if (value_hint) ss << " " << value_hint;
+    if (value_hint_2) ss << " " << value_hint_2;
+    if (ss.tellp() > n_leading_spaces - 3) {
+        // current line is too long, add new line
+        ss << "\n" << leading_spaces;
+    } else {
+        // padding between arg and help, same line
+        ss << std::string(leading_spaces.size() - ss.tellp(), ' ');
+    }
+    const auto help_lines = break_str_into_lines(help, n_char_per_line_help);
+    for (const auto & line : help_lines) {
+        ss << (&line == &help_lines.front() ? "" : leading_spaces) << line << "\n";
+    }
+    return ss.str();
+}
+
+std::vector<std::string> common_arg::get_args() const {
+    std::vector<std::string> result;
+    for (const auto & arg : args) {
+        result.push_back(std::string(arg));
+    }
+    for (const auto & arg : args_neg) {
+        result.push_back(std::string(arg));
+    }
+    return result;
+}
+
+std::vector<std::string> common_arg::get_env() const {
+    std::vector<std::string> result;
+    if (env) {
+        result.push_back(std::string(env));
+    }
+    if (!args_neg.empty() && env) {
+        // for compatibility, we need to add LLAMA_ARG_NO_ variant
+        std::string neg_env = env;
+        string_replace_all(neg_env, "LLAMA_ARG_", "LLAMA_ARG_NO_");
+        result.push_back(neg_env);
+    }
+    return result;
+}
+
+//
+// utils
+//
+
+// Helper function to parse tensor buffer override strings
+static void parse_tensor_buffer_overrides(const std::string & value, std::vector<llama_model_tensor_buft_override> & overrides) {
+    ggml_backend_load_all();
+
+    std::map<std::string, ggml_backend_buffer_type_t> buft_list;
+    for (size_t i = 0; i < ggml_backend_dev_count(); ++i) {
+        auto * dev = ggml_backend_dev_get(i);
+        auto * buft = ggml_backend_dev_buffer_type(dev);
+        if (buft) {
+            buft_list[ggml_backend_buft_name(buft)] = buft;
+        }
+    }
+
+    for (const auto & override : string_split<std::string>(value, ',')) {
+        std::string::size_type pos = override.find('=');
+        if (pos == std::string::npos) {
+            throw std::invalid_argument("invalid value");
+        }
+        std::string tensor_name = override.substr(0, pos);
+        std::string buffer_type = override.substr(pos + 1);
+
+        if (buft_list.find(buffer_type) == buft_list.end()) {
+            printf("Available buffer types:\n");
+            for (const auto & it : buft_list) {
+                printf("  %s\n", ggml_backend_buft_name(it.second));
+            }
+            throw std::invalid_argument("unknown buffer type");
+        }
+        // keep strings alive and avoid leaking memory by storing them in a static vector
+        static std::list<std::string> buft_overrides;
+        buft_overrides.push_back(tensor_name);
+        overrides.push_back({buft_overrides.back().c_str(), buft_list.at(buffer_type)});
+    }
+}
+
+static std::string clean_file_name(const std::string & fname) {
+    std::string clean_fname = fname;
+    string_replace_all(clean_fname, "\\", "_");
+    string_replace_all(clean_fname, "/", "_");
+    return clean_fname;
+}
+
+struct handle_model_result {
+    bool found_mmproj = false;
+    common_params_model mmproj;
+
+    bool found_mtp = false;
+    common_params_model mtp;
+
+    bool found_preset = false;
+    std::string preset_path;
+};
+
+const std::vector<ggml_type> kv_cache_types = {
+    GGML_TYPE_F32,
+    GGML_TYPE_F16,
+    GGML_TYPE_BF16,
+    GGML_TYPE_Q8_0,
+    GGML_TYPE_Q4_0,
+    GGML_TYPE_Q4_1,
+    GGML_TYPE_IQ4_NL,
+    GGML_TYPE_Q5_0,
+    GGML_TYPE_Q5_1,
+};
+
+static ggml_type kv_cache_type_from_str(const std::string & s) {
+    for (const auto & type : kv_cache_types) {
+        if (ggml_type_name(type) == s) {
+            return type;
+        }
+    }
+    throw std::runtime_error("Unsupported cache type: " + s);
+}
+
+static std::string get_all_kv_cache_types() {
+    std::ostringstream msg;
+    for (const auto & type : kv_cache_types) {
+        msg << ggml_type_name(type) << (&type == &kv_cache_types.back() ? "" : ", ");
+    }
+    return msg.str();
+}
+
+static bool parse_bool_value(const std::string & value) {
+    if (is_truthy(value)) {
+        return true;
+    } else if (is_falsey(value)) {
+        return false;
+    } else {
+        throw std::invalid_argument("invalid boolean value");
+    }
+}
+
+[[noreturn]] static void arg_removed(const std::string & msg) {
+    throw std::invalid_argument("the argument has been removed. " + msg);
+}
+
+//
+// common_models_handler
+//
+
+static std::string get_default_local_path(const std::string & url) {
+    auto f = string_split<std::string>(url, '#').front();
+    f = string_split<std::string>(f, '?').front();
+    return fs_get_cache_file(string_split<std::string>(f, '/').back());
+}
+
+static bool spec_types_is_default(const common_params & params) {
+    return params.speculative.types == std::vector<enum common_speculative_type>{COMMON_SPECULATIVE_TYPE_NONE};
+}
+
+common_models_handler common_models_handler_init(const common_params & params, llama_example curr_ex) {
+    common_download_hf_plan plan;
+    common_download_hf_plan plan_spec;
+    common_download_opts opts;
+
+    const bool spec_type_draft_mtp = std::find(params.speculative.types.begin(),
+                                        params.speculative.types.end(),
+                                        COMMON_SPECULATIVE_TYPE_DRAFT_MTP) != params.speculative.types.end();
+
+    const bool spec_type_draft_dflash = std::find(params.speculative.types.begin(),
+                                           params.speculative.types.end(),
+                                           COMMON_SPECULATIVE_TYPE_DRAFT_DFLASH) != params.speculative.types.end();
+
+    const bool spec_type_draft_eagle3 = std::find(params.speculative.types.begin(),
+                                           params.speculative.types.end(),
+                                           COMMON_SPECULATIVE_TYPE_DRAFT_EAGLE3) != params.speculative.types.end();
+
+    const bool spec_type_draft_dspark = std::find(params.speculative.types.begin(),
+                                           params.speculative.types.end(),
+                                           COMMON_SPECULATIVE_TYPE_DRAFT_DSPARK) != params.speculative.types.end();
+
+    // only download mmproj if the current example is using it
+    bool use_mmproj = false;
+    for (const auto & ex : mmproj_examples) {
+        if (curr_ex == ex) {
+            use_mmproj = true;
+            break;
+        }
+    }
+
+    opts.bearer_token    = params.hf_token;
+    opts.offline         = params.offline;
+    opts.download_mtp    = spec_type_draft_mtp;
+    opts.download_eagle3 = spec_type_draft_eagle3;
+    opts.download_dflash = spec_type_draft_dflash;
+    opts.download_dspark = spec_type_draft_dspark;
+    opts.download_mmproj = use_mmproj && !params.no_mmproj
+                        && params.mmproj.path.empty() && params.mmproj.url.empty();
+
+    if (!params.model.hf_repo.empty()) {
+        plan = common_download_get_hf_plan(params.model, opts);
+    }
+
+    if (!params.speculative.draft.mparams.hf_repo.empty()) {
+        // without a requested type, discover every sidecar the draft repo ships to infer the type later
+        auto opts_spec = opts;
+        if (spec_types_is_default(params)) {
+            opts_spec.download_mtp    = true;
+            opts_spec.download_dflash = true;
+            opts_spec.download_eagle3 = true;
+            opts_spec.download_dspark = true;
+        }
+        plan_spec = common_download_get_hf_plan(params.speculative.draft.mparams, opts_spec);
+    }
+
+    return common_models_handler{plan, plan_spec, opts};
+}
+
+bool common_models_handler_is_preset_repo(const common_models_handler & handler) {
+    return !handler.plan.preset.url.empty();
+}
+
+static std::vector<common_download_task> build_url_tasks(const common_params_model & model, common_download_opts opts) {
+    auto parts = common_download_get_all_parts(model.url);
+    std::vector<common_download_task> tasks;
+
+    // single-part: download straight to model.path if the user gave one (-m), else the cache default
+    if (parts.size() == 1) {
+        common_download_task task;
+        task.url        = parts[0];
+        task.local_path = model.path.empty() ? get_default_local_path(parts[0]) : model.path;
+        task.opts       = opts;
+        tasks.push_back(std::move(task));
+        return tasks;
+    }
+
+    // multi-part: place each part under the user's -m directory (if given), else the cache default
+    std::string base_dir;
+    if (!model.path.empty()) {
+        auto pos = model.path.rfind('/');
+        base_dir = pos == std::string::npos ? std::string(".") : model.path.substr(0, pos);
+    }
+
+    for (const auto & part : parts) {
+        common_download_task task;
+        task.url  = part;
+        task.opts = opts;
+
+        std::string local = get_default_local_path(part);
+        if (!base_dir.empty()) {
+            auto pos = local.rfind('/');
+            std::string name = pos == std::string::npos ? local : local.substr(pos + 1);
+            local = base_dir + "/" + name;
+        }
+        task.local_path = local;
+        tasks.push_back(std::move(task));
+    }
+    return tasks;
+}
+
+void common_models_handler_apply(common_models_handler & handler, common_params & params, common_download_callback * callback) {
+    std::vector<common_download_task> tasks;
+
+    auto & plan      = handler.plan;
+    auto & plan_spec = handler.plan_spec;
+
+    auto opts = handler.opts; // copy
+    opts.callback = callback;
+
+    // handle plain "url" if needed
+    auto handle_url = [&](common_params_model & model) {
+        if (!model.url.empty()) {
+            if (model.path.empty()) {
+                model.path = get_default_local_path(model.url);
+            }
+        }
+    };
+    handle_url(params.model);

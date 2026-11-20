@@ -1,0 +1,63 @@
+# machine state 2026-11-20T16:07:44
+7.0.0-38-generic
+name, driver_version, pcie.link.gen.max, pcie.link.width.max
+NVIDIA GeForce RTX 3090, 580.178.04, 4, 16
+MemTotal:       65762092 kB
+MemAvailable:   63999152 kB
+SwapTotal:       8388604 kB
+SwapFree:        8327888 kB
+/dev/nvme0n1p2  468G  357G   88G  81% /
+# swap (lock A1: off on Rushuna)
+NAME      TYPE SIZE  USED PRIO
+/swap.img file   8G 59.3M   -1
+Filename				Type		Size		Used		Priority
+/swap.img                               file		8388604		60716		-1
+# units (lock A1: stopped on Rushuna)
+mycoswarm inactive
+ollama inactive
+fwupd active
+ModemManager active
+apt-daily.timer active
+apt-daily-upgrade.timer active
+fwupd-refresh.timer active
+/home/minotaur/bench-models/qwen3.8-flash-next-iq3s
+8acbdb03c6a584de334b39a7920c981299cff0017ccfeb886229ccdd7a47df23  /home/minotaur/hotrod-2026-11/B/src/strata-iq3_s.json
+{
+ "exe": "/home/minotaur/hotrod-2026-11/B/src/engine/strata",
+ "args": [
+  "--pack",
+  "/home/minotaur/hotrod-2026-11/B/data/packs/iq3_s",
+  "--native",
+  "/home/minotaur/bench-models/qwen3.8-flash-next-iq3s/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf",
+  "--ple-gguf",
+  "/home/minotaur/bench-models/qwen3.8-flash-next-iq3s/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf",
+  "--expert-profile",
+  "/home/minotaur/hotrod-2026-11/B/src/data/expert-profile.bin",
+  "--expert-cache",
+  "auto",
+  "--prefill",
+  "auto",
+  "--spec",
+  "4",
+  "--spec-min-p",
+  "0.5",
+  "--mtp",
+  "/home/minotaur/hotrod-2026-11/B/data/mtp/rt",
+  "--max-context",
+  "131072",
+  "--kv",
+  "int8"
+ ],
+ "cwd": "/home/minotaur/hotrod-2026-11/B/src",
+ "tokenizer": "/home/minotaur/hotrod-2026-11/B/data/packs/iq3_s/tokenizer",
+ "model_name": "qwen3.8-flash-next-iq3_s",
+ "log": "/home/minotaur/hotrod-2026-11/B/src/strata-iq3_s.log",
+ "lib_dirs": [
+  "/home/minotaur/cuda-13.0/bin",
+  "/home/minotaur/cuda-13.0/lib64"
+ ],
+ "port": 8080,
+ "gpu": 0,
+ "gpus_asked": true,
+ "open_browser": false
+}
