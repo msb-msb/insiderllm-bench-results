@@ -131,8 +131,15 @@ descriptive): H decodes slower than B at all three lengths (0.82×, 0.82×, 0.76
    `rushuna/U-superseded-swap-on/`. **A1** (written after that one measured request, which it says) sets swap off and
    stops `mycoswarm`, `ollama` (already inactive), `fwupd`, `ModemManager` and the `apt-daily`, `apt-daily-upgrade`,
    `fwupd-refresh` timers on Rushuna for all three arms. `run_arm.sh` refuses to start on Rushuna otherwise
-   (`rushuna/U-blocked-guard-0326/`: it stopped once because `ModemManager` was still active). Restore after the last
-   Rushuna arm: `swapon -a` and the units started again, run by Mark in his own terminal (sudo).
+   (`rushuna/U-blocked-guard-0326/`: it stopped once because `ModemManager` was still active). **Restored 2026-11-20
+   16:36–16:37 UTC** by Mark (sudo, Rushuna's journal): `swapon -a` (4 GiB `/swap.img` back on), and `mycoswarm`,
+   `fwupd`, `ModemManager` and `fwupd-refresh.timer` started (all active after). `ollama` stays inactive, as before A1.
+   `apt-daily.timer` and `apt-daily-upgrade.timer` stay off: they have been **masked since 2026-07-15 23:30 UTC**
+   (the `/etc/systemd/system/*.timer -> /dev/null` links' timestamps), so they were inactive before the test and A1's
+   stop did nothing to them. The pre-A1 state file (`rushuna/U-superseded-swap-on/state-U.txt`) predates the units
+   block `run_arm.sh` gained with A1, so it doesn't list them; the mask dates are the evidence. The first restore
+   command (16:36:11) also named the two timers, which systemd won't start while masked; a second (16:37:36),
+   without them, started the rest and confirmed them active and the timers still masked.
 2. **H's and B's `tools/strata_bench.py` (v0.1.45 lineage) crash when they start their own server**
    (`NameError: name 'port' is not defined`; `rushuna/H-aborted-sb-port-bug-0457/`). `harness/sb_prestart.sh` starts
    the arm's own `server.py` from its config (what U's tool does itself), waits for `/health` without "loading",
