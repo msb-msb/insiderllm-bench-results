@@ -180,6 +180,10 @@ descriptive): H decodes slower than B at all three lengths (0.82×, 0.82×, 0.76
   logs, `strata-bench-ARM/` (the tool's report), `install/` (setup logs, configs, start script, `BUILD.json`,
   `hashes-ARM.txt` with commit, engine sha256 and pack/MTP hashes). Superseded, blocked, aborted and exploratory runs
   sit in their own folders, named for what they are.
+- `rushuna/`: the chain scripts and, added 2026-11-22 from the rig before its working directory moved to the HDD,
+  their outputs (`chain-U-H.out`, `chain-b.out`, `chain-u32.out`, `rerun-B.out`); the setup passes' `nohup-*.out` in
+  `U/install/` and `H/install/`; U's re-setup before the 32K re-run (`U/install/setup-pass-{a,b}-rerun32512.log`,
+  deviation 4); and `llama.cpp-3cf0325.zip.sha256`, the hash of the llama.cpp source zip fetched for the builds.
 - `tamanna/`: `machine-state-2026-11-20.txt`, `model-sha256.txt`, `chain.log`, one folder per arm.
 
 Engine sha256 (Rushuna build, identical on Tamanna): U `c54f094e…`; H `2beaa875…` (+ `libstrata_kq.so` `4cfc8b7a…`);

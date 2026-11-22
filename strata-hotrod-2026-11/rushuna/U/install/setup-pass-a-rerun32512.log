@@ -1,0 +1,77 @@
+2026-11-20T07:08:51 pass a: /home/minotaur/hotrod-2026-11/U/src/terminal/.venv/bin/python setup.py --model IQ3_S --gguf-dir /home/minotaur/hotrod-2026-11/model/IQ3_S --context 131072 --vision no --build --no-start --yes --no-browser --data-dir /home/minotaur/hotrod-2026-11/U/data
+Strata - Qwen3.8-Flash-Next on a normal PC (a GPU + system RAM + CPU)
+
+=== Step 1: checking your PC ===
+  [ok] GPU: NVIDIA GeForce RTX 3060, 12.0 GB VRAM, compute capability 8.6, driver 580.173.02
+  [ok] RAM: 31 GB
+  [ok] CPU: Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz (AVX2)
+  [ok] PCIe: 3.0 x16 (the card supports 4.0, the board 3.0)
+
+=== Step 2: your choices ===
+  The files in /home/minotaur/hotrod-2026-11/model/IQ3_S are Qwen3.8-Flash-Next IQ3_S: using them (no question to answer).
+  [ok] model: Qwen3.8-Flash-Next
+
+  1) Q2_0     2-bit, the fastest; download 66 GB, uses ~34 GB of RAM   <- fits
+  2) IQ2_XS   2-bit i-quant, a little better quality, close in speed; download 68 GB, uses ~36 GB of RAM   <- may run slower
+  3) IQ3_XXS  3-bit i-quant, better quality, slower (more CPU work per token); download 76 GB, uses ~43 GB of RAM   <- may run slower
+  4) IQ3_S    (recommended, installed) 3.5-bit i-quant, the best quality (matches the full model), the slowest; needs a 64 GB PC with little else running; download 84 GB, uses ~50 GB of RAM   <- may run slower
+  [ok] size: IQ3_S
+  [ok] context: 131072 tokens
+  [ok] KV cache: 8-bit
+  [ok] images: off
+  [ok] low-RAM mode: IQ3_S's experts (50 GB) are read from the model folder through the OS file cache instead of a copy in RAM (31 GB); the GPU holds ~9% of them
+  [!]  most of the experts are read from the SSD while it answers: expect it to be much slower than with enough RAM (a faster SSD and a smaller size help)
+
+  EXPERIMENTAL - speed projection: a small control vector applied while the model runs (layers 4-44).
+  It changes how the model answers: its package describes it as a refusal-direction projection (the
+  model declines far fewer requests). Off unless you choose it; when on, the web app can switch it off
+  per chat. Details: data/experimental-speed-projection/README.md
+  [ok] experimental speed projection: off
+
+=== Step 3: Python packages ===
+  [ok] numpy, jinja2, regex, pyyaml, tqdm, requests, pillow, psutil, textual (the screens) already installed
+
+=== Step 4: the Strata engine ===
+  [ok] llama.cpp 3cf0325 (gguf-py, ggml, mtmd)
+  [ok] engine already built for this PC
+  [ok] engine: /home/minotaur/hotrod-2026-11/U/src/terminal/engine/strata
+
+=== Step 5: downloading Qwen3.8-Flash-Next IQ3_S ===
+  [ok] model files present
+
+=== Step 6: preparing the model for Strata ===
+  > /home/minotaur/hotrod-2026-11/U/src/terminal/.venv/bin/python /home/minotaur/hotrod-2026-11/U/src/terminal/tools/iq_pack.py --gguf /home/minotaur/hotrod-2026-11/model/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --out /home/minotaur/hotrod-2026-11/U/data/packs/iq3_s
+tokenizer/: vocab 248320, merges 247587, pre qwen35, specials {'tokenizer.ggml.eos_token_id': 248046, 'tokenizer.ggml.padding_token_id': 248044, 'tokenizer.ggml.bos_token_id': 248044}
+model shards: Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf, Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf
+index.txt: 1079 tensors, 302 served natively, 0 in extra.bin, arena 1.43 GiB
+  Writing the experts into one file for the low-RAM mode (one time, 50 GB) ...
+  > /home/minotaur/hotrod-2026-11/U/src/terminal/.venv/bin/python /home/minotaur/hotrod-2026-11/U/src/terminal/tools/iq_pack.py --gguf /home/minotaur/hotrod-2026-11/model/IQ3_S/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf --out /home/minotaur/hotrod-2026-11/U/data/packs/iq3_s --experts-bin
+model shards: Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf, Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00002-of-00002.gguf
+index.txt: 1079 tensors, 302 served natively, 0 in extra.bin, arena 1.43 GiB
+  layer  0  IQ3_XXS /IQ4_NL  blob  2176000  at 0.00 GiB
+  layer  8  IQ2_S   /Q2_0    blob  1510400  at 7.50 GiB
+  layer 16  IQ3_XXS /IQ4_NL  blob  2176000  at 14.33 GiB
+  layer 24  IQ2_S   /IQ4_NL  blob  1971200  at 22.14 GiB
+  layer 32  IQ2_S   /IQ4_NL  blob  1971200  at 30.32 GiB
+  layer 40  IQ3_S   /IQ4_NL  blob  2329600  at 38.09 GiB
+experts.bin: 48 layers, 46.84 GiB
+  [ok] model prepared: /home/minotaur/hotrod-2026-11/U/data/packs/iq3_s
+  The MTP draft layer (speculative decoding, ~2x faster output) comes from the original Qwen checkpoint:
+  only its ~5 GB of MTP tensors are downloaded.
+  > /home/minotaur/hotrod-2026-11/U/src/terminal/.venv/bin/python /home/minotaur/hotrod-2026-11/U/src/terminal/tools/mtp_fetch.py fetch --out /home/minotaur/hotrod-2026-11/U/data/mtp
+  [X]  This computer could not connect to huggingface.co (it looks offline), so the draft layer could not be downloaded.
+       Check that this computer can open https://huggingface.co, then run the same command again: what is already downloaded is kept. Models that are already on this computer still start without the internet.
+  Tip for a 12 GB card: the draft layer's default token subset (with Chinese, Japanese and Korean) needs up to ~348 MiB of VRAM.
+    For English and code answers, ./setup.sh --draft-vocab en needs up to ~133 MiB (cyrillic: ~193) and leaves the rest to the expert cache - and it is the
+    fix when the start stops with "the draft head does not fit". The model keeps the choice.
+
+=== Step 7: writing the start script ===
+  [ok] KV streaming off: it needs ~62 GB of RAM for IQ3_S (its experts, the room beside them and the 1.8 GB cache), and this PC has 31; the KV cache stays in VRAM (fewer cached experts). --kv-streaming on turns it on anyway
+  [ok] start script: run-iq3_s.sh
+
+All set.
+  API (OpenAI):     http://127.0.0.1:8080/v1   (any API key; model name: anything)
+  API (Anthropic):  http://127.0.0.1:8080/v1/messages
+  Next time:        just run ./setup.sh (or run-iq3_s.sh) - it starts right away
+  Several requests at once: left at one at a time - parallel N reduces waiting for several users but costs about 10-25% speed per request on this card (docs/BATCHING.md).
+2026-11-20T07:13:59 rc=0
