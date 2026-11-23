@@ -403,3 +403,20 @@ Left for day 0 (2026-11-24), as already specified above: the llama.cpp v0.7.0 lo
 (section 2), the FLEURS clip selection by the fixed rule (section 3.3), and the Playwright timing harness that applies
 section 3.2. This lock fixes that harness's method and definitions, not its code. The harness's code and the 12 s
 padded copies of the clips go into the record before the first warm-up pass.
+
+## Amendment A1 (2026-11-23, Mark): interrupted arms, and a pre-run GPU check
+
+**Written 2026-11-23, the day before the run, before any warm-up or measured pass.** Nothing has been measured. Why:
+a power outage on 2026-11-23 (about 09:17 PT) rebooted Tamanna, and the reboot turned GPU persistence mode off. The
+lock above has no rule for an interrupted run and no check that the GPU settings in section 3 still hold.
+
+1. **Interrupted arms.** An arm interrupted mid-pass (power loss, crash, OOM) is voided and re-run once from its
+   discarded warm-up; a second interruption voids that arm, reported as void.
+2. **Pre-run GPU check.** Before the first warm-up pass, and again before any re-run under item 1, the harness reads
+   `nvidia-smi --query-gpu=persistence_mode,power.limit --format=csv,noheader` on Tamanna. If persistence mode is not
+   Enabled or the power limit is not 420.00 W, the run aborts before that arm, and the reading goes into the record.
+3. **Persistence on Tamanna** is set by a systemd drop-in since 2026-11-23:
+   `/etc/systemd/system/nvidia-persistenced.service.d/persistence.conf` replaces the stock
+   `--no-persistence-mode` ExecStart with `--persistence-mode` and sets `StopWhenUnneeded=false`, and the unit is
+   wanted by `multi-user.target`. Verified on 2026-11-23 with `systemctl cat nvidia-persistenced` (the drop-in is
+   loaded) and nvidia-smi (Enabled, 420.00 W). Item 2 still runs; the drop-in makes an abort unlikely, not impossible.
