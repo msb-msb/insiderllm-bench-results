@@ -1,0 +1,38 @@
+# machine state 2026-11-23T05:53:52 (before arm a24)
+rushuna
+6.8.0-136-generic
+ 05:53:52 up 29 days, 10:47,  2 users,  load average: 0.44, 1.48, 2.32
+name, driver_version, vbios_version, memory.used [MiB], memory.total [MiB], pcie.link.gen.current, pcie.link.width.current, pcie.link.gen.max, pcie.link.width.max
+NVIDIA GeForce RTX 3060, 580.173.02, 94.04.71.00.6A, 0 MiB, 12288 MiB, 3, 16, 3, 16
+# free / swap (A1: off)
+               total        used        free      shared  buff/cache   available
+Mem:           32024         964        3307           1       28219       31059
+Swap:              0           0           0
+Filename				Type		Size		Used		Priority
+# A1 units (stopped)
+mycoswarm inactive
+ollama inactive
+fwupd inactive
+ModemManager inactive
+apt-daily.timer inactive
+apt-daily-upgrade.timer inactive
+fwupd-refresh.timer inactive
+# model run-day re-hash (M4; must equal ac0e2c11...31a61)
+-rw-rw-r-- 1 minotaur minotaur 22134528992 Nov 22 09:21 /home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61  /home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+# NVMe sequential read: dd of the model, iflag=direct, 8 GiB
+8589934592 bytes (8.6 GB, 8.0 GiB) copied, 4.01613 s, 2.1 GB/s
+# DDR read bandwidth: stream_read.c (md5 331785328ca94900143b5c062c101bcd), gcc -O3 -fopenmp, OMP_NUM_THREADS=4 x3
+threads 4 read 26.53 GB/s (best of 8) sink 163678951424
+threads 4 read 26.44 GB/s (best of 8) sink 163678951424
+threads 4 read 26.74 GB/s (best of 8) sink 163678951424
+# PCIe at idle
+3, 16
+# build
+version: 1.0.0-dev (build 12359, commit b1b770d90)
+built with GNU 13.3.0 for Linux x86_64
+a6e3fc0a63b98d6de31cf47dcd0018f58415d117bda06e5de1a7ad2d2e71ac86  /home/minotaur/moecache-2026-11/llama.cpp/build/bin/llama-server
+0059011fae6ef38f15270ae39e9d334a9cddc2bb17a3866855d683e08a8e4a01  /home/minotaur/moecache-2026-11/llama.cpp/build/bin/llama-tokenize
+b1b770d90d94cad9e9ea5b993bdbc383a522fb28
+v1.0.0
+c3baf2d21ba7119cdd78a941f4f587caee2b376bad1c83bb44d194231ae6998b  /home/minotaur/moecache-2026-11/llama.cpp/scripts/moe-cache-tune.py

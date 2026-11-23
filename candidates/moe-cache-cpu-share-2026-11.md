@@ -212,3 +212,36 @@ A void cell is re-run once (a fresh server, its own cold request, then the cell'
 3. Build at `b1b770d9` done, binary hashed, prompts counted and hashed, after Mark's go. These are not measurements.
 4. Arm (a27)'s load peak read; the M2 fit gate passes, or the run stops and Mark is told.
 5. A1 in force (Mark's sudo steps), and Mark says go.
+
+## Amendment A1 (2026-11-22, Mark): arm (c) runs the tuner on the (a27) command
+
+**Written AFTER the results of (a24), (a27) and (b27) were known.** This is not a pre-registered change. Those three
+arms ran as locked on 2026-11-23 UTC (record `docs/bench-results/moe-cache-cpu-share-2026-11/`, commit 67b4cb3f), the
+fit gate passed, and the run stopped at the tuner. **Why:** `scripts/moe-cache-tune.py` as written can't run on the
+(a24) command on a 12 GB card. Its first calibration server always allocates a cache of 10% of the expert bytes
+(1,856 MiB here) before it reads how much room the card has, and `--max-mib` doesn't apply to that first run. On the
+(a24) command (10,367 MiB at load) the server ran out of memory allocating its 392 MiB compute buffer. The lock didn't
+cover a tuner failure, so no arm (c) existed.
+
+(This amendment is A1 of this lock. "A1 conditions" in M5, meaning swap off and the units stopped, refer to the HotRod
+lock's amendment A1 and are unchanged.)
+
+**Change, arm (c) only.** The tuner is run on the **(a27) command**: the M2 base command with `-ncmoe 27`, everything
+else identical: `python3 scripts/moe-cache-tune.py --out <fresh dir> -- <base command, N = 27>`. Its `recommended:`
+line is taken verbatim and appended to the (a27) command to make arm (c). The rest of M2's tuner paragraph stands:
+once, in a fresh `--out` directory, with full stdout, the run directory, start and end UTC, the `-ncmoe` and cache size
+it picked, and the `recommended:` line recorded. Prompts, runs per cell, the cold request, memory guard, A1 conditions
+and void rules are as in M5 and M6.
+
+**Projected fit (Mark):** 9,017 (the (a27) arm peak) + 1,856 + 392 ≈ 11,265 MiB against 11,909. This is a projection
+and adds no gate. **If the tuner still runs out of memory, the run stops and is reported. There is no further
+amendment.**
+
+**Scoring under A1.** **C1 = (c) / (a24)**, holding if ≥ 1.5 with non-overlapping ranges, scored at each length as in
+M8. **(c) / (b27)** is also reported: both arms are at `-ncmoe 27`, so this is the CPU-share effect, plus the cache
+size difference if the tuner's Mt isn't 1,866. Our prediction 1, (c)/(a24) at 1.1-1.3x, is read against the amended
+(c). C2, the cache effect alone, H0 and prediction 2 are as already scored. **Every (c) figure is labelled "amended arm
+(A1, post-results)"** in the record and in any article.
+
+The text above this section is byte-identical to the lock as committed in c22ff41b (sha256
+`f047318b9eceb00315e803e94189af1b68484293ab6b187ab0ddc2c07746f6a4`, the `.sha256` file beside it).

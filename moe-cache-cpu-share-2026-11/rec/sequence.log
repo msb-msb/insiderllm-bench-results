@@ -1,0 +1,12 @@
+2026-11-23T05:54:45 run start; lock sha256 f047318b9eceb00315e803e94189af1b68484293ab6b187ab0ddc2c07746f6a4
+2026-11-23T05:54:47 === a24: python3 /home/minotaur/moecache-2026-11/harness/bench_moecache.py a24 24
+2026-11-23T05:56:33 === a24 rc=0 card 0 MiB
+2026-11-23T05:56:34 === a27: python3 /home/minotaur/moecache-2026-11/harness/bench_moecache.py a27 27
+2026-11-23T05:58:27 === a27 rc=0 card 0 MiB
+FIT GATE: a27 load peak 8973 MiB, arm peak 9017 MiB; 9017 + 1866 + 1024 = 11907 MiB vs 11909 -> PASS
+2026-11-23T05:58:29 === b27: python3 /home/minotaur/moecache-2026-11/harness/bench_moecache.py b27 27 --moe-cache-mib 1866
+2026-11-23T06:00:12 === b27 rc=0 card 0 MiB
+2026-11-23T06:00:14 tuner start UTC 2026-11-23T06:00:14
+2026-11-23T06:00:14 === tuner: python3 /home/minotaur/moecache-2026-11/llama.cpp/scripts/moe-cache-tune.py --out rec/tune-rushuna -- /home/minotaur/moecache-2026-11/llama.cpp/build/bin/llama-server -m /home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf -ngl 99 -ncmoe 24 -fa on -c 16384 -np 1 --fit off -lm mmap -t 4 --port 8081
+2026-11-23T06:00:36 === tuner rc=1 card 0 MiB
+2026-11-23T06:00:36 STOP: tuner failed

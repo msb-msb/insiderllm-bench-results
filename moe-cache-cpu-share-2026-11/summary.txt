@@ -1,0 +1,30 @@
+| arm | len | decode t/s median (min..max) | prompt t/s median (min..max) | prompt_n | peak MiB | void |
+|---|---:|---|---|---|---:|---|
+| a24 | 512 | 37.53 (37.48..37.57) | 383.9 (383.0..384.7) | [511, 513, 512] | 10389 | no |
+| a24 | 4096 | 37.26 (37.19..37.28) | 399.0 (398.0..399.3) | [4097, 4095, 4096] | 10395 | no |
+| a27 | 512 | 34.50 (34.40..34.55) | 355.7 (353.2..357.1) | [512, 512, 512] | 9017 | no |
+| a27 | 4096 | 34.20 (34.08..34.23) | 362.4 (361.8..362.4) | [4096, 4096, 4097] | 9017 | no |
+| b27 | 512 | 39.37 (39.12..39.37) | 393.0 (389.3..393.4) | [513, 513, 513] | 10901 | no |
+| b27 | 4096 | 39.03 (38.96..39.10) | 406.7 (404.6..407.8) | [4095, 4094, 4095] | 10901 | no |
+
+a24: load 5.3s, load peak 10367 MiB, arm peak 10395 MiB, min MemAvailable 29019 MiB, cold tg 37.50 pp 354.4, build {'build_info': 'b12359-b1b770d90', 'build_commit': None, 'model_path': '/home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'}
+a27: load 5.4s, load peak 8973 MiB, arm peak 9017 MiB, min MemAvailable 28939 MiB, cold tg 34.42 pp 332.3, build {'build_info': 'b12359-b1b770d90', 'build_commit': None, 'model_path': '/home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'}
+b27: load 5.4s, load peak 10841 MiB, arm peak 10901 MiB, min MemAvailable 28804 MiB, cold tg 38.62 pp 357.2, build {'build_info': 'b12359-b1b770d90', 'build_commit': None, 'model_path': '/home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'}
+
+tg 512: b27/a27 (cache alone; C2) = 1.141  faster  (ranges overlap: False; H0 rejected)
+tg 512: b27/a24 = 1.049  faster  (ranges overlap: False; H0 not rejected)
+tg 512: a27/a24 (3 layers to host) = 0.919  slower  (ranges overlap: False; H0 rejected)
+tg 4096: b27/a27 (cache alone; C2) = 1.141  faster  (ranges overlap: False; H0 rejected)
+tg 4096: b27/a24 = 1.048  faster  (ranges overlap: False; H0 not rejected)
+tg 4096: a27/a24 (3 layers to host) = 0.918  slower  (ranges overlap: False; H0 rejected)
+pp 512: b27/a27 (cache alone; C2) = 1.105  faster  (ranges overlap: False; H0 rejected)
+pp 512: b27/a24 = 1.024  faster  (ranges overlap: False; H0 not rejected)
+pp 512: a27/a24 (3 layers to host) = 0.926  slower  (ranges overlap: False; H0 rejected)
+pp 4096: b27/a27 (cache alone; C2) = 1.122  faster  (ranges overlap: False; H0 rejected)
+pp 4096: b27/a24 = 1.019  faster  (ranges overlap: False; H0 not rejected)
+pp 4096: a27/a24 (3 layers to host) = 0.908  slower  (ranges overlap: False; H0 rejected)
+
+C2 @512: b27/a27 = 1.141 (faster) -> FAILS
+Prediction 2 @512: b27 vs a24 = 1.049 (faster), predicted slower or no difference -> MISS
+C2 @4096: b27/a27 = 1.141 (faster) -> FAILS
+Prediction 2 @4096: b27 vs a24 = 1.048 (faster), predicted slower or no difference -> MISS
