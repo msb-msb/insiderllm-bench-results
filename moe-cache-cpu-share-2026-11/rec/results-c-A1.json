@@ -1,0 +1,433 @@
+{
+ "arm": "c-A1",
+ "ncmoe": 27,
+ "cmd": [
+  "/home/minotaur/moecache-2026-11/llama.cpp/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-ncmoe",
+  "27",
+  "-fa",
+  "on",
+  "-c",
+  "16384",
+  "-np",
+  "1",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "-t",
+  "4",
+  "--port",
+  "8081",
+  "--moe-cache-mib",
+  "2432",
+  "--moe-cache-cpu-share",
+  "0.8"
+ ],
+ "lengths": [
+  512,
+  4096
+ ],
+ "cells": {
+  "512": [
+   {
+    "nonce": "6e878c81",
+    "t0": 1795414544.3486948,
+    "ttft_s": 1.2769267559051514,
+    "total_s": 5.851947546005249,
+    "content_chunks": 256,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 513,
+     "prompt_ms": 1241.827,
+     "prompt_per_token_ms": 2.4207153996101365,
+     "prompt_per_second": 413.10101970725395,
+     "predicted_n": 256,
+     "predicted_ms": 4574.989,
+     "predicted_per_token_ms": 17.941133333333333,
+     "predicted_per_second": 55.737838932508915
+    },
+    "usage": {
+     "completion_tokens": 256,
+     "prompt_tokens": 513,
+     "total_tokens": 769,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code snippet is the beginning of a C++ source file (`common/arg.cpp`) that serves as the **argument parsing and configuration initialization module** for a LLaMA.cpp-based application.\n\nHere\u2019s a ",
+    "answer_full": "This code snippet is the beginning of a C++ source file (`common/arg.cpp`) that serves as the **argument parsing and configuration initialization module** for a LLaMA.cpp-based application.\n\nHere\u2019s a summary of what it does:\n\n### 1. **Includes and Dependencies**\n- It includes a wide range of headers related to:\n  - JSON handling (`json.h`, `json-schema-to-grammar.h`)\n  - LLaMA core functionality (`llama.h`, `chat.h`, `sampling.h`, `speculative.h`)\n  - Logging (`log.h`)\n  - Downloading (`download.h`)\n  - Common utilities (`common.h`, `preset.h`)\n  - Build information (`build-info.h`)\n- It includes standard C++ libraries for file I/O, strings, algorithms, threading, etc.\n\n### 2. **Platform-Specific Adjustments**\n- On Windows (`_WIN32`), it defines `WIN32_LEAN_AND_MEAN` and `NOMINMAX` to avoid conflicts with `std::min`/`std::max` and to include only necessary Windows headers.\n- It sets up `PATH_MAX` depending on the OS (Linux,",
+    "tag": "c-A1-512-rep1",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 29836,
+     "free_mib": 1347,
+     "cached_mib": 28206,
+     "swapused_mib": 0
+    },
+    "peak_card_mib": 11471,
+    "prefill_pcie_links": [
+     [
+      "3",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "15295308 kB",
+     "RssAnon": "672180 kB",
+     "RssFile": "14578044 kB",
+     "RssShmem": "45084 kB",
+     "VmSwap": "0 kB"
+    }
+   },
+   {
+    "nonce": "19b178ac",
+    "t0": 1795414550.6386988,
+    "ttft_s": 1.2555577754974365,
+    "total_s": 5.8724846839904785,
+    "content_chunks": 256,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 512,
+     "prompt_ms": 1220.77,
+     "prompt_per_token_ms": 2.38431640625,
+     "prompt_per_second": 419.4074231837283,
+     "predicted_n": 256,
+     "predicted_ms": 4616.849,
+     "predicted_per_token_ms": 18.105290196078432,
+     "predicted_per_second": 55.23247565601561
+    },
+    "usage": {
+     "completion_tokens": 256,
+     "prompt_tokens": 512,
+     "total_tokens": 768,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code snippet is the beginning of a C++ source file (`common/arg.cpp`) that serves as a **command-line argument parser and configuration handler** for a large language model (LLM) application, lik",
+    "answer_full": "This code snippet is the beginning of a C++ source file (`common/arg.cpp`) that serves as a **command-line argument parser and configuration handler** for a large language model (LLM) application, likely part of the **llama.cpp** project.\n\nHere\u2019s a breakdown of what it does:\n\n### 1. **Includes and Dependencies**\n- It includes numerous headers related to:\n  - JSON handling (`json.h`, `json-schema-to-grammar.h`)\n  - LLM core functionality (`llama.h`, `chat.h`, `sampling.h`, `speculative.h`)\n  - Logging (`log.h`)\n  - Download utilities (`download.h`)\n  - Build information (`build-info.h`)\n  - Common utilities (`common.h`, `preset.h`)\n- This indicates the module is central to configuring and initializing various aspects of an LLM inference server or CLI tool.\n\n### 2. **Platform-Specific Fixes**\n- On Windows (`_WIN32`), it defines `NOMINMAX` to prevent the Windows headers from defining `min` and `max` macros, which conflict with `std::min` and `std::max` from the C++ standard library.\n",
+    "tag": "c-A1-512-rep2",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 29666,
+     "free_mib": 1177,
+     "cached_mib": 28206,
+     "swapused_mib": 0
+    },
+    "peak_card_mib": 11471,
+    "prefill_pcie_links": [
+     [
+      "3",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "15439540 kB",
+     "RssAnon": "816412 kB",
+     "RssFile": "14578044 kB",
+     "RssShmem": "45084 kB",
+     "VmSwap": "0 kB"
+    }
+   },
+   {
+    "nonce": "47110cd6",
+    "t0": 1795414556.9258504,
+    "ttft_s": 1.264997959136963,
+    "total_s": 5.845939874649048,
+    "content_chunks": 256,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 512,
+     "prompt_ms": 1231.192,
+     "prompt_per_token_ms": 2.404671875,
+     "prompt_per_second": 415.85715306792116,
+     "predicted_n": 256,
+     "predicted_ms": 4580.846,
+     "predicted_per_token_ms": 17.964101960784312,
+     "predicted_per_second": 55.66657337967703
+    },
+    "usage": {
+     "completion_tokens": 256,
+     "prompt_tokens": 512,
+     "total_tokens": 768,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code snippet is part of a C++ source file (`common/arg.cpp`) from the **llama.cpp** project (a popular library for running Large Language Models locally). It serves as a **utility module for hand",
+    "answer_full": "This code snippet is part of a C++ source file (`common/arg.cpp`) from the **llama.cpp** project (a popular library for running Large Language Models locally). It serves as a **utility module for handling command-line arguments and common configuration settings**.\n\nHere\u2019s a summary of what this specific snippet does:\n\n### 1. **Includes and Dependencies**\n- It includes numerous headers related to:\n  - JSON parsing (`json.h`, `json-schema-to-grammar.h`)\n  - Llama.cpp core functionality (`llama.h`, `chat.h`, `download.h`, `sampling.h`, etc.)\n  - System utilities (`filesystem`, `fstream`, `thread`, etc.)\n  - Platform-specific headers (Windows, Linux, AIX) for path limits and API access.\n\n### 2. **Platform-Specific Fixes**\n- On **Windows**, it defines `WIN32_LEAN_AND_MEAN` and `NOMINMAX` to prevent conflicts with `std::min`/`std::max` macros from Windows headers.\n- It sets `PATH_MAX` appropriately for different operating systems (Linux, Windows, AIX, etc.).\n\n### 3. **Constants**\n- Defines `",
+    "tag": "c-A1-512-rep3",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 29539,
+     "free_mib": 1050,
+     "cached_mib": 28206,
+     "swapused_mib": 0
+    },
+    "peak_card_mib": 11471,
+    "prefill_pcie_links": [
+     [
+      "3",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "15583860 kB",
+     "RssAnon": "960732 kB",
+     "RssFile": "14578044 kB",
+     "RssShmem": "45084 kB",
+     "VmSwap": "0 kB"
+    }
+   }
+  ],
+  "4096": [
+   {
+    "nonce": "dcf505e4",
+    "t0": 1795414563.2142467,
+    "ttft_s": 9.684879541397095,
+    "total_s": 14.304450511932373,
+    "content_chunks": 256,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 4095,
+     "prompt_ms": 9642.767,
+     "prompt_per_token_ms": 2.354766056166056,
+     "prompt_per_second": 424.6706365506913,
+     "predicted_n": 256,
+     "predicted_ms": 4619.365,
+     "predicted_per_token_ms": 18.115156862745096,
+     "predicted_per_second": 55.20239253663653
+    },
+    "usage": {
+     "completion_tokens": 256,
+     "prompt_tokens": 4095,
+     "total_tokens": 4351,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code (`common/arg.cpp`) is part of the **llama.cpp** project. It serves as the central implementation for **command-line argument parsing, help text generation, and model file handling** (includi",
+    "answer_full": "This code (`common/arg.cpp`) is part of the **llama.cpp** project. It serves as the central implementation for **command-line argument parsing, help text generation, and model file handling** (including downloading and caching).\n\nHere is a summary of its key functionalities:\n\n### 1. Argument Definition and Metadata\n*   **`common_arg` Class:** Defines individual command-line arguments. It supports:\n    *   Multiple aliases (short and long flags).\n    *   Help text with automatic line wrapping.\n    *   Environment variable support (e.g., `LLAMA_ARG_...`).\n    *   Examples of which `llama_example` (CLI, Server, etc.) use the argument.\n    *   Negation support (e.g., `--no-something` maps to `LLAMA_ARG_NO_...`).\n*   **`get_common_arg_defs()`:** Lazily initializes the full list of supported arguments by creating a dummy `common_params` object and extracting its parser options.\n\n### 2. Help Text Formatting\n*   **`to_string()`:** Generates formatted help text for the console.\n    *   Aligns argument flags (e.g., `-m`, `--model",
+    "tag": "c-A1-4096-rep1",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 29322,
+     "free_mib": 834,
+     "cached_mib": 28206,
+     "swapused_mib": 0
+    },
+    "peak_card_mib": 11471,
+    "prefill_pcie_links": [
+     [
+      "3",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "15794568 kB",
+     "RssAnon": "1171440 kB",
+     "RssFile": "14578044 kB",
+     "RssShmem": "45084 kB",
+     "VmSwap": "0 kB"
+    }
+   },
+   {
+    "nonce": "47c5eaa9",
+    "t0": 1795414577.8685343,
+    "ttft_s": 9.807830572128296,
+    "total_s": 14.398767709732056,
+    "content_chunks": 256,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 4096,
+     "prompt_ms": 9641.408,
+     "prompt_per_token_ms": 2.353859375,
+     "prompt_per_second": 424.83421508559746,
+     "predicted_n": 256,
+     "predicted_ms": 4590.802,
+     "predicted_per_token_ms": 18.003145098039216,
+     "predicted_per_second": 55.54585015864331
+    },
+    "usage": {
+     "completion_tokens": 256,
+     "prompt_tokens": 4096,
+     "total_tokens": 4352,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code snippet is part of the `llama.cpp` project (specifically `common/arg.cpp`). It serves as the **argument parsing and model handling infrastructure** for the application.\n\nHere is a summary of",
+    "answer_full": "This code snippet is part of the `llama.cpp` project (specifically `common/arg.cpp`). It serves as the **argument parsing and model handling infrastructure** for the application.\n\nHere is a summary of its key functionalities:\n\n### 1. Command-Line Argument Definition & Formatting\n*   **`common_arg` Class:** Defines individual command-line options. It supports:\n    *   Setting examples/exclusions for specific `llama_example` modes (e.g., server, CLI, MTMD).\n    *   Environment variable mapping (e.g., `LLAMA_ARG_...`).\n    *   Special flags for sampling, speculative decoding, and presets.\n    *   Generating formatted help strings (`to_string()`) with proper indentation and line wrapping for console output.\n*   **`get_common_arg_defs()`:** Retrieves the list of all available arguments by initializing a `common_params` parser for the `LLAMA_EXAMPLE_SERVER` context.\n\n### 2. Environment Variable Handling\n*   **`get_value_from_env()` / `has_value_from_env()`:** Checks if an argument's value is set via environment variables.\n*   **Negation Support:** It intelligently handles boolean negation by checking for",
+    "tag": "c-A1-4096-rep2",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 29023,
+     "free_mib": 535,
+     "cached_mib": 28206,
+     "swapused_mib": 0
+    },
+    "peak_card_mib": 11471,
+    "prefill_pcie_links": [
+     [
+      "3",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "16075416 kB",
+     "RssAnon": "1452288 kB",
+     "RssFile": "14578044 kB",
+     "RssShmem": "45084 kB",
+     "VmSwap": "0 kB"
+    }
+   },
+   {
+    "nonce": "8d9b528d",
+    "t0": 1795414592.56159,
+    "ttft_s": 9.831208229064941,
+    "total_s": 14.422656536102295,
+    "content_chunks": 256,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 4097,
+     "prompt_ms": 9664.718,
+     "prompt_per_token_ms": 2.3589743714913354,
+     "prompt_per_second": 423.91304122893183,
+     "predicted_n": 256,
+     "predicted_ms": 4591.216,
+     "predicted_per_token_ms": 18.004768627450982,
+     "predicted_per_second": 55.540841467707025
+    },
+    "usage": {
+     "completion_tokens": 256,
+     "prompt_tokens": 4097,
+     "total_tokens": 4353,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code snippet is part of the `llama.cpp` project (specifically `common/arg.cpp`). It serves as the **argument parsing, validation, and model handling infrastructure** for the application.\n\nHere is",
+    "answer_full": "This code snippet is part of the `llama.cpp` project (specifically `common/arg.cpp`). It serves as the **argument parsing, validation, and model handling infrastructure** for the application.\n\nHere is a summary of its key functionalities:\n\n### 1. Argument Definition and Help Generation\n*   **`common_arg` Class:** Defines command-line arguments with properties like names (`args`), environment variables (`env`), help text, and examples/exclusions for specific use cases (e.g., CLI vs. Server).\n*   **`to_string()`:** Formats these arguments into a human-readable help message, handling line wrapping and alignment for console output.\n*   **Environment Variable Support:** Allows arguments to be overridden via environment variables (e.g., `LLAMA_ARG_...`). It also supports \"negative\" environment variables (e.g., `LLAMA_ARG_NO_...`) to disable flags.\n\n### 2. Model and Speculative Decoding Handling\n*   **`common_models_handler`:** A struct that manages the logic for downloading and preparing models.\n*   **`common_models_handler_init()`:**\n    *   Determines which models need to be downloaded based on the current `llama_example` (",
+    "tag": "c-A1-4096-rep3",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 29048,
+     "free_mib": 616,
+     "cached_mib": 27894,
+     "swapused_mib": 0
+    },
+    "peak_card_mib": 11471,
+    "prefill_pcie_links": [
+     [
+      "3",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "16356212 kB",
+     "RssAnon": "1733084 kB",
+     "RssFile": "14578044 kB",
+     "RssShmem": "45084 kB",
+     "VmSwap": "0 kB"
+    }
+   }
+  ]
+ },
+ "load_s": 5.4,
+ "load_peak_mib": 11413,
+ "card_after_load_mib": 11413,
+ "props_build": {
+  "build_info": "b12359-b1b770d90",
+  "build_commit": null,
+  "model_path": "/home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"
+ },
+ "props_n_ctx": 16384,
+ "cold": {
+  "nonce": "9e6d5068",
+  "t0": 1795414537.5369594,
+  "ttft_s": 1.440356731414795,
+  "total_s": 6.287975788116455,
+  "content_chunks": 256,
+  "timings": {
+   "cache_n": 0,
+   "prompt_n": 513,
+   "prompt_ms": 1432.848,
+   "prompt_per_token_ms": 2.7930760233918126,
+   "prompt_per_second": 358.02820676024254,
+   "predicted_n": 256,
+   "predicted_ms": 4847.518,
+   "predicted_per_token_ms": 19.00987450980392,
+   "predicted_per_second": 52.60423994299763
+  },
+  "usage": {
+   "completion_tokens": 256,
+   "prompt_tokens": 513,
+   "total_tokens": 769,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "error": null,
+  "answer_head": "This code snippet is the beginning of a C++ source file (`common/arg.cpp`) that serves as a **command-line argument parser and configuration handler** for a large language model (LLM) application, lik",
+  "answer_full": "This code snippet is the beginning of a C++ source file (`common/arg.cpp`) that serves as a **command-line argument parser and configuration handler** for a large language model (LLM) application, likely part of the **llama.cpp** project.\n\nHere\u2019s a breakdown of what it does:\n\n### 1. **Includes and Dependencies**\n- It includes numerous headers related to:\n  - JSON handling (`json.h`, `json-schema-to-grammar.h`)\n  - LLM core functionality (`llama.h`, `chat.h`, `sampling.h`, `speculative.h`)\n  - Logging (`log.h`)\n  - Downloading (`download.h`)\n  - Common utilities (`common.h`, `preset.h`)\n  - Build information (`build-info.h`)\n- This indicates the module is central to configuring and initializing various aspects of an LLM inference server or CLI tool.\n\n### 2. **Platform-Specific Fixes**\n- On Windows (`_WIN32`), it defines `NOMINMAX` to prevent the Windows headers from defining `min` and `max` macros, which conflict with `std::min` and `std::max` from the C++ standard library.\n",
+  "tag": "c-A1-512-cold",
+  "swapin_kib": 0,
+  "swapout_kib": 0,
+  "nvme_read_prefill_mib": 0.0,
+  "nvme_read_decode_mib": 0.0,
+  "mem_after": {
+   "avail_mib": 29932,
+   "free_mib": 1444,
+   "cached_mib": 28206,
+   "swapused_mib": 0
+  },
+  "peak_card_mib": 11449,
+  "prefill_pcie_links": [
+   [
+    "3",
+    "16"
+   ]
+  ],
+  "proc": {
+   "VmRSS": "15137412 kB",
+   "RssAnon": "514284 kB",
+   "RssFile": "14578044 kB",
+   "RssShmem": "45084 kB",
+   "VmSwap": "0 kB"
+  }
+ },
+ "cold_peak_mib": 11449,
+ "cell_512_peak_mib": 11471,
+ "cell_4096_peak_mib": 11471,
+ "arm_peak_mib": 11471,
+ "min_avail_mib": 29007
+}

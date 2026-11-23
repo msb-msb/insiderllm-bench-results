@@ -10,3 +10,12 @@ FIT GATE: a27 load peak 8973 MiB, arm peak 9017 MiB; 9017 + 1866 + 1024 = 11907 
 2026-11-23T06:00:14 === tuner: python3 /home/minotaur/moecache-2026-11/llama.cpp/scripts/moe-cache-tune.py --out rec/tune-rushuna -- /home/minotaur/moecache-2026-11/llama.cpp/build/bin/llama-server -m /home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf -ngl 99 -ncmoe 24 -fa on -c 16384 -np 1 --fit off -lm mmap -t 4 --port 8081
 2026-11-23T06:00:36 === tuner rc=1 card 0 MiB
 2026-11-23T06:00:36 STOP: tuner failed
+2026-11-23T06:08:31 [A1] amendment A1 start; amended lock file sha256 ed172d567d0a17097b853e739a20a0d90fc72821273a2bedfad7001f3cf41e77
+2026-11-23T06:08:33 [A1] tuner start UTC 2026-11-23T06:08:33
+2026-11-23T06:08:33 [A1] === tuner-A1: python3 /home/minotaur/moecache-2026-11/llama.cpp/scripts/moe-cache-tune.py --out /home/minotaur/moecache-2026-11/rec/tune-rushuna-a27 -- /home/minotaur/moecache-2026-11/llama.cpp/build/bin/llama-server -m /home/minotaur/moecache-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf -ngl 99 -ncmoe 27 -fa on -c 16384 -np 1 --fit off -lm mmap -t 4 --port 8081
+2026-11-23T06:15:26 [A1] === tuner-A1 rc=0 card 0 MiB
+2026-11-23T06:15:26 [A1] tuner end UTC 2026-11-23T06:15:26
+2026-11-23T06:15:26 [A1] tuner: recommended: --moe-cache-mib 2432 --moe-cache-cpu-share 0.8 (58.2 t/s, 47.0 with share 0)
+2026-11-23T06:15:28 [A1] === c-A1: python3 /home/minotaur/moecache-2026-11/harness/bench_moecache.py c-A1 27 --moe-cache-mib 2432 --moe-cache-cpu-share 0.8
+2026-11-23T06:17:01 [A1] === c-A1 rc=0 card 0 MiB
+2026-11-23T06:17:01 [A1] === AMENDED ARM (c) DONE

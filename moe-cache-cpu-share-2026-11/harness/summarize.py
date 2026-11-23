@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Lock c22ff41b M6 (void rules) and M8 (scoring), from results-<arm>.json in the record folder.
   summarize.py RECDIR   -> prints the tables and writes summary.json
+Arm (c) is read from results-c-A1.json: "amended arm (A1, post-results)", the tuner run on the (a27) command.
+C1 under A1 = (c) / (a24) >= 1.5 with non-overlapping ranges; (c) / (b27) is the CPU-share effect.
 A re-run of a void cell (M6) is read from results-<arm>-rerun<len>.json when present and replaces that cell.
 Answer quality (empty / looping / garbled) is flagged by a heuristic here and checked by eye in the record.
 """
@@ -11,8 +13,11 @@ ARMS = ["a24", "a27", "b27", "c"]
 LENGTHS = ["512", "4096"]
 
 
+FILES = {"c": "c-A1"}   # Amendment A1 (post-results): arm (c) is the tuner run on the (a27) command
+
+
 def load(arm):
-    p = os.path.join(D, f"results-{arm}.json")
+    p = os.path.join(D, f"results-{FILES.get(arm, arm)}.json")
     if not os.path.exists(p):
         return None
     r = json.load(open(p))
@@ -122,11 +127,10 @@ print()
 for n in LENGTHS:
     b, c, a = cell("b27", n), cell("c", n), cell("a24", n)
     if b and c and a:
-        best, nm = (b, "b27") if b["median"] >= c["median"] else (c, "c")
-        cmp = compare(best, a)
+        cmp = compare(c, a)   # Amendment A1: C1 = (c) vs (a24)
         c1 = cmp["ratio"] >= 1.5 and cmp["verdict"] == "faster"
-        S["scores"][f"C1-{n}"] = {"better": nm, **cmp, "holds": c1}
-        print(f"C1 @{n}: better arm {nm}, {nm}/a24 = {cmp['ratio']:.3f} ({cmp['verdict']}) -> {'HOLDS' if c1 else 'FAILS'}")
+        S["scores"][f"C1-{n}"] = {"arm": "c (amended arm, A1, post-results)", **cmp, "holds": c1}
+        print(f"C1 @{n} [amended arm (A1, post-results)]: c/a24 = {cmp['ratio']:.3f} ({cmp['verdict']}) -> {'HOLDS' if c1 else 'FAILS'}")
     b, a27 = cell("b27", n), cell("a27", n)
     if b and a27:
         cmp = compare(b, a27); c2 = cmp["verdict"] == "slower"
