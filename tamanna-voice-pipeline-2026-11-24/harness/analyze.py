@@ -1,4 +1,4 @@
-"""Per-arm analysis for the voice-pipeline run (pre-registration sections 3.2, 3.3, 4; amendments A1, A2).
+"""Per-arm analysis for the voice-pipeline run (pre-registration sections 3.2, 3.3, 4; amendments A1, A2, A3).
 
 Inputs per arm, under RUN/<ARM>/ (Miu copy of Tamanna's folder plus the client logs):
   client-{1,2,3}.jsonl     Playwright records (client-warmup.jsonl is discarded, never read here)
@@ -20,7 +20,9 @@ Per clip (window = this clip's start .. next clip's start, on Tamanna's clock):
   Residual    E2E - STT - LLM first sentence - TTS first (section 3.2).
 Aggregates: median and p90 (numpy 'linear') per arm x set over the 3 measured passes. VRAM: per-process peak over
 the arm (ready .. last clip), and the per-tick total. WER: harness/wer.py on pass 1, hypotheses exactly as Open WebUI
-delivered them (the chat's user turn).
+delivered them (the chat's user turn). A3: for S1, hyps.tsv holds the hypotheses with the Qwen3-ASR prefix stripped
+by S1_PREFIX (primary S1 WER) and hyps-unstripped.tsv the hypotheses as delivered (locked scoring, reported beside
+it); per_clip.tsv records whether the delivered transcript still carried the prefix.
 
 Usage: analyze.py RUNDIR ARM  -> writes RUNDIR/<ARM>/per_clip.tsv, summary.json, refs.tsv, hyps.tsv
 """
@@ -30,6 +32,7 @@ import numpy as np
 
 RUN, ARM = pathlib.Path(sys.argv[1]), sys.argv[2]
 D = RUN / ARM
+S1_PREFIX = re.compile(r"^\s*language [A-Za-z]+<asr_text>")  # A3 item 2, S1 only: S1_PREFIX.sub("", hyp, count=1)
 TS = re.compile(r"^(\d+)\.(\d{2})\.(\d{3})\.(\d{3}) ")
 
 
@@ -94,6 +97,7 @@ for i, c in enumerate(clips):
         s = [t for t in stt if lo <= t["wall_launch"] < hi]
         if s:
             r["stt_ms"], t_stt = s[0]["total_ms"], s[0]["wall_launch"]
+            r["stt_prompt_tokens"] = s[0].get("prompt_tok")
     elif ARM == "S2":
         s = [t for t in stt if lo <= t["wall_recv"] < hi]
         if s:
@@ -113,10 +117,12 @@ for i, c in enumerate(clips):
         r["tts_first_ms"], r["tts_first_chars"], r["tts_requests_in_window"] = T[0]["total_ms"], T[0]["chars"], len(T)
     if ARM != "R0" and all(r.get(k) is not None for k in ("e2e_ms", "stt_ms", "llm_first_sentence_ms", "tts_first_ms")):
         r["residual_ms"] = round(r["e2e_ms"] - r["stt_ms"] - r["llm_first_sentence_ms"] - r["tts_first_ms"], 1)
+    if ARM == "S1":
+        r["s1_prefix_delivered"] = bool(S1_PREFIX.match(c.get("transcript") or ""))
     rows.append(r)
 
 cols = ["pass", "clip_id", "set", "ok", "e2e_ms", "stt_ms", "stt_infer_ms", "llm_ttft_ms", "llm_first_sentence_ms",
-        "tts_first_ms", "residual_ms", "llm_prompt_tokens", "llm_decode_tok_s", "first_sentence_tokens", "reply_tokens",
+        "tts_first_ms", "residual_ms", "stt_prompt_tokens", "s1_prefix_delivered", "llm_prompt_tokens", "llm_decode_tok_s", "first_sentence_tokens", "reply_tokens",
         "llm_tasks_in_window", "tts_requests_in_window", "speech_end_s", "transcript", "reply", "error"]
 with open(D / "per_clip.tsv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=cols, delimiter="\t", extrasaction="ignore", lineterminator="\n")
@@ -162,9 +168,17 @@ summary["vram_peak_mib"] = {n: per_pid.get(p) for n, p in pids.items()} | {"tota
 # WER inputs: pass 1, hypotheses as delivered.
 if ARM != "R0":
     refs = {r["clip_id"]: r for r in csv.DictReader(open(RUN / "clips" / "clips.tsv"), delimiter="\t")}
+    g2 = open(D / "hyps-unstripped.tsv", "w") if ARM == "S1" else None
     with open(D / "refs.tsv", "w") as f, open(D / "hyps.tsv", "w") as g:
         for r in rows:
             if r.get("pass") == "1" and r.get("ok"):
+                hyp = (r.get("transcript") or "").replace(chr(9), " ").replace(chr(10), " ")
                 f.write(f"{r['clip_id']}\t{refs[r['clip_id']]['set']}\t{refs[r['clip_id']]['reference']}\n")
-                g.write(f"{r['clip_id']}\t{ARM}\t{(r.get('transcript') or '').replace(chr(9), ' ').replace(chr(10), ' ')}\n")
+                g.write(f"{r['clip_id']}\t{ARM}\t{S1_PREFIX.sub('', hyp, count=1) if ARM == 'S1' else hyp}\n")
+                if g2:
+                    g2.write(f"{r['clip_id']}\t{ARM}\t{hyp}\n")
+    if g2:
+        g2.close()
+    summary["s1_prefix_delivered"] = sum(1 for r in rows if r.get("s1_prefix_delivered")) if ARM == "S1" else None
+    (D / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False))
 print(json.dumps(summary["sets"], indent=1)[:3000])

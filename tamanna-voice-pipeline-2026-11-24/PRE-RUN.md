@@ -2,7 +2,8 @@
 
 Pre-registration: `docs/candidates/voice-pipeline-3090-2026-11.md`, lock `c7cf92cc` (sha256 `6c7608fc…2a35`),
 Amendment A1 (file sha256 `711bf08d…1570`), Amendment A2 (commit `a8712dca`, file sha256
-`b8d34f650fc31559bf83ca1a1bb0314c0b682258697a769390413d66e15b4b54`, public copy checked byte-identical). This file
+`b8d34f650fc31559bf83ca1a1bb0314c0b682258697a769390413d66e15b4b54`, public copy checked byte-identical), Amendment A3
+(commit `5224a479`, file sha256 `bae91cb1…79a5`). This file
 lists what was done on the run day before any warm-up or measured pass, and the harness decisions the lock leaves
 open (section 8: "This lock fixes that harness's method and definitions, not its code"). Nothing here is a result.
 
@@ -66,15 +67,16 @@ Run on the 11-19 TTS smoke-test audio with a fixed `-ncmoe 20` (folder `FUNC1` o
 checked that the chain works end to end (fake microphone → Open WebUI → STT → LLM → TTS → `blob:` audio playing),
 that the R0 typed path works, and that `analyze.py` parses the logs. No number from them is reported.
 
-## Open questions for Mark before the first warm-up
+## Open questions, resolved by Amendment A3 (before the first warm-up)
 
-1. **llama-server's host prompt cache.** v0.7.0 defaults to `--cache-ram 8192` (keeps past prompts in RAM and
-   restores them). Each clip is asked once per pass, so passes 2 and 3 repeat pass 1's prompts and their prefill
-   could be served from cache. TTFT would then fall after pass 1. In the functional test, a repeated prompt
-   evaluated only 4 new tokens. The lock's fixed flags don't mention it, and the harness as committed runs the
-   defaults. Options: run as is and report TTFT per pass; or add `--cache-ram 0` to the LLM server in every arm,
-   which needs your call since it's a flag outside the locked list.
-2. **S1's transcript carries Qwen3-ASR's prefix.** llama.cpp v0.7.0 returns `language English<asr_text>Plants use…`.
-   Open WebUI passes that verbatim to the LLM as the user's message. The run measures it as is, since that's the
-   route the lock names. Pre-registered WER is computed on the text as delivered, so the prefix counts as inserted
-   words. A prefix-stripped WER can be reported beside it, labelled exploratory.
+Amendment A3 (file sha256 `bae91cb167cb3ff79795d0058074176c0016bc9ba0e6f0541726e0986c0179a5`, commit `5224a479`,
+public copy checked byte-identical) settles both questions raised here:
+
+1. **Host prompt cache.** llama-server v0.7.0 defaults to `--cache-ram 8192`. A day-0 check on the S1 STT server
+   (smoke audio only, `day0/cache-check/`) showed repeated clips evaluating 1 prompt token, against 71-84 with
+   `--cache-ram 0`. A3 sets `--cache-ram 0` on the LLM server and on the S1 and S3 STT servers in every arm;
+   per-slot common-prefix reuse stays at its default. `serve.py` was updated to match before the first warm-up.
+2. **S1 prefix.** llama.cpp v0.7.0's transcription response for Qwen3-ASR starts `language English<asr_text>`
+   (`day0/loadcheck/S1-responses.jsonl`). Whether Open WebUI passes it on to the LLM unchanged was not checked
+   before the run; the S1 arm's chats show it, and the results say. A3 fixes a strip rule for S1 WER
+   (`analyze.py`, `S1_PREFIX`): stripped WER is primary, unstripped WER under the locked scoring is reported beside it.

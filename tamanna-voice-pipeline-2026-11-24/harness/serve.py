@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tamanna-side server control for the voice-pipeline run (pre-registration section 3; amendments A1, A2).
+"""Tamanna-side server control for the voice-pipeline run (pre-registration section 3; amendments A1, A2, A3).
 
   serve.py up ARM      ARM in S1 S2 S3 R0. Starts the 10 Hz VRAM sampler, the arm's STT server and the TTS wrapper
                        (voice arms only), runs 3 warm-up requests through each, records each process's VRAM peak,
@@ -13,7 +13,8 @@ Standard library only (Tamanna's system python3). Everything goes to ~/voice-pip
 Fixed across arms (section 3.1): llama-server -c 8192 -np 1 -fa on --jinja, thinking off. STT llama-servers (S1, S3)
 run with -ngl 99 -c 2048 -np 1, set before the first warm-up: llama-server's default context (65,536 x 4 slots for
 Qwen3-ASR) reserves ~10 GB of KV for clips that use ~100-300 tokens. The lock fixes the STT models and route, not
-these flags. Warm-up audio is the TTS-generated smoke-test audio (smoke-2026-11-19/{en,de}.mp3), never a measured clip.
+these flags. Amendment A3: the LLM and the S1/S3 STT llama-servers run with --cache-ram 0 (no host-RAM prompt cache;
+per-slot common-prefix reuse stays at its default). Warm-up audio is the TTS-generated smoke-test audio (smoke-2026-11-19/{en,de}.mp3), never a measured clip.
 """
 import json, os, pathlib, signal, subprocess, sys, time, urllib.request, ssl
 
@@ -30,10 +31,10 @@ CTX = ssl.create_default_context(); CTX.check_hostname = False; CTX.verify_mode 
 STT = {
     "S1": [str(LLAMA), "-m", f"{M}/qwen3-asr-1.7b-gguf/qwen3-asr-1.7b-Q8_0.gguf",
            "--mmproj", f"{M}/qwen3-asr-1.7b-gguf/mmproj-qwen3-asr-1.7b-f16.gguf",
-           "-ngl", "99", "-c", "2048", "-np", "1", "--host", "127.0.0.1", "--port", "8093"],
+           "-ngl", "99", "-c", "2048", "-np", "1", "--cache-ram", "0", "--host", "127.0.0.1", "--port", "8093"],
     "S3": [str(LLAMA), "-m", f"{M}/granite-speech-4.1-2b-plus-gguf/granite-speech-4.1-2b-plus-Q8_0.gguf",
            "--mmproj", f"{M}/granite-speech-4.1-2b-plus-gguf/mmproj-model-f16.gguf",
-           "-ngl", "99", "-c", "2048", "-np", "1", "--host", "127.0.0.1", "--port", "8093"],
+           "-ngl", "99", "-c", "2048", "-np", "1", "--cache-ram", "0", "--host", "127.0.0.1", "--port", "8093"],
     "S2": [str(VP / "ctc/bin/python"), str(VP / "harness/stt_ctc_server.py"),
            "--model", f"{M}/granite-speech-5.0-470m-turboctc", "--ffmpeg", str(VP / "bin/ffmpeg"),
            "--host", "127.0.0.1", "--port", "8091", "--log", "{D}/stt_s2.jsonl"],
@@ -47,7 +48,7 @@ LLM_ALIAS = "qwen3.6-35b-a3b"
 
 def llm_cmd(ncmoe):
     return [str(LLAMA), "-m", str(LLM_GGUF), "--alias", LLM_ALIAS, "-ngl", "99", "--n-cpu-moe", str(ncmoe),
-            "-c", "8192", "-np", "1", "-fa", "on", "--jinja", "--chat-template-kwargs", '{"enable_thinking":false}',
+            "-c", "8192", "-np", "1", "--cache-ram", "0", "-fa", "on", "--jinja", "--chat-template-kwargs", '{"enable_thinking":false}',
             "--host", "0.0.0.0", "--port", "8080"]
 
 
