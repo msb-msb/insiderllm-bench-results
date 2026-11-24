@@ -432,3 +432,58 @@ lock above has no rule for an interrupted run and no check that the GPU settings
 **Known cost, reported with the results.** English is drawn from the loudest ~quarter of FLEURS en_us test clips. The record lists each selected clip's FLEURS speaker ID and the number of distinct speakers, and states that the English latency results may not carry over to quiet input. The low level of FLEURS en_us audio is reported as a finding in its own right.
 
 **Fallback.** If a selected clip still yields no speech-end point at run time, it is voided (logged with the reason) and replaced by the next qualifying row in order. The replacement is listed in the record.
+
+### Amendment A3 (2026-11-24, before any warm-up or measured pass, pre-results)
+
+#### 1. Host prompt cache off
+
+**Change.** The LLM llama-server gets `--cache-ram 0` in every arm (S1, S2, S3, R0), and so do the S1 and S3 STT
+llama-servers. Per-slot common-prefix reuse (`cache_prompt`) stays at llama.cpp's default.
+
+**Why.** llama.cpp v0.7.0 defaults to `--cache-ram 8192`: it keeps past prompts in host RAM and restores them. Each
+clip is asked once per pass, so passes 2 and 3 repeat pass 1's prompts exactly. In the functional test a repeated LLM
+prompt evaluated 4 new tokens. A day-0 check on the S1 STT server (11-19 smoke audio, sequence en, de, en, de)
+evaluated 80, 84, 1, 1 prompt tokens with the default, and 80, 84, 71, 84 with `--cache-ram 0` (logs in
+`docs/bench-results/tamanna-voice-pipeline-2026-11-24/day0/cache-check/`). A cached prompt makes time to first
+token, and STT time, unrepresentative of real use, where nobody repeats a question word for word. Common-prefix reuse within a slot (system prompt, chat template, the audio
+prompt's fixed head) is what a real deployment gets, so it stays.
+
+**Record.** The exact server command lines (LLM, STT, TTS) are written per arm to `meta.json` and to the first line
+of each server log, and are reproduced in the record.
+
+#### 2. S1 transcript prefix
+
+**Finding.** With llama.cpp v0.7.0, Qwen3-ASR's transcription response carries the model's language tag before the
+text. The two S1 outputs from the day-0 load check (11-19 smoke audio, `day0/loadcheck/S1-responses.jsonl` in the
+same record), and again from the cache check, are:
+
+    language English<asr_text>Plants use sunlight to turn water and air into food.
+    language German<asr_text>Pflanzen nutzen Sonnenlicht, um aus Wasser und Luft Nahrung zu machen.
+
+**Strip rule (S1 only, applied to each hypothesis before `wer.py`, nothing else changed):**
+
+    re.sub(r"^\s*language [A-Za-z]+<asr_text>", "", hyp, count=1)
+
+That is: at the start of the string, optional whitespace, the literal `language `, one or more ASCII letters, the
+literal `<asr_text>`; removed once. A hypothesis without that prefix at its start is left unchanged. Applied to the
+two outputs above:
+
+    Plants use sunlight to turn water and air into food.
+    Pflanzen nutzen Sonnenlicht, um aus Wasser und Luft Nahrung zu machen.
+
+**Primary S1 WER** is computed on the stripped hypotheses. The WER under the locked scoring on the hypotheses as
+delivered (prefix included) is reported beside it, labelled "unstripped, locked scoring". The hypothesis is whatever
+Open WebUI delivered as the user turn; the record states, from the S1 arm's chats, whether the prefix reached the
+LLM. Latency is measured on the pipeline as is; the strip rule touches WER only.
+
+#### 3. Limitations (reported with the results; not method changes)
+
+- FLEURS publishes no speaker IDs (`test.tsv` columns: id, file, raw and normalised transcription, characters,
+  `num_samples`, gender), so the record gives FLEURS sentence IDs and gender labels instead of A2's speaker count.
+- All 20 selected FLEURS clips are labelled MALE.
+- The 10 de_de clips cover 7 distinct sentences (ids 1885, 1724 and 1674 each appear twice, in separate recordings).
+  The 10 en_us clips are 10 distinct sentences.
+- For en01 and en10 the last 10 ms frame above −40 dBFS is the last frame of the file (background noise), so their
+  speech-end offset is the end of the file.
+- Clicking Voice mode makes Open WebUI play a ~10 ms silent `data:audio/wav` primer. By rule, a `playing` event whose
+  source is a `data:` URI is logged and ignored; first TTS audio is the first `playing` from any other source.
