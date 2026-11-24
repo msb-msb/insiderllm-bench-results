@@ -80,3 +80,27 @@ public copy checked byte-identical) settles both questions raised here:
    (`day0/loadcheck/S1-responses.jsonl`). Whether Open WebUI passes it on to the LLM unchanged was not checked
    before the run; the S1 arm's chats show it, and the results say. A3 fixes a strip rule for S1 WER
    (`analyze.py`, `S1_PREFIX`): stripped WER is primary, unstripped WER under the locked scoring is reported beside it.
+
+## S1.void-1 and Amendment A4 (before any measured pass)
+
+The first S1 attempt was stopped during its discarded warm-up pass and voided (`S1.void-1/`, see `VOID.md` there).
+Amendment A4 (file sha256 `81ba932a6ff203ef3d9fca27ab248d11420b0610e5e9999b072cd85a18a7d417`, commit `d8d7ba39`,
+public copy checked byte-identical) followed:
+
+- **LLM host cache.** The LLM llama-server is back on llama.cpp's default host cache; the S1/S3 STT servers keep
+  `--cache-ram 0`. Reason: every reply carries Open WebUI 0.13's built-in tool definitions (38 tools, ~7,400 prompt
+  tokens), and the title, follow-up and tag calls replace the single slot's contents between clips, so only the host
+  cache keeps the shared prefix.
+- **en04** stays a selected clip; Open WebUI's voice mode didn't detect it in S1.void-1 (no transcription request,
+  90 s client timeout). It counts as a failed clip in each S arm and is reported with its level.
+- **Pre-reply LLM call identified: title generation.** A logging proxy between Open WebUI and the LLM server
+  (`day0/owui-request-probe/`, a typed-chat probe with the LLM only; not a result) shows, per user message: the title
+  generation request, then ~20 ms later the reply request (with the 38 tool definitions), then follow-up and tag
+  generation after the reply. On the single slot the title call runs before the reply, so it falls inside the
+  measured E2E window (~0.6 s; reported per clip as `pre_reply_ms`).
+- **Analysis fix.** `analyze.py` matches the reply task by the `timings` Open WebUI stores on the assistant message
+  (prompt_n and predicted_n), and reports per reply the evaluated and cached prompt tokens and the slot-selection-to-
+  launch gap (where a host-cache restore happens, outside `prompt_ms`; 133 ms on one probe reply). `client.py` now
+  saves those stored timings with each clip.
+- **Exploratory pass (A4 item 4, not pre-registered):** `run_arm.sh ARM X-ARM tools=off`, built-in tools off on the
+  voice-bench model, after the four locked arms if time permits.

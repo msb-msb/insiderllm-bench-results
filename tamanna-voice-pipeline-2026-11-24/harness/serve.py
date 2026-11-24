@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tamanna-side server control for the voice-pipeline run (pre-registration section 3; amendments A1, A2, A3).
+"""Tamanna-side server control for the voice-pipeline run (pre-registration section 3; amendments A1-A4).
 
   serve.py up ARM      ARM in S1 S2 S3 R0. Starts the 10 Hz VRAM sampler, the arm's STT server and the TTS wrapper
                        (voice arms only), runs 3 warm-up requests through each, records each process's VRAM peak,
@@ -13,8 +13,10 @@ Standard library only (Tamanna's system python3). Everything goes to ~/voice-pip
 Fixed across arms (section 3.1): llama-server -c 8192 -np 1 -fa on --jinja, thinking off. STT llama-servers (S1, S3)
 run with -ngl 99 -c 2048 -np 1, set before the first warm-up: llama-server's default context (65,536 x 4 slots for
 Qwen3-ASR) reserves ~10 GB of KV for clips that use ~100-300 tokens. The lock fixes the STT models and route, not
-these flags. Amendment A3: the LLM and the S1/S3 STT llama-servers run with --cache-ram 0 (no host-RAM prompt cache;
-per-slot common-prefix reuse stays at its default). Warm-up audio is the TTS-generated smoke-test audio (smoke-2026-11-19/{en,de}.mp3), never a measured clip.
+these flags. Amendments A3/A4: the S1/S3 STT llama-servers run with --cache-ram 0 (no host-RAM prompt cache); the LLM
+llama-server keeps llama.cpp's default host cache (A4). Per-slot common-prefix reuse stays at its default in both.
+Exploratory pass (A4 item 4, not pre-registered): `up ARM dir=X-<ARM> tools=off` turns Open WebUI's built-in tools
+off on the voice-bench model; X-* folders only. Warm-up audio is the TTS-generated smoke-test audio (smoke-2026-11-19/{en,de}.mp3), never a measured clip.
 """
 import json, os, pathlib, signal, subprocess, sys, time, urllib.request, ssl
 
@@ -48,7 +50,7 @@ LLM_ALIAS = "qwen3.6-35b-a3b"
 
 def llm_cmd(ncmoe):
     return [str(LLAMA), "-m", str(LLM_GGUF), "--alias", LLM_ALIAS, "-ngl", "99", "--n-cpu-moe", str(ncmoe),
-            "-c", "8192", "-np", "1", "--cache-ram", "0", "-fa", "on", "--jinja", "--chat-template-kwargs", '{"enable_thinking":false}',
+            "-c", "8192", "-np", "1", "-fa", "on", "--jinja", "--chat-template-kwargs", '{"enable_thinking":false}',
             "--host", "0.0.0.0", "--port", "8080"]
 
 
@@ -164,7 +166,7 @@ def owui_token():
     return (RUN / "owui-admin.token").read_text().strip()
 
 
-def owui_configure(arm, d):
+def owui_configure(arm, d, builtin_tools=True):
     T = {"Authorization": f"Bearer {owui_token()}"}
     http(f"{OWUI}/openai/config/update", {"ENABLE_OPENAI_API": True, "OPENAI_API_BASE_URLS": ["http://127.0.0.1:8080/v1"],
                                           "OPENAI_API_KEYS": ["none"], "OPENAI_API_CONFIGS": {}}, T)
@@ -179,7 +181,8 @@ def owui_configure(arm, d):
     assert LLM_ALIAS in ids, ids
     # A workspace model carries the fixed system prompt and sampling (section 3.1), applied server-side by Open WebUI.
     body = {"id": "voice-bench", "base_model_id": LLM_ALIAS, "name": "voice-bench",
-            "meta": {"description": "voice-pipeline run 2026-11-24"},
+            "meta": {"description": "voice-pipeline run 2026-11-24",
+                     **({} if builtin_tools else {"capabilities": {"builtin_tools": False}})},
             "params": {"system": SYSTEM_PROMPT, **PARAMS}, "access_control": None, "is_active": True}
     try:
         http(f"{OWUI}/api/v1/models/model/update?id=voice-bench", body, T)
@@ -239,10 +242,10 @@ def fit_ncmoe(d, free):
     return pred, chosen, tried
 
 
-def up(arm, dirname=None, idle=300, force_ncmoe=None):
+def up(arm, dirname=None, idle=300, force_ncmoe=None, builtin_tools=True):
     d = RUN / (dirname or arm)
     d.mkdir(parents=True, exist_ok=True)
-    meta = {"arm": arm, "wall_up": time.time()}
+    meta = {"arm": arm, "wall_up": time.time(), "owui_builtin_tools": builtin_tools}
     assert not gpu_apps(), f"GPU not empty: {gpu_apps()}"
     start("sampler", [sys.executable, str(VP / "harness/sampler.py"), str(d / "vram.csv")], d)
     time.sleep(1)
@@ -281,7 +284,7 @@ def up(arm, dirname=None, idle=300, force_ncmoe=None):
     lp = start("llm", llm_cmd(meta["ncmoe"]), d)
     wait_health("http://127.0.0.1:8080/health", lp)
     meta["llm_cmd"] = llm_cmd(meta["ncmoe"])
-    owui_configure(arm, d)
+    owui_configure(arm, d, builtin_tools)
     meta["idle_start"] = time.time()
     time.sleep(idle)  # section 3.1: 5 minutes idle before each arm (300 s; FUNC tests may pass less)
     ok, q = a1_check(d, "pre-warmup")
@@ -308,8 +311,11 @@ if __name__ == "__main__":
     opt = dict(a.split("=", 1) for a in sys.argv[3:])  # FUNC tests: dir=FUNCn idle=S ncmoe=N
     if any(k in opt for k in ("idle", "ncmoe")):
         assert opt.get("dir", "").startswith("FUNC"), "idle/ncmoe overrides are for FUNC* folders only"
+    if "tools" in opt:
+        assert opt["tools"] == "off" and opt.get("dir", "").startswith(("X-", "FUNC")), "tools=off: exploratory X-* only"
     if cmd == "up":
-        up(arm, opt.get("dir"), int(opt.get("idle", 300)), int(opt["ncmoe"]) if "ncmoe" in opt else None)
+        up(arm, opt.get("dir"), int(opt.get("idle", 300)), int(opt["ncmoe"]) if "ncmoe" in opt else None,
+           opt.get("tools") != "off")
     elif cmd == "down":
         down(arm, opt.get("dir"))
     elif cmd == "check":

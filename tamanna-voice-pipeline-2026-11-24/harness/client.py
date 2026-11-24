@@ -1,4 +1,4 @@
-"""Miu-side Playwright client for the voice-pipeline run (pre-registration section 3.2; amendments A1, A2).
+"""Miu-side Playwright client for the voice-pipeline run (pre-registration section 3.2; amendments A1-A4).
 
 One fresh Chromium per clip, launched with
   --use-fake-ui-for-media-stream --use-fake-device-for-media-stream --use-file-for-fake-audio-capture=<padded clip>
@@ -171,6 +171,9 @@ async def one_clip(pw, row, clipdir):
     rec["transcript"] = user[0]["content"] if user else None
     reply = asst[0]["content"] if asst else ""
     rec["reply"] = reply
+    # A4: llama-server's `timings` for the reply as Open WebUI stored them (prompt_n, cache_n, prompt_ms, predicted_n).
+    rec["reply_usage"] = asst[0].get("usage") if asst else None
+    rec["reply_meta"] = asst[0].get("meta") if asst else None
     fs = first_sentence(reply)
     rec["first_sentence"] = fs
     rec["first_sentence_tokens"] = len(http(f"http://{H}:8080/tokenize", {"content": fs})["tokens"]) if fs else 0
@@ -190,7 +193,8 @@ async def main():
                 rec = await one_clip(pw, row, a.clipdir)
                 rec["ok"] = True
             except Exception as e:  # a failed clip is logged, not retried silently
-                rec = {"arm": a.arm, "pass": a.pass_, "clip_id": row["clip_id"], "ok": False, "error": repr(e)[:500]}
+                rec = {"arm": a.arm, "pass": a.pass_, "clip_id": row["clip_id"], "set": row["set"], "ok": False,
+                       "error": repr(e)[:500]}
             rec["wall_clip_start"] = t
             with open(LOG, "a") as f:
                 f.write(json.dumps(rec, ensure_ascii=False) + "\n")

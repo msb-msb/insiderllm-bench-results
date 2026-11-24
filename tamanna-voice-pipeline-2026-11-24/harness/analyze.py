@@ -1,4 +1,4 @@
-"""Per-arm analysis for the voice-pipeline run (pre-registration sections 3.2, 3.3, 4; amendments A1, A2, A3).
+"""Per-arm analysis for the voice-pipeline run (pre-registration sections 3.2, 3.3, 4; amendments A1-A4).
 
 Inputs per arm, under RUN/<ARM>/ (Miu copy of Tamanna's folder plus the client logs):
   client-{1,2,3}.jsonl     Playwright records (client-warmup.jsonl is discarded, never read here)
@@ -12,12 +12,19 @@ Per clip (window = this clip's start .. next clip's start, on Tamanna's clock):
               plus decode): llama-server's own `timings`. S2: the window's first stt_s2.jsonl line, total_ms
               (read + ffmpeg decode + inference); infer_ms is reported beside it. llama-server's file decode runs
               before the task starts and is not in its figure; the record says so.
-  LLM TTFT    the window's first LLM task after the STT request: 'prompt eval time'.
+  LLM TTFT    the reply's llama-server `timings` prompt_ms, as Open WebUI stored them on the assistant message
+              (client-*.jsonl reply_usage). The reply task in the server log is the window's task whose prompt and
+              output token counts equal the stored prompt_n and predicted_n (A4 item 3; before A4 the first task after
+              STT was taken, which is Open WebUI's title call). Also per reply: evaluated prompt tokens (prompt_n),
+              cached prompt tokens (cache_n), and the slot-selection-to-launch gap in the log, which holds any
+              host-cache restore (outside prompt_ms). Tasks launched between the STT request and the reply (Open
+              WebUI's title generation) are reported as pre_reply_ms: they sit inside the E2E window, ahead of the
+              reply on the single slot.
   LLM first   TTFT + first-sentence tokens x the task's mean decode ms/token (first sentence = text up to the first
   sentence    [.!?] followed by whitespace, Open WebUI's punctuation split; tokens counted with the server's
               /tokenize). Capped at the task's total time.
   TTS first   the window's first tts.jsonl line, total_ms (generation + mp3 encode).
-  Residual    E2E - STT - LLM first sentence - TTS first (section 3.2).
+  Residual    E2E - STT - LLM first sentence - TTS first (section 3.2). It holds the pre-reply title call.
 Aggregates: median and p90 (numpy 'linear') per arm x set over the 3 measured passes. VRAM: per-process peak over
 the arm (ready .. last clip), and the per-tick total. WER: harness/wer.py on pass 1, hypotheses exactly as Open WebUI
 delivered them (the chat's user turn). A3: for S1, hyps.tsv holds the hypotheses with the Qwen3-ASR prefix stripped
@@ -40,7 +47,7 @@ def llama_tasks(path):
     """[{wall_launch, prompt_ms, prompt_tok, eval_ms, eval_tok, total_ms}] from a llama-server log."""
     if not path.exists():
         return []
-    wall0, tasks, cur = None, [], {}
+    wall0, tasks, cur, sel = None, [], {}, None
     for line in path.read_text(errors="replace").splitlines():
         if line.startswith("# wall_start"):
             wall0 = float(line.split()[2])
@@ -50,8 +57,11 @@ def llama_tasks(path):
             continue
         rel = int(m[1]) * 60 + int(m[2]) + int(m[3]) / 1e3 + int(m[4]) / 1e6
         tid = re.search(r"task (\d+)", line)
-        if "launch_slot_" in line and tid:
-            cur[tid[1]] = {"task": int(tid[1]), "wall_launch": wall0 + rel}
+        if "get_availabl" in line:
+            sel = wall0 + rel
+        elif "launch_slot_" in line and tid:
+            cur[tid[1]] = {"task": int(tid[1]), "wall_launch": wall0 + rel, "wall_select": sel}
+            sel = None
         elif "print_timing" in line and tid and tid[1] in cur:
             t = cur[tid[1]]
             g = re.search(r"prompt eval time =\s+([\d.]+) ms /\s+(\d+) tokens", line)
@@ -103,26 +113,43 @@ for i, c in enumerate(clips):
         if s:
             r["stt_ms"], r["stt_infer_ms"], t_stt = s[0]["total_ms"], s[0]["infer_ms"], s[0]["wall_recv"]
     L = [t for t in llm if (t_stt or lo) <= t["wall_launch"] < hi]
-    if L:
-        t = L[0]
-        per_tok = t["eval_ms"] / t["eval_tok"] if t.get("eval_tok") else None
-        r["llm_ttft_ms"] = t["prompt_ms"]
-        r["llm_prompt_tokens"] = t["prompt_tok"]
+    u = c.get("reply_usage") or {}
+    rt, how = None, None
+    if u.get("prompt_n") is not None:
+        m = [t for t in L if t.get("prompt_tok") == u["prompt_n"] and t.get("eval_tok") == u.get("predicted_n")]
+        if m:
+            rt, how = m[0], "timings"
+    if rt is None and c.get("reply_tokens"):
+        m = [t for t in L if t.get("eval_tok") is not None and 0 <= t["eval_tok"] - c["reply_tokens"] <= 2]
+        if m:
+            rt, how = m[0], "output_tokens"
+    if rt is not None:
+        per_tok = rt["eval_ms"] / rt["eval_tok"] if rt.get("eval_tok") else None
+        r["llm_match"] = how
+        r["llm_ttft_ms"] = u.get("prompt_ms", rt["prompt_ms"]) if how == "timings" else rt["prompt_ms"]
+        r["llm_prompt_eval_tokens"] = rt["prompt_tok"]
+        r["llm_prompt_cached_tokens"] = u.get("cache_n") if how == "timings" else None
+        r["llm_select_to_launch_ms"] = (round((rt["wall_launch"] - rt["wall_select"]) * 1e3, 1)
+                                        if rt.get("wall_select") else None)
         r["llm_decode_tok_s"] = round(1e3 / per_tok, 2) if per_tok else None
         if per_tok is not None and c.get("first_sentence_tokens") is not None:
-            r["llm_first_sentence_ms"] = round(min(t["prompt_ms"] + c["first_sentence_tokens"] * per_tok, t["total_ms"]), 1)
+            r["llm_first_sentence_ms"] = round(min(rt["prompt_ms"] + c["first_sentence_tokens"] * per_tok, rt["total_ms"]), 1)
+        pre = [t for t in L if t["wall_launch"] < rt["wall_launch"]]
+        r["pre_reply_tasks"] = len(pre)
+        r["pre_reply_ms"] = round(sum(t["total_ms"] for t in pre), 1)
         r["llm_tasks_in_window"] = len(L)
     T = [t for t in tts if lo <= t["wall_recv"] < hi]
     if T:
         r["tts_first_ms"], r["tts_first_chars"], r["tts_requests_in_window"] = T[0]["total_ms"], T[0]["chars"], len(T)
     if ARM != "R0" and all(r.get(k) is not None for k in ("e2e_ms", "stt_ms", "llm_first_sentence_ms", "tts_first_ms")):
         r["residual_ms"] = round(r["e2e_ms"] - r["stt_ms"] - r["llm_first_sentence_ms"] - r["tts_first_ms"], 1)
-    if ARM == "S1":
+    if ARM == "S1" and c.get("ok"):
         r["s1_prefix_delivered"] = bool(S1_PREFIX.match(c.get("transcript") or ""))
     rows.append(r)
 
 cols = ["pass", "clip_id", "set", "ok", "e2e_ms", "stt_ms", "stt_infer_ms", "llm_ttft_ms", "llm_first_sentence_ms",
-        "tts_first_ms", "residual_ms", "stt_prompt_tokens", "s1_prefix_delivered", "llm_prompt_tokens", "llm_decode_tok_s", "first_sentence_tokens", "reply_tokens",
+        "tts_first_ms", "residual_ms", "pre_reply_ms", "pre_reply_tasks", "llm_match", "llm_prompt_eval_tokens",
+        "llm_prompt_cached_tokens", "llm_select_to_launch_ms", "stt_prompt_tokens", "s1_prefix_delivered", "llm_decode_tok_s", "first_sentence_tokens", "reply_tokens",
         "llm_tasks_in_window", "tts_requests_in_window", "speech_end_s", "transcript", "reply", "error"]
 with open(D / "per_clip.tsv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=cols, delimiter="\t", extrasaction="ignore", lineterminator="\n")
@@ -132,15 +159,23 @@ with open(D / "per_clip.tsv", "w", newline="") as f:
 
 summary = {"arm": ARM, "ncmoe": meta.get("ncmoe"), "free_mib": meta.get("free_mib"),
            "stt_peak_mib_warmup": meta.get("stt_peak_mib"), "tts_peak_mib_warmup": meta.get("tts_peak_mib"),
-           "a1": meta.get("a1_reading"), "n_clips": len(rows), "n_failed": sum(1 for r in rows if not r.get("ok")),
-           "sets": {}}
+           "a1": meta.get("a1_reading"), "owui_builtin_tools": meta.get("owui_builtin_tools", True),
+           "llm_cmd": meta.get("llm_cmd"), "stt_cmd": meta.get("stt_cmd"), "tts_cmd": meta.get("tts_cmd"),
+           "n_clips": len(rows), "n_failed": sum(1 for r in rows if not r.get("ok")),
+           "failed": [{"pass": r.get("pass"), "clip_id": r.get("clip_id"), "error": r.get("error")} for r in rows if not r.get("ok")],
+           "sets": {}, "per_pass": {}}
+KEYS = ("e2e_ms", "stt_ms", "stt_infer_ms", "llm_ttft_ms", "llm_first_sentence_ms", "tts_first_ms", "residual_ms",
+        "pre_reply_ms", "llm_prompt_eval_tokens", "llm_prompt_cached_tokens", "llm_select_to_launch_ms",
+        "llm_decode_tok_s", "reply_tokens")
 for s in ("fleurs_en", "fleurs_de", "en_real"):
     rs = [r for r in rows if r.get("set") == s and r.get("ok")]
-    summary["sets"][s] = {"n": len(rs)} | {
-        f"{k}_{lab}": q([r.get(k) for r in rs], p)
-        for k in ("e2e_ms", "stt_ms", "stt_infer_ms", "llm_ttft_ms", "llm_first_sentence_ms", "tts_first_ms",
-                  "residual_ms", "llm_decode_tok_s", "reply_tokens")
-        for lab, p in (("median", 50), ("p90", 90))}
+    nf = sum(1 for r in rows if r.get("set") == s and not r.get("ok"))
+    summary["sets"][s] = {"n": len(rs), "n_failed": nf} | {
+        f"{k}_{lab}": q([r.get(k) for r in rs], p) for k in KEYS for lab, p in (("median", 50), ("p90", 90))}
+    for ps in ("1", "2", "3"):
+        rp = [r for r in rs if r.get("pass") == ps]
+        summary["per_pass"].setdefault(ps, {})[s] = {"n": len(rp)} | {
+            f"{k}_{lab}": q([r.get(k) for r in rp], p) for k in KEYS for lab, p in (("median", 50), ("p90", 90))}
 
 # VRAM over the arm: from READY to the last clip's close.
 t0 = meta.get("wall_ready", 0)
