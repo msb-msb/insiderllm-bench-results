@@ -1,0 +1,21 @@
+0.01.572.288 I srv  llama_server: initializing ...
+0.01.572.300 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.572.458 W srv  server_setup: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.01.574.422 I srv    load_model: loading model '/home/minotaur/nariq-2026-11/model/Qwen3.8-27B-NariQ-3.0bpw.gguf'
+0.04.336.652 I cmn          init: llama threadpool init, n_threads = 4
+0.04.490.375 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 16384, kv_unified = 'false'
+0.04.493.251 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.04.493.308 I srv  server_run_i: model loaded
+0.04.493.325 I srv  server_on_li: listening on http://127.0.0.1:8081
+0.09.013.307 I slot       select: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1
+0.09.013.357 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.14.923.375 I slot print_timing: id  0 | task 0 | n_gen =    100, tg =  21.98 t/s, tg_3s =  22.20 t/s
+0.17.968.265 I slot print_timing: id  0 | task 0 | n_gen =    167, tg =  21.99 t/s, tg_3s =  22.00 t/s
+0.20.969.414 I slot print_timing: id  0 | task 0 | n_gen =    233, tg =  21.99 t/s, tg_3s =  21.99 t/s
+0.22.016.311 I slot print_timing: id  0 | task 0 | prompt eval time =    1406.05 ms /   511 tokens (    2.75 ms per token,   363.43 tokens per second)
+0.22.016.315 I slot print_timing: id  0 | task 0 |        eval time =   11596.87 ms /   256 tokens (   45.48 ms per token,    21.99 tokens per second)
+0.22.016.316 I slot print_timing: id  0 | task 0 |       total time =   13002.92 ms /   767 tokens
+0.22.016.321 I slot print_timing: id  0 | task 0 |    graphs reused =        254
+0.22.016.321 I slot print_timing: id  0 | task 0 |   graph reallocs =          1    /     2        (same size) / (changed size)
+0.22.016.386 I slot      release: id  0 | task 0 | stop processing: n_tokens = 766, truncated = 0
+0.22.093.729 I srv    operator(): operator(): cleaning up before exit...

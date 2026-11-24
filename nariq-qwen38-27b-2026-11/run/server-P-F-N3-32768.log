@@ -1,0 +1,32 @@
+0.01.746.123 I srv  llama_server: initializing ...
+0.01.746.152 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.01.746.362 W srv  server_setup: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.01.748.650 I srv    load_model: loading model '/home/minotaur/nariq-2026-11/model/Qwen3.8-27B-NariQ-3.0bpw.gguf'
+0.04.528.542 I cmn          init: llama threadpool init, n_threads = 4
+0.04.693.303 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 32768, kv_unified = 'false'
+0.04.696.166 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.04.696.232 I srv  server_run_i: model loaded
+0.04.696.238 I srv  server_on_li: listening on http://127.0.0.1:8081
+0.09.188.700 I slot       select: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1
+0.09.188.764 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+/home/minotaur/nariq-2026-11/fork/ggml/src/ggml-cuda/trellis.cu:344: trellis: tq_gemv_group(n, ms, x->data, TQ_F32, xs, (int) T, outs, TQ_F32, strides, pre, post, flags, ws, wsb, stream) failed (2): tq_gemv_group launch: out of memory
+/home/minotaur/nariq-2026-11/fork/build/bin/libggml-base.so.1(+0x16b9b)[0x741b86334b9b]
+/home/minotaur/nariq-2026-11/fork/build/bin/libggml-base.so.1(+0x1701c)[0x741b8633501c]
+/home/minotaur/nariq-2026-11/fork/build/bin/libggml-base.so.1(ggml_abort+0x15b)[0x741b863351fb]
+/home/minotaur/nariq-2026-11/fork/build/bin/libggml-cuda.so.1(_Z30ggml_cuda_op_trellis_mlp_chainR25ggml_backend_cuda_contextPKP11ggml_tensor+0xdd7)[0x741b80b4e2c7]
+/home/minotaur/nariq-2026-11/fork/build/bin/libggml-cuda.so.1(+0x30b981)[0x741b8090b981]
+/home/minotaur/nariq-2026-11/fork/build/bin/libggml-cuda.so.1(+0x318c63)[0x741b80918c63]
+/home/minotaur/nariq-2026-11/fork/build/bin/libggml-base.so.1(ggml_backend_sched_graph_compute_async+0x7c1)[0x741b863545e1]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama.so.1(_ZN13llama_context13graph_computeEP11ggml_cgraphb+0xdb)[0x741b84e734fb]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama.so.1(_ZN13llama_context14process_ubatchERK12llama_ubatch14llm_graph_typeP22llama_memory_context_iR11ggml_status+0x136)[0x741b84e76966]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama.so.1(_ZN13llama_context6decodeERK15llama_batch_ext+0x856)[0x741b84e811c6]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama-server-impl.so(_ZNSt17_Function_handlerIFvvEZN19server_context_impl6decodeERiiEUlvE_E9_M_invokeERKSt9_Any_data+0x52)[0x741b865a3392]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama-server-impl.so(_ZN12server_queue14yield_to_queueEOSt8functionIFvvEE+0xa6)[0x741b86554756]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama-server-impl.so(_ZN19server_context_impl6decodeERii+0x193)[0x741b865b9793]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama-server-impl.so(_ZN19server_context_impl12update_slotsEv+0x56e)[0x741b865bb3be]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama-server-impl.so(_ZN12server_queue10start_loopEl+0x125)[0x741b86555395]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama-server-impl.so(+0xeb5b8)[0x741b864eb5b8]
+/home/minotaur/nariq-2026-11/fork/build/bin/libllama-server-impl.so(_Z12llama_serveriPPc+0x140)[0x741b864ebd30]
+/lib/x86_64-linux-gnu/libc.so.6(+0x2a1ca)[0x741b85c2a1ca]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x8b)[0x741b85c2a28b]
+/home/minotaur/nariq-2026-11/fork/build/bin/llama-server(+0x2305)[0x5a4d45936305]

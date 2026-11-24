@@ -1,0 +1,65 @@
+| arm | len | decode t/s median (min..max) | prompt t/s median (min..max) | prompt_n | peak MiB | void |
+|---|---:|---|---|---|---:|---|
+| M-IQ3 | 512 | 20.55 (20.55..20.57) | 526.0 (370.4..530.1) | [512, 511, 512] | 10857 | no |
+| M-IQ3 | 4096 | 20.26 (20.26..20.26) | 581.0 (581.0..581.1) | [4097, 4096, 4097] | 10857 | no |
+| F-IQ3 | 512 | 20.53 (20.50..20.54) | 530.3 (529.6..530.9) | [512, 513, 512] | 10857 | no |
+| F-IQ3 | 4096 | 20.23 (20.23..20.24) | 580.2 (580.1..580.6) | [4097, 4095, 4097] | 10857 | no |
+| F-N3 | 512 | 22.00 (21.98..22.02) | 369.4 (366.2..369.4) | [512, 512, 510] | 10373 | no |
+| F-N3 | 4096 | 21.65 (21.65..21.67) | 388.6 (388.2..388.8) | [4095, 4095, 4096] | 10373 | no |
+| F-N25 | 512 | 23.05 (23.04..23.06) | 367.9 (367.8..368.3) | [511, 511, 511] | 8771 | no |
+| F-N25 | 4096 | 22.69 (22.68..22.69) | 389.0 (388.3..389.0) | [4097, 4096, 4097] | 8771 | no |
+
+M-IQ3: load 5.1s, load peak 10647 MiB, arm peak 10857 MiB, min MemAvailable 27010 MiB, cold tg 20.59145440107211 pp 467.9778594271438, build_info b12431-a946eb541 (ok), daemons {'mycoswarm': 0.27, 'ollama': 0.0}
+F-IQ3: load 6.0s, load peak 10647 MiB, arm peak 10857 MiB, min MemAvailable 26866 MiB, cold tg 20.571835720903277 pp 477.2215267919808, build_info b12442-9d5c990a2 (ok), daemons {'mycoswarm': 0.27, 'ollama': 0.0}
+F-N3: load 5.2s, load peak 10307 MiB, arm peak 10373 MiB, min MemAvailable 27125 MiB, cold tg 22.03638111463127 pp 364.08464648658315, build_info b12442-9d5c990a2 (ok), daemons {'mycoswarm': 0.27, 'ollama': 0.0}
+F-N25: load 6.0s, load peak 8705 MiB, arm peak 8771 MiB, min MemAvailable 27133 MiB, cold tg 23.095064720522547 pp 366.10221745187147, build_info b12442-9d5c990a2 (ok), daemons {'mycoswarm': 0.28, 'ollama': 0.01}
+
+tg 512: F-N3/M-IQ3 (vs what a user runs) = 1.071  faster  (ranges overlap: False)
+tg 512: F-N3/F-IQ3 (format alone) = 1.072  faster  (ranges overlap: False)
+tg 512: F-IQ3/M-IQ3 (fork on stock file; F2) = 0.999  slower  (ranges overlap: False)
+tg 512: F-N25/F-N3 = 1.048  faster  (ranges overlap: False)
+tg 512: F-N25/M-IQ3 = 1.122  faster  (ranges overlap: False)
+tg 4096: F-N3/M-IQ3 (vs what a user runs) = 1.069  faster  (ranges overlap: False)
+tg 4096: F-N3/F-IQ3 (format alone) = 1.070  faster  (ranges overlap: False)
+tg 4096: F-IQ3/M-IQ3 (fork on stock file; F2) = 0.999  slower  (ranges overlap: False)
+tg 4096: F-N25/F-N3 = 1.048  faster  (ranges overlap: False)
+tg 4096: F-N25/M-IQ3 = 1.120  faster  (ranges overlap: False)
+pp 512: F-N3/M-IQ3 (vs what a user runs) = 0.702  slower  (ranges overlap: False)
+pp 512: F-N3/F-IQ3 (format alone) = 0.697  slower  (ranges overlap: False)
+pp 512: F-IQ3/M-IQ3 (fork on stock file; F2) = 1.008  no difference shown  (ranges overlap: True)
+pp 512: F-N25/F-N3 = 0.996  no difference shown  (ranges overlap: True)
+pp 512: F-N25/M-IQ3 = 0.699  slower  (ranges overlap: False)
+pp 4096: F-N3/M-IQ3 (vs what a user runs) = 0.669  slower  (ranges overlap: False)
+pp 4096: F-N3/F-IQ3 (format alone) = 0.670  slower  (ranges overlap: False)
+pp 4096: F-IQ3/M-IQ3 (fork on stock file; F2) = 0.999  slower  (ranges overlap: False)
+pp 4096: F-N25/F-N3 = 1.001  no difference shown  (ranges overlap: True)
+pp 4096: F-N25/M-IQ3 = 0.669  slower  (ranges overlap: False)
+
+F1 @512: F-N3 decode vs M-IQ3 = 1.071 (faster) -> FAILS
+F2 @512 tg: F-IQ3/M-IQ3 = 0.999 (slower) -> HOLDS
+F2 @512 pp: F-IQ3/M-IQ3 = 1.008 (no difference shown) -> HOLDS
+F1 @4096: F-N3 decode vs M-IQ3 = 1.069 (faster) -> FAILS
+F2 @4096 tg: F-IQ3/M-IQ3 = 0.999 (slower) -> HOLDS
+F2 @4096 pp: F-IQ3/M-IQ3 = 0.999 (slower) -> HOLDS
+
+P-a F-N3/M-IQ3 decode @512: 1.071, predicted 0.5-0.85 -> MISS
+P-b F-N25/F-N3 decode @512: 1.048, predicted 1.05-1.2 -> MISS
+P-c F-N3/M-IQ3 prompt @512: 0.702, predicted 0.3-0.8 -> HIT
+P-d F-IQ3 vs M-IQ3 tg @512: slower -> MISS
+P-d F-IQ3 vs M-IQ3 pp @512: no difference shown -> HIT
+P-a F-N3/M-IQ3 decode @4096: 1.069, predicted 0.5-0.85 -> MISS
+P-b F-N25/F-N3 decode @4096: 1.048, predicted 1.05-1.2 -> MISS
+P-c F-N3/M-IQ3 prompt @4096: 0.669, predicted 0.3-0.8 -> HIT
+P-d F-IQ3 vs M-IQ3 tg @4096: slower -> MISS
+P-d F-IQ3 vs M-IQ3 pp @4096: slower -> MISS
+
+Fit probe (N5, reported only): -c, loads, answers, cold tg, card peak
+F-N3 @16384: loads True, answers True, n_ctx 16384, tg 21.988689880227177, peak 10871 MiB
+F-N3 @32768: loads True, answers False, n_ctx 32768, tg None, peak 11909 MiB
+F-N25 @16384: loads True, answers True, n_ctx 16384, tg 23.15453372126409, peak 9269 MiB
+F-N25 @32768: loads True, answers True, n_ctx 32768, tg 23.06653582965716, peak 10309 MiB
+M-IQ3 @16384: loads True, answers True, n_ctx 16384, tg 20.63218303384034, peak 11377 MiB
+M-IQ3 @32768: loads False, answers False, n_ctx None, tg None, peak None MiB
+Prediction fit: F-N3 loads at 16K and not at 32K -> HIT
+Prediction fit: F-N25 loads at 32K -> HIT
+Prediction fit: M-IQ3 behaves like F-N3 -> HIT

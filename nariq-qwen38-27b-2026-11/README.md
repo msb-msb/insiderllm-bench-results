@@ -66,3 +66,106 @@ mismatch voids that comparison, and it is reported.
 - Token-count check across files (`harness/token_counts.sh`, `rec/token-counts.txt`), one fixed nonce: the rendered
   512 request is 510 tokens and the 4096 request 4,094 tokens on all four file/build pairs (IQ3 on mainline and fork,
   both NariQ files on the fork), with **identical token-ID sequences** (ids sha256 `ac3df708…` and `cfeea90d…`).
+
+## Results (run 2026-11-24, 23:20-23:32 UTC, Rushuna RTX 3060 12 GB)
+
+Run folder: `run/` (`summary.txt` and `summary.json` from `harness/summarize.py`; per-request logs in `out-*.txt`, raw
+JSON in `results-*.json`, server logs, memwatch, card 1 s samples). No cell is void: prompt_n 510-513 and 4,095-4,097
+across all arms, cache_n 0, swap-out 0, PCIe 3.0 x16 in every prefill, decode NVMe reads ≤ 3 MiB. `build_info` read
+`b12431-a946eb541` (mainline) and `b12442-9d5c990a2` (fork) on every arm. Daemon CPU ≤ 0.28 s per arm (no flag).
+Memory floor never approached (min MemAvailable 26.9 GiB).
+
+Cell = median of 3 (min..max), 256-token decode, thinking off:
+
+| Arm | Prompt | Decode tok/s | Prompt tok/s | Card peak |
+|---|---:|---|---|---:|
+| M-IQ3 (mainline, UD-IQ3_XXS) | 512 | 20.55 (20.55..20.57) | 526.0 (370.4..530.1) | 10,857 MiB |
+| M-IQ3 | 4,096 | 20.26 (20.26..20.26) | 581.0 (581.0..581.1) | 10,857 MiB |
+| F-IQ3 (fork, UD-IQ3_XXS) | 512 | 20.53 (20.50..20.54) | 530.3 (529.6..530.9) | 10,857 MiB |
+| F-IQ3 | 4,096 | 20.23 (20.23..20.24) | 580.2 (580.1..580.6) | 10,857 MiB |
+| F-N3 (fork, NariQ 3.0 bpw) | 512 | 22.00 (21.98..22.02) | 369.4 (366.2..369.4) | 10,373 MiB |
+| F-N3 | 4,096 | 21.65 (21.65..21.67) | 388.6 (388.2..388.8) | 10,373 MiB |
+| F-N25 (fork, NariQ 2.5 bpw) | 512 | 23.05 (23.04..23.06) | 367.9 (367.8..368.3) | 8,771 MiB |
+| F-N25 | 4,096 | 22.69 (22.68..22.69) | 389.0 (388.3..389.0) | 8,771 MiB |
+
+Client TTFT at 4,096: M-IQ3 7.1-7.2 s, F-N3 and F-N25 10.6-10.7 s.
+
+### Claims (N8)
+
+- **F1 (F-N3 decodes slower than M-IQ3): FAILS at both lengths.** F-N3 is *faster*: 1.071x at 512 and 1.069x at
+  4,096, ranges apart. On this card, NariQ 3.0 bpw decodes about 7% faster than the same-size stock file on mainline.
+- **F2 (the fork leaves stock files alone): HOLDS at both lengths and both metrics.** F-IQ3/M-IQ3 decode 0.999 at
+  both lengths (ranges apart, but inside the 0.97-1.03 band); prompt 1.008 (no difference shown) at 512 and 0.999
+  (ranges apart, inside the band) at 4,096.
+- **Format alone (F-N3/F-IQ3, same build):** decode 1.072x / 1.070x faster; prompt processing 0.697x / 0.670x
+  slower (512 / 4,096).
+- **F-N25/F-N3:** decode 1.048x faster at both lengths; prompt processing no difference shown.
+
+### Predictions (N7)
+
+| Prediction | Result | Score |
+|---|---|---|
+| F-N3/M-IQ3 decode 0.50-0.85x | 1.071 / 1.069 | **MISS** both (wrong direction) |
+| F-N25/F-N3 decode 1.05-1.20x | 1.0475 / 1.0479 | **MISS** both (just under the band) |
+| F-N3/M-IQ3 prompt 0.30-0.80x | 0.702 / 0.669 | HIT both |
+| F-IQ3 vs M-IQ3: no difference shown | prompt @512 no difference; decode @512 and @4,096 and prompt @4,096 differ by ≤ 0.1% with ranges apart | HIT 1 of 4, MISS 3 of 4 (F2 still holds: its band allows these) |
+| F-N3 loads and answers at 16K, not at 32K | answers at 16K; at 32K loads, then crashes on the first request | HIT (scored on "answers") |
+| F-N25 loads at 32K | loads and answers, peak 10,309 MiB | HIT |
+| M-IQ3 behaves like F-N3 | answers at 16K; at 32K does not load | HIT on "answers"; the failure differs (see below) |
+
+### Fit probe (N5, reported only)
+
+| File | -c 16384 | -c 32768 |
+|---|---|---|
+| F-N3 | loads, answers, 21.99 tok/s, peak 10,871 MiB | loads (peak 11,867 MiB), then **aborts** after the first token: `trellis.cu:344 tq_gemv_group launch: out of memory` (`server-P-F-N3-32768.log`) |
+| F-N25 | loads, answers, 23.15 tok/s, peak 9,269 MiB | loads, answers, 23.07 tok/s, peak 10,309 MiB |
+| M-IQ3 | loads, answers, 20.63 tok/s, peak 11,377 MiB | does not load: `cudaMalloc failed: out of memory` allocating the 150 MiB recurrent-state cache |
+
+Scoring note (ours, written after the probe): the lock's outcomes are "loads/answers or does-not-fit". F-N3 at 32K is
+neither: the server started, the 512-token request returned one token, and the server process aborted on a fork
+kernel's OOM. We count that as not answering, which is how the fit predictions above are scored. `summarize.py`
+first counted any non-empty answer head as an answer; it was changed to require a full 256-token answer before the
+predictions were written here.
+
+### Answers (N6 addition)
+
+The third request of each cell is kept in full (`answer_full` in `results-*.json`). All 24 measured answers summarise
+`common/arg.cpp` coherently. The NariQ answers are worded differently from the IQ3 ones (e.g. at 512 they open with
+the includes list instead of a "Primary Purpose" heading) and are of the same standard. F-IQ3's third answer is
+identical to M-IQ3's at 512; at 4,096 the two match for the first 1,126 characters, then diverge in wording near the
+end (one token's choice, "multimodal projectors" vs "related assets"), as can happen with different kernel builds at
+temperature 0.
+
+### Observation (not scored)
+
+Server RssAnon grows by about 350 MB per request in every arm (e.g. M-IQ3 600 MB after the cold request, 3.66 GB
+after the sixth measured one), with `cache_prompt false` and cache_n 0. This looks like the server's host-side prompt
+cache keeping each request's state; it doesn't touch the card, and it's the same on both builds.
+
+**Checked 2026-11-24 (Mark's follow-up; observation, not a result).** `harness/ramcheck.py`, output in `ramcheck/`: the
+M-IQ3 command, 5 requests of the 512 prompt in the same request shape, RSS read 1 s after each, run twice on the
+mainline build, once as is and once with `--cache-ram 0` added.
+
+| After | RssAnon, default (`--cache-ram` 8192) | RssAnon, `--cache-ram 0` |
+|---|---:|---:|
+| load | 266 MiB | 266 MiB |
+| request 1 | 586 | 586 |
+| request 2 | 933 | 586 |
+| request 3 | 1,281 | 586 |
+| request 4 | 1,628 | 586 |
+| request 5 | 1,975 | 586 |
+
+With the cache disabled, RssAnon rises once on the first request (working buffers) and then stays flat at 586 MiB. With
+the default it grows by about 347 MiB per request. So the growth is llama.cpp's host prompt cache storing each
+finished request's state even though the requests send `cache_prompt false` (and cache_n stays 0, so nothing is
+reused). **It is not a leak.** The default caps the cache at 8,192 MiB, which we didn't run long enough to reach. None
+of the measured arms came near the memory floor (min MemAvailable 26.9 GiB), and the cache lives in host RAM, not
+on the card, so no cell is affected.
+
+### What this does and doesn't say
+
+- Speed only, one card (RTX 3060, Ampere, PCIe 3.0). The fork's README says Ampere decode is slower than stock GGUFs
+  and that no GeForce card was tested; on this GeForce Ampere card, at these lengths, NariQ decoded faster and
+  prefilled slower (about 0.67-0.70x).
+- Quality is not measured here. Whether 3.0 bpw NariQ is as good as, better or worse than UD-IQ3_XXS waits for
+  section T (KLD/PPL on Tamanna, BOS pinned and token counts matched per the N5 gate decision).

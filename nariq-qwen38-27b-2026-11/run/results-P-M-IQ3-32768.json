@@ -1,0 +1,37 @@
+{
+ "arm": "P-M-IQ3-32768",
+ "build": "mainline",
+ "file": "Qwen3.8-27B-UD-IQ3_XXS.gguf",
+ "ctx": 32768,
+ "probe": true,
+ "cmd": [
+  "/home/minotaur/nariq-2026-11/mainline/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/nariq-2026-11/model/Qwen3.8-27B-UD-IQ3_XXS.gguf",
+  "-ngl",
+  "99",
+  "-fa",
+  "on",
+  "-c",
+  "32768",
+  "-np",
+  "1",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "-t",
+  "4",
+  "--port",
+  "8081"
+ ],
+ "lengths": [
+  512,
+  4096
+ ],
+ "cells": {},
+ "load_s": 4.6,
+ "load_peak_mib": 9799,
+ "card_after_load_mib": null,
+ "error": "server did not start"
+}

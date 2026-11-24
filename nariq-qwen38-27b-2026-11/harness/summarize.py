@@ -203,7 +203,8 @@ for a in ("F-N3", "F-N25", "M-IQ3"):
         r = json.load(open(p))
         cold = r.get("cold") or {}
         loads = not r.get("error")
-        answers = loads and not cold.get("error") and bool((cold.get("answer_head") or "").strip())
+        t = cold.get("timings") or {}   # a full answer = timings present and all 256 tokens out (a mid-stream crash leaves none)
+        answers = loads and not cold.get("error") and (t.get("predicted_n") or 0) >= 256
         S["probe"][f"{a}-{c}"] = {"loads": loads, "answers": answers, "peak_mib": r.get("arm_peak_mib"),
                                  "n_ctx": r.get("props_n_ctx"), "cold_tg": (cold.get("timings") or {}).get("predicted_per_second"),
                                  "answer_head": (cold.get("answer_head") or "")[:80]}
