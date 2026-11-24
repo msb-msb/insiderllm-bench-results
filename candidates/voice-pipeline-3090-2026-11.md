@@ -420,3 +420,15 @@ lock above has no rule for an interrupted run and no check that the GPU settings
    `--no-persistence-mode` ExecStart with `--persistence-mode` and sets `StopWhenUnneeded=false`, and the unit is
    wanted by `multi-user.target`. Verified on 2026-11-23 with `systemctl cat nvidia-persistenced` (the drop-in is
    loaded) and nvidia-smi (Enabled, 420.00 W). Item 2 still runs; the drop-in makes an abort unlikely, not impossible.
+
+### Amendment A2 (2026-11-24, before any run, pre-results)
+
+**Why.** Applying the locked FLEURS rule on the run day showed that it conflicts with the locked −40 dBFS speech-end threshold on English. Of 359 en_us test rows of 4-10 s, only 83 (23%) have any 10 ms frame above −40 dBFS (median peak ~−50 dBFS). Nine of the first ten selected English rows never cross the threshold, so no speech-end point can be found and end-to-end latency can't be measured. One selected clip peaks at −53 dBFS, close to Open WebUI's −55 dB voice-activity floor. German is unaffected: all 313 qualifying de_de rows cross −40 dBFS. Mark's q1-q5 sit around −15 to −18 dBFS.
+
+**Change.** FLEURS selection, both languages: "the first 10 test rows per language between 4 and 10 s **that contain at least one 10 ms frame above −40 dBFS**." No audio is altered. The −40 dBFS threshold and every other method detail are unchanged.
+
+**Resulting sets** (recorded here before the run): en_us rows 7, 23, 28, 42, 58, 60, 66, 68, 74, 80; de_de rows 4, 8, 11, 14, 15, 16, 17, 26, 29, 30 (identical to the original rule).
+
+**Known cost, reported with the results.** English is drawn from the loudest ~quarter of FLEURS en_us test clips. The record lists each selected clip's FLEURS speaker ID and the number of distinct speakers, and states that the English latency results may not carry over to quiet input. The low level of FLEURS en_us audio is reported as a finding in its own right.
+
+**Fallback.** If a selected clip still yields no speech-end point at run time, it is voided (logged with the reason) and replaced by the next qualifying row in order. The replacement is listed in the record.
