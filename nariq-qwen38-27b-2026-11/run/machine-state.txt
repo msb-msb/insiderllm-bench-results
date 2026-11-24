@@ -1,0 +1,43 @@
+# machine state 2026-11-24T22:59:08 (before the first arm)
+rushuna
+6.8.0-136-generic
+ 22:59:08 up 1 day,  5:39,  1 user,  load average: 0.45, 0.31, 0.22
+name, driver_version, vbios_version, memory.used [MiB], memory.total [MiB], pcie.link.gen.current, pcie.link.width.current, pcie.link.gen.max, pcie.link.width.max
+NVIDIA GeForce RTX 3060, 580.173.02, 94.04.71.00.6A, 0 MiB, 12288 MiB, 3, 16, 3, 16
+# free / swap (A1 not in force, lock N5)
+               total        used        free      shared  buff/cache   available
+Mem:           32024        1069         981           1       30440       30955
+Swap:           4095           0        4095
+NAME      TYPE SIZE USED PRIO
+/swap.img file   4G   0B   -2
+# units (recorded, not stopped)
+mycoswarm active
+ollama active
+fwupd active
+ModemManager active
+apt-daily.timer inactive
+apt-daily-upgrade.timer inactive
+fwupd-refresh.timer active
+# ollama ps
+NAME    ID    SIZE    PROCESSOR    CONTEXT    UNTIL 
+# models run-day re-hash (N4)
+-rw-rw-r-- 1 minotaur minotaur  8443119712 Nov 24 18:58 /home/minotaur/nariq-2026-11/model/Qwen3.8-27B-NariQ-2.5bpw.gguf
+-rw-rw-r-- 1 minotaur minotaur 10123626592 Nov 24 18:52 /home/minotaur/nariq-2026-11/model/Qwen3.8-27B-NariQ-3.0bpw.gguf
+-rw-rw-r-- 1 minotaur minotaur 10934860704 Nov 24 19:05 /home/minotaur/nariq-2026-11/model/Qwen3.8-27B-UD-IQ3_XXS.gguf
+Qwen3.8-27B-NariQ-3.0bpw.gguf: OK
+Qwen3.8-27B-NariQ-2.5bpw.gguf: OK
+Qwen3.8-27B-UD-IQ3_XXS.gguf: OK
+# PCIe at idle
+3, 16
+# build mainline
+a946eb541a6d3051496bdcc451a0fa85772b8dfd
+version: 1.0.0-dev (build 12431, commit a946eb541)
+built with GNU 13.3.0 for Linux x86_64
+7b55b9889755a618124f79886dd6e30df2360b16f9928d2fe977912afb5989d7  /home/minotaur/nariq-2026-11/mainline/build/bin/llama-server
+79249f0f1e80ec4ca36757ebc10bd7f04e2c25f83612d2503456c4b9da73c6b1  /home/minotaur/nariq-2026-11/mainline/build/bin/llama-tokenize
+# build fork
+9d5c990a28410e8d8e7228da2d5727c6a653dca3
+version: 1.0.0-dev (build 12442, commit 9d5c990a2)
+built with GNU 13.3.0 for Linux x86_64
+b4f5c896ec9a436790e38eda278c1f1fe4dba8db1ba7c736d4aec3cd3995c492  /home/minotaur/nariq-2026-11/fork/build/bin/llama-server
+a240e4f1141368920962c1f2d090c44c2de882ad573765c5949d620d1ba1bfa6  /home/minotaur/nariq-2026-11/fork/build/bin/llama-tokenize

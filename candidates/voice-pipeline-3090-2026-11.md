@@ -487,3 +487,53 @@ LLM. Latency is measured on the pipeline as is; the strip rule touches WER only.
   speech-end offset is the end of the file.
 - Clicking Voice mode makes Open WebUI play a ~10 ms silent `data:audio/wav` primer. By rule, a `playing` event whose
   source is a `data:` URI is logged and ignored; first TTS audio is the first `playing` from any other source.
+
+### Amendment A4 (2026-11-24, after arm S1 was stopped in its discarded warm-up pass, before any measured pass, pre-results)
+
+**S1.void-1.** The first S1 attempt was stopped during the discarded warm-up pass (5 warm-up clips, no measured clip)
+because of the two findings below. Under A1 item 1 it is voided, kept in the record as `S1.void-1`, and S1 is re-run
+from the start.
+
+#### 1. LLM server back to llama.cpp's default host cache
+
+**Change.** The LLM llama-server runs with llama.cpp's default host prompt cache (no `--cache-ram` flag; v0.7.0's
+default is 8192 MiB) in every arm. The S1 and S3 STT llama-servers keep `--cache-ram 0` (A3). This replaces A3 item 1
+for the LLM server only.
+
+**Why.** A3's choice for the LLM server was made without two facts seen in S1.void-1's warm-up:
+- Open WebUI 0.13 uses native function calling by default and adds its built-in tool definitions (38 tools) to every
+  reply request, so the reply prompt is ~7,400 tokens (7,434 on a warm-up clip) for a ~20-token answer, not the
+  ~300-600 tokens section 4 assumed.
+- With `-np 1`, Open WebUI's title, follow-up and tag calls run on the single slot around every reply, so the
+  slot's contents are replaced between clips. Per-slot common-prefix reuse therefore never keeps the shared ~7K
+  tool prefix from one clip to the next; only the host cache restores it.
+With `--cache-ram 0` every reply re-evaluated all ~7,400 tokens (7.3 s). A default install restores the shared prefix
+from host RAM, which is the realistic case A3 meant to keep. The cost: in passes 2 and 3 the host cache can also hold
+pass 1's identical prompt, so a reply may restore its user turn too (a few hundred tokens at most).
+
+**Reported per pass** (1, 2, 3, separately, as well as pooled), for each reply: TTFT, evaluated prompt tokens and
+cached prompt tokens. Source: llama-server's `timings` for the reply (`prompt_ms`, `prompt_n`, `cache_n`), the
+response timings section 3.2 names, which Open WebUI stores on the assistant message. The host-cache restore happens
+before the task starts, outside `prompt_ms`; the gap between slot selection and task launch in the server log is
+reported beside TTFT for each reply.
+
+#### 2. en04 (FLEURS en_us row 28)
+
+Open WebUI's voice mode did not detect en04 as speech: no transcription request was sent, and the client's 90 s
+wait for audio timed out. It is the quietest selected clip (peak −29.6 dBFS; 15 10 ms frames above −40 dBFS, against
+400-800 for en01-en06). It stays a selected clip under the lock: in each S arm it counts as a failed clip, is reported
+with its level and the 90 s timeout, and is not replaced. A2's fallback covers a clip with no speech-end point under
+the harness rule; en04 has one (its speech-end offset is in `clips.tsv`).
+
+#### 3. Analysis defect fix (not a method change)
+
+The committed `analyze.py` took the first LLM task after the STT request as the reply. Open WebUI sends its title
+generation call ~20 ms before the reply request, so on the single slot the title call runs first (~300 prompt tokens,
+~11 output tokens, ~0.6 s). The reply is now matched by the timings Open WebUI stored for it (prompt and output token
+counts). The title call falls inside the measured E2E window; the record says so and reports its duration per clip.
+
+#### 4. Exploratory pass (not pre-registered)
+
+If time permits on the run day, after S1, S2, S3 and R0: the same four arms with Open WebUI's built-in tools turned
+off for the voice-bench model (reply prompt ~300-400 tokens), labelled "exploratory, not pre-registered". It is not
+part of the locked results.
