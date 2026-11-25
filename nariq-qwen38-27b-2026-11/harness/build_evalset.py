@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+"""NariQ section T eval set (draft T3 rules), built on Miu. Not a measurement.
+
+  build_evalset.py OUTDIR        (repos cloned in ~/nariq-t; tokenizer = mainline b12431 llama-tokenize, CPU build)
+
+Held out by date: text first published on or after 2026-11-08 (Qwen/Qwen3.8-27B last modified 2026-11-07).
+Code half: files ADDED since the date to ggml-org/llama.cpp, ggml, whisper.cpp (MIT) at pinned HEADs; source
+extensions only; >= 1 KiB; not vendored/generated; blob not present anywhere in that repo's pre-date tree; first
+occurrence only across repos (llama.cpp, then ggml, then whisper.cpp); and at most 20% of the file's distinct
+non-trivial lines (stripped, >= 25 chars) present anywhere in the three repos' pre-date trees (added 2026-11-24 after
+the first build: new files split out of old ones, e.g. tools/mtmd/mtmd-subcontext.cpp at 79%, are old text).
+Order: repo, add-commit time, path.
+Prose half: English Wikipedia pages created since the date (recentchanges rctype=new, ns 0, creation order), not
+redirects, not Content Translation, not lists or disambiguation pages, no creation summary saying split / copied /
+merged / moved / translated / from [[...]] (Wikipedia's in-wiki copying attribution; added 2026-11-24), plaintext extract >= 3,000 bytes, pinned by
+the revision fetched. Documents joined by one blank line. Code half first, sized so that it tokenizes to
+65,536..66,560 tokens (so chunks 0-15's scored positions are all code); then prose, until the whole file tokenizes
+to 131,072..132,096 tokens. The last document of each half is cut at a line boundary.
+"""
+import hashlib, json, os, re, subprocess, sys, tempfile, time, urllib.parse, urllib.request
+
+OUT = sys.argv[1]; os.makedirs(OUT, exist_ok=True)
+T = os.path.expanduser("~/nariq-t")
+TOK = f"{T}/tok-b12431/build/bin/llama-tokenize"
+MODEL = "/media/minotaur/Storage_Disk_1/LLM_repo/qwen3.8-27b-gguf/Qwen3.8-27B-UD-IQ3_XXS.gguf"
+SINCE = "2026-11-08T00:00:00Z"
+CODE_LO, CODE_HI, ALL_LO, ALL_HI = 65536, 66560, 131072, 132096
+EXT = (".c", ".cpp", ".h", ".hpp", ".cu", ".cuh", ".py", ".metal", ".comp", ".glsl", ".m", ".swift", ".js", ".ts",
+       ".sh", ".go", ".rs", ".java", ".kt", ".cmake")
+SKIP_DIR = re.compile(r"(^|/)(vendor|third_party|thirdparty|external|deps|public|dist|build)(/|$)")
+UA = {"User-Agent": "evalset-builder/0.1 (research script)"}
+SEP = "\n\n"
+
+
+def ntok(text):
+    with tempfile.NamedTemporaryFile("w", suffix=".txt", delete=False, encoding="utf-8") as f:
+        f.write(text); p = f.name
+    r = subprocess.run([TOK, "-m", MODEL, "-f", p, "--ids", "--log-disable", "--no-bos", "--no-escape"], capture_output=True, text=True)
+    os.unlink(p)
+    return len([x for x in r.stdout.strip().splitlines()[-1].strip("[]").split(",") if x.strip()])
+
+
+def git(r, *a):
+    return subprocess.check_output(["git", "-C", f"{T}/{r}", *a], text=True)
+
+
+MAX_OLD = 0.20
+
+
+def old_lines():
+    old = set()
+    for r in ("llama.cpp", "ggml", "whisper.cpp"):
+        pre = git(r, "rev-list", "-1", f"--before={SINCE}", "HEAD").strip()
+        blobs = [l.split(None, 3)[2] for l in git(r, "ls-tree", "-r", pre).splitlines() if l.split(None, 3)[3].endswith(EXT)]
+        p = subprocess.Popen(["git", "-C", f"{T}/{r}", "cat-file", "--batch"], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+        for b in blobs:
+            p.stdin.write((b + "\n").encode()); p.stdin.flush()
+            n = int(p.stdout.readline().split()[2]); data = p.stdout.read(n); p.stdout.read(1)
+            old.update(x.strip() for x in data.decode(errors="ignore").splitlines() if len(x.strip()) >= 25)
+        p.stdin.close(); p.wait()
+    return old
+
+
+def code_docs():
+    docs, seen = [], set()
+    OLD = old_lines()
+    for r in ("llama.cpp", "ggml", "whisper.cpp"):
+        head = git(r, "rev-parse", "HEAD").strip()
+        pre = git(r, "rev-list", "-1", f"--before={SINCE}", "HEAD").strip()
+        pre_blobs = {l.split()[2] for l in git(r, "ls-tree", "-r", pre).splitlines()}
+        adds = {}
+        for block in git(r, "log", "--reverse", "--diff-filter=A", f"--since={SINCE}", "--name-only",
+                         "--format=@@%H %cI", "HEAD").split("@@")[1:]:
+            lines = block.strip().splitlines(); h, ts = lines[0].split()
+            for f in lines[1:]:
+                adds.setdefault(f, (ts, h))
+        for f, (ts, h) in sorted(adds.items(), key=lambda x: (x[1][0], x[0])):
+            if not f.endswith(EXT) or SKIP_DIR.search(f):
+                continue
+            try:
+                blob = subprocess.check_output(["git", "-C", f"{T}/{r}", "rev-parse", f"HEAD:{f}"], text=True, stderr=subprocess.DEVNULL).strip()
+            except subprocess.CalledProcessError:
+                continue   # deleted again before HEAD
+            if blob in pre_blobs or blob in seen:
+                continue
+            text = git(r, "cat-file", "-p", blob)
+            if len(text.encode()) < 1024 or re.search(r"(auto-?generated|generated by|do not edit)", "\n".join(text.splitlines()[:5]), re.I):
+                continue
+            ls = {x.strip() for x in text.splitlines() if len(x.strip()) >= 25}
+            frac = len(ls & OLD) / max(1, len(ls))
+            if frac > MAX_OLD:
+                continue
+            seen.add(blob)
+            docs.append({"kind": "code", "repo": r, "head": head, "pre_date_commit": pre, "path": f, "added_in": h,
+                         "added_at": ts, "blob": blob, "old_line_fraction": round(frac, 3), "text": text})
+    return docs
+
+
+def api(params):
+    url = "https://en.wikipedia.org/w/api.php?" + urllib.parse.urlencode({**params, "format": "json", "formatversion": 2})
+    for i in range(5):
+        try:
+            time.sleep(1.0)
+            return json.load(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=60))
+        except Exception:
+            time.sleep(10 * (i + 1))
+    raise RuntimeError("wikipedia api failed")
+
+
+def prose_docs():
+    cont = {}
+    while True:
+        q = api({"action": "query", "list": "recentchanges", "rctype": "new", "rcnamespace": 0, "rcdir": "newer",
+                 "rcstart": SINCE, "rclimit": 500, "rcprop": "title|ids|timestamp|tags|sizes|comment", **cont})
+        for c in q["query"]["recentchanges"]:
+            t = c["title"]
+            if "mw-new-redirect" in c["tags"] or "contenttranslation" in c["tags"] or c["newlen"] < 3000:
+                continue
+            if t.startswith(("List of", "Lists of")) or "(disambiguation)" in t:
+                continue
+            if re.search(r"split|cop(y|ied)|merg|moved|translat|from \[\[|spun|spin.?off", c.get("comment", ""), re.I):
+                continue
+            p = api({"action": "query", "pageids": c["pageid"], "prop": "extracts|pageprops|revisions|info",
+                     "explaintext": 1, "exsectionformat": "plain", "rvprop": "ids|timestamp", "ppprop": "disambiguation"})
+            pg = p["query"]["pages"][0]
+            if pg.get("missing") or pg.get("redirect") or "disambiguation" in pg.get("pageprops", {}):
+                continue
+            text = (pg.get("extract") or "").strip()
+            if len(text.encode()) < 3000:
+                continue
+            yield {"kind": "prose", "title": pg["title"], "pageid": pg["pageid"], "created": c["timestamp"],
+                   "created_revid": c["revid"], "revid": pg["revisions"][0]["revid"],
+                   "rev_timestamp": pg["revisions"][0]["timestamp"], "creation_comment": c.get("comment", ""), "licence": "CC BY-SA 4.0", "text": text}
+        if "continue" not in q:
+            return
+        cont = q["continue"]
+
+
+def fill(prefix, docs, lo, hi):
+    """Append whole docs until the joined text reaches lo tokens; then cut the last doc at a line boundary into [lo, hi]."""
+    used, text = [], prefix
+    for d in docs:
+        cand = text + (SEP if text else "") + d["text"]
+        n = ntok(cand)
+        if n < lo:
+            used.append(d); text = cand; continue
+        lines = d["text"].split("\n"); a, b = 1, len(lines)
+        while a < b:   # smallest number of lines that reaches lo
+            m = (a + b) // 2
+            if ntok(text + (SEP if text else "") + "\n".join(lines[:m])) >= lo:
+                b = m
+            else:
+                a = m + 1
+        cut = "\n".join(lines[:a]); full = text + (SEP if text else "") + cut; n = ntok(full)
+        if not lo <= n <= hi:
+            raise SystemExit(f"cannot land in [{lo},{hi}]: {n}")
+        used.append({**d, "text": cut, "truncated_to_lines": a, "lines_total": len(lines)})
+        return full, used, n
+    raise SystemExit(f"ran out of documents below {lo} tokens")
+
+
+code_text, code_used, n_code = fill("", code_docs(), CODE_LO, CODE_HI)
+print("code half", n_code, "tokens,", len(code_used), "files", flush=True)
+all_text, prose_used, n_all = fill(code_text, prose_docs(), ALL_LO, ALL_HI)
+print("whole set", n_all, "tokens,", len(prose_used), "articles", flush=True)
+open(f"{OUT}/evalset.txt", "w", encoding="utf-8").write(all_text)
+sha = hashlib.sha256(all_text.encode()).hexdigest()
+meta = {"since": SINCE, "tokenizer": {"binary": TOK, "binary_sha256": hashlib.sha256(open(TOK, "rb").read()).hexdigest(),
+        "model": os.path.basename(MODEL), "flags": "--no-bos --no-escape"}, "tokens_code_half": n_code, "tokens_total": n_all,
+        "bytes": len(all_text.encode()), "sha256": sha,
+        "documents": [{k: v for k, v in d.items() if k != "text"} | {"bytes": len(d["text"].encode())} for d in code_used + prose_used]}
+json.dump(meta, open(f"{OUT}/sources.json", "w"), indent=1)
+open(f"{OUT}/evalset.txt.sha256", "w").write(f"{sha}  evalset.txt\n")
+print("sha256", sha, "bytes", meta["bytes"])
