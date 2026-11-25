@@ -1,0 +1,660 @@
+{
+ "arm": "Q-cmoe-32k",
+ "tag": "qwen",
+ "kind": "llama",
+ "cmd": [
+  "/home/minotaur/inkling2-2026-11/build/llama.cpp/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/inkling2-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-np",
+  "1",
+  "-ctk",
+  "q8_0",
+  "-ctv",
+  "q8_0",
+  "-fa",
+  "auto",
+  "-t",
+  "4",
+  "--cache-ram",
+  "0",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "--jinja",
+  "--port",
+  "8081",
+  "-lv",
+  "4",
+  "-cmoe",
+  "-c",
+  "32768"
+ ],
+ "cells_spec": "short:512:3,deep:29491:3",
+ "temp": 1.0,
+ "ballast_mib_target": 0,
+ "disk": "nvme0n1",
+ "cells": {
+  "short": {
+   "prompt_target": 512,
+   "reqs": [
+    {
+     "nonce": "741cc0d2",
+     "t0": 1795579289.347523,
+     "ttft_s": 2.0178377628326416,
+     "total_s": 11.705178260803223,
+     "content_chunks": 243,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 513,
+      "prompt_ms": 2012.356,
+      "prompt_per_token_ms": 3.9227212475633526,
+      "prompt_per_second": 254.92507289962612,
+      "predicted_n": 256,
+      "predicted_ms": 9687.243,
+      "predicted_per_token_ms": 37.98918823529412,
+      "predicted_per_second": 26.323278976278388
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 513,
+      "total_tokens": 769,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a C++ code snippet titled `request 741cc0d2`\n   - It starts with `// ===== common/arg.cpp =====`\n   - Includes many heade",
+     "answer_full": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a C++ code snippet titled `request 741cc0d2`\n   - It starts with `// ===== common/arg.cpp =====`\n   - Includes many headers related to a chat/AI model project (likely `llama.cpp` based on names like `llama.h`, `chat.h`, `common.h`, `llama_example`, `mmproj_examples`, etc.)\n   - Has Windows-specific includes and `NOMINMAX` to avoid macro conflicts\n   - Includes standard C++ headers\n   - Has OS-specific `PATH_MAX` definitions\n   - Defines `LLAMA_MAX_URL_LENGTH`\n   - Uses `json` and `common_arg_utils` namespace\n   - Has a static initializer list of `llama_example` enums\n   - Starts defining a `read_file` function but cuts off mid-statement: `file.`\n   - The request is: \"Summarise what this code does.\"\n\n2.  **Identify Key Components & Context:**\n   - **File Name:** `arg.cpp` suggests it's related to command-line argument parsing or CLI handling.\n  ",
+     "tag": "Q-cmoe-32k-short-512-rep1",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 30226,
+      "free_mib": 542,
+      "cached_mib": 30009,
+      "swapused_mib": 81
+     },
+     "peak_card_mib": 2935,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "21959092 kB",
+      "RssAnon": "525628 kB",
+      "RssFile": "21371996 kB",
+      "RssShmem": "61468 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "8a3975b5",
+     "t0": 1795579301.4729705,
+     "ttft_s": 1.9665052890777588,
+     "total_s": 11.660831689834595,
+     "content_chunks": 250,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 514,
+      "prompt_ms": 1960.626,
+      "prompt_per_token_ms": 3.8144474708171208,
+      "prompt_per_second": 262.1611668926149,
+      "predicted_n": 256,
+      "predicted_ms": 9694.145,
+      "predicted_per_token_ms": 38.016254901960785,
+      "predicted_per_second": 26.304537429551548
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 514,
+      "total_tokens": 770,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a C++ code snippet titled `request 8a3975b5` followed by code starting from `// ===== common/arg.cpp =====`\n   - The code",
+     "answer_full": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a C++ code snippet titled `request 8a3975b5` followed by code starting from `// ===== common/arg.cpp =====`\n   - The code includes various headers, defines macros for Windows compatibility (`WIN32_LEAN_AND_MEAN`, `NOMINMAX`), handles platform-specific limits (`PATH_MAX`), defines `LLAMA_MAX_URL_LENGTH`, uses `common_json` and `common_arg_utils` namespaces, declares a static initializer list for `llama_example` enum, and starts defining a `read_file` function.\n   - The code cuts off mid-function: `file.`\n   - The user asks: \"Summarise what this code does.\"\n\n2.  **Identify Key Components & Context:**\n   - **File:** `common/arg.cpp` - This strongly suggests it's part of a command-line argument parsing/utility module in a larger project.\n   - **Project Context:** The includes (`llama.h`, `chat.h`, `speculative.h`, `json-schema-to-grammar.h`, `preset.h`) and the enum `llama_example` strongly indicate",
+     "tag": "Q-cmoe-32k-short-512-rep2",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 30232,
+      "free_mib": 548,
+      "cached_mib": 30009,
+      "swapused_mib": 81
+     },
+     "peak_card_mib": 2935,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "21959284 kB",
+      "RssAnon": "525820 kB",
+      "RssFile": "21371996 kB",
+      "RssShmem": "61468 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "6dacc9a6",
+     "t0": 1795579313.5488749,
+     "ttft_s": 1.9696767330169678,
+     "total_s": 11.653700828552246,
+     "content_chunks": 247,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 512,
+      "prompt_ms": 1967.602,
+      "prompt_per_token_ms": 3.84297265625,
+      "prompt_per_second": 260.21522645331726,
+      "predicted_n": 256,
+      "predicted_ms": 9683.897,
+      "predicted_per_token_ms": 37.97606666666667,
+      "predicted_per_second": 26.332374249746767
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 512,
+      "total_tokens": 768,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a C++ code snippet starting with `// ===== common/arg.cpp =====`\n   - It includes headers like `arg.h`, `build-info.h`, `",
+     "answer_full": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a C++ code snippet starting with `// ===== common/arg.cpp =====`\n   - It includes headers like `arg.h`, `build-info.h`, `chat.h`, `common.h`, `download.h`, `json-schema-to-grammar.h`, `json.h`, `llama.h`, `log.h`, `sampling.h`, `speculative.h`, `preset.h`\n   - It handles Windows-specific includes (`windows.h`, `shellapi.h`) and defines `NOMINMAX` to fix `std::min`/`std::max` issues.\n   - It includes standard C++ headers (`<algorithm>`, `<cinttypes>`, `<filesystem>`, etc.)\n   - It handles platform-specific path length limits (`PATH_MAX`)\n   - Defines `LLAMA_MAX_URL_LENGTH 2084`\n   - Sets up aliases: `using json = common_json;` and `using namespace common_arg_utils;`\n   - Declares a static initializer list `mmproj_examples` with specific enum values.\n   - Defines a static helper function `read_file` that reads a file into",
+     "tag": "Q-cmoe-32k-short-512-rep3",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 30223,
+      "free_mib": 539,
+      "cached_mib": 30009,
+      "swapused_mib": 81
+     },
+     "peak_card_mib": 2935,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "21959456 kB",
+      "RssAnon": "525992 kB",
+      "RssFile": "21371996 kB",
+      "RssShmem": "61468 kB",
+      "VmSwap": "0 kB"
+     }
+    }
+   ],
+   "free_before": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        1797         543          60       30200       30227\nSwap:           4095          81        4014\n",
+    "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 81.8M   -2\n",
+    "vmstat": {
+     "pswpin": 45259,
+     "pswpout": 89305
+    },
+    "t": 1795579289.312425
+   },
+   "free_after": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        1801         539          60       30200       30223\nSwap:           4095          81        4014\n",
+    "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 81.8M   -2\n",
+    "vmstat": {
+     "pswpin": 45259,
+     "pswpout": 89305
+    },
+    "t": 1795579325.6163433
+   },
+   "pswpout_delta": 0,
+   "peak_card_mib": 2935,
+   "min_avail_mib": 30186
+  },
+  "deep": {
+   "prompt_target": 29491,
+   "reqs": [
+    {
+     "nonce": "bb77f7f6",
+     "t0": 1795579325.6703765,
+     "ttft_s": 115.86542010307312,
+     "total_s": 126.67253875732422,
+     "content_chunks": 251,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 29491,
+      "prompt_ms": 115752.176,
+      "prompt_per_token_ms": 3.9250000339086504,
+      "prompt_per_second": 254.77706786263784,
+      "predicted_n": 256,
+      "predicted_ms": 10806.03,
+      "predicted_per_token_ms": 42.37658823529412,
+      "predicted_per_second": 23.597935597069412
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 29491,
+      "total_tokens": 29747,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "Here's a thinking process:\n\n1.  **Understand User Request:** The user provided a large C++ source file (`common/arg.cpp`) from the `llama.cpp` project and asked for a summary of what this code does.\n\n",
+     "answer_full": "Here's a thinking process:\n\n1.  **Understand User Request:** The user provided a large C++ source file (`common/arg.cpp`) from the `llama.cpp` project and asked for a summary of what this code does.\n\n2.  **Initial Analysis of the Code:**\n   - **File Name/Context:** `common/arg.cpp` strongly suggests it's related to argument parsing in `llama.cpp`.\n   - **Includes:** Many includes like `chat.h`, `download.h`, `json.h`, `llama.h`, `log.h`, `sampling.h`, etc. This indicates it's a core utility file interacting with many parts of the codebase.\n   - **Key Structures/Classes:** `common_arg`, `common_params`, `common_params_context`, `common_params_parser_init`, `common_models_handler`, `common_download_task`, etc.\n   - **Main Functions:** \n     - `common_params_parser_init`: Sets up parameter defaults based on the example type (CLI, SERVER, etc.), configures help text, environment variables, and callback handlers.\n     - `common_params_parse` / `common_params_parse_ex`: Handles reading environment variables, command-line arguments, parses them into `common",
+     "tag": "Q-cmoe-32k-deep-29491-rep1",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 5.7,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 30140,
+      "free_mib": 450,
+      "cached_mib": 30014,
+      "swapused_mib": 81
+     },
+     "peak_card_mib": 2947,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "22032288 kB",
+      "RssAnon": "598784 kB",
+      "RssFile": "21372036 kB",
+      "RssShmem": "61468 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "6a5cc7b3",
+     "t0": 1795579452.764574,
+     "ttft_s": 115.84256982803345,
+     "total_s": 126.66701126098633,
+     "content_chunks": 248,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 29492,
+      "prompt_ms": 115797.359,
+      "prompt_per_token_ms": 3.92639898955649,
+      "prompt_per_second": 254.68629211137707,
+      "predicted_n": 256,
+      "predicted_ms": 10823.415,
+      "predicted_per_token_ms": 42.444764705882356,
+      "predicted_per_second": 23.560031653595466
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 29492,
+      "total_tokens": 29748,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "Here's a thinking process:\n\n1.  **Understand User Request:** The user provided a large C++ source file (`common/arg.cpp`) from the `llama.cpp` project and asked for a summary of what this code does.\n\n",
+     "answer_full": "Here's a thinking process:\n\n1.  **Understand User Request:** The user provided a large C++ source file (`common/arg.cpp`) from the `llama.cpp` project and asked for a summary of what this code does.\n\n2.  **Initial Scan & Context Identification:**\n   - File path: `common/arg.cpp`\n   - Contains includes related to CLI arguments, JSON, GGML/LLama, logging, argument parsing, model handling, etc.\n   - Uses `common_arg`, `common_params`, `common_params_context`, `common_models_handler`\n   - Has functions like `common_params_parse`, `common_params_parser_init`, `common_models_handler_init`, `common_models_handler_apply`\n   - Handles command-line arguments, environment variables, config files, model downloads, and example-specific parameter handling.\n   - Clearly part of a larger CLI/tool framework for `llama.cpp`.\n\n3.  **Key Components/Functions Identified:**\n   - **Argument Definition & Registration:** `common_arg` class and `add_opt()` lambda in `common_params_parser_init` register CLI/options with help text, handlers, environment variables, and example exclusions/inclusions.\n   - **Parsing Logic:**",
+     "tag": "Q-cmoe-32k-deep-29491-rep2",
+     "swapin_kib": 12,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 30143,
+      "free_mib": 452,
+      "cached_mib": 30015,
+      "swapused_mib": 81
+     },
+     "peak_card_mib": 2947,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "22037412 kB",
+      "RssAnon": "603908 kB",
+      "RssFile": "21372036 kB",
+      "RssShmem": "61468 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "0b3a60bc",
+     "t0": 1795579579.8434148,
+     "ttft_s": 115.8525857925415,
+     "total_s": 126.69276905059814,
+     "content_chunks": 249,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 29492,
+      "prompt_ms": 115814.577,
+      "prompt_per_token_ms": 3.9269828088973284,
+      "prompt_per_second": 254.6484282371467,
+      "predicted_n": 256,
+      "predicted_ms": 10839.201,
+      "predicted_per_token_ms": 42.50667058823529,
+      "predicted_per_second": 23.525719285028483
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 29492,
+      "total_tokens": 29748,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "Here's a thinking process:\n\n1.  **Understand User Request:** The user provided a large C++ source file (`common/arg.cpp`) from the `llama.cpp` project and asked for a summary of what this code does.\n\n",
+     "answer_full": "Here's a thinking process:\n\n1.  **Understand User Request:** The user provided a large C++ source file (`common/arg.cpp`) from the `llama.cpp` project and asked for a summary of what this code does.\n\n2.  **Initial Scan & Context Identification:**\n   - File path: `common/arg.cpp`\n   - Contains includes related to CLI arguments, JSON, GGML/LLAMA, logging, parsing, downloading, etc.\n   - Uses `common_params`, `common_arg`, `common_params_context`, `llama_example`, etc.\n   - Has functions like `common_params_parse`, `common_params_parser_init`, `common_models_handler_init/apply`, argument parsing logic, help printing, shell completion generation, device parsing, etc.\n   - It's clearly the core argument parsing, configuration management, and model handling module for `llama.cpp`.\n\n3.  **Key Components/Functions Identification:**\n   - `common_arg` class: Represents a single CLI/environment variable option. Has methods to set examples/excludes, environment variables, sampling/spec flags, and formatting/help string generation (`to_string()`, `get_args()`, `get_env()`).\n   - `common",
+     "tag": "Q-cmoe-32k-deep-29491-rep3",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 30134,
+      "free_mib": 443,
+      "cached_mib": 30015,
+      "swapused_mib": 81
+     },
+     "peak_card_mib": 2947,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "22042648 kB",
+      "RssAnon": "609144 kB",
+      "RssFile": "21372036 kB",
+      "RssShmem": "61468 kB",
+      "VmSwap": "0 kB"
+     }
+    }
+   ],
+   "free_before": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        1801         539          60       30200       30223\nSwap:           4095          81        4014\n",
+    "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 81.8M   -2\n",
+    "vmstat": {
+     "pswpin": 45259,
+     "pswpout": 89305
+    },
+    "t": 1795579325.628048
+   },
+   "free_after": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        1889         443          60       30206       30134\nSwap:           4095          81        4014\n",
+    "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 81.8M   -2\n",
+    "vmstat": {
+     "pswpin": 45262,
+     "pswpout": 89305
+    },
+    "t": 1795579706.9374871
+   },
+   "pswpout_delta": 0,
+   "peak_card_mib": 2947,
+   "min_avail_mib": 30053
+  }
+ },
+ "start_utc": "2026-11-25T04:01:08Z",
+ "state_before": {
+  "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        1018        1334           0       30127       31005\nSwap:           4095          81        4014\n",
+  "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 81.8M   -2\n",
+  "vmstat": {
+   "pswpin": 45259,
+   "pswpout": 89305
+  },
+  "t": 1795579268.164908
+ },
+ "load_s": 4.1,
+ "load_peak_mib": 2913,
+ "card_after_load_mib": 2913,
+ "avail_after_load_mib": 30436,
+ "proc_after_load": {
+  "VmRSS": "21723172 kB",
+  "RssAnon": "305952 kB",
+  "RssFile": "21355752 kB",
+  "RssShmem": "61468 kB",
+  "VmSwap": "0 kB"
+ },
+ "info_props": {
+  "default_generation_settings": {
+   "params": {
+    "seed": 4294967295,
+    "temperature": 1.0,
+    "dynatemp_range": 0.0,
+    "dynatemp_exponent": 1.0,
+    "top_k": 20,
+    "top_p": 0.949999988079071,
+    "min_p": 0.05000000074505806,
+    "top_n_sigma": -1.0,
+    "xtc_probability": 0.0,
+    "xtc_threshold": 0.10000000149011612,
+    "typical_p": 1.0,
+    "repeat_last_n": 64,
+    "repeat_penalty": 1.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "dry_multiplier": 0.0,
+    "dry_base": 1.75,
+    "dry_allowed_length": 2,
+    "dry_penalty_last_n": 64,
+    "mirostat": 0,
+    "mirostat_tau": 5.0,
+    "mirostat_eta": 0.10000000149011612,
+    "adaptive_target": -1.0,
+    "adaptive_decay": 0.8999999761581421,
+    "max_tokens": -1,
+    "n_predict": -1,
+    "n_keep": 0,
+    "n_discard": 0,
+    "ignore_eos": false,
+    "stream": false,
+    "n_probs": 0,
+    "min_keep": 0,
+    "chat_format": "Content-only",
+    "reasoning_format": "none",
+    "reasoning_in_content": false,
+    "generation_prompt": "",
+    "samplers": [
+     "penalties",
+     "dry",
+     "top_n_sigma",
+     "top_k",
+     "typ_p",
+     "top_p",
+     "min_p",
+     "xtc",
+     "temperature"
+    ],
+    "speculative.types": "none",
+    "timings_per_token": false,
+    "post_sampling_probs": false,
+    "backend_sampling": false,
+    "lora": []
+   },
+   "n_ctx": 32768
+  },
+  "total_slots": 1,
+  "model_alias": "/home/minotaur/inkling2-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "model_ftype": "Q4_K - Medium",
+  "model_path": "/home/minotaur/inkling2-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+  "modalities": {
+   "vision": false,
+   "video": false,
+   "audio": false
+  },
+  "media_marker": "<__media_DS2b7vMyqxKGLgfSqU38kuxmvCTaQrZc__>",
+  "endpoint_slots": true,
+  "endpoint_props": false,
+  "endpoint_metrics": false,
+  "ui": true,
+  "ui_settings": {},
+  "chat_template": "{%- set image_count = namespace(value=0) %}\n{%- set video_count = namespace(value=0) %}\n{%- macro render_content(content, do_vision_count, is_system_content=false) %}\n    {%- if content is string %}\n        {{- content }}\n    {%- elif content is iterable and content is not mapping %}\n        {%- for item in content %}\n            {%- if 'image' in item or 'image_url' in item or item.type == 'image' %}\n                {%- if is_system_content %}\n                    {{- raise_exception('System message cannot contain images.') }}\n                {%- endif %}\n                {%- if do_vision_count %}\n                    {%- set image_count.value = image_count.value + 1 %}\n                {%- endif %}\n                {%- if add_vision_id %}\n                    {{- 'Picture ' ~ image_count.value ~ ': ' }}\n                {%- endif %}\n                {{- '<|vision_start|><|image_pad|><|vision_end|>' }}\n            {%- elif 'video' in item or item.type == 'video' %}\n                {%- if is_system_content %}\n                    {{- raise_exception('System message cannot contain videos.') }}\n                {%- endif %}\n                {%- if do_vision_count %}\n                    {%- set video_count.value = video_count.value + 1 %}\n                {%- endif %}\n                {%- if add_vision_id %}\n                    {{- 'Video ' ~ video_count.value ~ ': ' }}\n                {%- endif %}\n                {{- '<|vision_start|><|video_pad|><|vision_end|>' }}\n            {%- elif 'text' in item %}\n                {{- item.text }}\n            {%- else %}\n                {{- raise_exception('Unexpected item type in content.') }}\n            {%- endif %}\n        {%- endfor %}\n    {%- elif content is none or content is undefined %}\n        {{- '' }}\n    {%- else %}\n        {{- raise_exception('Unexpected content type.') }}\n    {%- endif %}\n{%- endmacro %}\n{%- if not messages %}\n    {{- raise_exception('No messages provided.') }}\n{%- endif %}\n{%- set num_sys = 0 %}\n{%- set merged_system = '' %}\n{%- if messages[0].role == 'system' or messages[0].role == 'developer' %}\n    {%- set first = render_content(messages[0].content, false, true)|trim %}\n    {%- if messages|length > 1 and (messages[1].role == 'system' or messages[1].role == 'developer') %}\n        {%- set second = render_content(messages[1].content, false, true)|trim %}\n        {%- set merged_system = first + '\\n' + second %}\n        {%- set num_sys = 2 %}\n    {%- else %}\n        {%- set merged_system = first %}\n        {%- set num_sys = 1 %}\n    {%- endif %}\n{%- endif %}\n{%- if tools and tools is iterable and tools is not mapping %}\n    {{- '<|im_start|>system\\n' }}\n    {{- \"# Tools\\n\\nYou have access to the following functions:\\n\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\" }}\n    {{- '\\n\\nIf you choose to call a function ONLY reply in the following format with NO suffix:\\n\\n<tool_call>\\n<function=example_function_name>\\n<parameter=example_parameter_1>\\nvalue_1\\n</parameter>\\n<parameter=example_parameter_2>\\nThis is the value for the second parameter\\nthat can span\\nmultiple lines\\n</parameter>\\n</function>\\n</tool_call>\\n\\n<IMPORTANT>\\nReminder:\\n- Function calls MUST follow the specified format: an inner <function=...></function> block must be nested within <tool_call></tool_call> XML tags\\n- Required parameters MUST be specified\\n- You may provide optional reasoning for your function call in natural language BEFORE the function call, but NOT after\\n- If there is no function call available, answer the question like normal with your current knowledge and do not tell the user about function calls\\n</IMPORTANT>' }}\n    {%- if merged_system %}\n        {{- '\\n\\n' + merged_system }}\n    {%- endif %}\n    {{- '<|im_end|>\\n' }}\n{%- else %}\n    {%- if merged_system %}\n        {{- '<|im_start|>system\\n' + merged_system + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and message.role == \"user\" %}\n        {%- set content = render_content(message.content, false)|trim %}\n        {%- if not(content.startswith('<tool_response>') and content.endswith('</tool_response>')) %}\n            {%- set ns.multi_step_tool = false %}\n            {%- set ns.last_query_index = index %}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- for message in messages %}\n    {%- if loop.index0 >= num_sys and message.role != \"system\" and message.role != \"developer\" %}\n    {%- set content = render_content(message.content, true)|trim %}\n    {%- if message.role == \"user\" %}\n        {{- '<|im_start|>' + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is string %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- else %}\n            {%- if '</think>' in content %}\n                {%- set reasoning_content = content.split('</think>')[0].rstrip('\\n').split('<think>')[-1].lstrip('\\n') %}\n                {%- set content = content.split('</think>')[-1].lstrip('\\n') %}\n            {%- endif %}\n        {%- endif %}\n        {%- set reasoning_content = reasoning_content|trim %}\n        {%- if (preserve_thinking is defined and preserve_thinking is true) or (loop.index0 > ns.last_query_index) %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content + '\\n</think>\\n\\n' + content }}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls and message.tool_calls is iterable and message.tool_calls is not mapping %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if tool_call.function is defined %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {%- if loop.first %}\n                    {%- if content|trim %}\n                        {{- '\\n\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- else %}\n                        {{- '<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- endif %}\n                {%- else %}\n                    {{- '\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                {%- endif %}\n                {%- if tool_call.arguments is mapping %}\n                    {%- for args_name in tool_call.arguments %}\n                        {%- set args_value = tool_call.arguments[args_name] %}\n                        {{- '<parameter=' + args_name + '>\\n' }}\n                        {%- set args_value = args_value | tojson | safe if args_value is mapping or (args_value is sequence and args_value is not string) else args_value | string %}\n                        {{- args_value }}\n                        {{- '\\n</parameter>\\n' }}\n                    {%- endfor %}\n                {%- endif %}\n                {{- '</function>\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.previtem and loop.previtem.role != \"tool\" %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n        {{- '\\n</tool_response>' }}\n        {%- if not loop.last and loop.nextitem.role != \"tool\" %}\n            {{- '<|im_end|>\\n' }}\n        {%- elif loop.last %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- else %}\n        {{- '<think>\\n' }}\n    {%- endif %}\n{%- endif %}\n{#- Unsloth fixes - developer role, tool calling #}",
+  "chat_template_caps": {
+   "supports_object_arguments": true,
+   "supports_parallel_tool_calls": true,
+   "supports_preserve_reasoning": true,
+   "supports_reasoning_effort": false,
+   "supports_string_content": true,
+   "supports_system_role": true,
+   "supports_tool_calls": true,
+   "supports_tools": true,
+   "supports_typed_content": true,
+   "reasoning_effort_levels": [],
+   "reasoning_effort_rejected": []
+  },
+  "bos_token": "<|endoftext|>",
+  "eos_token": "<|im_end|>",
+  "build_info": "b12720-33aeb17f8",
+  "is_sleeping": false,
+  "cors_proxy_enabled": false
+ },
+ "info_v1_models": {
+  "models": [
+   {
+    "name": "/home/minotaur/inkling2-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "model": "/home/minotaur/inkling2-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "modified_at": "",
+    "size": "",
+    "digest": "",
+    "type": "model",
+    "description": "",
+    "tags": [
+     ""
+    ],
+    "capabilities": [
+     "completion"
+    ],
+    "parameters": "",
+    "details": {
+     "parent_model": "",
+     "format": "gguf",
+     "family": "",
+     "families": [
+      ""
+     ],
+     "parameter_size": "",
+     "quantization_level": ""
+    }
+   }
+  ],
+  "object": "list",
+  "data": [
+   {
+    "id": "/home/minotaur/inkling2-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "aliases": [
+     "/home/minotaur/inkling2-2026-11/model/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf"
+    ],
+    "tags": [],
+    "object": "model",
+    "architecture": {
+     "input_modalities": [
+      "text"
+     ],
+     "output_modalities": [
+      "text"
+     ]
+    },
+    "created": 1795579277,
+    "owned_by": "llamacpp",
+    "meta": {
+     "vocab_type": 2,
+     "n_vocab": 248320,
+     "n_ctx": 32768,
+     "n_ctx_train": 262144,
+     "n_embd": 2048,
+     "n_params": 34660610688,
+     "size": 22123538944,
+     "ftype": "Q4_K - Medium"
+    }
+   }
+  ]
+ },
+ "cold": {
+  "nonce": "0f55bdff",
+  "t0": 1795579277.254398,
+  "ttft_s": 2.0681440830230713,
+  "total_s": 11.757345914840698,
+  "content_chunks": 246,
+  "timings": {
+   "cache_n": 0,
+   "prompt_n": 512,
+   "prompt_ms": 2065.871,
+   "prompt_per_token_ms": 4.034904296875,
+   "prompt_per_second": 247.83735286472387,
+   "predicted_n": 256,
+   "predicted_ms": 9689.167,
+   "predicted_per_token_ms": 37.99673333333333,
+   "predicted_per_second": 26.318051902707428
+  },
+  "usage": {
+   "completion_tokens": 256,
+   "prompt_tokens": 512,
+   "total_tokens": 768,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "error": null,
+  "answer_head": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a C++ code snippet starting with `request 0f55bdff` (looks like a git commit hash or request ID, not part of the code).\n ",
+  "answer_full": "Here's a thinking process:\n\n1.  **Analyze User Input:**\n   - The user provides a C++ code snippet starting with `request 0f55bdff` (looks like a git commit hash or request ID, not part of the code).\n   - The code is a partial C++ file: `common/arg.cpp`\n   - It includes many headers related to a project that appears to be `llama.cpp` (based on `llama.h`, `LLAMA_EXAMPLE_*`, `common_json`, etc.).\n   - It defines platform-specific includes for fixing `std::min`/`std::max` on Windows.\n   - It includes standard C++ headers.\n   - It handles path length limits for different OSes (`__EMSCRIPTEN__`, `__linux__`, `_WIN32`, `_AIX`, etc.).\n   - Defines `LLAMA_MAX_URL_LENGTH`.\n   - Uses `using json = common_json;` and `using namespace common_arg_utils;`\n   - Defines a static initializer list of `llama_example` enum values (`mmproj_examples`).\n   - Defines a static helper function `read_file(const std::string & fname)` that",
+  "tag": "Q-cmoe-32k-cold",
+  "swapin_kib": 0,
+  "swapout_kib": 0,
+  "nvme_read_prefill_mib": 0.0,
+  "nvme_read_decode_mib": 0.0,
+  "mem_after": {
+   "avail_mib": 30227,
+   "free_mib": 543,
+   "cached_mib": 30009,
+   "swapused_mib": 81
+  },
+  "peak_card_mib": 2935,
+  "prefill_pcie_links": [
+   [
+    "3",
+    "16"
+   ]
+  ],
+  "proc": {
+   "VmRSS": "21955996 kB",
+   "RssAnon": "522532 kB",
+   "RssFile": "21371996 kB",
+   "RssShmem": "61468 kB",
+   "VmSwap": "0 kB"
+  }
+ },
+ "cold_peak_mib": 2935,
+ "arm_peak_mib": 2947,
+ "min_avail_mib": 30053,
+ "state_after": {
+  "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        1012        1320           0       30146       31011\nSwap:           4095          81        4014\n",
+  "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 81.8M   -2\n",
+  "vmstat": {
+   "pswpin": 45262,
+   "pswpout": 89305
+  },
+  "t": 1795579710.7599561
+ },
+ "end_utc": "2026-11-25T04:08:30Z"
+}

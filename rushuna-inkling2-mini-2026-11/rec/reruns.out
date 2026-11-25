@@ -1,0 +1,14 @@
+05:02:31 arm U-8k-rerun-short cells [('short', 512, 3)] temp 1.0 ballast 0 cmd: /home/minotaur/inkling2-2026-11/uns/app/llama-server -m /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf -ngl 99 -np 1 -ctk q8_0 -ctv q8_0 -fa auto -t 4 --cache-ram 0 --fit off -lm mmap --jinja --port 8081 -lv 4 -cmoe -c 8192
+05:02:40 start: ready in 4.0s load peak 2351 MiB, idle 2351 MiB, avail 30318
+05:03:09   U-8k-rerun-short-cold: prompt_n 515 cache_n 0 pp 118.67401262645409 tg 10.423462781431962 n 256 draft None/None ttft 4.58 swap 0/0 nvme pf/dec 0.5/0.1 MiB card 2395 links [('3', '16')] avail 30093 rss 710588 kB/15930624 kB  | 'The user asks to summarize code. The code shown is from llam'
+05:03:38   U-8k-rerun-short-short-512-rep1: prompt_n 513 cache_n 0 pp 122.27768284506084 tg 10.412314591384842 n 256 draft None/None ttft 4.42 swap 0/0 nvme pf/dec 0.0/0.0 MiB card 2395 links [('3', '16')] avail 30048 rss 710620 kB/15930624 kB  | 'The user wants a summary of the code. This is a code-reading'
+05:04:06   U-8k-rerun-short-short-512-rep2: prompt_n 512 cache_n 0 pp 119.65370535041357 tg 10.426838371206813 n 256 draft None/None ttft 4.49 swap 0/0 nvme pf/dec 0.0/0.0 MiB card 2395 links [('3', '16')] avail 30063 rss 710712 kB/15930624 kB  | 'The user asks to summarise this code, but the snippet is cut'
+05:04:35   U-8k-rerun-short-short-512-rep3: prompt_n 514 cache_n 0 pp 120.90117951567082 tg 10.39038129398875 n 256 draft None/None ttft 4.46 swap 0/0 nvme pf/dec 0.0/0.0 MiB card 2395 links [('3', '16')] avail 30069 rss 711104 kB/15930624 kB  | 'The user asks to summarize code. The code shown is from llam'
+05:04:41 arm U-8k-rerun-short done: arm peak 2395 MiB, min MemAvailable 30024 MiB, card now 0 MiB
+05:04:45 arm S10-split cells [('short', 512, 1)] temp 1.0 ballast 0 cmd: env HOME=/home/minotaur/inkling2-2026-11/strata/home /home/minotaur/inkling2-2026-11/strata/home/.local/bin/strata launch --model-path /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-SQ-10.strata --model sq-10 --family inkling-2-mini --vision off --parallel 1 --tune skip --access local --port 8090 --no-api-key --no-tui --yes --restart --context 64k --set vram-experts-gb=5
+05:07:56 start: ready in 186.1s load peak 9955 MiB, idle 9917 MiB, avail 27473
+05:08:10   S10-split-cold: prompt_n 515 cache_n 0 pp 329.8 tg 19.2 n 256 draft 358/124 ttft 1.58 swap 0/0 nvme pf/dec 2272.9/10371.6 MiB card 9959 links [('3', '16')] avail 27317 rss 1325404 kB/255772 kB  | 'The user asks "Summarise what this code does." with a snippe'
+05:08:26   S10-split-short-512-rep1: prompt_n 512 cache_n 0 pp 261.6 tg 18.0 n 256 draft 288/104 ttft 1.42 swap 0/0 nvme pf/dec 2232.5/12464.3 MiB card 9959 links [('3', '16')] avail 27317 rss 1325408 kB/255900 kB  | 'The user asks summarise what the code does, with a snippet o'
+Stopped sq-10-64k.
+05:08:31 arm S10-split done: arm peak 9959 MiB, min MemAvailable 27290 MiB, card now 0 MiB
+RERUNS_DONE

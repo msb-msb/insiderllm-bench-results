@@ -1,0 +1,689 @@
+{
+ "arm": "L-d-8k",
+ "tag": "inkling",
+ "kind": "llama",
+ "cmd": [
+  "/home/minotaur/inkling2-2026-11/build/llama.cpp/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-np",
+  "1",
+  "-ctk",
+  "q8_0",
+  "-ctv",
+  "q8_0",
+  "-fa",
+  "auto",
+  "-t",
+  "4",
+  "--cache-ram",
+  "0",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "--jinja",
+  "--port",
+  "8081",
+  "-lv",
+  "4",
+  "-cmoe",
+  "-c",
+  "8192",
+  "-md",
+  "/home/minotaur/inkling2-2026-11/model/dspark-Inkling-2-Mini-Q8_0.gguf",
+  "-ngld",
+  "99",
+  "--spec-type",
+  "draft-dspark",
+  "--spec-draft-n-max",
+  "3"
+ ],
+ "cells_spec": "short:512:3,deep:7372:3",
+ "temp": 1.0,
+ "ballast_mib_target": 0,
+ "disk": "nvme0n1",
+ "cells": {
+  "short": {
+   "prompt_target": 512,
+   "reqs": [
+    {
+     "nonce": "b986aa4f",
+     "t0": 1795572496.2903395,
+     "ttft_s": 3.9902100563049316,
+     "total_s": 39.03004264831543,
+     "content_chunks": 254,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 513,
+      "prompt_ms": 3637.615,
+      "prompt_per_token_ms": 7.090867446393761,
+      "prompt_per_second": 141.02646926626375,
+      "predicted_n": 256,
+      "predicted_ms": 35387.29,
+      "predicted_per_token_ms": 138.7736862745098,
+      "predicted_per_second": 7.205977061255608,
+      "draft_n": 338,
+      "draft_n_accepted": 142
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 513,
+      "total_tokens": 769,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user asks to summarize code. The code shown is an include-heavy C++ file likely llama.cpp common/arg.cpp. Need summarize. Given content is partial header and using llama_example enum declarations,",
+     "answer_full": "The user asks to summarize code. The code shown is an include-heavy C++ file likely llama.cpp common/arg.cpp. Need summarize. Given content is partial header and using llama_example enum declarations, includes build-info, chat, common, download, json schema grammar, json, llama, log, sampling, speculative, preset. Includes OS/windows includes. It sets LLAMA_MAX_URL_LENGTH. Then begins static initializer_list tag? Need be careful not to claim beyond visible. We can summarize visible portion: sets up argument parsing support, includes headers, platform-specific includes, defines URL max length, and declares a list of examples that require mmproj? Need inspect exact visible text:\n\n#define LLAMA_MAX_URL_LENGTH 2084 // Maximum URL Length in Chrome: 2083\n\nusing json = common_json;\nusing namespace common_arg_utils;\n\nstatic std::initializer_list<enum llama_example> mmproj_examples = {\n    LLAMA_EXAMPLE_MTMD,\n    LLAMA_EXAMPLE_SERVER,\n    LLAMA_EXAMPLE_CLI,\n    LLAMA_EXAMPL\n\nCODE truncated at LL",
+     "tag": "L-d-8k-short-512-rep1",
+     "swapin_kib": 16,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 29883,
+      "free_mib": 348,
+      "cached_mib": 29895,
+      "swapused_mib": 80
+     },
+     "peak_card_mib": 10737,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16840804 kB",
+      "RssAnon": "830140 kB",
+      "RssFile": "15913320 kB",
+      "RssShmem": "97344 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "56a39f5f",
+     "t0": 1795572535.6040497,
+     "ttft_s": 3.997617244720459,
+     "total_s": 47.08835577964783,
+     "content_chunks": 254,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 515,
+      "prompt_ms": 3641.567,
+      "prompt_per_token_ms": 7.071003883495146,
+      "prompt_per_second": 141.42263481627552,
+      "predicted_n": 256,
+      "predicted_ms": 43435.183,
+      "predicted_per_token_ms": 170.33405098039213,
+      "predicted_per_second": 5.870816752400929,
+      "draft_n": 414,
+      "draft_n_accepted": 116
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 515,
+      "total_tokens": 771,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user gives a code snippet and asks: \"Summarise what this code does.\" Need summarize snippet, not produce full code. Need be careful: They pasted only beginning of a huge file maybe intended asking",
+     "answer_full": "The user gives a code snippet and asks: \"Summarise what this code does.\" Need summarize snippet, not produce full code. Need be careful: They pasted only beginning of a huge file maybe intended asking for request 56a39f5f. We can summarize that this is the start of common/arg.cpp from llama.cpp, including headers for argument parsing/CLI common utilities, build info, chat/download/json/schema/llama/log/sampling/speculative/preset, Windows defines to avoid min/max macros, includes, PATH_MAX/limits handling, max URL length constant, using json alias and namespace, and a static initializer list of examples (mmproj_examples) including MTMD/server/cli/etc. Need maybe mention it's likely the argument-parsing/configuration module, not the whole behavior. Since only partial snippet provided, say based on shown excerpt. Could mention no actual function definitions included, so summary limited. Need answer concise. Ensure no unsafe content. This is code from open source likely llama.cpp. Provide summary. Need maybe note that `static std::initializer_list<enum llama_example> mmproj_examples` looks weird and truncated;",
+     "tag": "L-d-8k-short-512-rep2",
+     "swapin_kib": 32,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.1,
+     "mem_after": {
+      "avail_mib": 29861,
+      "free_mib": 327,
+      "cached_mib": 29895,
+      "swapused_mib": 80
+     },
+     "peak_card_mib": 10737,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16841196 kB",
+      "RssAnon": "830532 kB",
+      "RssFile": "15913320 kB",
+      "RssShmem": "97344 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "59d1e999",
+     "t0": 1795572582.7774985,
+     "ttft_s": 3.955706834793091,
+     "total_s": 40.43692684173584,
+     "content_chunks": 251,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 514,
+      "prompt_ms": 3603.846,
+      "prompt_per_token_ms": 7.011373540856031,
+      "prompt_per_second": 142.6254063020451,
+      "predicted_n": 256,
+      "predicted_ms": 36828.675,
+      "predicted_per_token_ms": 144.42617647058825,
+      "predicted_per_second": 6.923952599435086,
+      "draft_n": 350,
+      "draft_n_accepted": 138
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 514,
+      "total_tokens": 770,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user asks to summarize code. The code shown is from llama.cpp's common/arg.cpp, which parses command-line arguments. There's a truncated line `LLAMA_EXAMPL` due to truncation, but I can summarize.",
+     "answer_full": "The user asks to summarize code. The code shown is from llama.cpp's common/arg.cpp, which parses command-line arguments. There's a truncated line `LLAMA_EXAMPL` due to truncation, but I can summarize. Need answer concise. We should not claim beyond visible code. Summarize includes headers, MSVC defines, includes, max URL length, initializer list of mmproj examples. Likely more of file omitted, but user asks summarize this code; mention it appears to be argument parsing code for llama.cpp common layer. Avoid asserting exact later behavior not shown.\n\nNeed note: This is not malicious. Final answer.This is the start of `common/arg.cpp` (llama.cpp-style), the command-line argument-parsing unit for the common library.\n\nWhat it does:\n- Includes project headers such as `arg.h`, `build-info.h`, `chat.h`, `common.h`, `download.h`, `json.h`, `llama.h`, `log.h`, `sampling.h`, `speculative.h",
+     "tag": "L-d-8k-short-512-rep3",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.1,
+     "mem_after": {
+      "avail_mib": 29872,
+      "free_mib": 338,
+      "cached_mib": 29895,
+      "swapused_mib": 80
+     },
+     "peak_card_mib": 10737,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16841276 kB",
+      "RssAnon": "830612 kB",
+      "RssFile": "15913320 kB",
+      "RssShmem": "97344 kB",
+      "VmSwap": "0 kB"
+     }
+    }
+   ],
+   "free_before": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        2147         342          96       30094       29876\nSwap:           4095          80        4015\n",
+    "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 80.8M   -2\n",
+    "vmstat": {
+     "pswpin": 44431,
+     "pswpout": 88233
+    },
+    "t": 1795572496.2773857
+   },
+   "free_after": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        2151         338          96       30095       29872\nSwap:           4095          80        4015\n",
+    "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 80.8M   -2\n",
+    "vmstat": {
+     "pswpin": 44443,
+     "pswpout": 88233
+    },
+    "t": 1795572623.6488543
+   },
+   "pswpout_delta": 0,
+   "peak_card_mib": 10737,
+   "min_avail_mib": 29835
+  },
+  "deep": {
+   "prompt_target": 7372,
+   "reqs": [
+    {
+     "nonce": "87360e3f",
+     "t0": 1795572623.6990368,
+     "ttft_s": 44.47242093086243,
+     "total_s": 89.71402859687805,
+     "content_chunks": 251,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 7374,
+      "prompt_ms": 44049.022,
+      "prompt_per_token_ms": 5.973558719826417,
+      "prompt_per_second": 167.40439776392768,
+      "predicted_n": 256,
+      "predicted_ms": 45643.455,
+      "predicted_per_token_ms": 178.9939411764706,
+      "predicted_per_second": 5.58678128112782,
+      "draft_n": 421,
+      "draft_n_accepted": 113
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 7374,
+      "total_tokens": 7630,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user asks to summarise the code, which is part of a large C++ file (likely llama.cpp). Need answer concise summary. Public request? It includes code, summarize. Fine. Need avoid disallowed? No. Pr",
+     "answer_full": "The user asks to summarise the code, which is part of a large C++ file (likely llama.cpp). Need answer concise summary. Public request? It includes code, summarize. Fine. Need avoid disallowed? No. Provide summary. Mention it's arg parsing/model handling for llama.cpp common params: arg definitions, environment variables, download handlers (HF/url), speculative draft type inference, mmproj/spec sidecar download, URL/docker resolution. Keep concise but informative. Note truncated code at end. Ensure not claim unseen details. Mention specific functions. No need to reproduce copyrighted text? Summarizing is allowed. Avoid long verbatim snippets. final only.This `common/arg.cpp` code is the argument/model-resolution layer for an LLM tool/server (likely llama.cpp-style). It does three main things:\n\n- Defines and formats CLI arguments (`common_arg`): help text, environment-variable fallbacks including negative env variants, bool parsing, and help formatting/line wrapping.\n- Resolves model inputs: Hugging Face downloads, explicit URLs, Docker repo",
+     "tag": "L-d-8k-deep-7372-rep1",
+     "swapin_kib": 8,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 29712,
+      "free_mib": 545,
+      "cached_mib": 29527,
+      "swapused_mib": 80
+     },
+     "peak_card_mib": 10739,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16995424 kB",
+      "RssAnon": "984700 kB",
+      "RssFile": "15913380 kB",
+      "RssShmem": "97344 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "7fefe626",
+     "t0": 1795572713.735355,
+     "ttft_s": 44.647350788116455,
+     "total_s": 90.12018537521362,
+     "content_chunks": 251,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 7372,
+      "prompt_ms": 44195.08,
+      "prompt_per_token_ms": 5.9949918610960395,
+      "prompt_per_second": 166.805897851073,
+      "predicted_n": 256,
+      "predicted_ms": 45868.52,
+      "predicted_per_token_ms": 179.87654901960784,
+      "predicted_per_second": 5.559368385986729,
+      "draft_n": 424,
+      "draft_n_accepted": 112
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 7372,
+      "total_tokens": 7628,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user asks to summarise the code, which is common/arg.cpp from llama.cpp / ggml? It appears to be model loading/argument handling. No cyber issue. Need produce summary. Must not include hidden thin",
+     "answer_full": "The user asks to summarise the code, which is common/arg.cpp from llama.cpp / ggml? It appears to be model loading/argument handling. No cyber issue. Need produce summary. Must not include hidden thinking. We can answer. Need be mindful: source code from a repo is provided; summarizing it is allowed. Summarize functionality: CLI arg parsing/defaults, HF download planning/application, mmproj, speculative drafts, url downloads, cache finalization, preset repo handling, kv cache types, boolean parsing, help formatting. Mention not secrets. No request to exploit. Final concise but informative. Need note not full source but snippet. Done.This file implements common argument-handling and model-preparation logic for the LLaMA/GGUF example binaries.\n\nAt a high level it:\n\n- Defines a `common_arg` structure for CLI/env options, with metadata such as names, env vars, help text, examples, and whether the option is sampling/speculative/preset-only.\n- Provides formatting/parsing helpers, including line wrapping for help text and conversion of `common_arg` lists into usage",
+     "tag": "L-d-8k-deep-7372-rep2",
+     "swapin_kib": 20,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.1,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 29729,
+      "free_mib": 562,
+      "cached_mib": 29527,
+      "swapused_mib": 80
+     },
+     "peak_card_mib": 10739,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16997400 kB",
+      "RssAnon": "986676 kB",
+      "RssFile": "15913380 kB",
+      "RssShmem": "97344 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "bcd1163d",
+     "t0": 1795572804.3421245,
+     "ttft_s": 44.50870680809021,
+     "total_s": 86.41757416725159,
+     "content_chunks": 254,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 7373,
+      "prompt_ms": 44096.838,
+      "prompt_per_token_ms": 5.980854197748543,
+      "prompt_per_second": 167.20019698464546,
+      "predicted_n": 256,
+      "predicted_ms": 42303.158,
+      "predicted_per_token_ms": 165.89473725490197,
+      "predicted_per_second": 6.027918766726588,
+      "draft_n": 390,
+      "draft_n_accepted": 123
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 7373,
+      "total_tokens": 7629,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user asks to summarize code. This is a large source file. Need to answer with summary. Must be careful: This code includes downloading models, paths, etc. But user only asks summarize what code do",
+     "answer_full": "The user asks to summarize code. This is a large source file. Need to answer with summary. Must be careful: This code includes downloading models, paths, etc. But user only asks summarize what code does, not to exploit. This is benign. Provide concise summary. Need mention it's arg parsing/model resolution for llama.cpp-like parameter parsing. Avoid giving harmful instructions? Summarizing code is okay.\n\nNeed note: It handles command-line arg parsing, defaults, env vars, HF downloads, speculative draft sidecars, mmproj, models, presets etc. Mention specifics: common_arg parsing/formatting, get_common_arg_defs, env fallback, bool parsing, url/model path resolution, download handlers, hf plan, multi-part download, inferring speculative type from sidecar/GGUF, etc. Need no cyber safety issue. Also note the prompt includes a line \"request bcd1163d\" maybe a tracking ID; ignore.\n\nNeed final answer only. Ensure no extra claims beyond image. Could structure bullet summary. Mention not a runnable exploit. Keep moderate detail.\n\nAlso must not reconstruct whole code verbat",
+     "tag": "L-d-8k-deep-7372-rep3",
+     "swapin_kib": 524,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.6,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 29733,
+      "free_mib": 566,
+      "cached_mib": 29528,
+      "swapused_mib": 80
+     },
+     "peak_card_mib": 10739,
+     "prefill_pcie_links": [
+      [
+       "3",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16998516 kB",
+      "RssAnon": "987792 kB",
+      "RssFile": "15913380 kB",
+      "RssShmem": "97344 kB",
+      "VmSwap": "0 kB"
+     }
+    }
+   ],
+   "free_before": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        2151         338          96       30095       29872\nSwap:           4095          80        4015\n",
+    "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 80.8M   -2\n",
+    "vmstat": {
+     "pswpin": 44443,
+     "pswpout": 88233
+    },
+    "t": 1795572623.6607478
+   },
+   "free_after": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        2288         568          96       29728       29736\nSwap:           4095          80        4015\n",
+    "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 80.3M   -2\n",
+    "vmstat": {
+     "pswpin": 44581,
+     "pswpout": 88233
+    },
+    "t": 1795572891.2531674
+   },
+   "pswpout_delta": 0,
+   "peak_card_mib": 10739,
+   "min_avail_mib": 29648
+  }
+ },
+ "start_utc": "2026-11-25T02:07:25Z",
+ "state_before": {
+  "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        1098        1462           0       29966       30925\nSwap:           4095          80        4015\n",
+  "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 80.8M   -2\n",
+  "vmstat": {
+   "pswpin": 44431,
+   "pswpout": 88233
+  },
+  "t": 1795572445.938959
+ },
+ "load_s": 6.0,
+ "load_peak_mib": 10639,
+ "card_after_load_mib": 10639,
+ "avail_after_load_mib": 30179,
+ "proc_after_load": {
+  "VmRSS": "16503000 kB",
+  "RssAnon": "517276 kB",
+  "RssFile": "15898840 kB",
+  "RssShmem": "86884 kB",
+  "VmSwap": "0 kB"
+ },
+ "info_props": {
+  "default_generation_settings": {
+   "params": {
+    "seed": 4294967295,
+    "temperature": 1.0,
+    "dynatemp_range": 0.0,
+    "dynatemp_exponent": 1.0,
+    "top_k": 0,
+    "top_p": 1.0,
+    "min_p": 0.0,
+    "top_n_sigma": -1.0,
+    "xtc_probability": 0.0,
+    "xtc_threshold": 0.10000000149011612,
+    "typical_p": 1.0,
+    "repeat_last_n": 64,
+    "repeat_penalty": 1.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "dry_multiplier": 0.0,
+    "dry_base": 1.75,
+    "dry_allowed_length": 2,
+    "dry_penalty_last_n": 64,
+    "mirostat": 0,
+    "mirostat_tau": 5.0,
+    "mirostat_eta": 0.10000000149011612,
+    "adaptive_target": -1.0,
+    "adaptive_decay": 0.8999999761581421,
+    "max_tokens": -1,
+    "n_predict": -1,
+    "n_keep": 0,
+    "n_discard": 0,
+    "ignore_eos": false,
+    "stream": false,
+    "n_probs": 0,
+    "min_keep": 0,
+    "chat_format": "Content-only",
+    "reasoning_format": "none",
+    "reasoning_in_content": false,
+    "generation_prompt": "",
+    "samplers": [
+     "penalties",
+     "dry",
+     "top_n_sigma",
+     "top_k",
+     "typ_p",
+     "top_p",
+     "min_p",
+     "xtc",
+     "temperature"
+    ],
+    "speculative.types": "none",
+    "timings_per_token": false,
+    "post_sampling_probs": false,
+    "backend_sampling": false,
+    "lora": []
+   },
+   "n_ctx": 8192
+  },
+  "total_slots": 1,
+  "model_alias": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+  "model_ftype": "Q4_K - Medium",
+  "model_path": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+  "modalities": {
+   "vision": false,
+   "video": false,
+   "audio": false
+  },
+  "media_marker": "<__media_COoUetCcXsg74rF62YjE32MfExRkTvkH__>",
+  "endpoint_slots": true,
+  "endpoint_props": false,
+  "endpoint_metrics": false,
+  "ui": true,
+  "ui_settings": {},
+  "chat_template": "{%- set effort_map = {\"none\": 0.0, \"minimal\": 0.1, \"low\": 0.2, \"medium\": 0.7, \"high\": 0.9, \"xhigh\": 0.99, \"max\": 0.99} -%}\n{%- set role_token = {\"user\": \"<|message_user|>\", \"assistant\": \"<|message_model|>\", \"system\": \"<|message_system|>\", \"tool\": \"<|message_tool|>\"} -%}\n\n{%- macro emit_thinking_effort() -%}\n    {%- set eff = reasoning_effort if reasoning_effort is defined and reasoning_effort is not none else 0.9 -%}\n    {%- if eff is string -%}\n        {%- set key = eff | trim -%}\n        {%- if key not in effort_map -%}\n            {{- raise_exception(\"Unknown reasoning_effort: \" ~ eff) -}}\n        {%- endif -%}\n        {%- set num = effort_map[key] -%}\n    {%- else -%}\n        {%- set num = eff | float -%}\n    {%- endif -%}\n    {%- if num < 0.0 or num > 0.99 -%}\n        {{- raise_exception(\"reasoning_effort must be in [0.0, 0.99]\") -}}\n    {%- endif -%}\n    {{- \"<|message_system|><|content_text|>Thinking effort level: \" -}}\n    {%- if num == 0.0 -%}0{%- else -%}{{ num }}{%- endif -%}\n    {{- \"<|end_message|>\" -}}\n{%- endmacro -%}\n\n{%- if tools -%}\n    {%- set tool_state = namespace(specs=[]) -%}\n    {%- for tool in tools -%}\n        {%- set fn = tool.function if tool.function is defined else tool -%}\n        {%- set spec = {\n            \"description\": (fn.description if fn.description is defined and fn.description else \"\"),\n            \"name\": fn.name,\n            \"parameters\": (fn.parameters if fn.parameters is defined and fn.parameters else {}),\n            \"type\": (tool.type if tool.type is defined and tool.type else \"function\"),\n        } -%}\n        {%- set tool_state.specs = tool_state.specs + [spec] -%}\n    {%- endfor -%}\n    {{- \"<|message_system|>tool_declare<|content_xml|>\" -}}\n    {{- tool_state.specs | tojson(sort_keys=true, separators=(\",\", \":\")) -}}\n    {{- \"<|end_message|>\" -}}\n{%- endif -%}\n\n{%- set state = namespace(effort_emitted=false) -%}\n{%- for message in messages -%}\n    {%- if message.role not in role_token -%}\n        {{- raise_exception(\"Unknown message role: \" ~ message.role) -}}\n    {%- endif -%}\n    {%- if not state.effort_emitted and message.role != \"system\" -%}\n        {{- emit_thinking_effort() -}}\n        {%- set state.effort_emitted = true -%}\n    {%- endif -%}\n\n    {%- set header = namespace(text=role_token[message.role]) -%}\n    {%- if message.role == \"tool\" -%}\n        {%- if message.name is defined and message.name -%}\n            {%- set header.text = header.text ~ message.name -%}\n        {%- elif message.tool_call_id is defined and message.tool_call_id -%}\n            {%- for prev in messages -%}\n                {%- if prev.role == \"assistant\" and prev.tool_calls -%}\n                    {%- for tc in prev.tool_calls -%}\n                        {%- if tc.id is defined and tc.id == message.tool_call_id and tc.function.name is defined -%}\n                            {%- set header.text = header.text ~ tc.function.name -%}\n                        {%- endif -%}\n                    {%- endfor -%}\n                {%- endif -%}\n            {%- endfor -%}\n        {%- endif -%}\n    {%- elif message.role == \"assistant\" and message.name is defined and message.name -%}\n        {%- set header.text = header.text ~ message.name -%}\n    {%- endif -%}\n    {%- set rtok = header.text -%}\n    {%- set rendered -%}\n\n    {%- if message.role == \"assistant\" and message.reasoning_content is defined and message.reasoning_content -%}\n        {{- rtok ~ \"<|content_thinking|>\" ~ message.reasoning_content ~ \"<|end_message|>\" -}}\n    {%- endif -%}\n\n    {%- if message.content is string and (message.content or not (message.role == \"assistant\" and (message.tool_calls or message.reasoning_content))) -%}\n        {{- rtok ~ \"<|content_text|>\" ~ message.content ~ \"<|end_message|>\" -}}\n    {%- elif message.content -%}\n        {%- for part in message.content -%}\n            {%- if part is string -%}\n                {{- rtok ~ \"<|content_text|>\" ~ part ~ \"<|end_message|>\" -}}\n            {%- elif part.type is not defined or part.type in (\"text\", \"input_text\") -%}\n                {%- set text_part = (part.text if part.text is defined and part.text is string else \"\") -%}\n                {{- rtok ~ \"<|content_text|>\" ~ text_part ~ \"<|end_message|>\" -}}\n            {%- elif part.type in (\"image\", \"input_image\", \"image_url\") -%}\n                {%- if message.role not in (\"user\", \"tool\") -%}\n                    {{- raise_exception(\"Image content is only supported for user and tool messages\") -}}\n                {%- endif -%}\n                {{- rtok ~ \"<|content_image|><|unused_200054|><|end_message|>\" -}}\n            {%- elif part.type in (\"audio\", \"input_audio\", \"audio_url\") -%}\n                {{- raise_exception(\"Inkling 2 does not accept audio input\") -}}\n            {%- else -%}\n                {{- raise_exception(\"Unsupported content part type: \" ~ part.type) -}}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- endif -%}\n\n    {%- if message.role == \"assistant\" and message.tool_calls -%}\n        {%- for tc in message.tool_calls -%}\n            {%- set fn = tc.function -%}\n            {%- if fn.name is not defined or fn.name is not string -%}\n                {{- raise_exception(\"tool call function name must be a string\") -}}\n            {%- endif -%}\n            {%- if message.name is defined and message.name and message.name != fn.name -%}\n                {{- raise_exception(\"assistant name \" ~ message.name ~ \" does not match its tool call \" ~ fn.name) -}}\n            {%- endif -%}\n            {%- set args = fn.arguments if fn.arguments is defined and fn.arguments else {} -%}\n            {%- if args is string -%}\n                {{- raise_exception(\"tool call arguments must be a parsed object, not a JSON string; canonicalize upstream\") -}}\n            {%- endif -%}\n            {%- if args is not mapping -%}\n                {{- raise_exception(\"tool call arguments must be an object\") -}}\n            {%- endif -%}\n            {{- \"<|message_model|>\" ~ fn.name ~ \"<|content_invoke_tool_json|>\" -}}\n            {{- '{\"name\":' ~ (fn.name | tojson(sort_keys=true, separators=(\",\", \":\"))) ~ ',\"args\":' -}}\n            {{- \"{\" -}}\n            {%- for key, value in args | dictsort(case_sensitive=true) -%}\n                {{- (key | tojson) ~ \":\" ~ (value | tojson(separators=(\",\", \":\"))) -}}\n                {%- if not loop.last -%},{%- endif -%}\n            {%- endfor -%}\n            {{- \"}}<|end_message|>\" -}}\n        {%- endfor -%}\n    {%- endif -%}\n\n    {%- if message.role == \"assistant\" -%}\n        {{- \"<|content_model_end_sampling|>\" -}}\n    {%- endif -%}\n    {%- endset -%}\n    {%- if message.role == \"assistant\" -%}\n        {%- generation -%}{{- rendered -}}{%- endgeneration -%}\n    {%- else -%}\n        {{- rendered -}}\n    {%- endif -%}\n{%- endfor -%}\n\n{%- if not state.effort_emitted -%}\n    {{- emit_thinking_effort() -}}\n{%- endif -%}",
+  "chat_template_caps": {
+   "supports_object_arguments": true,
+   "supports_parallel_tool_calls": true,
+   "supports_preserve_reasoning": true,
+   "supports_reasoning_effort": true,
+   "supports_string_content": true,
+   "supports_system_role": true,
+   "supports_tool_calls": true,
+   "supports_tools": true,
+   "supports_typed_content": true,
+   "reasoning_effort_levels": [
+    "none",
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "max"
+   ],
+   "reasoning_effort_rejected": []
+  },
+  "bos_token": "",
+  "eos_token": "<|content_model_end_sampling|>",
+  "build_info": "b12720-33aeb17f8",
+  "is_sleeping": false,
+  "cors_proxy_enabled": false
+ },
+ "info_v1_models": {
+  "models": [
+   {
+    "name": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+    "model": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+    "modified_at": "",
+    "size": "",
+    "digest": "",
+    "type": "model",
+    "description": "",
+    "tags": [
+     ""
+    ],
+    "capabilities": [
+     "completion"
+    ],
+    "parameters": "",
+    "details": {
+     "parent_model": "",
+     "format": "gguf",
+     "family": "",
+     "families": [
+      ""
+     ],
+     "parameter_size": "",
+     "quantization_level": ""
+    }
+   }
+  ],
+  "object": "list",
+  "data": [
+   {
+    "id": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+    "aliases": [
+     "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf"
+    ],
+    "tags": [],
+    "object": "model",
+    "architecture": {
+     "input_modalities": [
+      "text"
+     ],
+     "output_modalities": [
+      "text"
+     ]
+    },
+    "created": 1795572457,
+    "owned_by": "llamacpp",
+    "meta": {
+     "vocab_type": 2,
+     "n_vocab": 200058,
+     "n_ctx": 8192,
+     "n_ctx_train": 1048576,
+     "n_embd": 2304,
+     "n_params": 26070390272,
+     "size": 16598564864,
+     "ftype": "Q4_K - Medium"
+    }
+   }
+  ]
+ },
+ "cold": {
+  "nonce": "1e3af2bf",
+  "t0": 1795572457.0156436,
+  "ttft_s": 4.153940677642822,
+  "total_s": 39.139097452163696,
+  "content_chunks": 254,
+  "timings": {
+   "cache_n": 0,
+   "prompt_n": 515,
+   "prompt_ms": 3745.501,
+   "prompt_per_token_ms": 7.272817475728155,
+   "prompt_per_second": 137.49829462066623,
+   "predicted_n": 256,
+   "predicted_ms": 35389.249,
+   "predicted_per_token_ms": 138.781368627451,
+   "predicted_per_second": 7.205578168669247,
+   "draft_n": 336,
+   "draft_n_accepted": 141
+  },
+  "usage": {
+   "completion_tokens": 256,
+   "prompt_tokens": 515,
+   "total_tokens": 771,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "error": null,
+  "answer_head": "The user gives a code snippet and asks: \"Summarise what this code does.\" Need inspect snippet. It includes arg.h, build-info, chat, common, download, json-schema-to-grammar, json, llama, log, sampling",
+  "answer_full": "The user gives a code snippet and asks: \"Summarise what this code does.\" Need inspect snippet. It includes arg.h, build-info, chat, common, download, json-schema-to-grammar, json, llama, log, sampling, speculative, preset. Contains includes. It defines WIN32_LEAN_AND_MEAN etc on Windows. Then standard headers. Then imports limits. Then defines LLAMA_MAX_URL_LENGTH. Using json = common_json; using namespace common_arg_utils; static std::initializer_list<enum llama_example> mmproj_examples = { LLAMA_EXAMPLE_MTMD, LLAMA_EXAMPLE_SERVER, LLAMA_EXAMPLE_CLI, LLAMA_EXAMPL ... It's only the first part of common/arg.cpp, truncated. We should summarize visible portion, not invent. Need mention this looks like argument-parsing code for a llama.cpp-style inference program. It includes headers for configuration/argument handling, model loading, sampling, chat, speculative decoding, presets; defines a max URL length; aliases JSON type and arg utilities; initializes a list containing examples that accept mm",
+  "tag": "L-d-8k-cold",
+  "swapin_kib": 0,
+  "swapout_kib": 0,
+  "nvme_read_prefill_mib": 0.7,
+  "nvme_read_decode_mib": 0.3,
+  "mem_after": {
+   "avail_mib": 29876,
+   "free_mib": 342,
+   "cached_mib": 29895,
+   "swapused_mib": 80
+  },
+  "peak_card_mib": 10737,
+  "prefill_pcie_links": [
+   [
+    "3",
+    "16"
+   ]
+  ],
+  "proc": {
+   "VmRSS": "16840764 kB",
+   "RssAnon": "830100 kB",
+   "RssFile": "15913320 kB",
+   "RssShmem": "97344 kB",
+   "VmSwap": "0 kB"
+  }
+ },
+ "cold_peak_mib": 10737,
+ "arm_peak_mib": 10739,
+ "min_avail_mib": 29648,
+ "state_after": {
+  "free_m": "               total        used        free      shared  buff/cache   available\nMem:           32024        1068        1788           0       29633       30955\nSwap:           4095          80        4015\n",
+  "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   4G 80.3M   -2\n",
+  "vmstat": {
+   "pswpin": 44581,
+   "pswpout": 88233
+  },
+  "t": 1795572895.1057513
+ },
+ "end_utc": "2026-11-25T02:14:55Z"
+}

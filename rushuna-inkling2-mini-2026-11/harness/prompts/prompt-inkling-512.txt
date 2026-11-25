@@ -1,0 +1,65 @@
+// ===== common/arg.cpp =====
+#include "arg.h"
+
+#include "build-info.h"
+#include "chat.h"
+#include "common.h"
+#include "download.h"
+#include "json-schema-to-grammar.h"
+#include "json.h"
+#include "llama.h"
+#include "log.h"
+#include "sampling.h"
+#include "speculative.h"
+#include "preset.h"
+
+// fix problem with std::min and std::max
+#if defined(_WIN32)
+#define WIN32_LEAN_AND_MEAN
+#ifndef NOMINMAX
+#   define NOMINMAX
+#endif
+#include <windows.h>
+#include <shellapi.h>
+#endif
+
+#include <algorithm>
+#include <cinttypes>
+#include <climits>
+#include <cmath>
+#include <cstdarg>
+#include <filesystem>
+#include <fstream>
+#include <list>
+#include <numeric>
+#include <regex>
+#include <set>
+#include <string>
+#include <system_error>
+#include <thread> // for hardware_concurrency
+#include <vector>
+
+#ifndef __EMSCRIPTEN__
+#ifdef __linux__
+#include <linux/limits.h>
+#elif defined(_WIN32)
+#   if !defined(PATH_MAX)
+#   define PATH_MAX MAX_PATH
+#   endif
+#elif defined(_AIX)
+#include <sys/limits.h>
+#else
+#include <sys/syslimits.h>
+#endif
+#endif
+
+#define LLAMA_MAX_URL_LENGTH 2084 // Maximum URL Length in Chrome: 2083
+
+using json = common_json;
+using namespace common_arg_utils;
+
+static std::initializer_list<enum llama_example> mmproj_examples = {
+    LLAMA_EXAMPLE_MTMD,
+    LLAMA_EXAMPLE_SERVER,
+    LLAMA_EXAMPLE_CLI,
+    LLAMA_EXAMPL

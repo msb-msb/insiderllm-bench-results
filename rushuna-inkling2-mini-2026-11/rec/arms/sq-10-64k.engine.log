@@ -1,0 +1,27 @@
+[strata] 2026-11-25 04:46:05 engine started: /home/minotaur/inkling2-2026-11/strata/home/.local/share/strata/components/shapes/inkling2/engine/0.1.67-linux-x86_64-cuda-cuda13/strata-inkling --serve --native /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-SQ-10.strata --max-context 65536 --vram-experts-gb 7.10 --ram-experts-gb 0.92 --draft dspark --draft-beam 1 --draft-adapt
+[InkCUDA] expert codecs (gate_up/down code: count, mean MB): 2/2: 585, 2.18; 3/2: 1814, 2.85; 3/3: 658, 3.18; 15/15: 15, 4.48;
+[InkTier] adaptive expert tier on: 4 classes, pool 7.10 GiB, slots 254 x 2.18 MB (of 585 experts) 611 x 3.18 MB (of 658 experts) 1776 x 2.85 MB (of 1814 experts) 15 x 4.48 MB (of 15 experts); a round every 4 tokens, 16 swaps
+[InkHybrid] host expert arena 8.60 GB pinned (under 45% of the available RAM; available RAM 31.7 GB): the card reads the cold experts itself
+[InkCUDA] Loaded /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-SQ-10.strata (SQ-10): trunk=1.87 GB (0.37s), experts=2656 VRAM / 416 host (4.55s, hyb=1, promo=0, pf_buf=64MB), sm120_tc=0, screen=1
+[InkCUDA] prefill chunk 512 (auto: 2113 MiB free after the experts, 1984 MiB of K/V still to grow, 1 slot(s); --chunk N sets it)
+[InkCUDA] Auto Host KV Offload (kv_fmt=0, 1.90 GiB free VRAM): global KV = 13568 VRAM + 51968 mapped host tokens (1624.0 MiB host RAM, max_ctx=65536)
+[InkCUDA] memory: 2113 MiB free after load, runner+KV took 1640 MiB (max_batch=512), DSpark took 78 MiB, 395 MiB free now
+[InkHybrid] cold experts: launch probe (18 decode steps each): CPU lane 21.1 ms/token, copy into the card 18.3 ms/token -> copied into the card and computed by its kernels (identical answers wherever an expert lives) (STRATA_INK_EXACT=1 or 0 forces a lane)
+[InkDSpark] Tight VRAM while growing global ctx 49152 -> 57344; disabling DSpark gracefully
+[InkTier] 125 rounds, 357 swaps
+[strata] 2026-11-25 04:52:37 engine started: /home/minotaur/inkling2-2026-11/strata/home/.local/share/strata/components/shapes/inkling2/engine/0.1.67-linux-x86_64-cuda-cuda13/strata-inkling --serve --native /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-SQ-10.strata --max-context 65536 --ram-experts-gb 0.92 --vram-experts-gb 5 --draft dspark --draft-beam 1 --draft-adapt
+[InkCUDA] expert codecs (gate_up/down code: count, mean MB): 2/2: 585, 2.18; 3/2: 1814, 2.85; 3/3: 658, 3.18; 15/15: 15, 4.48;
+[InkHybrid] host expert arena 0.99 GB pinned (under 45% of the available RAM; available RAM 31.8 GB): the card reads the cold experts itself
+[inkling-cuda] GPU+SSD streaming active: 1828 VRAM (5.00 GiB), 383 RAM, 861 SSD-only (220-slot pinned DMA ring = 941 MiB, direct=1)
+[InkCUDA] Loaded /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-SQ-10.strata (SQ-10): trunk=1.87 GB (0.37s), experts=1828 VRAM / 1244 host (1.63s, hyb=1, promo=59, pf_buf=64MB), sm120_tc=0, screen=1
+[InkCUDA] prefill chunk 512 (auto: 4057 MiB free after the experts, 1984 MiB of K/V still to grow, 1 slot(s); --chunk N sets it)
+[InkCUDA] memory: 4057 MiB free after load, runner+KV took 1446 MiB (max_batch=512), DSpark took 588 MiB, 2023 MiB free now
+[InkHybrid] cold experts: launch probe (18 decode steps each): CPU lane 86.1 ms/token, copy into the card 43.5 ms/token -> copied into the card and computed by its kernels (identical answers wherever an expert lives) (STRATA_INK_EXACT=1 or 0 forces a lane)
+[strata] 2026-11-25 05:07:43 engine started: /home/minotaur/inkling2-2026-11/strata/home/.local/share/strata/components/shapes/inkling2/engine/0.1.67-linux-x86_64-cuda-cuda13/strata-inkling --serve --native /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-SQ-10.strata --max-context 65536 --ram-experts-gb 0.92 --vram-experts-gb 5 --draft dspark --draft-beam 1 --draft-adapt
+[InkCUDA] expert codecs (gate_up/down code: count, mean MB): 2/2: 585, 2.18; 3/2: 1814, 2.85; 3/3: 658, 3.18; 15/15: 15, 4.48;
+[InkHybrid] host expert arena 0.99 GB pinned (under 45% of the available RAM; available RAM 31.7 GB): the card reads the cold experts itself
+[inkling-cuda] GPU+SSD streaming active: 1828 VRAM (5.00 GiB), 383 RAM, 861 SSD-only (220-slot pinned DMA ring = 941 MiB, direct=1)
+[InkCUDA] Loaded /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-SQ-10.strata (SQ-10): trunk=1.87 GB (0.38s), experts=1828 VRAM / 1244 host (2.07s, hyb=1, promo=59, pf_buf=64MB), sm120_tc=0, screen=1
+[InkCUDA] prefill chunk 512 (auto: 4057 MiB free after the experts, 1984 MiB of K/V still to grow, 1 slot(s); --chunk N sets it)
+[InkCUDA] memory: 4057 MiB free after load, runner+KV took 1446 MiB (max_batch=512), DSpark took 588 MiB, 2023 MiB free now
+[InkHybrid] cold experts: launch probe (18 decode steps each): CPU lane 65.9 ms/token, copy into the card 43.6 ms/token -> copied into the card and computed by its kernels (identical answers wherever an expert lives) (STRATA_INK_EXACT=1 or 0 forces a lane)

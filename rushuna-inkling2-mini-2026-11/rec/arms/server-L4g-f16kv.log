@@ -1,0 +1,248 @@
+0.00.034.078 I srv  llama_server: initializing ...
+0.00.034.108 I cmn  common_param: common_params_print_info: build 12720 (33aeb17f8) with GNU 13.3.0 for Linux x86_64
+0.00.034.108 I cmn  common_param: common_params_print_info: verbosity = 4 (adjust with the `-lv N` CLI arg)
+0.00.034.109 I cmn  common_param: device_info:
+0.00.124.329 I cmn  common_param:   - CUDA0   : NVIDIA GeForce RTX 3060 (11909 MiB, 3985 MiB free)
+0.00.124.352 I cmn  common_param:   - CPU     : Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz (32024 MiB, 32024 MiB free)
+0.00.124.450 I cmn  common_param: system_info: n_threads = 4 (n_threads_batch = 4) / 8 | CUDA : ARCHS = 860 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16,f8_e4m3-f8_e4m3 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | 
+0.00.124.573 I srv          init: using 7 threads for HTTP server
+0.00.124.661 W srv  server_setup: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.126.740 I srv    load_model: loading model '/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf'
+0.00.126.742 I srv    load_model: local path '/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf'
+0.00.206.032 I llama_model_loader: loaded meta data with 59 key-value pairs and 744 tensors from /home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf (version GGUF V3 (latest))
+0.00.206.072 I llama_model_loader: Dumping metadata keys/values. Note: KV overrides do not apply in this output.
+0.00.206.083 I llama_model_loader: - kv   0:                       general.architecture str              = inkling2_loop
+0.00.206.085 I llama_model_loader: - kv   1:                               general.type str              = model
+0.00.206.086 I llama_model_loader: - kv   2:                               general.name str              = Inkling-2-Mini
+0.00.206.087 I llama_model_loader: - kv   3:                         general.size_label str              = 128x1.8B
+0.00.206.089 I llama_model_loader: - kv   4:                  inkling2_loop.block_count u32              = 24
+0.00.206.090 I llama_model_loader: - kv   5:               inkling2_loop.context_length u32              = 1048576
+0.00.206.090 I llama_model_loader: - kv   6:             inkling2_loop.embedding_length u32              = 2304
+0.00.206.090 I llama_model_loader: - kv   7:          inkling2_loop.feed_forward_length u32              = 1152
+0.00.206.095 I llama_model_loader: - kv   8:         inkling2_loop.attention.head_count arr[i32,24]      = [24, 24, 24, 24, 24, 24, 24, 24, 24, ...
+0.00.206.097 I llama_model_loader: - kv   9:      inkling2_loop.attention.head_count_kv arr[i32,24]      = [8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, ...
+0.00.206.101 I llama_model_loader: - kv  10: inkling2_loop.attention.layer_norm_rms_epsilon f32              = 0.000001
+0.00.206.101 I llama_model_loader: - kv  11:                 inkling2_loop.expert_count u32              = 128
+0.00.206.102 I llama_model_loader: - kv  12:            inkling2_loop.expert_used_count u32              = 8
+0.00.206.102 I llama_model_loader: - kv  13:         inkling2_loop.attention.key_length u32              = 128
+0.00.206.103 I llama_model_loader: - kv  14:       inkling2_loop.attention.value_length u32              = 128
+0.00.206.103 I llama_model_loader: - kv  15:                   inkling2_loop.loop.count u32              = 3
+0.00.206.103 I llama_model_loader: - kv  16:                   inkling2_loop.loop.start u32              = 6
+0.00.206.104 I llama_model_loader: - kv  17:                     inkling2_loop.loop.end u32              = 18
+0.00.206.104 I llama_model_loader: - kv  18:               inkling2_loop.loop.gate_rank u32              = 64
+0.00.206.104 I llama_model_loader: - kv  19:                   inkling2_loop.vocab_size u32              = 201024
+0.00.206.105 I llama_model_loader: - kv  20:          inkling2_loop.vocab_size_unpadded u32              = 200058
+0.00.206.105 I llama_model_loader: - kv  21:   inkling2_loop.expert_feed_forward_length u32              = 1152
+0.00.206.106 I llama_model_loader: - kv  22:     inkling2_loop.attention.key_length_swa u32              = 128
+0.00.206.106 I llama_model_loader: - kv  23:   inkling2_loop.attention.value_length_swa u32              = 128
+0.00.206.106 I llama_model_loader: - kv  24:         inkling2_loop.rope.dimension_count u32              = 0
+0.00.206.107 I llama_model_loader: - kv  25:     inkling2_loop.attention.sliding_window u32              = 1024
+0.00.206.108 I llama_model_loader: - kv  26: inkling2_loop.attention.sliding_window_pattern arr[bool,24]     = [true, true, true, true, true, false,...
+0.00.206.109 I llama_model_loader: - kv  27:            inkling2_loop.shortconv.l_cache u32              = 4
+0.00.206.110 I llama_model_loader: - kv  28:         inkling2_loop.expert_weights_scale f32              = 8.000000
+0.00.206.110 I llama_model_loader: - kv  29:         inkling2_loop.activation.situ_beta f32              = 4.000000
+0.00.206.111 I llama_model_loader: - kv  30:  inkling2_loop.activation.situ_linear_beta f32              = 25.000000
+0.00.206.112 I llama_model_loader: - kv  31:          inkling2_loop.attn_res.block_size u32              = 6
+0.00.206.112 I llama_model_loader: - kv  32:      inkling2_loop.final_logit_softcapping f32              = 30.000000
+0.00.206.113 I llama_model_loader: - kv  33:    inkling2_loop.attention.relative_length u32              = 16
+0.00.206.113 I llama_model_loader: - kv  34:    inkling2_loop.attention.relative_extent u32              = 1024
+0.00.206.114 I llama_model_loader: - kv  35:            inkling2_loop.attention.qk_clip f32              = 22.627417
+0.00.206.115 I llama_model_loader: - kv  36:      inkling2_loop.attention.relative_clip f32              = 8.000000
+0.00.206.115 I llama_model_loader: - kv  37:    inkling2_loop.attention.log_scale_floor u32              = 8192
+0.00.206.116 I llama_model_loader: - kv  38:    inkling2_loop.attention.log_scale_alpha f32              = 0.100000
+0.00.206.116 I llama_model_loader: - kv  39:                       tokenizer.ggml.model str              = gpt2
+0.00.206.117 I llama_model_loader: - kv  40:                         tokenizer.ggml.pre str              = inkling2
+0.00.206.119 I llama_model_loader: - kv  41:                      tokenizer.ggml.tokens arr[str,200058]  = ["!", "\"", "#", "$", "%", "&", "'", ...
+0.00.206.120 I llama_model_loader: - kv  42:                  tokenizer.ggml.token_type arr[i32,200058]  = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, ...
+0.00.206.122 I llama_model_loader: - kv  43:                      tokenizer.ggml.merges arr[str,424413]  = ["i n", "e r", "t h", "a n", "o n", "...
+0.00.206.122 I llama_model_loader: - kv  44:                tokenizer.ggml.eos_token_id u32              = 200006
+0.00.206.123 I llama_model_loader: - kv  45:                tokenizer.ggml.eot_token_id u32              = 200006
+0.00.206.123 I llama_model_loader: - kv  46:               tokenizer.ggml.add_bos_token bool             = false
+0.00.206.124 I llama_model_loader: - kv  47:               tokenizer.ggml.add_eos_token bool             = false
+0.00.206.124 I llama_model_loader: - kv  48:                tokenizer.ggml.clean_spaces bool             = false
+0.00.206.124 I llama_model_loader: - kv  49:               general.quantization_version u32              = 2
+0.00.206.125 I llama_model_loader: - kv  50:                          general.file_type u32              = 15
+0.00.206.126 I llama_model_loader: - kv  51:                    tokenizer.chat_template str              = {%- set effort_map = {"none": 0.0, "m...
+0.00.206.127 I llama_model_loader: - kv  52:                           general.basename str              = Inkling-2-Mini
+0.00.206.127 I llama_model_loader: - kv  53:            tokenizer.ggml.padding_token_id u32              = 199999
+0.00.206.128 I llama_model_loader: - kv  54:                      general.sampling.temp f32              = 1.000000
+0.00.206.128 I llama_model_loader: - kv  55:                     general.sampling.top_k i32              = 0
+0.00.206.128 I llama_model_loader: - kv  56:                     general.sampling.top_p f32              = 1.000000
+0.00.206.129 I llama_model_loader: - kv  57:                     general.sampling.min_p f32              = 0.000000
+0.00.206.129 I llama_model_loader: - kv  58:                 inkling2_loop.loop.varying bool             = false
+0.00.206.131 I llama_model_loader: - type  f32:  518 tensors
+0.00.206.131 I llama_model_loader: - type q8_0:  150 tensors
+0.00.206.131 I llama_model_loader: - type q5_K:    4 tensors
+0.00.206.132 I llama_model_loader: - type bf16:   32 tensors
+0.00.206.132 I llama_model_loader: - type nvfp4:   40 tensors
+0.00.206.134 I print_info: file format = GGUF V3 (latest)
+0.00.206.134 I print_info: file type   = Q4_K - Medium
+0.00.206.136 I print_info: file size   = 15.46 GiB (5.09 BPW) 
+0.00.211.476 I llama_prepare_model_devices: using device CUDA0 (NVIDIA GeForce RTX 3060) (0000:01:00.0) - 3985 MiB free
+0.00.362.424 I load: 45 unused tokens
+0.00.387.110 W load: special_eos_id is not in special_eog_ids - the tokenizer config may be incorrect
+0.00.387.114 I load: printing all EOG tokens:
+0.00.387.115 I load:   - 199999 ('<|endoftext|>')
+0.00.387.115 I load:   - 200006 ('<|content_model_end_sampling|>')
+0.00.387.527 I load: special tokens cache size = 60
+0.00.414.117 I load: token to piece cache size = 1.2012 MB
+0.00.414.146 I print_info: arch                  = inkling2_loop
+0.00.414.147 I print_info: vocab_only            = 0
+0.00.414.148 I print_info: no_alloc              = 0
+0.00.414.148 I print_info: n_ctx_train           = 1048576
+0.00.414.149 I print_info: n_embd_inp            = 2304
+0.00.414.149 I print_info: n_embd                = 2304
+0.00.414.150 I print_info: n_embd_out            = 2304
+0.00.414.151 I print_info: n_layer               = 48
+0.00.414.151 I print_info: n_layer_all           = 48
+0.00.414.163 I print_info: n_head                = 24
+0.00.414.164 I print_info: n_head_kv             = 8
+0.00.414.164 I print_info: n_rot                 = 0
+0.00.414.165 I print_info: n_swa                 = 1024
+0.00.414.166 I print_info: is_swa_any            = 1
+0.00.414.166 I print_info: non_causal_type       = 0
+0.00.414.166 I print_info: n_embd_head_k         = 128
+0.00.414.166 I print_info: n_embd_head_v         = 128
+0.00.414.168 I print_info: n_gqa                 = 3
+0.00.414.169 I print_info: n_embd_k_gqa          = 1024
+0.00.414.171 I print_info: n_embd_v_gqa          = 1024
+0.00.414.172 I print_info: f_norm_eps            = 0.0e+00
+0.00.414.172 I print_info: f_norm_rms_eps        = 1.0e-06
+0.00.414.173 I print_info: f_clamp_kqv           = 0.0e+00
+0.00.414.173 I print_info: f_max_alibi_bias      = 0.0e+00
+0.00.414.173 I print_info: f_logit_scale         = 0.0e+00
+0.00.414.173 I print_info: f_attn_scale          = 0.0e+00
+0.00.414.174 I print_info: f_attn_value_scale    = 0.0000
+0.00.414.175 I print_info: n_ff                  = 1152
+0.00.414.175 I print_info: n_expert              = 128
+0.00.414.176 I print_info: n_expert_used         = 8
+0.00.414.176 I print_info: n_expert_groups       = 0
+0.00.414.176 I print_info: n_group_used          = 0
+0.00.414.176 I print_info: causal attn           = 1
+0.00.414.177 I print_info: pooling type          = -1
+0.00.414.177 I print_info: rope type             = -1
+0.00.414.177 I print_info: rope scaling          = linear
+0.00.414.178 I print_info: freq_base_train       = 10000.0
+0.00.414.178 I print_info: freq_scale_train      = 1
+0.00.414.179 I print_info: freq_base_swa         = 10000.0
+0.00.414.179 I print_info: freq_scale_swa        = 1
+0.00.414.179 I print_info: n_embd_head_k_swa     = 128
+0.00.414.179 I print_info: n_embd_head_v_swa     = 128
+0.00.414.180 I print_info: n_rot_swa             = 0
+0.00.414.180 I print_info: n_ctx_orig_yarn       = 1048576
+0.00.414.180 I print_info: rope_yarn_log_mul     = 0.0000
+0.00.414.180 I print_info: rope_finetuned        = unknown
+0.00.414.181 I print_info: model type            = ?B
+0.00.414.182 I print_info: model params          = 26.07 B
+0.00.414.182 I print_info: general.name          = Inkling-2-Mini
+0.00.414.185 I print_info: vocab type            = BPE
+0.00.414.186 I print_info: n_vocab               = 200058
+0.00.414.186 I print_info: n_merges              = 424413
+0.00.414.187 I print_info: EOS token             = 200006 '<|content_model_end_sampling|>'
+0.00.414.187 I print_info: EOT token             = 200006 '<|content_model_end_sampling|>'
+0.00.414.187 I print_info: PAD token             = 199999 '<|endoftext|>'
+0.00.414.187 I print_info: LF token              = 198 'Ċ'
+0.00.414.188 I print_info: EOG token             = 199999 '<|endoftext|>'
+0.00.414.188 I print_info: EOG token             = 200006 '<|content_model_end_sampling|>'
+0.00.414.188 I print_info: max token length      = 92
+0.00.414.190 I load_tensors: loading model tensors, this can take a while... (load_mode = mmap)
+0.00.420.765 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.01.402.834 I load_tensors: offloading output layer to GPU
+0.01.402.838 I load_tensors: offloading 47 repeating layers to GPU
+0.01.402.838 I load_tensors: offloaded 49/49 layers to GPU
+0.01.402.858 I load_tensors:   CPU_Mapped model buffer size =   469.31 MiB
+0.01.402.859 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.859 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.860 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.860 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.861 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.861 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.862 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.862 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.863 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.863 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.864 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.864 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.865 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.865 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.866 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.867 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.868 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.869 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.869 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.870 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.870 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.871 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.871 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.871 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.872 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.872 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.873 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.873 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.874 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.874 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.875 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.875 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.876 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.876 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.877 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.877 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.878 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.878 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.879 I load_tensors:   CPU_Mapped model buffer size =   182.25 MiB
+0.01.402.879 I load_tensors:   CPU_Mapped model buffer size =   364.50 MiB
+0.01.402.879 I load_tensors:   CPU_Mapped model buffer size =   344.25 MiB
+0.01.402.880 I load_tensors:   CPU_Mapped model buffer size =   445.50 MiB
+0.01.402.880 I load_tensors:   CPU_Mapped model buffer size =   344.25 MiB
+0.01.402.881 I load_tensors:   CPU_Mapped model buffer size =   445.50 MiB
+0.01.402.881 I load_tensors:   CPU_Mapped model buffer size =   344.25 MiB
+0.01.402.882 I load_tensors:   CPU_Mapped model buffer size =   445.50 MiB
+0.01.402.882 I load_tensors:   CPU_Mapped model buffer size =   344.25 MiB
+0.01.402.883 I load_tensors:   CPU_Mapped model buffer size =   445.50 MiB
+0.01.402.884 I load_tensors:        CUDA0 model buffer size =  1266.34 MiB
+0.01.575.258 I cmn  common_init_: added <|endoftext|> logit bias = -inf
+0.01.575.284 I cmn  common_init_: added <|content_model_end_sampling|> logit bias = -inf
+0.01.576.054 I llama_context: constructing llama_context
+0.01.576.073 I llama_context: n_seq_max             = 1
+0.01.576.073 I llama_context: n_ctx                 = 65536
+0.01.576.073 I llama_context: n_ctx_seq             = 65536
+0.01.576.074 I llama_context: n_batch               = 2048
+0.01.576.074 I llama_context: n_ubatch              = 512
+0.01.576.074 I llama_context: causal_attn           = 1
+0.01.576.075 I llama_context: flash_attn            = auto
+0.01.576.075 I llama_context: kv_unified            = false
+0.01.576.077 I llama_context: freq_base             = 10000.0
+0.01.576.078 I llama_context: freq_scale            = 1
+0.01.576.078 I llama_context: n_rs_seq              = 0
+0.01.576.078 I llama_context: rs_replay             = false
+0.01.576.078 I llama_context: n_outputs_max         = 1
+0.01.576.079 I llama_context: n_outputs_max_per_seq = 1
+0.01.576.079 I llama_context: n_ctx_seq (65536) < n_ctx_train (1048576) -- the full capacity of the model will not be utilized
+0.01.579.189 I llama_context:  CUDA_Host  output buffer size =     0.76 MiB
+0.01.579.221 I llama_kv_cache_iswa: creating non-SWA KV cache, size = 65536 cells
+0.01.586.112 I llama_kv_cache:      CUDA0 KV buffer size =  2048.00 MiB
+0.01.586.117 I llama_kv_cache: size = 2048.00 MiB ( 65536 cells,   8 layers,  1/1 seqs), K (f16): 1024.00 MiB, V (f16): 1024.00 MiB
+0.01.586.118 I llama_kv_cache: n_rot_k = 0, n_embd_head_k_all = 128
+0.01.586.119 I llama_kv_cache: n_rot_v = 0, n_embd_head_k_all = 128
+0.01.586.121 I llama_kv_cache_iswa: creating     SWA KV cache, size = 1536 cells
+0.01.587.073 I llama_kv_cache:      CUDA0 KV buffer size =   240.00 MiB
+0.01.587.077 I llama_kv_cache: size =  240.00 MiB (  1536 cells,  40 layers,  1/1 seqs), K (f16):  120.00 MiB, V (f16):  120.00 MiB
+0.01.587.077 I llama_kv_cache: n_rot_k = 0, n_embd_head_k_all = 128
+0.01.587.078 I llama_kv_cache: n_rot_v = 0, n_embd_head_k_all = 128
+0.01.587.225 I llama_memory_recurrent:      CUDA0 RS buffer size =     3.66 MiB
+0.01.587.248 I llama_memory_recurrent: size =    3.66 MiB (     1 cells,  48 layers,  1 seqs  0 rs_seq), R (f32):    3.66 MiB, S (f32):    0.00 MiB, P (f32):    0.00 MiB
+0.01.588.405 I sched_reserve: reserving ...
+0.01.595.508 I resolve_fused_ops: Flash Attention enabled
+0.01.595.511 I resolve_fused_ops: resolving fused DeepSeek V4 HC support:
+0.01.599.893 I resolve_fused_ops: fused DeepSeek V4 HC pre enabled
+0.01.604.216 I resolve_fused_ops: fused DeepSeek V4 HC comb enabled
+0.01.608.509 I resolve_fused_ops: fused DeepSeek V4 HC post enabled
+0.01.617.940 E ggml_backend_cuda_buffer_type_alloc_buffer: allocating 13111.85 MiB on device 0: cudaMalloc failed: out of memory
+0.01.617.967 E ggml_gallocr_reserve_n_impl: failed to allocate CUDA0 buffer of size 13748767104
+0.01.617.969 E graph_reserve: failed to allocate compute buffers
+0.01.622.287 E llama_init_from_model: failed to initialize the context: failed to allocate compute pp buffers
+0.01.622.295 E cmn  common_init_: failed to create context with model '/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf'
+0.01.622.312 E cmn  common_init_: failed to create context with model '/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf'
+0.01.622.315 E srv    load_model: failed to create_context with model '/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf'
+0.01.622.328 I srv    operator(): operator(): cleaning up before exit...
+0.01.622.644 E srv  server_run_i: exiting due to model loading error
