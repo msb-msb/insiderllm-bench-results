@@ -29,3 +29,46 @@ removed '/home/minotaur/nariq-t/model/Qwen3.8-27B-UD-Q4_K_XL.gguf'
 2026-11-25T00:14:36-08:00 remote base rc=0
 2026-11-25T00:14:37-08:00 base: 2026-11-25T08:13:44 === base rc=0 swap-out 7516 KiB override-lines 0
 2026-11-25T00:14:37-08:00 STOP: BF16 base run failed the A1 rule (rc/swap/override); Q8_0 fallback needs a manual step (store copy, download)
+2026-11-25T11:02:39-08:00 === orchestrate start (from rebase), A1 0f4e9b497e3cfd8b14d039dbbb86c2e71f9498e33d0b9d867f4201b1523a5372, A2 1f9ba443cf437168a55a7803502f8c5199c2ff1893e326e15b8340c451d21862; Tamanna free 21.70 GiB
+2026-11-25T11:02:40-08:00 --- phase rebase (lock A2 1f9ba443cf437168a55a7803502f8c5199c2ff1893e326e15b8340c451d21862): BF16 base re-run once, -v, -ngl 30
+2026-11-25T11:03:05-08:00 tamanna ref/Qwen3.8-27B-BF16-00001-of-00002.gguf b9966e82b7a4d87028b5eae061d578ee826305ebf8baea5bfc6e09bad0ba191f
+2026-11-25T11:03:08-08:00 tamanna ref/Qwen3.8-27B-BF16-00002-of-00002.gguf 92e3943c4f9bd6292a7bef82369f65fed9bfed088b9df0fb2fa2ce17c9edfa02
+removed '/home/minotaur/nariq-t/ref.kld'
+2026-11-25T11:03:09-08:00 free before re-run: 51.99 GiB
+2026-11-25T11:03:09-08:00 remote base: bash /home/minotaur/nariq-t/harness/kld.sh /home/minotaur/nariq-t/out/kld base 30
+2026-11-25T11:15:33-08:00 remote base rc=0
+2026-11-25T11:15:33-08:00 base (A2): 2026-11-25T19:14:35 === base rc=0 swap-out 9508 KiB override-lines 1
+2026-11-25T11:15:33-08:00 free after base: 21.70 GiB
+2026-11-25T11:15:33-08:00 ref-head-A2.kld bc206a39db5044122238f23523e7e38b2b5a09a69ca5c640fbd4d80fb279de48; identical to first run's: yes
+2026-11-25T11:20:06-08:00 store Qwen3.8-27B-BF16-00001-of-00002.gguf b9966e82b7a4d87028b5eae061d578ee826305ebf8baea5bfc6e09bad0ba191f
+2026-11-25T11:20:32-08:00 store Qwen3.8-27B-BF16-00002-of-00002.gguf 92e3943c4f9bd6292a7bef82369f65fed9bfed088b9df0fb2fa2ce17c9edfa02
+removed '/home/minotaur/nariq-t/ref/Qwen3.8-27B-BF16-00001-of-00002.gguf'
+removed '/home/minotaur/nariq-t/ref/Qwen3.8-27B-BF16-00002-of-00002.gguf'
+2026-11-25T11:20:33-08:00 free after BF16 removal: 72.60 GiB
+2026-11-25T11:20:33-08:00 --- phase tokcheck + bpb (T4)
+2026-11-25T11:21:31-08:00 store Qwen3.8-27B-UD-IQ3_XXS.gguf c0b7c3038681ed2e3040456c1dd45f9858b6c2290bed172c70388a94874f3eee
+2026-11-25T11:22:23-08:00 store Qwen3.8-27B-NariQ-3.0bpw.gguf 1eaad934aa05579b8eba47ed9b26450392f9875fc2354efe8cfa8b29be8f4419
+2026-11-25T11:23:07-08:00 store Qwen3.8-27B-NariQ-2.5bpw.gguf 2445372e6de20620b940fbfab53aa718af9ba741f202da30cd2f02b5df78d05c
+2026-11-25T11:24:36-08:00 store Qwen3.8-27B-UD-Q4_K_XL.gguf bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+2026-11-25T11:26:19-08:00 tamanna model/Qwen3.8-27B-UD-IQ3_XXS.gguf c0b7c3038681ed2e3040456c1dd45f9858b6c2290bed172c70388a94874f3eee
+2026-11-25T11:28:00-08:00 tamanna model/Qwen3.8-27B-NariQ-3.0bpw.gguf 1eaad934aa05579b8eba47ed9b26450392f9875fc2354efe8cfa8b29be8f4419
+2026-11-25T11:29:19-08:00 tamanna model/Qwen3.8-27B-NariQ-2.5bpw.gguf 2445372e6de20620b940fbfab53aa718af9ba741f202da30cd2f02b5df78d05c
+2026-11-25T11:32:07-08:00 tamanna model/Qwen3.8-27B-UD-Q4_K_XL.gguf bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+2026-11-25T11:32:07-08:00 free after copy: 28.43 GiB
+2026-11-25T11:32:07-08:00 remote tokcheck: python3 /home/minotaur/nariq-t/harness/tokcheck.py /home/minotaur/nariq-t/ref.kld /home/minotaur/nariq-t/evalset/evalset.txt mainline:Qwen3.8-27B-UD-IQ3_XXS.gguf fork:Qwen3.8-27B-UD-IQ3_XXS.gguf fork:Qwen3.8-27B-NariQ-3.0bpw.gguf fork:Qwen3.8-27B-NariQ-2.5bpw.gguf mainline:Qwen3.8-27B-UD-Q4_K_XL.gguf
+2026-11-25T11:32:28-08:00 remote tokcheck rc=0
+base: n_ctx 4096 n_vocab 248320 n_chunk 32 tokens 131072 ids 61491582411922f6
+mainline Qwen3.8-27B-UD-IQ3_XXS.gguf: tokens 131182 first-131072 ids 61491582411922f6 MATCH
+fork Qwen3.8-27B-UD-IQ3_XXS.gguf: tokens 131182 first-131072 ids 61491582411922f6 MATCH
+fork Qwen3.8-27B-NariQ-3.0bpw.gguf: tokens 131182 first-131072 ids 61491582411922f6 MATCH
+fork Qwen3.8-27B-NariQ-2.5bpw.gguf: tokens 131182 first-131072 ids 61491582411922f6 MATCH
+mainline Qwen3.8-27B-UD-Q4_K_XL.gguf: tokens 131182 first-131072 ids 61491582411922f6 MATCH
+RESULT MATCH
+{"n_ctx": 4096, "n_chunk": 32, "decode_matches_evalset_prefix": true, "decoded_bytes": 484997, "scored_tokens": 65504, "scored_bytes": 241010, "scored_tokens_code_half": 32752, "scored_bytes_code_half": 101008, "scored_bytes_prose_half": 140002}
+2026-11-25T11:32:43-08:00 --- phase KLD arms (T4)
+2026-11-25T11:32:43-08:00 remote arms: bash /home/minotaur/nariq-t/harness/kld.sh /home/minotaur/nariq-t/out/kld arms
+2026-11-25T11:45:07-08:00 remote arms rc=0
+2026-11-25T11:45:07-08:00 --- fetch
+removed '/home/minotaur/nariq-t/ref.kld'
+2026-11-25T11:45:08-08:00 Tamanna free at end: 58.72 GiB; card 1 MiB
+2026-11-25T11:45:08-08:00 === orchestrate DONE

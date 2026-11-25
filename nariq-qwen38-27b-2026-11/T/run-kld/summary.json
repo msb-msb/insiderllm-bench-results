@@ -1,0 +1,238 @@
+{
+ "reference": "BF16",
+ "bpb_denominator": {
+  "n_ctx": 4096,
+  "n_chunk": 32,
+  "decode_matches_evalset_prefix": true,
+  "decoded_bytes": 484997,
+  "scored_tokens": 65504,
+  "scored_bytes": 241010,
+  "scored_tokens_code_half": 32752,
+  "scored_bytes_code_half": 101008,
+  "scored_bytes_prose_half": 140002
+ },
+ "arms": {
+  "Q-M-IQ3": {
+   "ppl": [
+    3.681333,
+    0.034803
+   ],
+   "ppl_base": [
+    3.424897,
+    0.030214
+   ],
+   "ln_ratio": [
+    0.072204,
+    0.002849
+   ],
+   "kld": [
+    0.101204,
+    0.00292
+   ],
+   "same_top_p": [
+    91.5,
+    0.109
+   ],
+   "kld_max": 30.843035,
+   "kld_999": 13.151288,
+   "kld_99": 1.235676,
+   "kld_median": 0.010283,
+   "override_logged": true,
+   "code": {
+    "kld": 0.03766,
+    "nll": 0.523485152712745
+   },
+   "prose": {
+    "kld": 0.16474,
+    "nll": 2.0830467486242044
+   },
+   "bpb": 0.5110263960772345
+  },
+  "Q-F-IQ3": {
+   "ppl": [
+    3.681333,
+    0.034803
+   ],
+   "ppl_base": [
+    3.424897,
+    0.030214
+   ],
+   "ln_ratio": [
+    0.072204,
+    0.002849
+   ],
+   "kld": [
+    0.101204,
+    0.00292
+   ],
+   "same_top_p": [
+    91.5,
+    0.109
+   ],
+   "kld_max": 30.843035,
+   "kld_999": 13.151288,
+   "kld_99": 1.235676,
+   "kld_median": 0.010283,
+   "override_logged": true,
+   "code": {
+    "kld": 0.03766,
+    "nll": 0.523485152712745
+   },
+   "prose": {
+    "kld": 0.16474,
+    "nll": 2.0830467486242044
+   },
+   "bpb": 0.5110263960772345
+  },
+  "Q-F-N3": {
+   "ppl": [
+    3.489358,
+    0.030651
+   ],
+   "ppl_base": [
+    3.424897,
+    0.030214
+   ],
+   "ln_ratio": [
+    0.018646,
+    0.002065
+   ],
+   "kld": [
+    0.078942,
+    0.002296
+   ],
+   "same_top_p": [
+    92.297,
+    0.104
+   ],
+   "kld_max": 30.946318,
+   "kld_999": 9.417269,
+   "kld_99": 0.905694,
+   "kld_median": 0.00822,
+   "override_logged": true,
+   "code": {
+    "kld": 0.0232,
+    "nll": 0.5146781930814807
+   },
+   "prose": {
+    "kld": 0.13468,
+    "nll": 1.9847814102458483
+   },
+   "bpb": 0.49002613213363244
+  },
+  "Q-F-N25": {
+   "ppl": [
+    3.700428,
+    0.033578
+   ],
+   "ppl_base": [
+    3.424897,
+    0.030214
+   ],
+   "ln_ratio": [
+    0.077377,
+    0.002925
+   ],
+   "kld": [
+    0.148806,
+    0.002885
+   ],
+   "same_top_p": [
+    89.204,
+    0.121
+   ],
+   "kld_max": 26.185698,
+   "kld_999": 12.761062,
+   "kld_99": 2.091979,
+   "kld_median": 0.01655,
+   "override_logged": true,
+   "code": {
+    "kld": 0.04622,
+    "nll": 0.5325675458843945
+   },
+   "prose": {
+    "kld": 0.2514,
+    "nll": 2.084314297945659
+   },
+   "bpb": 0.5130550031923261
+  },
+  "Q-R-Q4": {
+   "ppl": [
+    3.452419,
+    0.030984
+   ],
+   "ppl_base": [
+    3.424897,
+    0.030214
+   ],
+   "ln_ratio": [
+    0.008004,
+    0.001075
+   ],
+   "kld": [
+    0.013292,
+    0.00118
+   ],
+   "same_top_p": [
+    97.515,
+    0.061
+   ],
+   "kld_max": 27.99728,
+   "kld_999": 1.639871,
+   "kld_99": 0.077317,
+   "kld_median": 0.000856,
+   "override_logged": true,
+   "code": {
+    "kld": 0.00401,
+    "nll": 0.5059738730349663
+   },
+   "prose": {
+    "kld": 0.02257,
+    "nll": 1.9721654096917647
+   },
+   "bpb": 0.48585306022727254
+  }
+ },
+ "scores": {
+  "Q-F-N3 vs Q-M-IQ3": {
+   "ratio": 0.78,
+   "verdict": "lower"
+  },
+  "Q-F-N3 vs Q-R-Q4": {
+   "ratio": 5.939,
+   "verdict": "higher"
+  },
+  "Q-F-N25 vs Q-F-N3": {
+   "ratio": 1.885,
+   "verdict": "higher"
+  },
+  "Q-F-N25 vs Q-M-IQ3": {
+   "ratio": 1.47,
+   "verdict": "higher"
+  },
+  "Q-F-IQ3 vs Q-M-IQ3": {
+   "ratio": 1.0,
+   "verdict": "no difference shown"
+  },
+  "Q-F-N3 vs Q-F-IQ3": {
+   "ratio": 0.78,
+   "verdict": "lower"
+  },
+  "Q-R-Q4 vs Q-M-IQ3": {
+   "ratio": 0.131,
+   "verdict": "lower"
+  }
+ },
+ "predictions": {
+  "R-Q4 mean KLD 0.010-0.040": true,
+  "M-IQ3 mean KLD 0.060-0.150": true,
+  "F-N3 lower than M-IQ3, at 0.35-0.80x": true,
+  "F-N3 higher than R-Q4": true,
+  "F-N25 higher than F-N3 and no worse than M-IQ3": false,
+  "same top p: R-Q4 > F-N3 > F-N25 >= M-IQ3": false,
+  "ln(PPL ratio) ordering matches mean KLD ordering (5 arms)": true,
+  "F-IQ3 vs M-IQ3: |dKLD| <= 0.002 and same top p within 0.2 pp": true,
+  "code half lower mean KLD than prose half, every arm": true
+ },
+ "ref_bpb": 0.48271471567633684
+}

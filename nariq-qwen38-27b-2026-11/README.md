@@ -169,3 +169,79 @@ on the card, so no cell is affected.
   prefilled slower (about 0.67-0.70x).
 - Quality is not measured here. Whether 3.0 bpw NariQ is as good as, better or worse than UD-IQ3_XXS waits for
   section T (KLD/PPL on Tamanna, BOS pinned and token counts matched per the N5 gate decision).
+
+## Section T results (Tamanna RTX 3090, 2026-11-24/25; lock A1 `0f4e9b49…3a5372`, A2 `1f9ba443…21862`)
+
+Files in `T/`: harness, eval set (`62c590c5…5b68`), `run-speed/` (`summary.txt`), `run-kld/` (`summary.txt`,
+`tokcheck.txt`, `bpb.json`, every log), `rec/` (removal logs, build sums, `orchestrate.log`, base-file headers).
+
+**Disk (A1 T9):** the draft's T9 was built from stale records; Mark's option 1 removed Qwen3.6-35B-A3B-UD-Q4_K_M and
+Qwen3.5-27B-Q4_K_M after same-day hash matches (67.34 → 103.89 GiB free). At the end: BF16 copy removed (LLM_repo copy
+re-hashed OK first), logits deleted, the four arm files stay (Mark); **58.72 GiB free, card 1 MiB.**
+
+### 3090 speed (A1 T5): median of 3, no void, every request at PCIe gen 4 x16, no swap
+
+| Arm | decode 512 / 4096 tok/s | prompt 512 / 4096 tok/s | peak MiB |
+|---|---|---|---:|
+| M-IQ3 | 50.71 / 49.69 | 1,243.7 / 1,495.4 | 11,028 |
+| F-IQ3 | 50.55 / 49.66 | 1,245.7 / 1,495.6 | 11,052 |
+| F-N3 | 51.18 / 49.95 | 896.3 / 1,014.0 | 10,544 |
+| F-N25 | 54.47 / 53.24 | 897.9 / 1,014.1 | 8,920 |
+| R-Q4 | 42.03 / 41.40 | 1,265.5 / 1,512.4 | 17,298 |
+
+F1 FAILS again (F-N3/M-IQ3 decode 1.009 / 1.005, faster, ranges apart; 1.07 on the 3060). F2 HOLDS (0.997-1.002).
+F-N3/M-IQ3 prompt 0.721 / 0.678. T6 speed: 10 of 12 hit; **miss: R-Q4/M-IQ3 decode 0.829 / 0.833 (predicted
+0.55-0.75).** `--cache-ram 0` on every arm (A1).
+
+### Reference run
+
+- First BF16 base run (A1, `-ngl 30`): rc 0, but **failed under A1 as written (swap-out 7,516 KiB; override line not
+  logged)**. Kept as `run-kld/*base-A1-failed*`. Evidence that BOS was handled correctly (A2): verbose diagnostic run
+  logs the override; stored tokens = eval-set tokens, no BOS at chunk starts. Not used to un-void it.
+- A2 written and locked before any arm. **BF16 base re-run under A2:** rc 0, override line logged, swap-out 9,508 KiB
+  (recorded; not a void for quality runs, A2.2), min MemAvailable above 55 GiB. Its stored header and tokens are
+  byte-identical to the first run's (`rec/ref-head-A2.kld` = `rec/ref-head.kld`, `bc206a39…de48`). **Reference: BF16.**
+- Token check: all five pairs MATCH the stored tokens (`61491582411922f6`). bpb check: decode matches the eval set;
+  65,504 scored tokens, 241,010 scored bytes.
+
+### Quality vs BF16 (A1 T4; 32 chunks × 4,096, 65,504 scored positions; every arm rc 0, override logged, swap-out 0)
+
+| Arm | mean KLD ± SE | median | 99% | 99.9% | same top p % | PPL(Q) | ln(PPL(Q)/PPL(base)) | bpb | code KLD | prose KLD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Q-M-IQ3 | 0.10120 ± 0.00292 | 0.0103 | 1.236 | 13.15 | 91.500 ± 0.109 | 3.6813 | 0.07220 ± 0.00285 | 0.5110 | 0.0377 | 0.1647 |
+| Q-F-IQ3 | 0.10120 ± 0.00292 | 0.0103 | 1.236 | 13.15 | 91.500 ± 0.109 | 3.6813 | 0.07220 ± 0.00285 | 0.5110 | 0.0377 | 0.1647 |
+| Q-F-N3 | 0.07894 ± 0.00230 | 0.0082 | 0.906 | 9.42 | 92.297 ± 0.104 | 3.4894 | 0.01865 ± 0.00206 | 0.4900 | 0.0232 | 0.1347 |
+| Q-F-N25 | 0.14881 ± 0.00288 | 0.0166 | 2.092 | 12.76 | 89.204 ± 0.121 | 3.7004 | 0.07738 ± 0.00293 | 0.5131 | 0.0462 | 0.2514 |
+| Q-R-Q4 | 0.01329 ± 0.00118 | 0.0009 | 0.077 | 1.64 | 97.515 ± 0.061 | 3.4524 | 0.00800 ± 0.00108 | 0.4859 | 0.0040 | 0.0226 |
+
+Reference PPL 3.4249, bpb 0.4827. Per-half values come from the running chunk means (chunks 1-16 code, 17-32 prose).
+
+**Comparisons (T7, ±2 SE):** F-N3 lower than M-IQ3 (0.78x); F-N3 higher than R-Q4 (5.9x); F-N25 higher than F-N3
+(1.89x) **and higher than M-IQ3 (1.47x)**; F-IQ3 = M-IQ3 (identical output to every printed digit).
+
+**T6 quality predictions: 7 of 9 hit.**
+
+| Prediction | Result |
+|---|---|
+| R-Q4 mean KLD 0.010-0.040 | 0.0133, HIT |
+| M-IQ3 mean KLD 0.060-0.150 | 0.1012, HIT |
+| F-N3 lower than M-IQ3, at 0.35-0.80x | lower, 0.78x, HIT (near the band's top) |
+| F-N3 higher than R-Q4 | 5.9x, HIT: NariQ 3.0 is not 4-bit quality on this text |
+| F-N25 higher than F-N3 and no worse than M-IQ3 | higher than both, **MISS** |
+| Same top p R-Q4 > F-N3 > F-N25 ≥ M-IQ3 | 97.5 > 92.3 > 89.2 < 91.5, **MISS** (F-N25 below M-IQ3) |
+| ln(PPL ratio) ordering = KLD ordering, 5 arms | HIT |
+| F-IQ3 vs M-IQ3 within ±0.002 KLD, 0.2 pp top p | identical, HIT |
+| Code half lower KLD than prose half, every arm | HIT |
+
+**Notes, not scored:**
+- F-N3's PPL ratio gap to M-IQ3 is much wider than its KLD gap: ln ratio 0.019 vs 0.072 (3.9x), mean KLD 0.079 vs
+  0.101 (1.28x).
+- The tool's PPL(base) in KL mode (3.4249) differs from the base run's own final estimate (3.4393). The base run
+  scores every position of the second half; the KL mode recomputes from the stored 2,047 positions per chunk. All arms
+  share the same PPL(base).
+- **Deviations:**
+  - A1 T2 names the NariQ store copies under `qwen3.8-27b-gguf/`; they are in `qwen3.8-27b-nariq-gguf/`. Hashes as
+    A1.
+  - `ollama` isn't installed on Tamanna, so the "ollama ps empty" check passes trivially.
+  - `summarize_kld.py` regexes fixed after the arms ran: padded `±` and `%` in the per-chunk rows. Parsing only; the
+    script isn't hash-pinned in A1.

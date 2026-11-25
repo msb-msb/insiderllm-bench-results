@@ -12,9 +12,9 @@ num = r"([-0-9.]+)"
 
 def parse(p):
     t = open(p, errors="replace").read(); r = {}
-    for key, pat in (("ppl", rf"Mean PPL\(Q\)\s*:\s*{num} ± {num}"), ("ppl_base", rf"Mean PPL\(base\)\s*:\s*{num} ± {num}"),
-                     ("ln_ratio", rf"Mean ln\(PPL\(Q\)/PPL\(base\)\)\s*:\s*{num} ± {num}"), ("kld", rf"Mean    KLD:\s*{num} ± {num}"),
-                     ("same_top_p", rf"Same top p:\s*{num} ± {num}")):
+    for key, pat in (("ppl", rf"Mean PPL\(Q\)\s*:\s*{num}\s*±\s*{num}"), ("ppl_base", rf"Mean PPL\(base\)\s*:\s*{num}\s*±\s*{num}"),
+                     ("ln_ratio", rf"Mean ln\(PPL\(Q\)/PPL\(base\)\)\s*:\s*{num}\s*±\s*{num}"), ("kld", rf"Mean    KLD:\s*{num}\s*±\s*{num}"),
+                     ("same_top_p", rf"Same top p:\s*{num}\s*±\s*{num}")):
         m = re.search(pat, t)
         r[key] = (float(m.group(1)), float(m.group(2))) if m else None
     for key, pat in (("kld_max", rf"Maximum KLD:\s*{num}"), ("kld_999", rf"99\.9%   KLD:\s*{num}"),
@@ -22,7 +22,7 @@ def parse(p):
         m = re.search(pat, t); r[key] = float(m.group(1)) if m else None
     rows = {}
     for l in t.splitlines():
-        m = re.match(r"^\s*(\d+)\s+" + r"\s+".join([rf"{num} ± {num}"] * 5), l)
+        m = re.match(r"^\s*(\d+)\s+" + r"\s+".join([rf"{num}\s*±\s*{num}\s*%?"] * 5), l)   # padded ±, % on the last two (fixed 2026-11-25 after the arms ran)
         if m:
             v = [float(x) for x in m.groups()[1:]]
             rows[int(m.group(1))] = {"ppl": v[0], "ln_ratio": v[2], "kld": v[4]}

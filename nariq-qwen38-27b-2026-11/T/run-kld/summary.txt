@@ -1,0 +1,27 @@
+Reference: BF16. Scored tokens 65504, bytes 241010.
+| arm | mean KLD ± SE | median | 99% | 99.9% | same top p % | PPL(Q) | ln(PPL(Q)/PPL(base)) | bpb | code KLD | prose KLD |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Q-M-IQ3 | 0.10120 ± 0.00292 | 0.010283 | 1.235676 | 13.151288 | 91.500 ± 0.109 | 3.6813 | 0.07220 ± 0.00285 | 0.5110 | 0.03766 | 0.16474 |
+| Q-F-IQ3 | 0.10120 ± 0.00292 | 0.010283 | 1.235676 | 13.151288 | 91.500 ± 0.109 | 3.6813 | 0.07220 ± 0.00285 | 0.5110 | 0.03766 | 0.16474 |
+| Q-F-N3 | 0.07894 ± 0.00230 | 0.00822 | 0.905694 | 9.417269 | 92.297 ± 0.104 | 3.4894 | 0.01865 ± 0.00206 | 0.4900 | 0.02320 | 0.13468 |
+| Q-F-N25 | 0.14881 ± 0.00288 | 0.01655 | 2.091979 | 12.761062 | 89.204 ± 0.121 | 3.7004 | 0.07738 ± 0.00293 | 0.5131 | 0.04622 | 0.25140 |
+| Q-R-Q4 | 0.01329 ± 0.00118 | 0.000856 | 0.077317 | 1.639871 | 97.515 ± 0.061 | 3.4524 | 0.00800 ± 0.00108 | 0.4859 | 0.00401 | 0.02257 |
+reference PPL 3.4249, bpb 0.4827
+
+KLD Q-F-N3 vs Q-M-IQ3: 0.78x, lower
+KLD Q-F-N3 vs Q-R-Q4: 5.939x, higher
+KLD Q-F-N25 vs Q-F-N3: 1.885x, higher
+KLD Q-F-N25 vs Q-M-IQ3: 1.47x, higher
+KLD Q-F-IQ3 vs Q-M-IQ3: 1.0x, no difference shown
+KLD Q-F-N3 vs Q-F-IQ3: 0.78x, lower
+KLD Q-R-Q4 vs Q-M-IQ3: 0.131x, lower
+
+R-Q4 mean KLD 0.010-0.040 -> HIT
+M-IQ3 mean KLD 0.060-0.150 -> HIT
+F-N3 lower than M-IQ3, at 0.35-0.80x -> HIT
+F-N3 higher than R-Q4 -> HIT
+F-N25 higher than F-N3 and no worse than M-IQ3 -> MISS
+same top p: R-Q4 > F-N3 > F-N25 >= M-IQ3 -> MISS
+ln(PPL ratio) ordering matches mean KLD ordering (5 arms) -> HIT
+F-IQ3 vs M-IQ3: |dKLD| <= 0.002 and same top p within 0.2 pp -> HIT
+code half lower mean KLD than prose half, every arm -> HIT
