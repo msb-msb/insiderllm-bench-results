@@ -11,8 +11,10 @@ Anything not pre-registered is labelled **exploratory**.
 machine, through Open WebUI 0.13.0: how long from the end of a spoken question to the first audio of the answer,
 where does the time go, and how is the 24 GB split?
 
-**Short answer.** About **6.2–6.7 s** median from end of speech to first audio for FLEURS in all three STT arms, and
-**5.1–5.4 s** for Mark's five real questions. Every E2E prediction missed (bands 2.8–5.5 s). The time splits roughly
+**Short answer.** About **6.2–6.7 s** median from end of speech to first audio for FLEURS in all three STT arms. For
+Mark's five real questions the pooled median is **5.1–5.4 s**, but 5–7 of those 15 clips per arm got their answer
+audio from Open WebUI's own TTS cache (see Measurement notes); the TTS-served ones alone have a median of
+**5.6–6.6 s**. Every E2E prediction missed (bands 2.8–5.5 s). The time splits roughly
 in half:
 - **~3.2–3.4 s residual.** This is Open WebUI's own: the ~2 s end-of-speech wait, plus its title call (~0.4–0.6 s),
   which runs ahead of the reply on the single LLM slot.
@@ -139,8 +141,10 @@ check as section 3.3 says, not a leaderboard figure.
 
 The TTFT prediction assumed a ~300–600-token prompt. The real reply prompt was ~7,400–7,430 tokens, because Open
 WebUI 0.13 adds 38 built-in tool definitions (A4). The default host cache restored all but 30–50 of those tokens
-for each reply (next table), so TTFT measures 30–50 evaluated tokens plus the cached prefix. The restore itself
-(~134 ms) happens before the task starts and isn't in TTFT.
+for each reply (next table), so TTFT measures 30–50 evaluated tokens plus the cached prefix. llama-server's
+slot-selection-to-launch step, which holds the host-cache restore, takes ~134 ms per reply here and isn't in TTFT.
+The exploratory tools-off pass, with a ~240-token prompt, shows ~115 ms for the same step. So most of it is
+per-request overhead, and the restore of the 7.4K prefix adds only ~20 ms.
 
 Decode is the median of each reply's own rate. German replies decode visibly slower in every arm (lower quartile
 30–50 tok/s, slowest on the longest replies). **Exploratory, not verified:** the likely cause is the TTS starting on
@@ -174,7 +178,7 @@ the first sentence while the LLM is still decoding, so the two share the GPU.
 | E2E without the residual, 1.0–2.8 s | 3.07 s: **misses** | 3.08 s: **misses** | 3.39 s: **misses** |
 | German vs English E2E within ±20% | +4.3%: **holds** | −8.8%: **holds** | +2.6%: **holds** |
 | German WER higher than English in all three arms | 8.0 < 12.5: no | 15.4 > 13.7: yes | 18.9 > 13.1: yes → **misses** (not all three) |
-| EN real vs EN FLEURS E2E within ±25% | −12.1%: **holds** | −24.0%: **holds** | −19.4%: **holds** |
+| EN real vs EN FLEURS E2E within ±25% | −12.1%: **holds** | −24.0%: **holds** | −19.4%: **holds** (all three also hold on TTS-served EN real clips only: +6.5%, −15.2%, −5.0%) |
 | Total VRAM peak ≤ 23.8 GB (the 23,808 MiB budget) | 24,096 MiB: **misses** | 24,096 MiB: **misses** | 24,098 MiB: **misses** |
 | p90 E2E within 1.5 s of the median | +1.80 s: **misses** | +1.60 s: **misses** | +1.56 s: **misses** |
 
@@ -205,6 +209,21 @@ memory. A school box sized by this method needs a larger margin, or longer TTS w
 - **R0** has no failed clips (it's typed text).
 
 ## Measurement notes (reported; no clip is excluded, the lock has no exclusion rule)
+
+- **Open WebUI's TTS cache (found after the run).** Open WebUI's `/api/v1/audio/speech` keys a cache on the SHA-256
+  of the request body (text, voice and model; `routers/openai.py` line 525 in 0.13.0). If a reply's first TTS chunk
+  is text it has synthesised before, Open WebUI returns the cached mp3 and never calls the TTS server. The cache has
+  run since Open WebUI started at 10:26, so it spans passes, the warm-up passes, the voided attempts and the arms
+  (`owui-data/cache/audio/speech/`, 1,576 entries by the end).
+  - **Which clips.** In the locked arms it hit only EN real, whose short questions often get word-for-word the same
+    reply ("The capital of France is Paris."): S1 5 of 15 EN real clips, S2 5, S3 7. These clips have no TTS request
+    in their window, so they have no 1st-TTS, residual or E2E − residual figure, and their E2E is ~3.4–3.6 s.
+  - **No FLEURS clip** in any locked arm was served from the cache, so the FLEURS figures are not affected.
+  - **EN real E2E, pooled vs TTS-served only (median):** S1 5,417 vs 6,569 ms (n 15 vs 10), S2 5,060 vs 5,642
+    (15 vs 10), S3 5,297 vs 6,245 (15 vs 8). The split is **exploratory**; the pre-registered figure is the pooled
+    one.
+  - **For a school deployment**, a repeated reply is played straight from the cache, so a common question answered
+    the same way gets faster.
 
 - **en08 is partly heard.** en08 is quiet (most frames between −45 and −30 dBFS). In every arm and pass Open WebUI
   sent only its middle, "…adult children did not leave a big impression", so it lost both the opening name and the
@@ -270,4 +289,33 @@ memory. A school box sized by this method needs a larger margin, or longer TTS w
   - `clips/` (the clip list and the padded FLEURS clips; Mark's audio is not here).
   - `day0/` and `install/`: install script and log, copied from Tamanna.
   - `run_all.log`.
-- **Exploratory tools-off pass (A4 item 4):** `X-S1/` … `X-R0/`, reported in its own section below once it has run.
+- **Exploratory tools-off pass (A4 item 4):** `X-S1/` … `X-R0/` and `tables-exploratory.json`; see the next section.
+
+## Exploratory, not pre-registered: Open WebUI built-in tools off (A4 item 4)
+
+**Set-up.** Same four arms, same harness and flags, run 18:32–21:30 straight after the locked arms. The one change:
+`capabilities.builtin_tools = false` on the voice-bench model, so the reply request carries no tool definitions. The
+reply prompt drops from ~7,430 to ~240 tokens. `-ncmoe` came out the same (10 / 5 / 10 / 0). Open WebUI's TTS cache
+was still warm from the locked arms. This is not part of the locked results.
+
+| Arm | FLEURS E2E median, tools off (locked) | p90 | LLM TTFT | 1st TTS request | Residual | Reply tokens | FLEURS WER en / de |
+|---|---|---|---|---|---|---|---|
+| X-S1 | 6,223 (6,313) | 7,142 | 272 (274) | 2,337 (2,536) | 3,384 (3,396) | 22.5 (26) | 12.5 / 8.0% |
+| X-S2 | 5,789 (6,199) | 7,509 | 147 (149) | 2,259 (2,684) | 3,203 (3,195) | 26 (35) | 13.7 / 16.0% |
+| X-S3 | 6,062 (6,679) | 7,357 | 247 (178) | 2,329 (2,695) | 3,383 (3,415) | 24 (32) | 11.9 / 19.4% |
+| X-R0 | n/a | n/a | 56 (114) | n/a | n/a | 44.5 (36) | n/a |
+
+What it shows:
+- **TTFT barely moves in the voice arms.** With the host cache on (A4), the 7.4K tool prefix was already restored
+  for each reply, so removing it saves no prefill. X-S3's FLEURS TTFT median is higher (247 vs 178 ms) because its
+  English and German halves sit at different levels and the pooled median falls between them. Per set it's
+  unchanged: en 170 vs 173, de 260 vs 262. In X-R0, TTFT halves (56 vs 114 ms).
+- **E2E drops 0.1–0.6 s**, mostly through a shorter first TTS request (0.2–0.4 s less). The replies came out shorter
+  (median 22–26 tokens vs 26–35), which shortens the TTS chunk. Whether removing the tools causes that wasn't tested.
+- **Residual and title call unchanged** (the title call is ~0.4–0.6 s either way).
+- **Restore step.** Slot select → launch is ~115 ms per reply, against ~134 ms with the 7.4K prefix (see 4.2).
+- **TTS cache.** Cache-served clips rose to 11 / 7 / 11 of 72–73 per S arm: EN real (6–10 of 15), plus 1–2 FLEURS
+  clips. EN real pooled E2E is therefore not comparable with the locked arms.
+- **en04 was detected once:** X-S1 pass 3, with E2E 463 ms and a negative residual (−1,476 ms). The answer audio
+  started 0.46 s after the clip's speech end, quicker than the stages add up to. That doesn't fit a normal
+  detection, and it wasn't investigated. It failed in the other 11 exploratory voice passes.

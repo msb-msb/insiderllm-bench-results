@@ -1,0 +1,38 @@
+{
+  "arm": "R0",
+  "wall_up": 1795583078.6616185,
+  "owui_builtin_tools": false,
+  "ncmoe": 0,
+  "free_mib": null,
+  "llm_cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "--alias",
+    "qwen3.6-35b-a3b",
+    "-ngl",
+    "99",
+    "--n-cpu-moe",
+    "0",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "-fa",
+    "on",
+    "--jinja",
+    "--chat-template-kwargs",
+    "{\"enable_thinking\":false}",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    "8080"
+  ],
+  "idle_start": 1795583083.4189591,
+  "a1_reading": "Enabled, 420.00 W",
+  "a1_ok": true,
+  "gpu_apps_ready": [
+    "95485, 21226"
+  ],
+  "wall_ready": 1795583383.509022
+}

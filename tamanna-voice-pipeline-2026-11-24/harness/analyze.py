@@ -31,14 +31,15 @@ delivered them (the chat's user turn). A3: for S1, hyps.tsv holds the hypotheses
 by S1_PREFIX (primary S1 WER) and hyps-unstripped.tsv the hypotheses as delivered (locked scoring, reported beside
 it); per_clip.tsv records whether the delivered transcript still carried the prefix.
 
-Usage: analyze.py RUNDIR ARM  -> writes RUNDIR/<ARM>/per_clip.tsv, summary.json, refs.tsv, hyps.tsv
+Usage: analyze.py RUNDIR ARM|X-ARM  -> writes RUNDIR/<dir>/per_clip.tsv, summary.json, refs.tsv, hyps.tsv
 """
 import csv, json, pathlib, re, statistics, sys
 
 import numpy as np
 
-RUN, ARM = pathlib.Path(sys.argv[1]), sys.argv[2]
-D = RUN / ARM
+RUN, DIRNAME = pathlib.Path(sys.argv[1]), sys.argv[2]
+D = RUN / DIRNAME
+ARM = DIRNAME.split("-")[-1]  # exploratory folders (A4 item 4) are X-<ARM>
 S1_PREFIX = re.compile(r"^\s*language [A-Za-z]+<asr_text>")  # A3 item 2, S1 only: S1_PREFIX.sub("", hyp, count=1)
 TS = re.compile(r"^(\d+)\.(\d{2})\.(\d{3})\.(\d{3}) ")
 
