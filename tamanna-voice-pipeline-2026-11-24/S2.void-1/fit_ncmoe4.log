@@ -1,0 +1,67 @@
+# wall_start 1795565987.075 cmd ["/home/minotaur/llama-v0.7.0/build/bin/llama-server", "-m", "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf", "--alias", "qwen3.6-35b-a3b", "-ngl", "99", "--n-cpu-moe", "4", "-c", "8192", "-np", "1", "-fa", "on", "--jinja", "--chat-template-kwargs", "{\"enable_thinking\":false}", "--host", "0.0.0.0", "--port", "8080"]
+0.00.047.646 W Setting 'enable_thinking' via --chat-template-kwargs is deprecated. Use --reasoning on / --reasoning off instead.
+0.00.047.868 I srv  llama_server: initializing ...
+0.00.047.876 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.048.136 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.050.557 I srv    load_model: loading model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'
+0.00.524.410 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.00.769.952 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.03.103.606 I cmn          init: llama threadpool init, n_threads = 8
+/home/minotaur/llama-v0.7.0/ggml/src/ggml-cuda/ggml-cuda.cu:109: CUDA error
+0.03.116.868 E CUDA error: out of memory
+0.03.116.872 E   current device: 0, in function ggml_cuda_kernel_can_use_pdl at /home/minotaur/llama-v0.7.0/ggml/src/ggml-cuda/common.cuh:1679
+0.03.116.872 E   cudaFuncGetAttributes(&attr, kernel)
+⚠️ warning: The current terminal doesn't support styling.  Styled output might not appear as expected.
+[New LWP 36659]
+[New LWP 36658]
+[New LWP 36657]
+[New LWP 36656]
+[New LWP 36655]
+[New LWP 36654]
+[New LWP 36653]
+[New LWP 36652]
+[New LWP 36651]
+[New LWP 36650]
+[New LWP 36649]
+[New LWP 36648]
+[New LWP 36647]
+[New LWP 36646]
+[New LWP 36645]
+[New LWP 36644]
+[New LWP 36643]
+[New LWP 36642]
+[New LWP 36641]
+[New LWP 36640]
+[New LWP 36639]
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/usr/lib/x86_64-linux-gnu/libthread_db.so.1".
+__syscall_cancel_arch () at ../sysdeps/unix/sysv/linux/x86_64/syscall_cancel.S:56
+⚠️ warning: 56	../sysdeps/unix/sysv/linux/x86_64/syscall_cancel.S: No such file or directory
+#0  __syscall_cancel_arch () at ../sysdeps/unix/sysv/linux/x86_64/syscall_cancel.S:56
+56	in ../sysdeps/unix/sysv/linux/x86_64/syscall_cancel.S
+#1  0x000079ec192a035c in __internal_syscall_cancel (a1=<optimized out>, a2=<optimized out>, a3=<optimized out>, a4=<optimized out>, a5=0, a6=0, nr=61) at ./nptl/cancellation.c:49
+⚠️ warning: 49	./nptl/cancellation.c: No such file or directory
+#2  __syscall_cancel (a1=<optimized out>, a2=<optimized out>, a3=<optimized out>, a4=<optimized out>, a5=a5@entry=0, a6=a6@entry=0, nr=61) at ./nptl/cancellation.c:75
+75	in ./nptl/cancellation.c
+#3  0x000079ec1931ca8f in __GI___wait4 (pid=<optimized out>, stat_loc=<optimized out>, options=<optimized out>, usage=<optimized out>) at ../sysdeps/unix/sysv/linux/wait4.c:30
+⚠️ warning: 30	../sysdeps/unix/sysv/linux/wait4.c: No such file or directory
+#4  0x000079ec1a0aabc3 in ggml_print_backtrace () from /home/minotaur/llama-v0.7.0/build/bin/libggml-base.so.0
+#5  0x000079ec1a0aad6b in ggml_abort () from /home/minotaur/llama-v0.7.0/build/bin/libggml-base.so.0
+#6  0x000079ec0bcf53d7 in ggml_cuda_error(char const*, char const*, char const*, int, char const*) () from /home/minotaur/llama-v0.7.0/build/bin/libggml-cuda.so.0
+#7  0x000079ec0be92784 in quantize_row_q8_1_cuda(float const*, int const*, void*, ggml_type, long, long, long, long, long, long, long, long, CUstream_st*) () from /home/minotaur/llama-v0.7.0/build/bin/libggml-cuda.so.0
+#8  0x000079ec0be80d58 in ggml_cuda_mul_mat_vec_q(ggml_backend_cuda_context&, ggml_tensor const*, ggml_tensor const*, ggml_tensor const*, ggml_tensor*, ggml_cuda_mm_fusion_args_host const*) () from /home/minotaur/llama-v0.7.0/build/bin/libggml-cuda.so.0
+#9  0x000079ec0bd0d2e9 in ggml_backend_cuda_graph_compute(ggml_backend*, ggml_cgraph*) () from /home/minotaur/llama-v0.7.0/build/bin/libggml-cuda.so.0
+#10 0x000079ec1a0c93d4 in ggml_backend_sched_graph_compute_async () from /home/minotaur/llama-v0.7.0/build/bin/libggml-base.so.0
+#11 0x000079ec188351eb in llama_context::graph_compute(ggml_cgraph*, bool) () from /home/minotaur/llama-v0.7.0/build/bin/libllama.so.0
+#12 0x000079ec18838e86 in llama_context::process_ubatch(llama_ubatch const&, llm_graph_type, llama_memory_context_i*, ggml_status&) () from /home/minotaur/llama-v0.7.0/build/bin/libllama.so.0
+#13 0x000079ec18842176 in llama_context::decode(llama_batch_ext const&) () from /home/minotaur/llama-v0.7.0/build/bin/libllama.so.0
+#14 0x000079ec18e4c1f1 in common_init_from_params(common_params&, bool) () from /home/minotaur/llama-v0.7.0/build/bin/libllama-common.so.0
+#15 0x000079ec19b7c49a in server_context_impl::load_model(common_params&) () from /home/minotaur/llama-v0.7.0/build/bin/libllama-server-impl.so
+#16 0x000079ec19ad02cf in llama_server(common_params&, int, char**, server_child&) () from /home/minotaur/llama-v0.7.0/build/bin/libllama-server-impl.so
+#17 0x000079ec19ad17d1 in llama_server(int, char**) () from /home/minotaur/llama-v0.7.0/build/bin/libllama-server-impl.so
+#18 0x000079ec1922a601 in __libc_start_call_main (main=main@entry=0x5fd577368270 <main>, argc=argc@entry=22, argv=argv@entry=0x7ffeb44931d8) at ../sysdeps/nptl/libc_start_call_main.h:59
+⚠️ warning: 59	../sysdeps/nptl/libc_start_call_main.h: No such file or directory
+#19 0x000079ec1922a718 in __libc_start_main_impl (main=0x5fd577368270 <main>, argc=22, argv=0x7ffeb44931d8, init=<optimized out>, fini=<optimized out>, rtld_fini=<optimized out>, stack_end=0x7ffeb44931c8) at ../csu/libc-start.c:360
+⚠️ warning: 360	../csu/libc-start.c: No such file or directory
+#20 0x00005fd5773682a5 in _start ()
+[Inferior 1 (process 36637) detached]

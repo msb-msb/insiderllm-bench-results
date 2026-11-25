@@ -213,7 +213,11 @@ def fit_ncmoe(d, free):
         t0 = time.time()
         p = start(name, llm_cmd(n), d)
         try:
-            wait_health("http://127.0.0.1:8080/health", p)
+            try:
+                wait_health("http://127.0.0.1:8080/health", p)
+            except SystemExit as e:  # the server exited while loading (e.g. CUDA out of memory): does not fit
+                tried[n] = {"peak_mib": peak_of(d, p.pid, t0), "fits": False, "load_failed": str(e)[:200]}
+                return False
             ntok = len(http("http://127.0.0.1:8080/tokenize", {"content": prompt})["tokens"])
             r = http("http://127.0.0.1:8080/v1/chat/completions",
                      {"model": LLM_ALIAS, "messages": [{"role": "user", "content": prompt}], "max_tokens": 8,
