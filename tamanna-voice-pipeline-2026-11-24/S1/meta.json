@@ -1,0 +1,146 @@
+{
+  "arm": "S1",
+  "wall_up": 1795562804.4225976,
+  "owui_builtin_tools": true,
+  "stt_cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/voice-pipeline/qwen3-asr-1.7b-gguf/qwen3-asr-1.7b-Q8_0.gguf",
+    "--mmproj",
+    "/home/minotaur/bench-models/voice-pipeline/qwen3-asr-1.7b-gguf/mmproj-qwen3-asr-1.7b-f16.gguf",
+    "-ngl",
+    "99",
+    "-c",
+    "2048",
+    "-np",
+    "1",
+    "--cache-ram",
+    "0",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8093"
+  ],
+  "tts_cmd": [
+    "/home/minotaur/voice-pipeline/tts/bin/python",
+    "/home/minotaur/voice-pipeline/harness/tts_customvoice_server.py",
+    "--model",
+    "/home/minotaur/bench-models/voice-pipeline/qwen3-tts-12hz-0.6b-customvoice",
+    "--speaker",
+    "ryan",
+    "--language",
+    "english",
+    "--ffmpeg",
+    "/home/minotaur/voice-pipeline/bin/ffmpeg",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    "8092",
+    "--log",
+    "{D}/tts.jsonl"
+  ],
+  "warmups": [
+    {
+      "kind": "stt",
+      "audio": "en",
+      "ms": 148.4,
+      "text": "language English<asr_text>Plants use sunlight to turn water and air into food."
+    },
+    {
+      "kind": "stt",
+      "audio": "de",
+      "ms": 110.0,
+      "text": "language German<asr_text>Pflanzen nutzen Sonnenlicht, um aus Wasser und Luft Nahrung zu machen."
+    },
+    {
+      "kind": "stt",
+      "audio": "en",
+      "ms": 80.2,
+      "text": "language English<asr_text>Plants use sunlight to turn water and air into food."
+    },
+    {
+      "kind": "tts",
+      "chars": 52,
+      "ms": 2336.9,
+      "bytes": 57260
+    },
+    {
+      "kind": "tts",
+      "chars": 41,
+      "ms": 1035.3,
+      "bytes": 56108
+    },
+    {
+      "kind": "tts",
+      "chars": 56,
+      "ms": 1257.1,
+      "bytes": 68780
+    }
+  ],
+  "stt_peak_mib": 3522,
+  "tts_peak_mib": 2944,
+  "free_mib": 17342,
+  "ncmoe_predicted_start": 10,
+  "ncmoe": 10,
+  "fit_trials": {
+    "10": {
+      "peak_mib": 16882,
+      "prompt_tokens": 4048,
+      "fits": true,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 4059,
+        "total_tokens": 4067,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    },
+    "9": {
+      "peak_mib": 17346,
+      "prompt_tokens": 4048,
+      "fits": false,
+      "usage": {
+        "completion_tokens": 8,
+        "prompt_tokens": 4059,
+        "total_tokens": 4067,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        }
+      }
+    }
+  },
+  "llm_cmd": [
+    "/home/minotaur/llama-v0.7.0/build/bin/llama-server",
+    "-m",
+    "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+    "--alias",
+    "qwen3.6-35b-a3b",
+    "-ngl",
+    "99",
+    "--n-cpu-moe",
+    "10",
+    "-c",
+    "8192",
+    "-np",
+    "1",
+    "-fa",
+    "on",
+    "--jinja",
+    "--chat-template-kwargs",
+    "{\"enable_thinking\":false}",
+    "--host",
+    "0.0.0.0",
+    "--port",
+    "8080"
+  ],
+  "idle_start": 1795562858.7782207,
+  "a1_reading": "Enabled, 420.00 W",
+  "a1_ok": true,
+  "gpu_apps_ready": [
+    "25560, 3522",
+    "25561, 2944",
+    "25824, 16854"
+  ],
+  "wall_ready": 1795563158.8656418
+}

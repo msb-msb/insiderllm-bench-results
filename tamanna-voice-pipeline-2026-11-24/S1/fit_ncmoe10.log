@@ -1,0 +1,23 @@
+# wall_start 1795562816.435 cmd ["/home/minotaur/llama-v0.7.0/build/bin/llama-server", "-m", "/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf", "--alias", "qwen3.6-35b-a3b", "-ngl", "99", "--n-cpu-moe", "10", "-c", "8192", "-np", "1", "-fa", "on", "--jinja", "--chat-template-kwargs", "{\"enable_thinking\":false}", "--host", "0.0.0.0", "--port", "8080"]
+0.00.018.042 W Setting 'enable_thinking' via --chat-template-kwargs is deprecated. Use --reasoning on / --reasoning off instead.
+0.00.018.286 I srv  llama_server: initializing ...
+0.00.018.294 I cmn  common_param: common_params_print_info: verbosity = 3 (adjust with the `-lv N` CLI arg)
+0.00.018.550 W srv  llama_server: security: no API key is set and CORS allows all origins (see https://github.com/ggml-org/llama.cpp/pull/25655)
+0.00.020.962 I srv    load_model: loading model '/home/minotaur/bench-models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf'
+0.00.453.837 W common_fit_params: failed to fit params to free device memory: n_gpu_layers already set by user to 99, abort
+0.00.697.367 W llama_model_loader: tensor overrides to CPU are used with mmap enabled - consider using --load-mode none for better performance
+0.02.828.562 I cmn          init: llama threadpool init, n_threads = 8
+0.02.909.670 I srv    load_model: initializing, n_slots = 1, n_ctx_slot = 8192, kv_unified = 'false'
+0.02.912.881 W srv          init: chat template supports preserving reasoning, it is enabled by default (may use more tokens, disable via --no-reasoning-preserve)
+0.02.912.913 I srv  llama_server: model loaded
+0.02.912.917 I srv  llama_server: listening on http://0.0.0.0:8080
+0.03.541.879 I slot get_availabl: id  0 | task -1 | selected slot by LRU, n_tokens = 0, t_last = -1
+0.03.541.928 I slot launch_slot_: id  0 | task 0 | processing task, is_child = 0
+0.06.631.569 I slot print_timing: id  0 | task 0 | prompt processing, n_tokens =   4055, progress = 1.00, t =   3.09 s / 1312.47 tokens per second
+0.06.808.742 I slot print_timing: id  0 | task 0 | prompt eval time =    3182.56 ms /  4059 tokens (    0.78 ms per token,  1275.39 tokens per second)
+0.06.808.745 I slot print_timing: id  0 | task 0 |        eval time =      84.23 ms /     8 tokens (   12.03 ms per token,    83.11 tokens per second)
+0.06.808.746 I slot print_timing: id  0 | task 0 |       total time =    3266.79 ms /  4067 tokens
+0.06.808.751 I slot print_timing: id  0 | task 0 |    graphs reused =          7
+0.06.808.751 I slot print_timing: id  0 | task 0 |   graph reallocs =          7    /     0        (same size) / (changed size)
+0.06.808.837 I slot      release: id  0 | task 0 | stop processing: n_tokens = 4066, truncated = 0
+0.07.311.060 I srv    operator(): operator(): cleaning up before exit...

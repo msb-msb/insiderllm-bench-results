@@ -1,0 +1,559 @@
+# wall_start 1795566047.223 cmd ["/home/minotaur/voice-pipeline/tts/bin/python", "/home/minotaur/voice-pipeline/harness/tts_customvoice_server.py", "--model", "/home/minotaur/bench-models/voice-pipeline/qwen3-tts-12hz-0.6b-customvoice", "--speaker", "ryan", "--language", "english", "--ffmpeg", "/home/minotaur/voice-pipeline/bin/ffmpeg", "--host", "0.0.0.0", "--port", "8092", "--log", "/home/minotaur/voice-pipeline/run-2026-11-24/S2/tts.jsonl"]
+/bin/sh: 1: sox: not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/402 [00:00<?, ?it/s]Loading weights:  91%|█████████ | 366/402 [00:00<00:00, 3658.13it/s]Loading weights: 100%|██████████| 402/402 [00:00<00:00, 2487.67it/s]
+Loading weights:   0%|          | 0/496 [00:00<?, ?it/s]Loading weights: 100%|██████████| 496/496 [00:00<00:00, 5803.29it/s]
+Could not infer sample rate from base model; defaulting to 24000 Hz.
+[W1124 16:30:58.988839084 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 134217728 bytes (free: 48627712, total: 25293946880).
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/applications.py", line 1194, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/routing.py", line 683, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 2811, in app
+    await route.handle(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 1330, in handle
+    await super().handle(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/routing.py", line 289, in handle
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 166, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 152, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 745, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 374, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/telemetry/_api.py", line 244, in _run_sync_endpoint
+    return function(**arguments)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/harness/tts_customvoice_server.py", line 74, in speech
+    audios, sr = tts.generate_custom_voice(text=req.input, speaker=args.speaker, language=lang)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 1177, in generate_custom_voice
+    m, talker, config, tie, tam, tth, tpe = self._prepare_generation_custom(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 569, in _prepare_generation_custom
+    tie, tam, tth, tpe = self._build_talker_inputs_local(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 653, in _build_talker_inputs_local
+    tts_bos_embed, tts_eos_embed, tts_pad_embed = m.talker.text_projection(
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/qwen_tts/core/models/modeling_qwen3_tts.py", line 816, in forward
+    return self.linear_fc2(self.act_fn(self.linear_fc1(hidden_state)))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: CUBLAS_STATUS_ALLOC_FAILED when calling `cublasCreate(handle)`
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/applications.py", line 1194, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/routing.py", line 683, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 2811, in app
+    await route.handle(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 1330, in handle
+    await super().handle(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/routing.py", line 289, in handle
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 166, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 152, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 745, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 374, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/telemetry/_api.py", line 244, in _run_sync_endpoint
+    return function(**arguments)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/harness/tts_customvoice_server.py", line 74, in speech
+    audios, sr = tts.generate_custom_voice(text=req.input, speaker=args.speaker, language=lang)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 1177, in generate_custom_voice
+    m, talker, config, tie, tam, tth, tpe = self._prepare_generation_custom(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 569, in _prepare_generation_custom
+    tie, tam, tth, tpe = self._build_talker_inputs_local(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 653, in _build_talker_inputs_local
+    tts_bos_embed, tts_eos_embed, tts_pad_embed = m.talker.text_projection(
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/qwen_tts/core/models/modeling_qwen3_tts.py", line 816, in forward
+    return self.linear_fc2(self.act_fn(self.linear_fc1(hidden_state)))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: CUBLAS_STATUS_ALLOC_FAILED when calling `cublasCreate(handle)`
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/applications.py", line 1194, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/routing.py", line 683, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 2811, in app
+    await route.handle(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 1330, in handle
+    await super().handle(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/routing.py", line 289, in handle
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 166, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 152, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 745, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 374, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/telemetry/_api.py", line 244, in _run_sync_endpoint
+    return function(**arguments)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/harness/tts_customvoice_server.py", line 74, in speech
+    audios, sr = tts.generate_custom_voice(text=req.input, speaker=args.speaker, language=lang)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 1177, in generate_custom_voice
+    m, talker, config, tie, tam, tth, tpe = self._prepare_generation_custom(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 569, in _prepare_generation_custom
+    tie, tam, tth, tpe = self._build_talker_inputs_local(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 653, in _build_talker_inputs_local
+    tts_bos_embed, tts_eos_embed, tts_pad_embed = m.talker.text_projection(
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/qwen_tts/core/models/modeling_qwen3_tts.py", line 816, in forward
+    return self.linear_fc2(self.act_fn(self.linear_fc1(hidden_state)))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: CUBLAS_STATUS_ALLOC_FAILED when calling `cublasCreate(handle)`
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 411, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 63, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/applications.py", line 1194, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/applications.py", line 96, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/telemetry/_asgi.py", line 151, in __call__
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/routing.py", line 683, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 2811, in app
+    await route.handle(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 1330, in handle
+    await super().handle(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/routing.py", line 289, in handle
+    await self.app(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 166, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 152, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 745, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/routing.py", line 374, in run_endpoint_function
+    return await run_in_threadpool(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/starlette/concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2779, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1124, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/fastapi/telemetry/_api.py", line 244, in _run_sync_endpoint
+    return function(**arguments)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/harness/tts_customvoice_server.py", line 74, in speech
+    audios, sr = tts.generate_custom_voice(text=req.input, speaker=args.speaker, language=lang)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 1177, in generate_custom_voice
+    m, talker, config, tie, tam, tth, tpe = self._prepare_generation_custom(
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 569, in _prepare_generation_custom
+    tie, tam, tth, tpe = self._build_talker_inputs_local(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/faster_qwen3_tts/model.py", line 653, in _build_talker_inputs_local
+    tts_bos_embed, tts_eos_embed, tts_pad_embed = m.talker.text_projection(
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/qwen_tts/core/models/modeling_qwen3_tts.py", line 816, in forward
+    return self.linear_fc2(self.act_fn(self.linear_fc1(hidden_state)))
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/minotaur/voice-pipeline/tts/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: CUDA error: CUBLAS_STATUS_ALLOC_FAILED when calling `cublasCreate(handle)`
+[W1124 17:02:13.779966400 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 184549376 bytes (free: 6684672, total: 25293946880).
+[W1124 17:02:13.819715436 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 142999552, total: 25293946880).
+[W1124 17:02:13.824114351 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.840067578 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.840161003 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.840378810 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.840464070 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.840675305 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.840758291 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.840953566 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.841043344 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.841238209 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.841321044 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.841513645 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.841594666 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.841780855 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.841860314 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.842052063 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.842134627 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.842318702 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.842398902 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.842582416 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.842658478 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.842833997 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.842910871 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.843106407 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.843186326 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.843367515 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.843444540 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.843625739 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.843700489 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.843871840 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.843945688 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.844124002 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.844199944 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.844371675 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.844445564 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.844614230 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.844686946 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.844855611 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.844929169 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.845107814 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.845183185 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.845352953 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.845426671 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.845594114 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.845666740 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.845840445 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1696595968 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.845914313 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1696595968 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.846088109 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.846163300 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.849620642 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.849733694 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.849929030 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.850008488 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.851199919 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.851277314 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.851453253 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.851525709 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.851706357 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.851781257 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.851952478 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.852034521 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.852215360 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.852290260 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.852459557 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.852532864 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.852702792 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.852775769 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.852940998 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.853019665 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.853194292 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.853266989 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.853432098 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.853509993 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.853682516 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.853755463 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.853922526 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.854006092 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.854186771 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.854277961 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.854450244 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.854522379 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.854693489 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.854766165 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.854932537 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855011495 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855191762 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855264258 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855430619 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855502965 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855672352 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855744236 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855910277 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.855982673 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.856162830 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.856243271 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.856412938 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1696595968 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.856486045 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1696595968 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.856651164 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.856724091 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.860937128 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.861026235 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.861221861 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.861296862 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.861471088 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.861544295 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.861714934 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.861787651 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.861960665 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.862039562 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.862211594 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.862284872 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.862452686 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.862525111 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.862695991 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.862769098 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.862937824 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863024717 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863199684 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863272811 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863440235 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863512410 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863679022 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863751547 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863919722 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.863992278 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.864178016 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.864253797 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.864420580 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.864492404 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.864658445 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.864731281 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.864896901 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.864969247 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.865149114 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.865224625 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.865394994 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.865467169 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.865635394 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.865707749 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.865880433 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.865951866 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 517996544 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.866126033 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.866201394 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.866368056 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.866440321 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.866610940 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1696595968 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.866684378 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 1696595968 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.866850489 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
+[W1124 17:02:13.866923055 CUDACachingAllocator.cpp:3933] memory allocation failed with OOM on device 0 while trying to allocate 222298112 bytes (free: 222691328, total: 25293946880).
