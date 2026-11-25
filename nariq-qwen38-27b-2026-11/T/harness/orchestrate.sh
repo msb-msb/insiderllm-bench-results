@@ -1,8 +1,8 @@
 #!/bin/bash
 # NariQ section T on Tamanna, driven from Miu (lock A1 0f4e9b49…3a5372, T9 phases). Stops at any failed gate.
-#   orchestrate.sh [FROM_PHASE]   phases: speed bf16 tokcheck arms fetch
+#   orchestrate.sh [FROM_PHASE]   phases: speed bf16 rebase tokcheck arms fetch   (rebase = lock A2: re-run the BF16 base once)
 set -u
-A1=0f4e9b497e3cfd8b14d039dbbb86c2e71f9498e33d0b9d867f4201b1523a5372
+A1=0f4e9b497e3cfd8b14d039dbbb86c2e71f9498e33d0b9d867f4201b1523a5372; A2=1f9ba443cf437168a55a7803502f8c5199c2ff1893e326e15b8340c451d21862
 S=/media/minotaur/Storage_Disk_1/LLM_repo
 REC=/home/minotaur/Desktop/InsiderLLM/docs/bench-results/nariq-qwen38-27b-2026-11/T
 LOG=$HOME/nariq-t/orch.log
@@ -44,7 +44,7 @@ rrun() {  # name cmd...: detached on Tamanna, poll until done
   rc=$(ssh tamanna "cat ~/nariq-t/logs/$n.rc"); log "remote $n rc=$rc"; return "$rc"; }
 seen=0; at() { [ "$1" = "$FROM" ] && seen=1; [ $seen = 1 ]; }
 
-log "=== orchestrate start (from $FROM), A1 $A1; Tamanna free $(free_gib) GiB"
+log "=== orchestrate start (from $FROM), A1 $A1, A2 $A2; Tamanna free $(free_gib) GiB"
 rsync -a --delete "$REC/harness/" tamanna:nariq-t/harness/ && rsync -a ~/nariq-t/step.sh tamanna:nariq-t/ || die "harness copy"
 ssh tamanna "mkdir -p ~/nariq-t/model ~/nariq-t/ref ~/nariq-t/out ~/nariq-t/logs"
 
@@ -79,6 +79,23 @@ if at bf16; then
   log "free after BF16 removal: $(free_gib) GiB"
 fi
 
+if at rebase; then
+  log "--- phase rebase (lock A2 $A2): BF16 base re-run once, -v, -ngl 30"
+  for f in "${BF[@]}"; do h=$(ssh tamanna "sha256sum ~/nariq-t/ref/$f" | cut -d' ' -f1)
+    log "tamanna ref/$f $h"; [ "$h" = "${HASH[$f]}" ] || die "tamanna BF16 hash mismatch $f"; done
+  ssh tamanna "rm -v ~/nariq-t/ref.kld" | tee -a "$LOG"; log "free before re-run: $(free_gib) GiB"
+  rrun base bash /home/minotaur/nariq-t/harness/kld.sh /home/minotaur/nariq-t/out/kld base 30
+  line=$(ssh tamanna "grep '=== base rc=' ~/nariq-t/out/kld/sequence.log | tail -1"); log "base (A2): $line"
+  echo "$line" | grep -q "rc=0 swap-out [0-9]* KiB override-lines [1-9]" \
+    || die "BF16 base re-run failed A2 (rc or override line); Q8_0 fallback needs a manual step"
+  log "free after base: $(free_gib) GiB"
+  ssh tamanna "head -c $((20 + 4 * 4096 * 32)) ~/nariq-t/ref.kld" > "$REC/rec/ref-head-A2.kld"
+  log "ref-head-A2.kld $(sha256sum "$REC/rec/ref-head-A2.kld" | cut -d' ' -f1); identical to first run's: $(cmp -s "$REC/rec/ref-head.kld" "$REC/rec/ref-head-A2.kld" && echo yes || echo no)"
+  store_hash "${BF[@]}"
+  ssh tamanna "rm -v ~/nariq-t/ref/Qwen3.8-27B-BF16-0000*.gguf" | tee -a "$LOG"
+  log "free after BF16 removal: $(free_gib) GiB"
+fi
+
 if at tokcheck; then
   log "--- phase tokcheck + bpb (T4)"
   store_hash "${ARMS[@]}"; copy_in model "${ARMS[@]}"
@@ -86,7 +103,7 @@ if at tokcheck; then
     mainline:Qwen3.8-27B-UD-IQ3_XXS.gguf fork:Qwen3.8-27B-UD-IQ3_XXS.gguf fork:Qwen3.8-27B-NariQ-3.0bpw.gguf \
     fork:Qwen3.8-27B-NariQ-2.5bpw.gguf mainline:Qwen3.8-27B-UD-Q4_K_XL.gguf || log "tokcheck MISMATCH (reported; voids per A1)"
   mkdir -p "$REC/run-kld"; rsync -a tamanna:nariq-t/logs/tokcheck.out "$REC/run-kld/tokcheck.txt"; cat "$REC/run-kld/tokcheck.txt" >> "$LOG"
-  PYTHONPATH=$HOME/nariq-t/llama.cpp/gguf-py python3 "$REC/harness/bpb.py" "$REC/rec/ref-head.kld" "$REC/evalset/evalset.txt" \
+  PYTHONPATH=$HOME/nariq-t/llama.cpp/gguf-py python3 "$REC/harness/bpb.py" "$REC/rec/ref-head-A2.kld" "$REC/evalset/evalset.txt" \
     "$S/qwen3.8-27b-gguf/Qwen3.8-27B-UD-IQ3_XXS.gguf" "$REC/run-kld/bpb.json" >> "$LOG" 2>&1 || log "bpb check failed (bpb not reported, per A1)"
 fi
 

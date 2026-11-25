@@ -3,12 +3,13 @@
 #   STEP = ngl-search | base NGL | arms
 # Every llama-perplexity call: -c 4096 -b 2048 -ub 512 --chunks 32 -fa on -t 8 --fit off
 #   --override-kv tokenizer.ggml.add_bos_token=bool:false   (BOS pinned, Mark's N5 gate decision)
+#   -v (lock A2: the loader logs the override only at verbose level). Swap-out recorded, not a void for quality runs (A2).
 set -u
 OUT=$1; STEP=$2; H=$(cd "$(dirname "$0")" && pwd); W=$HOME/nariq-t
 export LD_LIBRARY_PATH=$W/cuda-libs
 mkdir -p "$OUT"; cd "$OUT"
 REF=$W/ref/Qwen3.8-27B-BF16-00001-of-00002.gguf; KLD=$W/ref.kld; SET=$W/evalset/evalset.txt
-COMMON=(-f "$SET" -c 4096 -b 2048 -ub 512 -fa on -t 8 --fit off --override-kv tokenizer.ggml.add_bos_token=bool:false)
+COMMON=(-f "$SET" -c 4096 -b 2048 -ub 512 -fa on -t 8 --fit off --override-kv tokenizer.ggml.add_bos_token=bool:false -v)   # -v: A2 (override line is only logged at verbose level)
 seq() { echo "$(date -u +%FT%T) $*" | tee -a sequence.log; }
 swapout() { awk '/^pswpout/ {print $2}' /proc/vmstat; }
 pre() { used=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | head -1)
