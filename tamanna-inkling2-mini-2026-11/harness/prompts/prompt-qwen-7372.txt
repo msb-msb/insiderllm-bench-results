@@ -1,0 +1,793 @@
+// ===== common/arg.cpp =====
+#include "arg.h"
+
+#include "build-info.h"
+#include "chat.h"
+#include "common.h"
+#include "download.h"
+#include "json-schema-to-grammar.h"
+#include "json.h"
+#include "llama.h"
+#include "log.h"
+#include "sampling.h"
+#include "speculative.h"
+#include "preset.h"
+
+// fix problem with std::min and std::max
+#if defined(_WIN32)
+#define WIN32_LEAN_AND_MEAN
+#ifndef NOMINMAX
+#   define NOMINMAX
+#endif
+#include <windows.h>
+#include <shellapi.h>
+#endif
+
+#include <algorithm>
+#include <cinttypes>
+#include <climits>
+#include <cmath>
+#include <cstdarg>
+#include <filesystem>
+#include <fstream>
+#include <list>
+#include <numeric>
+#include <regex>
+#include <set>
+#include <string>
+#include <system_error>
+#include <thread> // for hardware_concurrency
+#include <vector>
+
+#ifndef __EMSCRIPTEN__
+#ifdef __linux__
+#include <linux/limits.h>
+#elif defined(_WIN32)
+#   if !defined(PATH_MAX)
+#   define PATH_MAX MAX_PATH
+#   endif
+#elif defined(_AIX)
+#include <sys/limits.h>
+#else
+#include <sys/syslimits.h>
+#endif
+#endif
+
+#define LLAMA_MAX_URL_LENGTH 2084 // Maximum URL Length in Chrome: 2083
+
+using json = common_json;
+using namespace common_arg_utils;
+
+static std::initializer_list<enum llama_example> mmproj_examples = {
+    LLAMA_EXAMPLE_MTMD,
+    LLAMA_EXAMPLE_SERVER,
+    LLAMA_EXAMPLE_CLI,
+    LLAMA_EXAMPLE_TTS,
+};
+
+static std::string read_file(const std::string & fname) {
+    std::ifstream file(fname);
+    if (!file) {
+        throw std::runtime_error(string_format("error: failed to open file '%s'\n", fname.c_str()));
+    }
+    std::string content((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+    file.close();
+    return content;
+}
+
+static const std::vector<common_arg> & get_common_arg_defs() {
+    static const std::vector<common_arg> options = [] {
+        common_params params;
+        auto ctx = common_params_parser_init(params, LLAMA_EXAMPLE_SERVER, nullptr);
+        return ctx.options;
+    }();
+    return options;
+}
+
+common_arg & common_arg::set_examples(std::initializer_list<enum llama_example> examples) {
+    this->examples = examples;
+    return *this;
+}
+
+common_arg & common_arg::set_excludes(std::initializer_list<enum llama_example> excludes) {
+    this->excludes = excludes;
+    return *this;
+}
+
+common_arg & common_arg::set_env(const char * env) {
+    help = help + "\n(env: " + env + ")";
+    this->env = env;
+    return *this;
+}
+
+common_arg & common_arg::set_sampling() {
+    is_sampling = true;
+    return *this;
+}
+
+common_arg & common_arg::set_spec() {
+    is_spec = true;
+    return *this;
+}
+
+common_arg & common_arg::set_preset_only() {
+    is_preset_only = true;
+    return *this;
+}
+
+bool common_arg::in_example(enum llama_example ex) {
+    return examples.find(ex) != examples.end();
+}
+
+bool common_arg::is_exclude(enum llama_example ex) {
+    return excludes.find(ex) != excludes.end();
+}
+
+bool common_arg::get_value_from_env(std::string & output) const {
+    if (env == nullptr) return false;
+    if (!args_neg.empty()) {
+        // for compatibility, we need to check LLAMA_ARG_NO_ env as well
+        std::string neg_env = env;
+        string_replace_all(neg_env, "LLAMA_ARG_", "LLAMA_ARG_NO_");
+        char * neg_value = std::getenv(neg_env.c_str());
+        if (neg_value) {
+            output = "0"; // falsey
+            return true;
+        }
+    }
+    char * value = std::getenv(env);
+    if (value) {
+        output = value;
+        return true;
+    }
+    return false;
+}
+
+bool common_arg::has_value_from_env() const {
+    if (env != nullptr && !args_neg.empty()) {
+        // for compatibility, we need to check LLAMA_ARG_NO_ env as well
+        std::string neg_env = env;
+        string_replace_all(neg_env, "LLAMA_ARG_", "LLAMA_ARG_NO_");
+        if (std::getenv(neg_env.c_str())) {
+            return true;
+        }
+    }
+    return env != nullptr && std::getenv(env);
+}
+
+static std::vector<std::string> break_str_into_lines(std::string input, size_t max_char_per_line) {
+    std::vector<std::string> result;
+    std::istringstream iss(input);
+    std::string line;
+    auto add_line = [&](const std::string& l) {
+        if (l.length() <= max_char_per_line) {
+            result.push_back(l);
+        } else {
+            std::istringstream line_stream(l);
+            std::string word, current_line;
+            while (line_stream >> word) {
+                if (current_line.length() + !current_line.empty() + word.length() > max_char_per_line) {
+                    if (!current_line.empty()) result.push_back(current_line);
+                    current_line = word;
+                } else {
+                    current_line += (!current_line.empty() ? " " : "") + word;
+                }
+            }
+            if (!current_line.empty()) result.push_back(current_line);
+        }
+    };
+    while (std::getline(iss, line)) {
+        add_line(line);
+    }
+    return result;
+}
+
+std::string common_arg::to_string() const {
+    // params for printing to console
+    const static int n_leading_spaces = 40;
+    const static int n_char_per_line_help = 70; // TODO: detect this based on current console
+    std::string leading_spaces(n_leading_spaces, ' ');
+
+    std::ostringstream ss;
+    auto all_args = get_args(); // also contains args_neg
+    for (const auto & arg : all_args) {
+        if (arg == all_args.front()) {
+            if (all_args.size() == 1) {
+                ss << arg;
+            } else {
+                // first arg is usually abbreviation, we need padding to make it more beautiful
+                auto tmp = std::string(arg) + ", ";
+                auto spaces = std::string(std::max(0, 7 - (int)tmp.size()), ' ');
+                ss << tmp << spaces;
+            }
+        } else {
+            ss << arg << (arg != all_args.back() ? ", " : "");
+        }
+    }
+    if (value_hint) ss << " " << value_hint;
+    if (value_hint_2) ss << " " << value_hint_2;
+    if (ss.tellp() > n_leading_spaces - 3) {
+        // current line is too long, add new line
+        ss << "\n" << leading_spaces;
+    } else {
+        // padding between arg and help, same line
+        ss << std::string(leading_spaces.size() - ss.tellp(), ' ');
+    }
+    const auto help_lines = break_str_into_lines(help, n_char_per_line_help);
+    for (const auto & line : help_lines) {
+        ss << (&line == &help_lines.front() ? "" : leading_spaces) << line << "\n";
+    }
+    return ss.str();
+}
+
+std::vector<std::string> common_arg::get_args() const {
+    std::vector<std::string> result;
+    for (const auto & arg : args) {
+        result.push_back(std::string(arg));
+    }
+    for (const auto & arg : args_neg) {
+        result.push_back(std::string(arg));
+    }
+    return result;
+}
+
+std::vector<std::string> common_arg::get_env() const {
+    std::vector<std::string> result;
+    if (env) {
+        result.push_back(std::string(env));
+    }
+    if (!args_neg.empty() && env) {
+        // for compatibility, we need to add LLAMA_ARG_NO_ variant
+        std::string neg_env = env;
+        string_replace_all(neg_env, "LLAMA_ARG_", "LLAMA_ARG_NO_");
+        result.push_back(neg_env);
+    }
+    return result;
+}
+
+//
+// utils
+//
+
+// Helper function to parse tensor buffer override strings
+static void parse_tensor_buffer_overrides(const std::string & value, std::vector<llama_model_tensor_buft_override> & overrides) {
+    ggml_backend_load_all();
+
+    std::map<std::string, ggml_backend_buffer_type_t> buft_list;
+    for (size_t i = 0; i < ggml_backend_dev_count(); ++i) {
+        auto * dev = ggml_backend_dev_get(i);
+        auto * buft = ggml_backend_dev_buffer_type(dev);
+        if (buft) {
+            buft_list[ggml_backend_buft_name(buft)] = buft;
+        }
+    }
+
+    for (const auto & override : string_split<std::string>(value, ',')) {
+        std::string::size_type pos = override.find('=');
+        if (pos == std::string::npos) {
+            throw std::invalid_argument("invalid value");
+        }
+        std::string tensor_name = override.substr(0, pos);
+        std::string buffer_type = override.substr(pos + 1);
+
+        if (buft_list.find(buffer_type) == buft_list.end()) {
+            printf("Available buffer types:\n");
+            for (const auto & it : buft_list) {
+                printf("  %s\n", ggml_backend_buft_name(it.second));
+            }
+            throw std::invalid_argument("unknown buffer type");
+        }
+        // keep strings alive and avoid leaking memory by storing them in a static vector
+        static std::list<std::string> buft_overrides;
+        buft_overrides.push_back(tensor_name);
+        overrides.push_back({buft_overrides.back().c_str(), buft_list.at(buffer_type)});
+    }
+}
+
+static std::string clean_file_name(const std::string & fname) {
+    std::string clean_fname = fname;
+    string_replace_all(clean_fname, "\\", "_");
+    string_replace_all(clean_fname, "/", "_");
+    return clean_fname;
+}
+
+struct handle_model_result {
+    bool found_mmproj = false;
+    common_params_model mmproj;
+
+    bool found_mtp = false;
+    common_params_model mtp;
+
+    bool found_preset = false;
+    std::string preset_path;
+};
+
+const std::vector<ggml_type> kv_cache_types = {
+    GGML_TYPE_F32,
+    GGML_TYPE_F16,
+    GGML_TYPE_BF16,
+    GGML_TYPE_Q8_0,
+    GGML_TYPE_Q4_0,
+    GGML_TYPE_Q4_1,
+    GGML_TYPE_IQ4_NL,
+    GGML_TYPE_Q5_0,
+    GGML_TYPE_Q5_1,
+};
+
+static ggml_type kv_cache_type_from_str(const std::string & s) {
+    for (const auto & type : kv_cache_types) {
+        if (ggml_type_name(type) == s) {
+            return type;
+        }
+    }
+    throw std::runtime_error("Unsupported cache type: " + s);
+}
+
+static std::string get_all_kv_cache_types() {
+    std::ostringstream msg;
+    for (const auto & type : kv_cache_types) {
+        msg << ggml_type_name(type) << (&type == &kv_cache_types.back() ? "" : ", ");
+    }
+    return msg.str();
+}
+
+static bool parse_bool_value(const std::string & value) {
+    if (is_truthy(value)) {
+        return true;
+    } else if (is_falsey(value)) {
+        return false;
+    } else {
+        throw std::invalid_argument("invalid boolean value");
+    }
+}
+
+[[noreturn]] static void arg_removed(const std::string & msg) {
+    throw std::invalid_argument("the argument has been removed. " + msg);
+}
+
+//
+// common_models_handler
+//
+
+static std::string get_default_local_path(const std::string & url) {
+    auto f = string_split<std::string>(url, '#').front();
+    f = string_split<std::string>(f, '?').front();
+    return fs_get_cache_file(string_split<std::string>(f, '/').back());
+}
+
+static bool spec_types_is_default(const common_params & params) {
+    return params.speculative.types == std::vector<enum common_speculative_type>{COMMON_SPECULATIVE_TYPE_NONE};
+}
+
+common_models_handler common_models_handler_init(const common_params & params, llama_example curr_ex) {
+    common_download_hf_plan plan;
+    common_download_hf_plan plan_spec;
+    common_download_opts opts;
+
+    const bool spec_type_draft_mtp = std::find(params.speculative.types.begin(),
+                                        params.speculative.types.end(),
+                                        COMMON_SPECULATIVE_TYPE_DRAFT_MTP) != params.speculative.types.end();
+
+    const bool spec_type_draft_dflash = std::find(params.speculative.types.begin(),
+                                           params.speculative.types.end(),
+                                           COMMON_SPECULATIVE_TYPE_DRAFT_DFLASH) != params.speculative.types.end();
+
+    const bool spec_type_draft_eagle3 = std::find(params.speculative.types.begin(),
+                                           params.speculative.types.end(),
+                                           COMMON_SPECULATIVE_TYPE_DRAFT_EAGLE3) != params.speculative.types.end();
+
+    const bool spec_type_draft_dspark = std::find(params.speculative.types.begin(),
+                                           params.speculative.types.end(),
+                                           COMMON_SPECULATIVE_TYPE_DRAFT_DSPARK) != params.speculative.types.end();
+
+    // only download mmproj if the current example is using it
+    bool use_mmproj = false;
+    for (const auto & ex : mmproj_examples) {
+        if (curr_ex == ex) {
+            use_mmproj = true;
+            break;
+        }
+    }
+
+    opts.bearer_token    = params.hf_token;
+    opts.offline         = params.offline;
+    opts.download_mtp    = spec_type_draft_mtp;
+    opts.download_eagle3 = spec_type_draft_eagle3;
+    opts.download_dflash = spec_type_draft_dflash;
+    opts.download_dspark = spec_type_draft_dspark;
+    opts.download_mmproj = use_mmproj && !params.no_mmproj
+                        && params.mmproj.path.empty() && params.mmproj.url.empty();
+
+    if (!params.model.hf_repo.empty()) {
+        plan = common_download_get_hf_plan(params.model, opts);
+    }
+
+    if (!params.speculative.draft.mparams.hf_repo.empty()) {
+        // without a requested type, discover every sidecar the draft repo ships to infer the type later
+        auto opts_spec = opts;
+        if (spec_types_is_default(params)) {
+            opts_spec.download_mtp    = true;
+            opts_spec.download_dflash = true;
+            opts_spec.download_eagle3 = true;
+            opts_spec.download_dspark = true;
+        }
+        plan_spec = common_download_get_hf_plan(params.speculative.draft.mparams, opts_spec);
+    }
+
+    return common_models_handler{plan, plan_spec, opts};
+}
+
+bool common_models_handler_is_preset_repo(const common_models_handler & handler) {
+    return !handler.plan.preset.url.empty();
+}
+
+static std::vector<common_download_task> build_url_tasks(const common_params_model & model, common_download_opts opts) {
+    auto parts = common_download_get_all_parts(model.url);
+    std::vector<common_download_task> tasks;
+
+    // single-part: download straight to model.path if the user gave one (-m), else the cache default
+    if (parts.size() == 1) {
+        common_download_task task;
+        task.url        = parts[0];
+        task.local_path = model.path.empty() ? get_default_local_path(parts[0]) : model.path;
+        task.opts       = opts;
+        tasks.push_back(std::move(task));
+        return tasks;
+    }
+
+    // multi-part: place each part under the user's -m directory (if given), else the cache default
+    std::string base_dir;
+    if (!model.path.empty()) {
+        auto pos = model.path.rfind('/');
+        base_dir = pos == std::string::npos ? std::string(".") : model.path.substr(0, pos);
+    }
+
+    for (const auto & part : parts) {
+        common_download_task task;
+        task.url  = part;
+        task.opts = opts;
+
+        std::string local = get_default_local_path(part);
+        if (!base_dir.empty()) {
+            auto pos = local.rfind('/');
+            std::string name = pos == std::string::npos ? local : local.substr(pos + 1);
+            local = base_dir + "/" + name;
+        }
+        task.local_path = local;
+        tasks.push_back(std::move(task));
+    }
+    return tasks;
+}
+
+void common_models_handler_apply(common_models_handler & handler, common_params & params, common_download_callback * callback) {
+    std::vector<common_download_task> tasks;
+
+    auto & plan      = handler.plan;
+    auto & plan_spec = handler.plan_spec;
+
+    auto opts = handler.opts; // copy
+    opts.callback = callback;
+
+    // handle plain "url" if needed
+    auto handle_url = [&](common_params_model & model) {
+        if (!model.url.empty()) {
+            if (model.path.empty()) {
+                model.path = get_default_local_path(model.url);
+            }
+        }
+    };
+    handle_url(params.model);
+    handle_url(params.mmproj);
+    handle_url(params.speculative.draft.mparams);
+
+    // optionally, if docker repo is set, resolve it
+    if (!params.model.docker_repo.empty()) {
+        params.model.url  = common_docker_resolve_model(params.model.docker_repo);
+        params.model.path = get_default_local_path(params.model.url);
+    }
+
+    // handle plain "url" tasks (non-hf)
+    if (!params.model.url.empty()) {
+        auto url_tasks = build_url_tasks(params.model, opts);
+        // the first part is what gets loaded, so point params.model.path at it
+        if (!url_tasks.empty()) {
+            std::string first_path = url_tasks.front().local_path;
+            url_tasks.front().on_done = [&, first_path]() { params.model.path = first_path; };
+        }
+        for (auto & task : url_tasks) {
+            tasks.push_back(std::move(task));
+        }
+    }
+    if (!params.mmproj.url.empty()) {
+        common_download_task task;
+        task.url        = params.mmproj.url;
+        task.local_path = params.mmproj.path;
+        task.opts       = opts;
+        tasks.push_back(task);
+    }
+    bool had_spec_url = false;
+    if (!params.speculative.draft.mparams.url.empty()) {
+        common_download_task task;
+        task.url        = params.speculative.draft.mparams.url;
+        task.local_path = params.speculative.draft.mparams.path;
+        task.opts       = opts;
+        tasks.push_back(task);
+        had_spec_url = true;
+    }
+
+    // handle hf_plan tasks
+    auto add_tasks = [&opts, &tasks](const hf_cache::hf_files  & model_files,
+                                    const hf_cache::hf_file    & primary,
+                                    common_params_model        & model) {
+        for (size_t i = 0; i < model_files.size(); ++i) {
+            auto & model_file = model_files[i];
+            bool is_primary = (model_file.path == primary.path);
+            tasks.emplace_back(model_file, opts, [&, is_primary]() {
+                if (is_primary) {
+                    // the primary file is the first split (00001-of), use it as model path
+                    model.path = hf_cache::finalize_file(model_file);
+                } else {
+                    hf_cache::finalize_file(model_file);
+                }
+            });
+        }
+    };
+
+    // an explicit draft file selection (e.g. -md with -hfd) disables the sidecar resolution of the draft repo
+    if (!params.speculative.draft.mparams.hf_file.empty()) {
+        plan_spec.mtp    = {};
+        plan_spec.dflash = {};
+        plan_spec.eagle3 = {};
+        plan_spec.dspark = {};
+    }
+
+    // infer the speculative type from the sidecar shipped by the draft repo when none is requested
+    if (spec_types_is_default(params)) {
+        if (!plan_spec.mtp.local_path.empty()) {
+            params.speculative.types = { COMMON_SPECULATIVE_TYPE_DRAFT_MTP };
+            plan_spec.dspark = {};
+            plan_spec.dflash = {};
+            plan_spec.eagle3 = {};
+        } else if (!plan_spec.dspark.local_path.empty()) {
+            // dspark outranks dflash, its sidecar carries the extra Markov head
+            params.speculative.types = { COMMON_SPECULATIVE_TYPE_DRAFT_DSPARK };
+            plan_spec.dflash = {};
+            plan_spec.eagle3 = {};
+        } else if (!plan_spec.dflash.local_path.empty()) {
+            params.speculative.types = { COMMON_SPECULATIVE_TYPE_DRAFT_DFLASH };
+            plan_spec.eagle3 = {};
+        } else if (!plan_spec.eagle3.local_path.empty()) {
+            params.speculative.types = { COMMON_SPECULATIVE_TYPE_DRAFT_EAGLE3 };
+        }
+    }
+
+    // infer the speculative type from the draft GGUF metadata when none is requested
+    // note: reads only the first split - sharded drafts need an explicit --spec-type
+    if (spec_types_is_default(params) && !params.speculative.draft.mparams.path.empty()) {
+        const auto types_gguf = common_speculative_types_from_gguf(params.speculative.draft.mparams.path);
+        if (!types_gguf.empty()) {
+            params.speculative.types = types_gguf;
+        }
+    }
+
+    // when a sidecar type is requested, the draft repo resolves to its sidecar instead of a full model
+    const bool spec_sidecar_found = !plan_spec.mtp.local_path.empty() ||
+                                    !plan_spec.dflash.local_path.empty() ||
+                                    !plan_spec.eagle3.local_path.empty() ||
+                                    !plan_spec.dspark.local_path.empty();
+    if (!plan_spec.mtp.local_path.empty() && !had_spec_url) {
+        tasks.emplace_back(plan_spec.mtp, opts, [&]() {
+            // only use the discovered MTP head when no draft path is set yet
+            if (params.speculative.draft.mparams.path.empty()) {
+                params.speculative.draft.mparams.path = hf_cache::finalize_file(plan_spec.mtp);
+            } else {
+                hf_cache::finalize_file(plan_spec.mtp);
+            }
+        });
+    }
+    if (!plan_spec.dflash.local_path.empty() && !had_spec_url) {
+        tasks.emplace_back(plan_spec.dflash, opts, [&]() {
+            // only use the discovered DFlash sidecar when no draft path is set yet
+            if (params.speculative.draft.mparams.path.empty()) {
+                params.speculative.draft.mparams.path = hf_cache::finalize_file(plan_spec.dflash);
+            } else {
+                hf_cache::finalize_file(plan_spec.dflash);
+            }
+        });
+    }
+    if (!plan_spec.eagle3.local_path.empty() && !had_spec_url) {
+        tasks.emplace_back(plan_spec.eagle3, opts, [&]() {
+            // only use the discovered Eagle3 sidecar when no draft path is set yet
+            if (params.speculative.draft.mparams.path.empty()) {
+                params.speculative.draft.mparams.path = hf_cache::finalize_file(plan_spec.eagle3);
+            } else {
+                hf_cache::finalize_file(plan_spec.eagle3);
+            }
+        });
+    }
+    if (!plan_spec.dspark.local_path.empty() && !had_spec_url) {
+        tasks.emplace_back(plan_spec.dspark, opts, [&]() {
+            // only use the discovered DSpark sidecar when no draft path is set yet
+            if (params.speculative.draft.mparams.path.empty()) {
+                params.speculative.draft.mparams.path = hf_cache::finalize_file(plan_spec.dspark);
+            } else {
+                hf_cache::finalize_file(plan_spec.dspark);
+            }
+        });
+    }
+
+    // a wired draft sidecar counts as an explicit draft for the main plan fallback below
+    if (spec_sidecar_found) {
+        had_spec_url = true;
+    }
+
+    // handle plan_spec (e.g. --spec-draft-hf)
+    if (!plan_spec.model_files.empty() && !had_spec_url && !spec_sidecar_found) {
+        add_tasks(plan_spec.model_files, plan_spec.primary, params.speculative.draft.mparams);
+        had_spec_url = true;
+    }
+
+    if (!plan.model_files.empty()) {
+        add_tasks(plan.model_files, plan.primary, params.model);
+    }
+    if (!plan.mmproj.local_path.empty()) {
+        tasks.emplace_back(plan.mmproj, opts, [&]() {
+            params.mmproj.path = hf_cache::finalize_file(plan.mmproj);
+        });
+    }
+    if (!plan.mtp.local_path.empty() && !had_spec_url) {
+        tasks.emplace_back(plan.mtp, opts, [&]() {
+            // only fall back to the discovered MTP head when no draft was explicitly provided
+            if (params.speculative.draft.mparams.empty()) {
+                params.speculative.draft.mparams.path = hf_cache::finalize_file(plan.mtp);
+            } else {
+                hf_cache::finalize_file(plan.mtp);
+            }
+        });
+    }
+    if (!plan.dflash.local_path.empty() && !had_spec_url) {
+        tasks.emplace_back(plan.dflash, opts, [&]() {
+            // only fall back to the discovered DFlash sidecar when no draft was explicitly provided
+            if (params.speculative.draft.mparams.empty()) {
+                params.speculative.draft.mparams.path = hf_cache::finalize_file(plan.dflash);
+            } else {
+                hf_cache::finalize_file(plan.dflash);
+            }
+        });
+    }
+    if (!plan.eagle3.local_path.empty() && !had_spec_url) {
+        tasks.emplace_back(plan.eagle3, opts, [&]() {
+            // only fall back to the discovered Eagle3 sidecar when no draft was explicitly provided
+            if (params.speculative.draft.mparams.empty()) {
+                params.speculative.draft.mparams.path = hf_cache::finalize_file(plan.eagle3);
+            } else {
+                hf_cache::finalize_file(plan.eagle3);
+            }
+        });
+    }
+    if (!plan.dspark.local_path.empty() && !had_spec_url) {
+        tasks.emplace_back(plan.dspark, opts, [&]() {
+            // only fall back to the discovered DSpark sidecar when no draft was explicitly provided
+            if (params.speculative.draft.mparams.empty()) {
+                params.speculative.draft.mparams.path = hf_cache::finalize_file(plan.dspark);
+            } else {
+                hf_cache::finalize_file(plan.dspark);
+            }
+        });
+    }
+    if (!plan.preset.local_path.empty()) {
+        tasks.emplace_back(plan.preset, opts, [&]() {
+            // if HF repo is a preset repo, we simply run server in router mode with the preset.ini file
+            params.models_preset_hf = params.model.hf_repo; // only for showing a warning
+            params.models_preset    = hf_cache::finalize_file(plan.preset);
+            params.model = common_params_model{}; // make sure to clear model, so server starts in router mode
+        });
+    }
+
+    // run all tasks in parallel
+    if (!params.offline) {
+        // if duplicated files are found, only download once (but still call on_done for each task)
+        std::unordered_map<std::string, common_download_task *> unique_tasks;
+        for (auto & task : tasks) {
+            auto it = unique_tasks.find(task.local_path);
+            if (it == unique_tasks.end()) {
+                unique_tasks[task.local_path] = &task;
+            }
+        }
+        std::vector<common_download_task> unique_tasks_vec;
+        for (auto & pair : unique_tasks) {
+            LOG_DBG("download task: %s -> %s\n", pair.second->url.c_str(), pair.second->local_path.c_str());
+            unique_tasks_vec.push_back(*pair.second);
+        }
+        common_download_run_tasks(unique_tasks_vec);
+    }
+
+    // download successful, update params with the downloaded paths
+    for (const auto & task : tasks) {
+        if (task.on_done) {
+            task.on_done();
+        }
+    }
+}
+
+//
+// CLI argument parsing functions
+//
+
+// apply config files (if present), a later file overrides an earlier one:
+// 1. system-wide: /etc/llama.cpp/config.ini (%PROGRAMDATA%\llama.cpp\config.ini on windows)
+// 2. user-level: ${XDG_CONFIG_HOME:-~/.config}/llama.cpp/config.ini (%APPDATA%\llama.cpp\config.ini on windows)
+static void common_params_apply_system_config(common_params & params, llama_example ex) {
+    std::vector<std::string> paths;
+
+#if defined(_WIN32)
+    const std::string program_data = common_get_env("PROGRAMDATA");
+    if (!program_data.empty()) {
+        paths.push_back(program_data + "\\llama.cpp\\config.ini");
+    }
+#else
+    paths.push_back("/etc/llama.cpp/config.ini");
+#endif
+
+    try {
+        paths.push_back(fs_get_config_directory() + "config.ini");
+    } catch (const std::exception & e) {
+        LOG_DBG("cannot read user-level config file, skipping: %s\n", e.what());
+    }
+
+    std::vector<std::string> found;
+    for (const auto & path : paths) {
+        std::error_code ec;
+        if (std::filesystem::exists(path, ec)) {
+            found.push_back(path);
+        }
+    }
+    if (found.empty()) {
+        return;
+    }
+
+    common_preset_context ctx(ex);
+    ctx.ignore_unknown_keys = true; // the same config file is shared by all programs
+    for (const auto & path : found) {
+        LOG_INF("using config file: %s\n", path.c_str());
+        common_preset global;
+        common_presets presets = ctx.load_from_ini(path, global);
+        global.apply_to_params(params);
+        auto it = presets.find(COMMON_PRESET_DEFAULT_NAME);
+        if (it != presets.end()) {
+            it->second.apply_to_params(params);
+        }
+    }
+}
+
+static bool common_params_parse_ex(int argc, char ** argv, common_params_context & ctx_arg) {
+    common_params & params = ctx_arg.params;
+
+    // setup log directly from params.verbosity: see tools/cli/cli.cpp
+    common_log_set_verbosity_thold(params.verbosity);
+
+    // config file applies first, so env variables and CLI arguments override it
+    common_params_apply_system_config(params, ctx_arg.ex);
+
+    std::unordered_map<std::string, std::pair<common_arg *, bool>> arg_to_options;
+    for (auto & opt : ctx_arg.options) {
+        for (const auto & arg : opt.args) {
+            arg_to_options[arg] = {&opt, /* is_positive */ true};
+        }
+        for (const auto & arg : opt.args_neg) {
+            arg_to_options[arg] = {&opt, /* is_positive */ false};
+        }
+    }
+
+    // handle environment variables
+    for (auto & opt : ctx_arg.options) {
+        std::string value;
+        if (opt.get_value_from_env(value)) {
+            try {
+                if (opt.handler_void && is_truthy(value)) {
+                    opt.handler_void(params);
+                }
+                if (opt.handler_int) {
+                    opt.handler_int(params, std::stoi(value));
+                }
+                if (opt.handler_bool) {

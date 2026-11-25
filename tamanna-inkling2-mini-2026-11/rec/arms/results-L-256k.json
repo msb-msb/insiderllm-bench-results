@@ -1,0 +1,66 @@
+{
+ "arm": "L-256k",
+ "tag": "inkling",
+ "kind": "llama",
+ "cmd": [
+  "/home/minotaur/inkling2-2026-11/build/llama.cpp/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-np",
+  "1",
+  "-ctk",
+  "q8_0",
+  "-ctv",
+  "q8_0",
+  "-fa",
+  "auto",
+  "-t",
+  "4",
+  "--cache-ram",
+  "0",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "--jinja",
+  "--port",
+  "8081",
+  "-lv",
+  "4",
+  "-cmoe",
+  "-c",
+  "262144"
+ ],
+ "cells_spec": "short:512:3,deep:235929:1",
+ "temp": 1.0,
+ "ballast_mib_target": 0,
+ "disk": "nvme0n1",
+ "cells": {},
+ "start_utc": "2026-11-25T21:45:27Z",
+ "state_before": {
+  "free_m": "               total        used        free      shared  buff/cache   available\nMem:           64220        1723        6514           0       56673       62497\nSwap:           8191          17        8174\n",
+  "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   8G 17.6M   -1\n",
+  "vmstat": {
+   "pswpin": 330,
+   "pswpout": 4603
+  },
+  "t": 1795643127.8405955
+ },
+ "load_s": 2.0,
+ "load_peak_mib": 266,
+ "card_after_load_mib": 1,
+ "avail_after_load_mib": 62516,
+ "proc_after_load": {},
+ "error": "server did not start",
+ "state_after": {
+  "free_m": "               total        used        free      shared  buff/cache   available\nMem:           64220        1707        6530           0       56673       62512\nSwap:           8191          17        8174\n",
+  "swapon": "NAME      TYPE SIZE  USED PRIO\n/swap.img file   8G 17.6M   -1\n",
+  "vmstat": {
+   "pswpin": 330,
+   "pswpout": 4603
+  },
+  "t": 1795643134.8951108
+ }
+}
