@@ -1,0 +1,31 @@
+2026-11-24T23:29:36-08:00 === orchestrate start (from speed), A1 0f4e9b497e3cfd8b14d039dbbb86c2e71f9498e33d0b9d867f4201b1523a5372; Tamanna free 102.90 GiB
+2026-11-24T23:29:37-08:00 --- phase speed (T5)
+2026-11-24T23:30:34-08:00 store Qwen3.8-27B-UD-IQ3_XXS.gguf c0b7c3038681ed2e3040456c1dd45f9858b6c2290bed172c70388a94874f3eee
+2026-11-24T23:31:26-08:00 store Qwen3.8-27B-NariQ-3.0bpw.gguf 1eaad934aa05579b8eba47ed9b26450392f9875fc2354efe8cfa8b29be8f4419
+2026-11-24T23:32:09-08:00 store Qwen3.8-27B-NariQ-2.5bpw.gguf 2445372e6de20620b940fbfab53aa718af9ba741f202da30cd2f02b5df78d05c
+2026-11-24T23:33:39-08:00 store Qwen3.8-27B-UD-Q4_K_XL.gguf bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+2026-11-24T23:35:20-08:00 tamanna model/Qwen3.8-27B-UD-IQ3_XXS.gguf c0b7c3038681ed2e3040456c1dd45f9858b6c2290bed172c70388a94874f3eee
+2026-11-24T23:36:55-08:00 tamanna model/Qwen3.8-27B-NariQ-3.0bpw.gguf 1eaad934aa05579b8eba47ed9b26450392f9875fc2354efe8cfa8b29be8f4419
+2026-11-24T23:38:13-08:00 tamanna model/Qwen3.8-27B-NariQ-2.5bpw.gguf 2445372e6de20620b940fbfab53aa718af9ba741f202da30cd2f02b5df78d05c
+2026-11-24T23:41:00-08:00 tamanna model/Qwen3.8-27B-UD-Q4_K_XL.gguf bee238bbeb3dc0a34bde4d0dedbaee1f98c009e8bb4226f03070054c12fb1372
+2026-11-24T23:41:00-08:00 free after copy: 58.73 GiB
+2026-11-24T23:41:00-08:00 remote speed: bash /home/minotaur/nariq-t/harness/run_speed.sh /home/minotaur/nariq-t/out/speed
+2026-11-24T23:46:22-08:00 remote speed rc=0
+2026-11-24T23:46:23-08:00 --- phase bf16 base run (T4)
+removed '/home/minotaur/nariq-t/model/Qwen3.8-27B-NariQ-2.5bpw.gguf'
+removed '/home/minotaur/nariq-t/model/Qwen3.8-27B-NariQ-3.0bpw.gguf'
+removed '/home/minotaur/nariq-t/model/Qwen3.8-27B-UD-IQ3_XXS.gguf'
+removed '/home/minotaur/nariq-t/model/Qwen3.8-27B-UD-Q4_K_XL.gguf'
+2026-11-24T23:46:25-08:00 free before BF16: 102.90 GiB
+2026-11-24T23:50:56-08:00 store Qwen3.8-27B-BF16-00001-of-00002.gguf b9966e82b7a4d87028b5eae061d578ee826305ebf8baea5bfc6e09bad0ba191f
+2026-11-24T23:51:22-08:00 store Qwen3.8-27B-BF16-00002-of-00002.gguf 92e3943c4f9bd6292a7bef82369f65fed9bfed088b9df0fb2fa2ce17c9edfa02
+2026-11-24T23:59:07-08:00 tamanna ref/Qwen3.8-27B-BF16-00001-of-00002.gguf b9966e82b7a4d87028b5eae061d578ee826305ebf8baea5bfc6e09bad0ba191f
+2026-11-24T23:59:51-08:00 tamanna ref/Qwen3.8-27B-BF16-00002-of-00002.gguf 92e3943c4f9bd6292a7bef82369f65fed9bfed088b9df0fb2fa2ce17c9edfa02
+2026-11-24T23:59:51-08:00 free after copy: 51.99 GiB
+2026-11-24T23:59:51-08:00 remote ngl: bash /home/minotaur/nariq-t/harness/kld.sh /home/minotaur/nariq-t/out/kld ngl-search
+2026-11-25T00:02:12-08:00 remote ngl rc=0
+2026-11-25T00:02:12-08:00 NGL=30
+2026-11-25T00:02:12-08:00 remote base: bash /home/minotaur/nariq-t/harness/kld.sh /home/minotaur/nariq-t/out/kld base 30
+2026-11-25T00:14:36-08:00 remote base rc=0
+2026-11-25T00:14:37-08:00 base: 2026-11-25T08:13:44 === base rc=0 swap-out 7516 KiB override-lines 0
+2026-11-25T00:14:37-08:00 STOP: BF16 base run failed the A1 rule (rc/swap/override); Q8_0 fallback needs a manual step (store copy, download)

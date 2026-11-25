@@ -1,0 +1,59 @@
+| arm | len | decode t/s median (min..max) | prompt t/s median (min..max) | prompt_n | peak MiB | void |
+|---|---:|---|---|---|---:|---|
+| M-IQ3 | 512 | 50.71 (50.59..50.93) | 1243.7 (1242.1..1251.4) | [513, 511, 512] | 11028 | no |
+| M-IQ3 | 4096 | 49.69 (49.68..49.69) | 1495.4 (1494.0..1501.1) | [4095, 4094, 4096] | 11028 | no |
+| F-IQ3 | 512 | 50.55 (50.51..50.62) | 1245.7 (1244.3..1245.8) | [511, 512, 512] | 11052 | no |
+| F-IQ3 | 4096 | 49.66 (49.65..49.66) | 1495.6 (1493.9..1498.4) | [4097, 4097, 4096] | 11052 | no |
+| F-N3 | 512 | 51.18 (51.09..51.20) | 896.3 (895.6..896.7) | [511, 513, 513] | 10544 | no |
+| F-N3 | 4096 | 49.95 (49.94..50.10) | 1014.0 (1013.7..1016.5) | [4095, 4096, 4096] | 10544 | no |
+| F-N25 | 512 | 54.47 (54.45..54.48) | 897.9 (895.5..901.9) | [513, 510, 513] | 8920 | no |
+| F-N25 | 4096 | 53.24 (53.24..53.28) | 1014.1 (1014.0..1018.2) | [4096, 4097, 4097] | 8920 | no |
+| R-Q4 | 512 | 42.03 (42.03..42.04) | 1265.5 (1263.6..1268.5) | [512, 513, 513] | 17298 | no |
+| R-Q4 | 4096 | 41.40 (41.38..41.41) | 1512.4 (1510.7..1520.8) | [4096, 4095, 4096] | 17298 | no |
+
+M-IQ3: load 2.0s, load peak 10818 MiB, arm peak 11028 MiB, min MemAvailable 61498 MiB, cold tg 51.05358584370155 pp 1030.1463977131152, build_info b12431-a946eb541 (ok), daemons {}
+F-IQ3: load 2.0s, load peak 10818 MiB, arm peak 11052 MiB, min MemAvailable 61432 MiB, cold tg 50.81775735856073 pp 1002.3531807093998, build_info b12442-9d5c990a2 (ok), daemons {}
+F-N3: load 3.0s, load peak 10478 MiB, arm peak 10544 MiB, min MemAvailable 61659 MiB, cold tg 51.29270696154676 pp 874.9011241880197, build_info b12442-9d5c990a2 (ok), daemons {}
+F-N25: load 3.0s, load peak 8876 MiB, arm peak 8920 MiB, min MemAvailable 61731 MiB, cold tg 54.444415027854184 pp 882.4890681882551, build_info b12442-9d5c990a2 (ok), daemons {}
+R-Q4: load 3.3s, load peak 17262 MiB, arm peak 17298 MiB, min MemAvailable 61639 MiB, cold tg 42.02204130222845 pp 1187.5795875480424, build_info b12431-a946eb541 (ok), daemons {}
+
+tg 512: F-N3/M-IQ3 (vs what a user runs) = 1.009  faster  (ranges overlap: False)
+tg 512: F-N3/F-IQ3 (format alone) = 1.013  faster  (ranges overlap: False)
+tg 512: F-IQ3/M-IQ3 (fork on stock file; F2) = 0.997  no difference shown  (ranges overlap: True)
+tg 512: F-N25/F-N3 = 1.064  faster  (ranges overlap: False)
+tg 512: F-N25/M-IQ3 = 1.074  faster  (ranges overlap: False)
+tg 4096: F-N3/M-IQ3 (vs what a user runs) = 1.005  faster  (ranges overlap: False)
+tg 4096: F-N3/F-IQ3 (format alone) = 1.006  faster  (ranges overlap: False)
+tg 4096: F-IQ3/M-IQ3 (fork on stock file; F2) = 1.000  slower  (ranges overlap: False)
+tg 4096: F-N25/F-N3 = 1.066  faster  (ranges overlap: False)
+tg 4096: F-N25/M-IQ3 = 1.071  faster  (ranges overlap: False)
+pp 512: F-N3/M-IQ3 (vs what a user runs) = 0.721  slower  (ranges overlap: False)
+pp 512: F-N3/F-IQ3 (format alone) = 0.720  slower  (ranges overlap: False)
+pp 512: F-IQ3/M-IQ3 (fork on stock file; F2) = 1.002  no difference shown  (ranges overlap: True)
+pp 512: F-N25/F-N3 = 1.002  no difference shown  (ranges overlap: True)
+pp 512: F-N25/M-IQ3 = 0.722  slower  (ranges overlap: False)
+pp 4096: F-N3/M-IQ3 (vs what a user runs) = 0.678  slower  (ranges overlap: False)
+pp 4096: F-N3/F-IQ3 (format alone) = 0.678  slower  (ranges overlap: False)
+pp 4096: F-IQ3/M-IQ3 (fork on stock file; F2) = 1.000  no difference shown  (ranges overlap: True)
+pp 4096: F-N25/F-N3 = 1.000  no difference shown  (ranges overlap: True)
+pp 4096: F-N25/M-IQ3 = 0.678  slower  (ranges overlap: False)
+
+F1 @512: F-N3 decode vs M-IQ3 = 1.009 (faster) -> FAILS
+F2 @512 tg: F-IQ3/M-IQ3 = 0.997 (no difference shown) -> HOLDS
+F2 @512 pp: F-IQ3/M-IQ3 = 1.002 (no difference shown) -> HOLDS
+F1 @4096: F-N3 decode vs M-IQ3 = 1.005 (faster) -> FAILS
+F2 @4096 tg: F-IQ3/M-IQ3 = 1.000 (slower) -> HOLDS
+F2 @4096 pp: F-IQ3/M-IQ3 = 1.000 (no difference shown) -> HOLDS
+
+T6-a F-N3/M-IQ3 decode @512: 1.009, predicted 0.85-1.05 -> HIT
+T6-b F-N25/F-N3 decode @512: 1.064, predicted 1.02-1.1 -> HIT
+T6-c F-N3/M-IQ3 prompt @512: 0.721, predicted 0.55-0.8 -> HIT
+T6-d F-IQ3/M-IQ3 decode @512: 0.997, predicted 0.97-1.03 -> HIT
+T6-d F-IQ3/M-IQ3 prompt @512: 1.002, predicted 0.97-1.03 -> HIT
+T6-e R-Q4/M-IQ3 decode @512: 0.829, predicted 0.55-0.75 -> MISS
+T6-a F-N3/M-IQ3 decode @4096: 1.005, predicted 0.85-1.05 -> HIT
+T6-b F-N25/F-N3 decode @4096: 1.066, predicted 1.02-1.1 -> HIT
+T6-c F-N3/M-IQ3 prompt @4096: 0.678, predicted 0.55-0.8 -> HIT
+T6-d F-IQ3/M-IQ3 decode @4096: 1.000, predicted 0.97-1.03 -> HIT
+T6-d F-IQ3/M-IQ3 prompt @4096: 1.000, predicted 0.97-1.03 -> HIT
+T6-e R-Q4/M-IQ3 decode @4096: 0.833, predicted 0.55-0.75 -> MISS
