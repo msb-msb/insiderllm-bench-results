@@ -319,3 +319,44 @@ What it shows:
 - **en04 was detected once:** X-S1 pass 3, with E2E 463 ms and a negative residual (−1,476 ms). The answer audio
   started 0.46 s after the clip's speech end, quicker than the stages add up to. That doesn't fit a normal
   detection, and it wasn't investigated. It failed in the other 11 exploratory voice passes.
+
+## After the run (2026-11-24, 21:35–21:38)
+
+- **voice-bench tools restored.** The voice-bench model's built-in tools were set back to the locked default (on).
+  The exploratory pass had set `meta.capabilities = {"builtin_tools": false}`; it's now `null`, so Open WebUI's
+  default applies, the same state as the locked arms. Before and after: `post-run-voice-bench-restore.json`.
+- **Everything stopped.** Open WebUI (uvicorn, running since 10:26) was stopped by PID. Afterwards no Open WebUI,
+  llama-server, STT/TTS wrapper or sampler process remained on Tamanna. Ports 8443, 8080, 8091, 8092 and 8093 were
+  closed, and the GPU had no compute process (1 MiB used; persistence Enabled, 420.00 W).
+- **Display.** `display_active` read Disabled.
+
+## Handling for any follow-up run (Open WebUI pitfalls found here)
+
+Fix each of these in the pre-registration before the first warm-up:
+
+1. **Clear Open WebUI's TTS cache before each arm.** Delete `owui-data/cache/audio/speech/*`, or decide to keep it
+   and say so. `/api/v1/audio/speech` caches on sha256(text, voice, model) and the cache persists across passes,
+   arms and restarts. A reply whose text was synthesised before never reaches the TTS server, so it gets no TTS time
+   and a ~3.5 s E2E. In this run that hit 5–7 of 15 EN real clips per arm.
+2. **Decide on Open WebUI's built-in tools.** 0.13 defaults to native function calling and adds 38 tool definitions
+   (~7,400 prompt tokens) to every reply request. Set it per model with `meta.capabilities.builtin_tools`.
+3. **Decide on the LLM's host prompt cache.** With `-np 1`, Open WebUI's title, follow-up and tag calls replace the
+   slot's contents between clips, so only llama-server's host cache (`--cache-ram`, default 8192 MiB) keeps a shared
+   prefix. `--cache-ram 0` makes every reply re-prefill the whole prompt (7.3 s with the tool prefix). The warm-up
+   pass also seeds the host cache, so pass 1 behaves like later passes.
+4. **Account for the title call.** Open WebUI sends title generation ~20 ms before the reply. On a single slot it
+   runs first, inside the E2E window (~0.4–0.6 s here). Either keep it and report it, or turn title generation off
+   and say so. Follow-up and tag generation run after the reply; the client must wait for the slot to go idle before
+   the next clip.
+5. **Match the reply by its stored timings.** The assistant message stores llama.cpp's `timings` as `usage`
+   (`prompt_n`, `cache_n`, `prompt_ms`, `predicted_n`). Use them to find the reply task in the server log, not "the
+   first task after STT", which is the title call.
+6. **Check clip levels against voice mode's speech detection.** Voice mode didn't detect en04 (peak −29.6 dBFS) at
+   all, and only partly heard en08 (mostly −45 to −30 dBFS). Either pick clips that Open WebUI's detection
+   segments reliably, or record each clip's level and report misses as failures, as here.
+7. **Expect the first TTS request to be the whole reply.** With Punctuation splitting, Open WebUI usually sent a
+   short reply as one TTS request. Predictions for the first TTS request should be based on whole-reply length.
+8. **Size VRAM with realistic TTS input.** The TTS process grew ~700 MiB past its three-sentence warm-up peak, so the
+   fit's total went ~290 MiB over budget. Warm the TTS on reply-length text, or widen the margin.
+9. **Keep the S1 prefix in mind.** llama.cpp v0.7.0's Qwen3-ASR transcription starts `language <Name><asr_text>`, and
+   Open WebUI passes it to the LLM verbatim. Score WER with the A3 strip rule.
