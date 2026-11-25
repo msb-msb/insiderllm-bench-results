@@ -265,8 +265,10 @@ memory. A school box sized by this method needs a larger margin, or longer TTS w
   - A4: LLM back on the default host cache; the reply matched by its stored timings; per-pass cache figures;
     exploratory tools-off option (`9880767c`).
   - The fit-trial fix (`8210d177`).
-- **Not done here.** Section 5 asks for benchmarks.json rows for the LLM fit (one per arm's `-ncmoe`). They aren't
-  written: this run has no site changes, and the rows wait for Mark.
+- **benchmarks.json rows pending article; rows prepared at
+  `docs/bench-results/tamanna-voice-pipeline-2026-11-24/benchmarks-rows-pending.json`** (one per arm's `-ncmoe`,
+  section 5). They go into `insiderllm-hugo/static/benchmarks.json`, with `source_article` set, when the explainer
+  publishes (Mark, 2026-11-24).
 
 ## Wall time
 
