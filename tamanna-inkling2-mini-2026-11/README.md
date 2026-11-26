@@ -177,10 +177,30 @@ None from A1 in the arms run. To record:
    were removed. It was then re-extracted into `uns/app/`, and the hashes matched.
 3. **A1 has no smoke test**, as A1.3 states, and no Qwen arm.
 
+## Addendum, 2026-11-26: pre-T-2133 bandwidth reading at DDR4-3000 (not a scored cell)
+
+T-2133 was scheduled for 2026-11-26 and is **on hold**. Mark paused it before any BIOS change: Tamanna was not
+rebooted, its RAM stayed at DDR4-3000 at 1.35 V, and no T-2133 request was run.
+
+Before the planned reboot, `stream_read` was run once more at DDR4-3000. It was the same binary (source sha256
+`09858c7f…`, binary `0ff077fb…`), with 4 threads and each run best of 8, at 2026-11-26 21:27 UTC on an idle card (1 MiB,
+no compute process, load 0.00):
+
+| | runs | median |
+|---|---|---|
+| Tamanna, read, 4 threads, DDR4-3000 (pre-T-2133) | 42.17, 42.21, 42.30 GB/s | **42.21 GB/s** |
+
+- **Not a scored cell, and not an input to any band.** It is labelled context only: it shows the box's bandwidth at
+  DDR4-3000 the day after A1.4 (42.30 GB/s), within 0.2%.
+- When T-2133 does run, the lock's procedure (A1 T-2133 step 2 and A1.6) applies as written. BW(2133) and the
+  restore reading are measured then, and the A1-P8/P9 bands are recomputed and committed before any measured 2133
+  request.
+- Raw output: `bandwidth/stream-read-tamanna-2026-11-26-pre3000.txt`.
+
 ## Files
 
 - `bands-A1.md`: the day's bandwidth and the recomputed bands, committed before the measured requests.
-- `bandwidth/`: the raw `stream_read` and STREAM output.
+- `bandwidth/`: the raw `stream_read` and STREAM output, plus the 2026-11-26 pre-T-2133 reading (context only).
 - `rec/machine-state.txt`: hashes and state before arm U.
 - `rec/gate/`, `rec/gates_a1.out`: the PPL gates.
 - `rec/run_everything.out`, `rec/arms/`: per-arm results JSON, server and engine logs, card CSVs and memwatch.
