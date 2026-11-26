@@ -1,0 +1,689 @@
+{
+ "limits_at_start": [
+  "250.00",
+  "250.00",
+  "420.00"
+ ],
+ "expected_w": 250.0,
+ "arm": "B250",
+ "build": "mainline",
+ "file": "Qwen3.8-27B-UD-Q4_K_XL.gguf",
+ "ctx": 8192,
+ "probe": false,
+ "cmd": [
+  "/home/minotaur/nariq-2026-11/mainline/build/bin/llama-server",
+  "-m",
+  "/home/minotaur/nariq-t/model/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+  "-ngl",
+  "99",
+  "-fa",
+  "on",
+  "-c",
+  "8192",
+  "-np",
+  "1",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "-t",
+  "4",
+  "--cache-ram",
+  "0",
+  "--port",
+  "8081"
+ ],
+ "lengths": [
+  512,
+  4096
+ ],
+ "cells": {
+  "512": [
+   {
+    "nonce": "be2df4d7",
+    "t0": 1795675413.8084297,
+    "ttft_s": 0.4907398223876953,
+    "total_s": 17.696082830429077,
+    "content_chunks": 512,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 510,
+     "prompt_ms": 488.632,
+     "prompt_per_token_ms": 0.9581019607843138,
+     "prompt_per_second": 1043.7302509864276,
+     "predicted_n": 512,
+     "predicted_ms": 17205.333,
+     "predicted_per_token_ms": 33.669927592954984,
+     "predicted_per_second": 29.700093569825125
+    },
+    "usage": {
+     "completion_tokens": 512,
+     "prompt_tokens": 510,
+     "total_tokens": 1022,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "Based on the provided code snippet, here is a summary of what this file (`common/arg.cpp`) does:\n\n### **Primary Purpose**\nThis file is part of the **llama.cpp** library (or a similar LLM inference fra",
+    "answer_full": "Based on the provided code snippet, here is a summary of what this file (`common/arg.cpp`) does:\n\n### **Primary Purpose**\nThis file is part of the **llama.cpp** library (or a similar LLM inference framework). It handles **command-line argument parsing, validation, and configuration setup** for various LLM applications (such as CLI, Server, TTS, etc.).\n\n### **Key Components & Functions**\n\n1. **Header Inclusions & Dependencies**:\n   - Includes headers for core LLM functionality (`llama.h`, `sampling.h`, `speculative.h`).\n   - Includes utilities for JSON handling (`json.h`), logging (`log.h`), file operations (`download.h`), and build information (`build-info.h`).\n   - Includes platform-specific headers (e.g., `windows.h` for Windows, `linux/limits.h` for Linux) to handle path length limits and system-specific definitions.\n\n2. **Platform-Specific Fixes**:\n   - On Windows, it defines `WIN32_LEAN_AND_MEAN` and `NOMINMAX` to prevent conflicts with `std::min`/`std::max` from Windows headers.\n   - Defines `PATH_MAX` for different operating systems to ensure consistent file path handling.\n\n3. **Constants**:\n   - `LLAMA_MAX_URL_LENGTH`: Sets a maximum URL length (2084 characters) for download or remote model fetching.\n   - `mmproj_examples`: A list of example applications (e.g., `MTMD`, `SERVER`, `CLI`, `TTS`) that support multimodal projection (likely for vision-language models).\n\n4. **Utility Function**:\n   - `read_file(const std::string & fname)`:\n     - A helper function to read the entire content of a file into a `std::string`.\n     - Throws a `std::runtime_error` if the file cannot be opened.\n     - Uses `std::istreambuf_iterator` for efficient file reading.\n\n### **Context**\nThis file is likely the **entry point for argument parsing** in the llama.cpp ecosystem. It would typically contain:\n- Definitions for command-line options (e.g., `--model`, `--threads`, `--temp`).\n- Logic to parse user-provided arguments.\n- Validation of arguments (e.g., checking file existence, validating numeric ranges).\n- Initialization of global configuration structures based on parsed arguments.",
+    "power_prefill": {
+     "n": 3,
+     "w_instant": 249.9,
+     "w_avg": 249.7,
+     "sm_mhz": 840,
+     "mem_mhz": 9501,
+     "temp_max": 60.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "power_decode": {
+     "n": 166,
+     "w_instant": 249.9,
+     "w_avg": 249.5,
+     "sm_mhz": 823,
+     "mem_mhz": 9501,
+     "temp_max": 64.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "tag": "B250-512-rep1",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 61875,
+     "free_mib": 5813,
+     "cached_mib": 55446,
+     "swapused_mib": 17
+    },
+    "peak_card_mib": 17272,
+    "prefill_pcie_links": [
+     [
+      "4",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "1406308 kB",
+     "RssAnon": "482728 kB",
+     "RssFile": "862112 kB",
+     "RssShmem": "61468 kB",
+     "VmSwap": "0 kB"
+    },
+    "void": null
+   },
+   {
+    "nonce": "6e4fe13e",
+    "t0": 1795675431.5182784,
+    "ttft_s": 0.48702383041381836,
+    "total_s": 18.002999544143677,
+    "content_chunks": 512,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 512,
+     "prompt_ms": 484.858,
+     "prompt_per_token_ms": 0.94698828125,
+     "prompt_per_second": 1055.9792764067006,
+     "predicted_n": 512,
+     "predicted_ms": 17515.929,
+     "predicted_per_token_ms": 34.27774755381605,
+     "predicted_per_second": 29.17344549638218
+    },
+    "usage": {
+     "completion_tokens": 512,
+     "prompt_tokens": 512,
+     "total_tokens": 1024,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "Based on the provided code snippet, here is a summary of what `common/arg.cpp` does:\n\n### **Primary Purpose**\nThis file is part of the **llama.cpp** project (a C++ library for running Large Language M",
+    "answer_full": "Based on the provided code snippet, here is a summary of what `common/arg.cpp` does:\n\n### **Primary Purpose**\nThis file is part of the **llama.cpp** project (a C++ library for running Large Language Models locally). Specifically, `arg.cpp` is responsible for **parsing and validating command-line arguments** for various llama.cpp executables (such as `llama-cli`, `llama-server`, `llama-quantize`, etc.).\n\n### **Key Functions & Components**\n\n1. **Argument Parsing Infrastructure**:\n   - It defines utilities to handle command-line inputs, including:\n     - Parsing key-value pairs (e.g., `--model path/to/model.gguf`).\n     - Handling boolean flags (e.g., `--verbose`).\n     - Managing lists and arrays from the command line.\n   - It likely contains the main `parse_args()` function that converts raw `argc`/`argv` into structured data (often stored in a `common_params` struct).\n\n2. **Validation & Error Handling**:\n   - Validates that required arguments are provided.\n   - Checks for invalid values (e.g., negative thread counts, unsupported quantization types).\n   - Provides helpful error messages if arguments are malformed or missing.\n\n3. **Integration with Other Modules**:\n   - **`llama.h`**: Interacts with the core LLM inference engine.\n   - **`sampling.h`**: Parses sampling parameters (e.g., `--temp`, `--top-k`, `--top-p`).\n   - **`speculative.h`**: Handles speculative decoding options.\n   - **`download.h`**: Supports downloading models or other resources via URL (note the `LLAMA_MAX_URL_LENGTH` constant).\n   - **`json.h` / `json-schema-to-grammar.h`**: Supports JSON-based configuration or schema validation.\n   - **`preset.h`**: Allows loading predefined parameter sets.\n\n4. **Platform-Specific Handling**:\n   - Includes platform-specific headers (Windows, Linux, AIX, Emscripten) to handle path length limits (`PATH_MAX`) and other OS-specific behaviors.\n   - On Windows, it includes `<windows.h>` and `<shellapi.h>` for proper command-line parsing (handling quoted arguments correctly).\n\n5. **Utility Functions**:\n   - `read_file()`: A helper to read entire files into strings (used for loading prompts, system messages",
+    "power_prefill": {
+     "n": 3,
+     "w_instant": 248.9,
+     "w_avg": 249.7,
+     "sm_mhz": 810,
+     "mem_mhz": 9501,
+     "temp_max": 64.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "power_decode": {
+     "n": 169,
+     "w_instant": 252.6,
+     "w_avg": 249.9,
+     "sm_mhz": 808,
+     "mem_mhz": 9501,
+     "temp_max": 64.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "tag": "B250-512-rep2",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 61855,
+     "free_mib": 5793,
+     "cached_mib": 55446,
+     "swapused_mib": 17
+    },
+    "peak_card_mib": 17272,
+    "prefill_pcie_links": [
+     [
+      "4",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "1406576 kB",
+     "RssAnon": "482996 kB",
+     "RssFile": "862112 kB",
+     "RssShmem": "61468 kB",
+     "VmSwap": "0 kB"
+    },
+    "void": null
+   },
+   {
+    "nonce": "84527441",
+    "t0": 1795675449.7419748,
+    "ttft_s": 0.4824237823486328,
+    "total_s": 17.87618851661682,
+    "content_chunks": 512,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 513,
+     "prompt_ms": 480.288,
+     "prompt_per_token_ms": 0.936233918128655,
+     "prompt_per_second": 1068.1091345192883,
+     "predicted_n": 512,
+     "predicted_ms": 17393.745,
+     "predicted_per_token_ms": 34.03863992172211,
+     "predicted_per_second": 29.37837711200205
+    },
+    "usage": {
+     "completion_tokens": 512,
+     "prompt_tokens": 513,
+     "total_tokens": 1025,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "Based on the provided code snippet, here is a summary of what `common/arg.cpp` does:\n\n### **Primary Purpose**\nThis file is part of the **llama.cpp** project (a C++ library for running Large Language M",
+    "answer_full": "Based on the provided code snippet, here is a summary of what `common/arg.cpp` does:\n\n### **Primary Purpose**\nThis file is part of the **llama.cpp** project (a C++ library for running Large Language Models locally). Specifically, `arg.cpp` is responsible for **parsing command-line arguments** and **managing configuration options** for various llama.cpp examples (such as `llama-cli`, `llama-server`, `llama-tts`, etc.).\n\n### **Key Functions & Components**\n\n1. **Argument Parsing Infrastructure**:\n   - It defines utilities for handling command-line inputs, including:\n     - Parsing flags, options, and values.\n     - Validating arguments against expected types (e.g., integers, strings, booleans).\n     - Providing default values and help text.\n   - It likely contains the main `parse_args()` function (not shown in the snippet but implied by the filename and includes) that processes `argc`/`argv`.\n\n2. **Cross-Platform Compatibility**:\n   - Handles platform-specific definitions:\n     - **Windows**: Includes `<windows.h>` and `<shellapi.h>`, defines `NOMINMAX` to avoid conflicts with `std::min`/`std::max`, and sets `PATH_MAX` if not defined.\n     - **Linux**: Includes `<linux/limits.h>`.\n     - **AIX**: Includes `<sys/limits.h>`.\n     - **Other Unix-like systems**: Includes `<sys/syslimits.h>`.\n   - Defines `LLAMA_MAX_URL_LENGTH` (2084) for URL validation, likely used in download or server contexts.\n\n3. **Integration with Core Libraries**:\n   - Includes headers from the llama.cpp ecosystem:\n     - `llama.h`: Core LLM inference API.\n     - `sampling.h`: Sampling parameters (temperature, top-k, etc.).\n     - `speculative.h`: Speculative decoding support.\n     - `preset.h`: Predefined model configurations.\n     - `json.h` / `json-schema-to-grammar.h`: JSON handling and schema validation (likely for structured output or server APIs).\n     - `download.h`: Model downloading utilities.\n     - `chat.h`: Chat template handling.\n     - `log.h`: Logging utilities.\n     - `build-info.h`: Build metadata (version, commit hash, etc.).\n\n4. **Multim",
+    "power_prefill": {
+     "n": 2,
+     "w_instant": 189.9,
+     "w_avg": 244.3,
+     "sm_mhz": 795,
+     "mem_mhz": 9501,
+     "temp_max": 61.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "power_decode": {
+     "n": 168,
+     "w_instant": 251.1,
+     "w_avg": 248.6,
+     "sm_mhz": 795,
+     "mem_mhz": 9501,
+     "temp_max": 62.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "tag": "B250-512-rep3",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 61901,
+     "free_mib": 5839,
+     "cached_mib": 55446,
+     "swapused_mib": 17
+    },
+    "peak_card_mib": 17272,
+    "prefill_pcie_links": [
+     [
+      "4",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "1406840 kB",
+     "RssAnon": "483260 kB",
+     "RssFile": "862112 kB",
+     "RssShmem": "61468 kB",
+     "VmSwap": "0 kB"
+    },
+    "void": null
+   }
+  ],
+  "4096": [
+   {
+    "nonce": "ee399f0e",
+    "t0": 1795675467.9661417,
+    "ttft_s": 3.3520283699035645,
+    "total_s": 20.74289631843567,
+    "content_chunks": 512,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 4095,
+     "prompt_ms": 3344.937,
+     "prompt_per_token_ms": 0.8168344322344322,
+     "prompt_per_second": 1224.238304039807,
+     "predicted_n": 512,
+     "predicted_ms": 17390.717,
+     "predicted_per_token_ms": 34.032714285714285,
+     "predicted_per_second": 29.383492353995525
+    },
+    "usage": {
+     "completion_tokens": 512,
+     "prompt_tokens": 4095,
+     "total_tokens": 4607,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code (`common/arg.cpp`) is a core utility module for the **llama.cpp** project. It handles the parsing, validation, and management of command-line arguments and environment variables for various ",
+    "answer_full": "This code (`common/arg.cpp`) is a core utility module for the **llama.cpp** project. It handles the parsing, validation, and management of command-line arguments and environment variables for various llama.cpp examples (such as `server`, `cli`, `mtmd`, etc.).\n\nHere is a summary of its main functions:\n\n### 1. **Argument Definition & Metadata Management**\n*   **`common_arg` Class Methods:** Provides methods to define arguments, including:\n    *   Setting which examples use an argument (`set_examples`).\n    *   Excluding arguments from specific examples (`set_excludes`).\n    *   Associating environment variables with arguments (`set_env`).\n    *   Flagging arguments as related to sampling, speculative decoding, or presets.\n*   **`get_common_arg_defs`:** Initializes and returns the static list of all common argument definitions.\n\n### 2. **Environment Variable Handling**\n*   **`get_value_from_env` / `has_value_from_env`:** Checks if an argument's value is provided via an environment variable.\n*   **Negative Flag Support:** Specifically handles `LLAMA_ARG_NO_*` environment variables to allow disabling features via env vars (e.g., `LLAMA_ARG_NO_MMProj`).\n\n### 3. **Help Text Formatting**\n*   **`to_string`:** Generates formatted help text for arguments.\n    *   Aligns argument names and help descriptions.\n    *   Wraps long help text into multiple lines (`break_str_into_lines`).\n    *   Handles padding and spacing for console readability.\n\n### 4. **Model & Asset Download Logic**\n*   **`common_models_handler_init`:** Prepares a download plan for models, multimodal projectors (mmproj), and speculative decoding models (MTP, EAGLE3, DFlash, DSpark).\n    *   Determines which assets need to be downloaded based on the current example and user parameters.\n    *   Supports Hugging Face repository downloads.\n*   **`build_url_tasks`:** Converts model URLs (single or multi-part) into download tasks, determining local file paths (either user-specified or default cache locations).\n*   **`common_models_handler_apply`:** Executes the download tasks, applying the results to the `common_params` structure.\n\n### 5. **Utility Functions**\n*   **`parse_tensor_buffer_overrides`:** Parses user input to override tensor buffer types",
+    "power_prefill": {
+     "n": 31,
+     "w_instant": 249.0,
+     "w_avg": 246.3,
+     "sm_mhz": 795,
+     "mem_mhz": 9501,
+     "temp_max": 61.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "power_decode": {
+     "n": 168,
+     "w_instant": 247.4,
+     "w_avg": 249.4,
+     "sm_mhz": 798,
+     "mem_mhz": 9501,
+     "temp_max": 60.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "tag": "B250-4096-rep1",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 61777,
+     "free_mib": 5715,
+     "cached_mib": 55446,
+     "swapused_mib": 17
+    },
+    "peak_card_mib": 17272,
+    "prefill_pcie_links": [
+     [
+      "4",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "1563808 kB",
+     "RssAnon": "640228 kB",
+     "RssFile": "862112 kB",
+     "RssShmem": "61468 kB",
+     "VmSwap": "0 kB"
+    },
+    "void": null
+   },
+   {
+    "nonce": "3addd4e1",
+    "t0": 1795675488.794317,
+    "ttft_s": 3.3457062244415283,
+    "total_s": 20.69023895263672,
+    "content_chunks": 512,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 4095,
+     "prompt_ms": 3338.47,
+     "prompt_per_token_ms": 0.8152551892551892,
+     "prompt_per_second": 1226.6097943069728,
+     "predicted_n": 512,
+     "predicted_ms": 17344.386,
+     "predicted_per_token_ms": 33.942046966731894,
+     "predicted_per_second": 29.461982684195338
+    },
+    "usage": {
+     "completion_tokens": 512,
+     "prompt_tokens": 4095,
+     "total_tokens": 4607,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code (`common/arg.cpp`) is a core utility module for the **llama.cpp** project. It handles the parsing, validation, and management of command-line arguments and environment variables for various ",
+    "answer_full": "This code (`common/arg.cpp`) is a core utility module for the **llama.cpp** project. It handles the parsing, validation, and management of command-line arguments and environment variables for various llama.cpp examples (such as `server`, `cli`, `mtmd`, etc.).\n\nHere is a summary of its main functions:\n\n### 1. **Argument Definition & Metadata Management**\n*   **`common_arg` Class Methods:** Provides methods to define arguments, including:\n    *   Setting which examples use an argument (`set_examples`).\n    *   Excluding arguments from specific examples (`set_excludes`).\n    *   Associating environment variables with arguments (`set_env`).\n    *   Flagging arguments as related to sampling, speculative decoding, or presets.\n*   **`get_common_arg_defs`:** Initializes and returns the static list of all common argument definitions.\n\n### 2. **Environment Variable Handling**\n*   **`get_value_from_env` / `has_value_from_env`:** Checks if an argument's value is provided via an environment variable.\n*   **Negative Flag Support:** Specifically handles `LLAMA_ARG_NO_*` environment variables to allow disabling features via env vars (e.g., `LLAMA_ARG_NO_MMProj`).\n\n### 3. **Help Text Formatting**\n*   **`to_string`:** Generates formatted help text for arguments.\n    *   Aligns argument names and help descriptions.\n    *   Wraps long help text into multiple lines (`break_str_into_lines`).\n    *   Handles padding and spacing for console readability.\n\n### 4. **Model & Asset Download Logic**\n*   **`common_models_handler_init`:** Prepares a download plan for models, multimodal projectors (mmproj), and speculative decoding models (MTP, EAGLE3, DFlash, DSpark).\n    *   Determines which assets need to be downloaded based on the current example and user parameters.\n    *   Handles Hugging Face repository plans.\n*   **`build_url_tasks`:** Converts model URLs (single or multi-part) into download tasks, determining local file paths (either user-specified or default cache locations).\n*   **`common_models_handler_apply`:** Executes the download tasks, applying the results to the `common_params` structure.\n\n### 5. **Utility Functions**\n*   **`parse_tensor_buffer_overrides`:** Parses user input to override tensor buffer types",
+    "power_prefill": {
+     "n": 32,
+     "w_instant": 253.6,
+     "w_avg": 247.4,
+     "sm_mhz": 810,
+     "mem_mhz": 9501,
+     "temp_max": 60.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "power_decode": {
+     "n": 167,
+     "w_instant": 249.6,
+     "w_avg": 249.6,
+     "sm_mhz": 821,
+     "mem_mhz": 9501,
+     "temp_max": 59.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "tag": "B250-4096-rep2",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 61755,
+     "free_mib": 5694,
+     "cached_mib": 55446,
+     "swapused_mib": 17
+    },
+    "peak_card_mib": 17272,
+    "prefill_pcie_links": [
+     [
+      "4",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "1564600 kB",
+     "RssAnon": "641020 kB",
+     "RssFile": "862112 kB",
+     "RssShmem": "61468 kB",
+     "VmSwap": "0 kB"
+    },
+    "void": null
+   },
+   {
+    "nonce": "0c59380d",
+    "t0": 1795675509.6277714,
+    "ttft_s": 3.335280179977417,
+    "total_s": 20.64207625389099,
+    "content_chunks": 512,
+    "timings": {
+     "cache_n": 0,
+     "prompt_n": 4097,
+     "prompt_ms": 3327.995,
+     "prompt_per_token_ms": 0.8123004637539663,
+     "prompt_per_second": 1231.07156110511,
+     "predicted_n": 512,
+     "predicted_ms": 17306.681,
+     "predicted_per_token_ms": 33.8682602739726,
+     "predicted_per_second": 29.526169691346364
+    },
+    "usage": {
+     "completion_tokens": 512,
+     "prompt_tokens": 4097,
+     "total_tokens": 4609,
+     "prompt_tokens_details": {
+      "cached_tokens": 0
+     }
+    },
+    "error": null,
+    "answer_head": "This code (`common/arg.cpp`) is a core utility module for the **llama.cpp** project. It handles the parsing, validation, and management of command-line arguments and environment variables for various ",
+    "answer_full": "This code (`common/arg.cpp`) is a core utility module for the **llama.cpp** project. It handles the parsing, validation, and management of command-line arguments and environment variables for various llama.cpp examples (such as `server`, `cli`, `mtmd`, etc.).\n\nHere is a summary of its key functionalities:\n\n### 1. **Argument Definition & Metadata Management**\n*   **`common_arg` Class Methods**: Provides methods to define argument properties, such as:\n    *   `set_examples`: Specifies which llama.cpp examples (e.g., server, CLI) support this argument.\n    *   `set_excludes`: Specifies which examples *do not* support this argument.\n    *   `set_env`: Associates an environment variable with the argument (e.g., `LLAMA_ARG_...`).\n    *   `set_sampling` / `set_spec`: Flags arguments related to sampling or speculative decoding.\n*   **`to_string()`**: Generates formatted help text for arguments, aligning them neatly in the console output with proper padding and line wrapping.\n\n### 2. **Environment Variable Handling**\n*   **`get_value_from_env` / `has_value_from_env`**: Checks if an argument's value is provided via environment variables.\n*   **Negative Flag Support**: Handles compatibility for \"negative\" environment variables (e.g., `LLAMA_ARG_NO_...`) to disable features, ensuring backward compatibility.\n\n### 3. **Model & Asset Download Logic**\n*   **`common_models_handler_init`**: Prepares a download plan for models and associated assets based on user parameters.\n    *   Determines if **multimodal projection (mmproj)** files are needed based on the current example.\n    *   Determines if **speculative decoding** assets (MTP, EAGLE3, DFlash, DSpark) are needed.\n    *   Integrates with Hugging Face download utilities (`common_download_hf_plan`).\n*   **`build_url_tasks`**: Constructs download tasks for model files.\n    *   Handles single-file URLs.\n    *   Handles multi-part model files (shards), determining the correct local directory structure based on user-provided paths or default cache locations.\n*   **`common_models_handler_apply`**: Executes the download tasks, applying them to the `common_params` structure.\n\n### 4. **Utility Functions**\n*   **`read_file`**:",
+    "power_prefill": {
+     "n": 31,
+     "w_instant": 230.0,
+     "w_avg": 242.9,
+     "sm_mhz": 825,
+     "mem_mhz": 9501,
+     "temp_max": 59.0,
+     "sw_power_cap_share": 0.903,
+     "hw_slowdown_share": 0.0
+    },
+    "power_decode": {
+     "n": 167,
+     "w_instant": 250.5,
+     "w_avg": 249.7,
+     "sm_mhz": 825,
+     "mem_mhz": 9501,
+     "temp_max": 59.0,
+     "sw_power_cap_share": 1.0,
+     "hw_slowdown_share": 0.0
+    },
+    "tag": "B250-4096-rep3",
+    "swapin_kib": 0,
+    "swapout_kib": 0,
+    "nvme_read_prefill_mib": 0.0,
+    "nvme_read_decode_mib": 0.0,
+    "mem_after": {
+     "avail_mib": 61741,
+     "free_mib": 5679,
+     "cached_mib": 55446,
+     "swapused_mib": 17
+    },
+    "peak_card_mib": 17272,
+    "prefill_pcie_links": [
+     [
+      "4",
+      "16"
+     ]
+    ],
+    "proc": {
+     "VmRSS": "1565392 kB",
+     "RssAnon": "641812 kB",
+     "RssFile": "862112 kB",
+     "RssShmem": "61468 kB",
+     "VmSwap": "0 kB"
+    },
+    "void": null
+   }
+  ]
+ },
+ "load_s": 3.1,
+ "load_peak_mib": 17262,
+ "card_after_load_mib": 17262,
+ "props_build": {
+  "build_info": "b12431-a946eb541",
+  "build_commit": null,
+  "model_path": "/home/minotaur/nariq-t/model/Qwen3.8-27B-UD-Q4_K_XL.gguf"
+ },
+ "props_full": {
+  "default_generation_settings": {
+   "params": {
+    "seed": 4294967295,
+    "temperature": 1.0,
+    "dynatemp_range": 0.0,
+    "dynatemp_exponent": 1.0,
+    "top_k": 20,
+    "top_p": 0.949999988079071,
+    "min_p": 0.05000000074505806,
+    "top_n_sigma": -1.0,
+    "xtc_probability": 0.0,
+    "xtc_threshold": 0.10000000149011612,
+    "typical_p": 1.0,
+    "repeat_last_n": 64,
+    "repeat_penalty": 1.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "dry_multiplier": 0.0,
+    "dry_base": 1.75,
+    "dry_allowed_length": 2,
+    "dry_penalty_last_n": 64,
+    "mirostat": 0,
+    "mirostat_tau": 5.0,
+    "mirostat_eta": 0.10000000149011612,
+    "adaptive_target": -1.0,
+    "adaptive_decay": 0.8999999761581421,
+    "max_tokens": -1,
+    "n_predict": -1,
+    "n_keep": 0,
+    "n_discard": 0,
+    "ignore_eos": false,
+    "stream": false,
+    "n_probs": 0,
+    "min_keep": 0,
+    "chat_format": "Content-only",
+    "reasoning_format": "none",
+    "reasoning_in_content": false,
+    "generation_prompt": "",
+    "samplers": [
+     "penalties",
+     "dry",
+     "top_n_sigma",
+     "top_k",
+     "typ_p",
+     "top_p",
+     "min_p",
+     "xtc",
+     "temperature"
+    ],
+    "speculative.types": "none",
+    "timings_per_token": false,
+    "post_sampling_probs": false,
+    "backend_sampling": false,
+    "lora": []
+   },
+   "n_ctx": 8192
+  },
+  "total_slots": 1,
+  "model_alias": "/home/minotaur/nariq-t/model/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+  "model_ftype": "Q4_K - Small",
+  "model_path": "/home/minotaur/nariq-t/model/Qwen3.8-27B-UD-Q4_K_XL.gguf",
+  "modalities": {
+   "vision": false,
+   "video": false,
+   "audio": false
+  },
+  "media_marker": "<__media_fRCjEL4EQ8HMktQC1BEHAv5OfhbhawPC__>",
+  "endpoint_slots": true,
+  "endpoint_props": false,
+  "endpoint_metrics": false,
+  "ui": true,
+  "ui_settings": {},
+  "chat_template": "{%- set image_count = namespace(value=0) %}\n{%- set video_count = namespace(value=0) %}\n{%- macro render_content(content, do_vision_count, is_system_content=false) %}\n    {%- if content is string %}\n        {{- content }}\n    {%- elif content is iterable and content is not mapping %}\n        {%- for item in content %}\n            {%- if 'image' in item or 'image_url' in item or item.type == 'image' %}\n                {%- if is_system_content %}\n                    {{- raise_exception('System message cannot contain images.') }}\n                {%- endif %}\n                {%- if do_vision_count %}\n                    {%- set image_count.value = image_count.value + 1 %}\n                {%- endif %}\n                {%- if add_vision_id %}\n                    {{- 'Picture ' ~ image_count.value ~ ': ' }}\n                {%- endif %}\n                {{- '<|vision_start|><|image_pad|><|vision_end|>' }}\n            {%- elif 'video' in item or item.type == 'video' %}\n                {%- if is_system_content %}\n                    {{- raise_exception('System message cannot contain videos.') }}\n                {%- endif %}\n                {%- if do_vision_count %}\n                    {%- set video_count.value = video_count.value + 1 %}\n                {%- endif %}\n                {%- if add_vision_id %}\n                    {{- 'Video ' ~ video_count.value ~ ': ' }}\n                {%- endif %}\n                {{- '<|vision_start|><|video_pad|><|vision_end|>' }}\n            {%- elif 'text' in item %}\n                {{- item.text }}\n            {%- else %}\n                {{- raise_exception('Unexpected item type in content.') }}\n            {%- endif %}\n        {%- endfor %}\n    {%- elif content is none or content is undefined %}\n        {{- '' }}\n    {%- else %}\n        {{- raise_exception('Unexpected content type.') }}\n    {%- endif %}\n{%- endmacro %}\n{%- if not messages %}\n    {{- raise_exception('No messages provided.') }}\n{%- endif %}\n{%- set sysns = namespace(count=0, text='') %}\n{%- for message in messages %}\n    {%- if sysns.count == loop.index0 and (message.role == 'system' or message.role == 'developer') %}\n        {%- set sys_content = render_content(message.content, false, true)|trim %}\n        {%- if sys_content %}\n            {%- set sysns.text = sysns.text + ('\\n' if sysns.text else '') + sys_content %}\n        {%- endif %}\n        {%- set sysns.count = sysns.count + 1 %}\n    {%- endif %}\n{%- endfor %}\n{%- set num_sys = sysns.count %}\n{%- set merged_system = sysns.text %}\n{%- set reasoning_instructions = '' %}\n{%- if enable_thinking is undefined or enable_thinking is true %}\n    {%- set resolved_reasoning_effort = reasoning_effort|default('xhigh') %}\n    {%- if resolved_reasoning_effort == 'high' %}\n        {%- set resolved_reasoning_effort = 'xhigh' %}\n    {%- endif %}\n    {%- if resolved_reasoning_effort not in ('xhigh', 'medium', 'low') %}\n        {{- raise_exception('Unexpected reasoning effort ' ~ reasoning_effort ~ '. Supported types are xhigh (default), medium, and low.') }}\n    {%- endif %}\n    {%- if resolved_reasoning_effort == 'xhigh' %}\n        {%- set reasoning_instructions = 'Reasoning effort is set to xhigh. Please think carefully through the task, validate key assumptions, consider plausible alternatives, and prioritize correctness, consistency, and clarity in the final answer.' %}\n    {%- elif resolved_reasoning_effort == 'low' %}\n        {%- set reasoning_instructions = 'Reasoning effort is set to low. Keep your thinking brief and focused, moving directly to the conclusion without unnecessary elaboration.' %}\n    {%- endif %}\n{%- endif %}\n{%- if tools and tools is iterable and tools is not mapping %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if reasoning_instructions %}\n        {{- reasoning_instructions + '\\n\\n' }}\n    {%- endif %}\n    {{- \"# Tools\\n\\nYou have access to the following functions:\\n\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\" }}\n    {{- '\\n\\nIf you choose to call a function ONLY reply in the following format with NO suffix:\\n\\n<tool_call>\\n<function=example_function_name>\\n<parameter=example_parameter_1>\\nvalue_1\\n</parameter>\\n<parameter=example_parameter_2>\\nThis is the value for the second parameter\\nthat can span\\nmultiple lines\\n</parameter>\\n</function>\\n</tool_call>\\n\\n<IMPORTANT>\\nReminder:\\n- Function calls MUST follow the specified format: an inner <function=...></function> block must be nested within <tool_call></tool_call> XML tags\\n- Required parameters MUST be specified\\n- You may provide optional reasoning for your function call in natural language BEFORE the function call, but NOT after\\n- If there is no function call available, answer the question like normal with your current knowledge and do not tell the user about function calls\\n</IMPORTANT>' }}\n    {%- if merged_system %}\n        {{- '\\n\\n' + merged_system }}\n    {%- endif %}\n    {{- '<|im_end|>\\n' }}\n{%- else %}\n    {%- if merged_system %}\n        {{- '<|im_start|>system\\n' + (reasoning_instructions + '\\n\\n' if reasoning_instructions else '')  + merged_system + '<|im_end|>\\n' }}\n    {%- elif reasoning_instructions %}\n        {{- '<|im_start|>system\\n' + reasoning_instructions + '<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- set ns = namespace(multi_step_tool=true, last_query_index=messages|length - 1) %}\n{%- for message in messages[::-1] %}\n    {%- set index = (messages|length - 1) - loop.index0 %}\n    {%- if ns.multi_step_tool and message.role == \"user\" %}\n        {%- set content = render_content(message.content, false)|trim %}\n        {%- if not(content.startswith('<tool_response>') and content.endswith('</tool_response>')) %}\n            {%- set ns.multi_step_tool = false %}\n            {%- set ns.last_query_index = index %}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- for message in messages %}\n    {%- if loop.index0 >= num_sys %}\n    {%- set content = render_content(message.content, true)|trim %}\n    {%- if message.role == \"system\" or message.role == \"developer\" %}\n        {{- raise_exception('System message must be at the beginning.') }}\n    {%- elif message.role == \"user\" %}\n        {{- '<|im_start|>' + message.role + '\\n' + content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {%- set reasoning_content = '' %}\n        {%- if message.reasoning_content is string %}\n            {%- set reasoning_content = message.reasoning_content %}\n        {%- endif %}\n        {%- set reasoning_content = reasoning_content|trim %}\n        {%- if preserve_thinking is undefined or preserve_thinking is true or loop.index0 > ns.last_query_index %}\n            {{- '<|im_start|>' + message.role + '\\n<think>\\n' + reasoning_content + '\\n</think>\\n\\n' + content }}\n        {%- else %}\n            {{- '<|im_start|>' + message.role + '\\n' + content }}\n        {%- endif %}\n        {%- if message.tool_calls and message.tool_calls is iterable and message.tool_calls is not mapping %}\n            {%- for tool_call in message.tool_calls %}\n                {%- if tool_call.function is defined %}\n                    {%- set tool_call = tool_call.function %}\n                {%- endif %}\n                {%- if tool_call.name is not defined or tool_call.name is none %}\n                    {{- raise_exception('Tool call is missing a function name.') }}\n                {%- endif %}\n                {%- if loop.first %}\n                    {%- if content|trim %}\n                        {{- '\\n\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- else %}\n                        {{- '<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                    {%- endif %}\n                {%- else %}\n                    {{- '\\n<tool_call>\\n<function=' + tool_call.name + '>\\n' }}\n                {%- endif %}\n                {%- if tool_call.arguments is mapping %}\n                    {%- for args_name, args_value in tool_call.arguments|items %}\n                        {{- '<parameter=' + args_name + '>\\n' }}\n                        {%- set args_value = args_value | string if args_value is string else args_value | tojson | safe %}\n                        {{- args_value }}\n                        {{- '\\n</parameter>\\n' }}\n                    {%- endfor %}\n                {%- elif tool_call.arguments is string %}\n                    {%- if tool_call.arguments|trim %}\n                        {{- raise_exception('Tool call arguments for function \"' + (tool_call.name | string) + '\" were passed as a JSON string. Parse them into an object before calling apply_chat_template.') }}\n                    {%- endif %}\n                {%- elif tool_call.arguments is defined and tool_call.arguments is not none %}\n                    {{- raise_exception('Tool call arguments for function \"' + (tool_call.name | string) + '\" must be an object/mapping or a JSON string.') }}\n                {%- endif %}\n                {{- '</function>\\n</tool_call>' }}\n            {%- endfor %}\n        {%- endif %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if loop.previtem and loop.previtem.role != \"tool\" %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- content }}\n        {{- '\\n</tool_response>' }}\n        {%- if not loop.last and loop.nextitem.role != \"tool\" %}\n            {{- '<|im_end|>\\n' }}\n        {%- elif loop.last %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- else %}\n        {{- raise_exception('Unexpected message role.') }}\n    {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n    {%- if enable_thinking is defined and enable_thinking is false %}\n        {{- '<think>\\n\\n</think>\\n\\n' }}\n    {%- else %}\n        {{- '<think>\\n' }}\n    {%- endif %}\n{%- endif %}\n{#- Unsloth fixes - developer role, merged system messages, tool calling #}",
+  "chat_template_caps": {
+   "supports_object_arguments": true,
+   "supports_parallel_tool_calls": true,
+   "supports_preserve_reasoning": true,
+   "supports_reasoning_effort": true,
+   "supports_string_content": true,
+   "supports_system_role": true,
+   "supports_tool_calls": true,
+   "supports_tools": true,
+   "supports_typed_content": true,
+   "reasoning_effort_levels": [
+    "low",
+    "medium",
+    "xhigh"
+   ],
+   "reasoning_effort_rejected": [
+    "minimal",
+    "max"
+   ]
+  },
+  "bos_token": "<|endoftext|>",
+  "eos_token": "<|im_end|>",
+  "build_info": "b12431-a946eb541",
+  "is_sleeping": false,
+  "cors_proxy_enabled": false
+ },
+ "props_n_ctx": 8192,
+ "cold": {
+  "nonce": "3b1c724e",
+  "t0": 1795675396.6276448,
+  "ttft_s": 0.4922325611114502,
+  "total_s": 17.17926025390625,
+  "content_chunks": 512,
+  "timings": {
+   "cache_n": 0,
+   "prompt_n": 513,
+   "prompt_ms": 489.97,
+   "prompt_per_token_ms": 0.9551072124756336,
+   "prompt_per_second": 1047.0028777272078,
+   "predicted_n": 512,
+   "predicted_ms": 16687.086,
+   "predicted_per_token_ms": 32.65574559686888,
+   "predicted_per_second": 30.622482559267688
+  },
+  "usage": {
+   "completion_tokens": 512,
+   "prompt_tokens": 513,
+   "total_tokens": 1025,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "error": null,
+  "answer_head": "Based on the provided code snippet, here is a summary of what this file (`common/arg.cpp`) does:\n\n### **Primary Purpose**\nThis file is part of the **llama.cpp** library (or a similar LLM inference fra",
+  "answer_full": "Based on the provided code snippet, here is a summary of what this file (`common/arg.cpp`) does:\n\n### **Primary Purpose**\nThis file is part of the **llama.cpp** library (or a similar LLM inference framework). It handles **command-line argument parsing, validation, and configuration setup** for various LLM applications (such as CLI, server, TTS, etc.).\n\n### **Key Components & Functions**\n\n1. **Header Inclusions & Dependencies**:\n   - Includes headers for core LLM functionality (`llama.h`, `sampling.h`, `speculative.h`).\n   - Includes utilities for JSON handling (`json.h`), logging (`log.h`), downloading (`download.h`), and chat formatting (`chat.h`).\n   - Includes platform-specific headers (e.g., `windows.h` for Windows, `linux/limits.h` for Linux) to handle path length limits and system-specific definitions.\n\n2. **Platform-Specific Fixes**:\n   - On Windows, it defines `WIN32_LEAN_AND_MEAN` and `NOMINMAX` to prevent conflicts with `std::min`/`std::max` from Windows headers.\n   - Defines `PATH_MAX` for different operating systems to ensure consistent file path handling.\n\n3. **Constants**:\n   - `LLAMA_MAX_URL_LENGTH`: Sets a maximum URL length (2084 characters) for download or remote model fetching.\n   - `mmproj_examples`: A list of example applications that support multimodal (image) projection, such as `MTMD`, `SERVER`, `CLI`, and `TTS`.\n\n4. **Utility Function**:\n   - `read_file(const std::string & fname)`:\n     - A helper function to read the entire content of a file into a `std::string`.\n     - Throws a `std::runtime_error` if the file cannot be opened.\n     - Uses `std::istreambuf_iterator` for efficient file reading.\n\n### **Context**\nThis file is likely the implementation behind a header (`arg.h`) that defines a command-line argument parser. It prepares the environment for running LLM inference by:\n- Parsing user-provided arguments (model paths, sampling parameters, etc.).\n- Validating inputs (e.g., file existence, URL lengths).\n- Setting up configurations for different LLM examples (CLI, server, etc.).\n- Handling cross-platform compatibility for file paths and system",
+  "power_prefill": {
+   "n": 3,
+   "w_instant": 128.0,
+   "w_avg": 128.0,
+   "sm_mhz": 1800,
+   "mem_mhz": 9501,
+   "temp_max": 52.0,
+   "sw_power_cap_share": 0.0,
+   "hw_slowdown_share": 0.0
+  },
+  "power_decode": {
+   "n": 161,
+   "w_instant": 248.7,
+   "w_avg": 246.6,
+   "sm_mhz": 1550,
+   "mem_mhz": 9501,
+   "temp_max": 59.0,
+   "sw_power_cap_share": 1.0,
+   "hw_slowdown_share": 0.0
+  },
+  "tag": "B250-512-cold",
+  "swapin_kib": 0,
+  "swapout_kib": 0,
+  "nvme_read_prefill_mib": 0.0,
+  "nvme_read_decode_mib": 0.0,
+  "mem_after": {
+   "avail_mib": 61894,
+   "free_mib": 5833,
+   "cached_mib": 55446,
+   "swapused_mib": 17
+  },
+  "peak_card_mib": 17272,
+  "prefill_pcie_links": [
+   [
+    "4",
+    "16"
+   ]
+  ],
+  "proc": {
+   "VmRSS": "1406044 kB",
+   "RssAnon": "482464 kB",
+   "RssFile": "862112 kB",
+   "RssShmem": "61468 kB",
+   "VmSwap": "0 kB"
+  }
+ },
+ "cold_peak_mib": 17272,
+ "cell_512_peak_mib": 17272,
+ "cell_4096_peak_mib": 17272,
+ "arm_peak_mib": 17272,
+ "min_avail_mib": 61682,
+ "limits_at_end": [
+  "250.00",
+  "250.00",
+  "420.00"
+ ]
+}
