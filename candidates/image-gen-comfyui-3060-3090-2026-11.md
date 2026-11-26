@@ -389,3 +389,21 @@ file table fixes the bytes at lock either way.
 4. Mark schedules both rigs. CC#3 has released Rushuna, and no other session holds the GPUs.
 5. Any deviation found after locking is handled as an amendment (A1, A2, …) before the affected arm runs. Results are
    never used to justify one.
+
+## Fill-ins and amendments (after lock)
+
+**F1 (fill-in, 2026-11-26 13:40 PST, before any transfer of these files and before any run).** Mark accepted the
+licence on black-forest-labs/flux-3-image-klein-comfy. The repo stayed at the pinned commit
+`09192d1abae1e57e1a2fcbc5b701cd1d9e2abd51`, and its LFS pointers at that commit read:
+
+| # | Path | Bytes | sha256 |
+|---|---|---:|---|
+| 18 | `diffusion_models/flux3-image-klein-int8-convrot.safetensors` | 5,827,874,779 | `847d8933548afd93df4af2cac2498e70891bf28d9dae06d695f536992e168fe2` |
+| 19 | `diffusion_models/flux3-image-klein-bf16.safetensors` | 11,097,404,512 | `c3e9813cdd049c831c836b2e9db61150e49a93fc1a4c63b256494642fee0bd7c` |
+| 20 | `text_encoders/qwen3vl_4b_int8_convrot.safetensors` | 4,858,559,240 | `32de113cbf8282b02cbff0794b637b9d6676da09314a1db5a30bcea9bf4ee01c` |
+| 21 | `text_encoders/qwen3vl_4b_bf16.safetensors` | 8,875,719,408 | `f0b24fc5c8d7c0ea6ca909da14c20af5cac53f22506be942c6c956f838b9630f` |
+| 22 | `vae/flux2-vae.safetensors` | 336,211,292 | `868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3` (same bytes as #15) |
+
+The sizes match the table at lock. With row 22 a duplicate of row 15, the set is 36 distinct files, 265,788,104,636 B.
+**Transfer timing (Mark, 2026-11-26):** T-2133 was postponed, so the stream started at 13:38, before T-2133 rather
+than after it. G11 item 3 still applies: all transfers stop when Mark starts T-2133.
