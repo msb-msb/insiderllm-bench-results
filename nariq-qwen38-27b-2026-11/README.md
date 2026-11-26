@@ -245,3 +245,9 @@ Reference PPL 3.4249, bpb 0.4827. Per-half values come from the running chunk me
   - `ollama` isn't installed on Tamanna, so the "ollama ps empty" check passes trivially.
   - `summarize_kld.py` regexes fixed after the arms ran: padded `±` and `%` in the per-chunk rows. Parsing only; the
     script isn't hash-pinned in A1.
+
+## Post-results note (2026-11-25, after publication)
+
+The lock's trigger line says "Hacker News front page"; the item
+([news.ycombinator.com/item?id=50611402](https://news.ycombinator.com/item?id=50611402), 195 points, 2026-11-23) is
+verified, front-page placement is not. The published article says "195 points on Hacker News". The lock is unchanged.
