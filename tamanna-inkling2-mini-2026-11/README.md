@@ -197,6 +197,14 @@ no compute process, load 0.00):
   request.
 - Raw output: `bandwidth/stream-read-tamanna-2026-11-26-pre3000.txt`.
 
+## Post-results observation, 2026-11-27 (not a re-score)
+
+The Inkling bandwidth model (expert bytes per token × tok/s ≈ 69% of `stream_read` bandwidth) over-predicts the
+October Flash-Next record (`../tamanna-ram-speed-offload-2026-10-09/`, old UD-IQ3_XXS at `-ncmoe 29`): 50.9 tok/s
+predicted against 32.57 measured, and +15% decode for +35% bandwidth. That is consistent with a fixed per-token
+overhead the model leaves out. T-2133 is the test that bears on it. Nothing in this record is re-scored. The working
+is in `docs/candidates/qwen3-8-flash-ram-offload-2026-11.md` section 4 (draft, parked).
+
 ## Files
 
 - `bands-A1.md`: the day's bandwidth and the recomputed bands, committed before the measured requests.
