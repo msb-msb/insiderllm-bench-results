@@ -16,7 +16,7 @@ machine state header shows UTC.
 - Arms: 13:02:30 to 13:49:48 PST, which is 21:02 to 21:49 UTC.
 
 **Arms run: the main arms only.** That means U and L at 8K, 32K and 256K, then S10d at 8K and 16K.
-**The optional arm T-2133 was not run.** Go condition 6 was not met, so A1-P8 and A1-P9 stay pending.
+**The optional arm T-2133 was not run on 11-25.** Go condition 6 was not met then. It ran on 2026-11-27: see the addendum of that date. A1-P8 and A1-P9 both fail, above the band.
 
 ## Setup
 
@@ -205,10 +205,111 @@ predicted against 32.57 measured, and +15% decode for +35% bandwidth. That is co
 overhead the model leaves out. T-2133 is the test that bears on it. Nothing in this record is re-scored. The working
 is in `docs/candidates/qwen3-8-flash-ram-offload-2026-11.md` section 4 (draft, parked).
 
+## Addendum, 2026-11-27: optional arm T-2133 run (A1-P8 and A1-P9 scored)
+
+**Go condition 6 was met:** Mark made both BIOS changes. The bands were committed before any 2133 request: `bands-T2133.md`, commit
+`8c7911e7`. This addendum scores A1-P8 and A1-P9. The table row above that reads "pending" is superseded by this
+section. Nothing else in the record is re-scored.
+
+**Sequence (UTC, 2026-11-27).**
+1. 21:54: Tamanna idle (card 7 MiB, no compute process, no transfers, load 0.00). Pre-reboot `stream_read` at
+   DDR4-3000: 42.05, 42.21, 42.26, median 42.21 GB/s (context only).
+2. Mark set DDR4-2133. `dmidecode` reads 4 × 16 GB at 2133 MT/s configured, 1.2 V (`t2133/dmidecode-2133.txt`).
+   BIOS P4.00, persistence mode enabled after the reboot.
+3. 22:09: **BW(2133) = 31.54 GB/s** (31.40, 31.54, 31.61). Same source (`09858c7f…`) and binary (`0ff077fb…`),
+   4 threads, each run best of 8. Bands computed and committed (`8c7911e7`).
+4. 22:10-22:14: U-8k short, then U-32k short. Each had a fresh server, a model pre-read, a cold request excluded,
+   and 3 × 512 tokens. The server command is byte-identical to the main arm's `results-U-8k.json` and
+   `results-U-32k.json` `cmd`. Run by `harness/run_t2133.sh`, which is `run_a1.sh`'s `arm()` with short cells only
+   (A1.3 T-2133 step 3). On Tamanna the main `rec/arms` was moved aside during the run and put back unchanged
+   afterwards, so the T-2133 logs did not append to it.
+5. Mark restored DDR4-3000. `dmidecode` reads 3000 MT/s configured (`t2133/dmidecode-3000-restore.txt`).
+   **Voltage: 1.35 V, as set.** Mark read it on the BIOS screen during an extra reboot at about 22:45. dmidecode's 1.2 V
+   is the SPD value, as in the 10-09 record.
+6. 22:25: **restore check: 42.08 GB/s** (42.18, 42.07, 42.08). That is ≥ 40.5, so Tamanna counts as **restored**.
+7. After the voltage-check reboot:
+   - 22:47, under a minute after boot at load 1.47: 41.23, 41.63, 41.38 GB/s (boot load, context only).
+   - 22:49, at load 0.18: 41.77, 42.15, 42.17 GB/s, median **42.15 GB/s**.
+
+   Tamanna is back at DDR4-3000 / 1.35 V and can be used by other sessions.
+
+**Void rules (A1.5): no cell is void.**
+- No swap-out (pswpout +0).
+- Every prefill read gen 4 x16.
+- prompt_n was 512-514, and cache_n was 0.
+- NVMe reads during decode were 0.0 MiB.
+- Every answer was non-empty and not looping.
+- memwatch did not trip: min MemAvailable was 61,897 MiB.
+
+### Results (tok/s, median [min..max] of 3)
+
+| cell | decode at DDR4-3000 (main arm, 2026-11-25) | decode at DDR4-2133 (2026-11-27) | decode ratio | bandwidth ratio | band (±10%) | verdict |
+|---|---|---|---|---|---|---|
+| **A1-P8: U-8k short** | 16.40 [16.39..16.42] | **13.83** [13.83..13.83] | **0.843** | 0.746 | [0.671..0.820] | **fails, above the band** |
+| **A1-P9: U-32k short** | 16.39 [16.33..16.41] | **13.82** [13.80..13.83] | **0.843** | 0.746 | [0.671..0.820] | **fails, above the band** |
+
+- The ranges don't overlap. Short prefill fell from about 183 to 148 tok/s.
+- **Robustness:** with today's pre-reboot 42.21 or the restore reading of 42.08 as BW(3000), the top of the band
+  moves to 0.822 or 0.825. Both cells still fail.
+- **Deviation (written into `bands-T2133.md` before the run):** A1 asks for the 3000 inputs "from the same day". The
+  main arms ran on 11-25, and T-2133 was deferred to 11-27. The scored inputs are the ones the lock names. Bandwidth at
+  3000 read 42.30, 42.21, 42.21 and 42.08 GB/s across the three days.
+
+### What it says (A1.6, "How A1-P8 reads")
+
+**The ratio is above the band, so part of decode is not bandwidth-bound.**
+- Read bandwidth fell 25.4%; decode fell 15.7%.
+- Equivalently, 2133 → 3000 is +34.1% bandwidth for +18.6% decode.
+- This is with the CPU, GPU, binary, file, flags and prompts held fixed. Only the RAM clock changed, plus whatever
+  timings the board chose with it, which aren't controlled (A1.9).
+
+**Consequence for A1-P1, as the lock says:** the CPU explanation, (b), carries more weight.
+- The Tamanna/Rushuna decode ratio of 1.575 against r = 1.570 was not pure bandwidth scaling. Within one box, decode
+  doesn't scale with bandwidth one-for-one.
+- The near-exact cross-rig match combined a bandwidth part with a part that differs between the rigs by CPU or GPU.
+- The "69% of read bandwidth on both rigs" in the Discussion was a coincidence of that mix. It is not a constant.
+
+**Fixed per-token overhead (unscored analysis, fixed in `bands-T2133.md` before the run).** Fit t = a + k / BW to the
+two U-8k points:
+
+| | Inkling U-8k short, `-cmoe` (this arm) | Flash-Next old UD-IQ3_XXS, `-ncmoe 29` (10-09 record) |
+|---|---|---|
+| decode 2133 → 3000 | 13.83 → 16.40 (+18.6%) | 28.40 → 32.57 (+14.7%) |
+| bandwidth 2133 → 3000 | 31.54 → 42.30 (+34.1%) | 31.52 → 42.44 (+34.6%) |
+| per-token time at 3000 | 60.98 ms | 30.70 ms |
+| **fixed part a** | **27.8 ms (45.5%)** | 17.7 ms (57.6%) |
+| bandwidth part at 3000 | 33.2 ms (k = 1.405 GB) | 13.0 ms (k = 0.552 GB) |
+
+U-32k gives the same fit: a = 27.8 ms, 45.5%.
+
+**So the fixed per-token overhead seen in the Flash-Next record shows up here too.** It is about 45% of an Inkling
+token at DDR4-3000.
+
+What a two-point fit can't tell:
+- **What the fixed part is.** It could be CPU compute on the experts, memory latency, or the on-card share (the GPU
+  plus launches). T-2133 holds all of those fixed, so it can't separate them.
+- **Whether t = a + k / BW is the right shape at all.** Two points can't show it.
+
+These are directional readings:
+- **k = 1.405 GB is below the 1.784 GB of three-pass routed-expert bytes,** and above the 0.924 GB of one pass. The
+  variable part streams less than every pass reading its experts afresh. One possible reason is passes re-picking
+  experts already in cache. This was not tested.
+- **Cross-rig (directional, DDR4 confound):** with Tamanna's a and k, Rushuna at 26.94 GB/s would decode 12.5 tok/s.
+  It measured 10.41, which puts its fixed part near 44 ms, against Tamanna's 28. That fits a slower CPU, or a slower
+  GPU share, on the 3060 box. Same caveats.
+
+Raw files:
+- `t2133/arms/`: results JSON, server logs, card CSVs, memwatch and `summary.txt` (`PCIE_GEN=4`).
+- `t2133/run_t2133.out`.
+- `t2133/dmidecode-*.txt`.
+- `bandwidth/stream-read-tamanna-2026-11-27-{pre2133,2133,restore3000,post-voltage-check,post-voltage-check-settled}.txt`.
+
 ## Files
 
 - `bands-A1.md`: the day's bandwidth and the recomputed bands, committed before the measured requests.
-- `bandwidth/`: the raw `stream_read` and STREAM output, plus the 2026-11-26 pre-T-2133 reading (context only).
+- `bandwidth/`: the raw `stream_read` and STREAM output, the 2026-11-26 pre-T-2133 reading (context only), and the
+  2026-11-27 T-2133 readings.
+- `bands-T2133.md`, `t2133/`, `harness/run_t2133.sh`: the T-2133 arm (2026-11-27).
 - `rec/machine-state.txt`: hashes and state before arm U.
 - `rec/gate/`, `rec/gates_a1.out`: the PPL gates.
 - `rec/run_everything.out`, `rec/arms/`: per-arm results JSON, server and engine logs, card CSVs and memwatch.

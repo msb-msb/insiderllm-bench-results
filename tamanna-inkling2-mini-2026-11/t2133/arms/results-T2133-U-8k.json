@@ -1,0 +1,480 @@
+{
+ "arm": "T2133-U-8k",
+ "tag": "inkling",
+ "kind": "llama",
+ "cmd": [
+  "/home/minotaur/inkling2-2026-11/uns/app/llama-server",
+  "-m",
+  "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+  "-ngl",
+  "99",
+  "-np",
+  "1",
+  "-ctk",
+  "q8_0",
+  "-ctv",
+  "q8_0",
+  "-fa",
+  "auto",
+  "-t",
+  "4",
+  "--cache-ram",
+  "0",
+  "--fit",
+  "off",
+  "-lm",
+  "mmap",
+  "--jinja",
+  "--port",
+  "8081",
+  "-lv",
+  "4",
+  "-cmoe",
+  "-c",
+  "8192"
+ ],
+ "cells_spec": "short:512:3",
+ "temp": 1.0,
+ "ballast_mib_target": 0,
+ "disk": "nvme0n1",
+ "cells": {
+  "short": {
+   "prompt_target": 512,
+   "reqs": [
+    {
+     "nonce": "95d043ac",
+     "t0": 1795817485.1191046,
+     "ttft_s": 3.6195523738861084,
+     "total_s": 21.908536195755005,
+     "content_chunks": 254,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 513,
+      "prompt_ms": 3465.364,
+      "prompt_per_token_ms": 6.755095516569201,
+      "prompt_per_second": 148.0363967537032,
+      "predicted_n": 256,
+      "predicted_ms": 18439.854,
+      "predicted_per_token_ms": 72.31315294117647,
+      "predicted_per_second": 13.828742895686702
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 513,
+      "total_tokens": 769,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user asks to summarize code. The code shown is from llama.cpp, common/arg.cpp, including argument parsing likely. Need answer summarize. Need be careful: They pasted \"request 95d043ac\" maybe irrel",
+     "answer_full": "The user asks to summarize code. The code shown is from llama.cpp, common/arg.cpp, including argument parsing likely. Need answer summarize. Need be careful: They pasted \"request 95d043ac\" maybe irrelevant. We can summarize visible code. The snippet includes includes, constants, beginning of static initializer list for mmproj_examples. Need mention truncated snippet. We can say this file appears to implement common command-line argument parsing/types for llama examples, defining default enum examples, common utilities, using shared json alias. But need avoid overclaiming beyond visible. Need note it is clipped at \"LLAMA_EXAMPL\". We can outline structure: includes llama.h and common modules, arg.h, build-info, chat, common, download, json-schema-to-grammar, json, log, sampling, speculative, preset; platform headers; constants; alias json to common_json; using common_arg_utils; begins mmproj_examples initializer list with LLAMA_EXAMPLE_MTMD/SERVER/CLI and cut off. Likely file registers arguments/defaults for different example programs (mtmd, server, cli etc.) compatible with multimodal projection models",
+     "tag": "T2133-U-8k-short-512-rep1",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 61981,
+      "free_mib": 45777,
+      "cached_mib": 16747,
+      "swapused_mib": 0
+     },
+     "peak_card_mib": 2572,
+     "prefill_pcie_links": [
+      [
+       "4",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16670776 kB",
+      "RssAnon": "712240 kB",
+      "RssFile": "15927244 kB",
+      "RssShmem": "31292 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "57707a1f",
+     "t0": 1795817507.2829196,
+     "ttft_s": 3.6158201694488525,
+     "total_s": 21.89815640449524,
+     "content_chunks": 254,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 514,
+      "prompt_ms": 3462.684,
+      "prompt_per_token_ms": 6.736739299610895,
+      "prompt_per_second": 148.43976522258455,
+      "predicted_n": 256,
+      "predicted_ms": 18432.277,
+      "predicted_per_token_ms": 72.28343921568627,
+      "predicted_per_second": 13.83442750995984
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 514,
+      "total_tokens": 770,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user provides a code snippet and asks to summarise what it does. The snippet is truncated (\"LLAMA_EXAMPL\" cut). We can summarize visible parts. Need not reproduce extensive proprietary code? It's ",
+     "answer_full": "The user provides a code snippet and asks to summarise what it does. The snippet is truncated (\"LLAMA_EXAMPL\" cut). We can summarize visible parts. Need not reproduce extensive proprietary code? It's user-provided code; summarizing is allowed. We can describe purpose: common/arg.cpp from llama.cpp likely handles argument parsing for CLI/server/etc. It includes headers and sets up examples, platform limits, max URL length. Visible code defines enum? It begins includes, windows min/max fix, platform limit headers, defines max URL length, using json common_json, namespace common_arg_utils, static initializer_list of enum llama_example mmproj_examples with entries. We can say it initializes CLI argument handling/help examples, likely of examples that require mmproj/multimodal model. Need be accurate: common_arg.cpp seems from llama.cpp common args. The snippet includes preset.h, speculative.h, sampling.h etc. It is a large file defining argument parsing and help. We should note truncated. Mention platform-specific PATH_MAX. Mention json alias. Avoid claiming beyond visible. Done. Final concise",
+     "tag": "T2133-U-8k-short-512-rep2",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 61949,
+      "free_mib": 45744,
+      "cached_mib": 16747,
+      "swapused_mib": 0
+     },
+     "peak_card_mib": 2572,
+     "prefill_pcie_links": [
+      [
+       "4",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16671112 kB",
+      "RssAnon": "712576 kB",
+      "RssFile": "15927244 kB",
+      "RssShmem": "31292 kB",
+      "VmSwap": "0 kB"
+     }
+    },
+    {
+     "nonce": "b714a872",
+     "t0": 1795817529.4477344,
+     "ttft_s": 3.622497797012329,
+     "total_s": 21.89349675178528,
+     "content_chunks": 254,
+     "timings": {
+      "cache_n": 0,
+      "prompt_n": 512,
+      "prompt_ms": 3455.152,
+      "prompt_per_token_ms": 6.74834375,
+      "prompt_per_second": 148.18450823581713,
+      "predicted_n": 256,
+      "predicted_ms": 18435.496,
+      "predicted_per_token_ms": 72.29606274509804,
+      "predicted_per_second": 13.83201189704904
+     },
+     "usage": {
+      "completion_tokens": 256,
+      "prompt_tokens": 512,
+      "total_tokens": 768,
+      "prompt_tokens_details": {
+       "cached_tokens": 0
+      }
+     },
+     "error": null,
+     "answer_head": "The user asks to summarize code. The code shown is an include-heavy C++ file common/arg.cpp from llama.cpp likely. Need be careful: This is request b714... maybe asks summarize snippet. No safety issu",
+     "answer_full": "The user asks to summarize code. The code shown is an include-heavy C++ file common/arg.cpp from llama.cpp likely. Need be careful: This is request b714... maybe asks summarize snippet. No safety issue. We can summarize. Need note that only a prefix is shown, so summary based on visible portion.\n\nNeed answer: It appears to be llama.cpp common argument parser. Includes arg.h, build-info, chat, common, download, json schema to grammar, json, llama, log, sampling, speculative, preset. Defines min/max fix for Windows by including windows.h with NOMINMAX. Standard includes. Platform-specific limits. LLAMA_MAX_URL_LENGTH. using common_json and common_arg_utils. Initializer list of mmproj examples with example enums. Likely parses command-line args/options for examples (server/cli/mtmd), including model paths, context size, gpu layers, sampling, grammar/json schema, media/mmproj, downloads, presets, speculative decoding, etc. Since only head shown, not full behavior.\n\nNeed mention truncated. Avoid claiming secrets. Provide concise",
+     "tag": "T2133-U-8k-short-512-rep3",
+     "swapin_kib": 0,
+     "swapout_kib": 0,
+     "nvme_read_prefill_mib": 0.0,
+     "nvme_read_decode_mib": 0.0,
+     "mem_after": {
+      "avail_mib": 61964,
+      "free_mib": 45759,
+      "cached_mib": 16747,
+      "swapused_mib": 0
+     },
+     "peak_card_mib": 2572,
+     "prefill_pcie_links": [
+      [
+       "4",
+       "16"
+      ]
+     ],
+     "proc": {
+      "VmRSS": "16671264 kB",
+      "RssAnon": "712728 kB",
+      "RssFile": "15927244 kB",
+      "RssShmem": "31292 kB",
+      "VmSwap": "0 kB"
+     }
+    }
+   ],
+   "free_before": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           64220        2242       45773          32       16821       61978\nSwap:           8191           0        8191\n",
+    "swapon": "NAME      TYPE SIZE USED PRIO\n/swap.img file   8G   0B   -1\n",
+    "vmstat": {
+     "pswpin": 0,
+     "pswpout": 0
+    },
+    "t": 1795817485.1061287
+   },
+   "free_after": {
+    "free_m": "               total        used        free      shared  buff/cache   available\nMem:           64220        2256       45759          32       16821       61964\nSwap:           8191           0        8191\n",
+    "swapon": "NAME      TYPE SIZE USED PRIO\n/swap.img file   8G   0B   -1\n",
+    "vmstat": {
+     "pswpin": 0,
+     "pswpout": 0
+    },
+    "t": 1795817551.5956254
+   },
+   "pswpout_delta": 0,
+   "peak_card_mib": 2572,
+   "min_avail_mib": 61910
+  }
+ },
+ "start_utc": "2026-11-27T22:10:53Z",
+ "state_before": {
+  "free_m": "               total        used        free      shared  buff/cache   available\nMem:           64220        1311       46867           2       16627       62909\nSwap:           8191           0        8191\n",
+  "swapon": "NAME      TYPE SIZE USED PRIO\n/swap.img file   8G   0B   -1\n",
+  "vmstat": {
+   "pswpin": 0,
+   "pswpout": 0
+  },
+  "t": 1795817453.9223564
+ },
+ "load_s": 4.0,
+ "load_peak_mib": 2528,
+ "card_after_load_mib": 2528,
+ "avail_after_load_mib": 62272,
+ "proc_after_load": {
+  "VmRSS": "16390216 kB",
+  "RssAnon": "445180 kB",
+  "RssFile": "15913744 kB",
+  "RssShmem": "31292 kB",
+  "VmSwap": "0 kB"
+ },
+ "info_props": {
+  "default_generation_settings": {
+   "params": {
+    "seed": 4294967295,
+    "temperature": 1.0,
+    "dynatemp_range": 0.0,
+    "dynatemp_exponent": 1.0,
+    "top_k": 0,
+    "top_p": 1.0,
+    "min_p": 0.0,
+    "top_n_sigma": -1.0,
+    "xtc_probability": 0.0,
+    "xtc_threshold": 0.10000000149011612,
+    "typical_p": 1.0,
+    "repeat_last_n": 64,
+    "repeat_penalty": 1.0,
+    "presence_penalty": 0.0,
+    "frequency_penalty": 0.0,
+    "penalize_prompt": true,
+    "dry_multiplier": 0.0,
+    "dry_base": 1.75,
+    "dry_allowed_length": 2,
+    "dry_penalty_last_n": 64,
+    "mirostat": 0,
+    "mirostat_tau": 5.0,
+    "mirostat_eta": 0.10000000149011612,
+    "adaptive_target": -1.0,
+    "adaptive_decay": 0.8999999761581421,
+    "max_tokens": -1,
+    "n_predict": -1,
+    "n_keep": 0,
+    "n_discard": 0,
+    "ignore_eos": false,
+    "stream": false,
+    "n_probs": 0,
+    "min_keep": 0,
+    "chat_format": "Content-only",
+    "reasoning_format": "none",
+    "reasoning_in_content": false,
+    "generation_prompt": "",
+    "samplers": [
+     "penalties",
+     "dry",
+     "top_n_sigma",
+     "top_k",
+     "typ_p",
+     "top_p",
+     "min_p",
+     "xtc",
+     "temperature"
+    ],
+    "speculative.types": "none",
+    "timings_per_token": false,
+    "post_sampling_probs": false,
+    "backend_sampling": false,
+    "lora": []
+   },
+   "n_ctx": 8192
+  },
+  "total_slots": 1,
+  "model_alias": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+  "model_ftype": "Q4_K - Medium",
+  "model_path": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+  "modalities": {
+   "vision": false,
+   "video": false,
+   "audio": false
+  },
+  "media_marker": "<__media_qQeDIxYDgTaBOuKs12DwtUwpdieFzY4V__>",
+  "endpoint_slots": true,
+  "endpoint_props": false,
+  "endpoint_metrics": false,
+  "ui": true,
+  "ui_settings": {},
+  "chat_template": "{%- set effort_map = {\"none\": 0.0, \"minimal\": 0.1, \"low\": 0.2, \"medium\": 0.7, \"high\": 0.9, \"xhigh\": 0.99, \"max\": 0.99} -%}\n{%- set role_token = {\"user\": \"<|message_user|>\", \"assistant\": \"<|message_model|>\", \"system\": \"<|message_system|>\", \"tool\": \"<|message_tool|>\"} -%}\n\n{%- macro emit_thinking_effort() -%}\n    {%- set eff = reasoning_effort if reasoning_effort is defined and reasoning_effort is not none else 0.9 -%}\n    {%- if eff is string -%}\n        {%- set key = eff | trim -%}\n        {%- if key not in effort_map -%}\n            {{- raise_exception(\"Unknown reasoning_effort: \" ~ eff) -}}\n        {%- endif -%}\n        {%- set num = effort_map[key] -%}\n    {%- else -%}\n        {%- set num = eff | float -%}\n    {%- endif -%}\n    {%- if num < 0.0 or num > 0.99 -%}\n        {{- raise_exception(\"reasoning_effort must be in [0.0, 0.99]\") -}}\n    {%- endif -%}\n    {{- \"<|message_system|><|content_text|>Thinking effort level: \" -}}\n    {%- if num == 0.0 -%}0{%- else -%}{{ num }}{%- endif -%}\n    {{- \"<|end_message|>\" -}}\n{%- endmacro -%}\n\n{%- if tools -%}\n    {%- set tool_state = namespace(specs=[]) -%}\n    {%- for tool in tools -%}\n        {%- set fn = tool.function if tool.function is defined else tool -%}\n        {%- set spec = {\n            \"description\": (fn.description if fn.description is defined and fn.description else \"\"),\n            \"name\": fn.name,\n            \"parameters\": (fn.parameters if fn.parameters is defined and fn.parameters else {}),\n            \"type\": (tool.type if tool.type is defined and tool.type else \"function\"),\n        } -%}\n        {%- set tool_state.specs = tool_state.specs + [spec] -%}\n    {%- endfor -%}\n    {{- \"<|message_system|>tool_declare<|content_xml|>\" -}}\n    {{- tool_state.specs | tojson(sort_keys=true, separators=(\",\", \":\")) -}}\n    {{- \"<|end_message|>\" -}}\n{%- endif -%}\n\n{%- set state = namespace(effort_emitted=false) -%}\n{%- for message in messages -%}\n    {%- if message.role not in role_token -%}\n        {{- raise_exception(\"Unknown message role: \" ~ message.role) -}}\n    {%- endif -%}\n    {%- if not state.effort_emitted and message.role != \"system\" -%}\n        {{- emit_thinking_effort() -}}\n        {%- set state.effort_emitted = true -%}\n    {%- endif -%}\n\n    {%- set header = namespace(text=role_token[message.role]) -%}\n    {%- if message.role == \"tool\" -%}\n        {%- if message.name is defined and message.name -%}\n            {%- set header.text = header.text ~ message.name -%}\n        {%- elif message.tool_call_id is defined and message.tool_call_id -%}\n            {%- for prev in messages -%}\n                {%- if prev.role == \"assistant\" and prev.tool_calls -%}\n                    {%- for tc in prev.tool_calls -%}\n                        {%- if tc.id is defined and tc.id == message.tool_call_id and tc.function.name is defined -%}\n                            {%- set header.text = header.text ~ tc.function.name -%}\n                        {%- endif -%}\n                    {%- endfor -%}\n                {%- endif -%}\n            {%- endfor -%}\n        {%- endif -%}\n    {%- elif message.role == \"assistant\" and message.name is defined and message.name -%}\n        {%- set header.text = header.text ~ message.name -%}\n    {%- endif -%}\n    {%- set rtok = header.text -%}\n    {%- set rendered -%}\n\n    {%- if message.role == \"assistant\" and message.reasoning_content is defined and message.reasoning_content -%}\n        {{- rtok ~ \"<|content_thinking|>\" ~ message.reasoning_content ~ \"<|end_message|>\" -}}\n    {%- endif -%}\n\n    {%- if message.content is string and (message.content or not (message.role == \"assistant\" and (message.tool_calls or message.reasoning_content))) -%}\n        {{- rtok ~ \"<|content_text|>\" ~ message.content ~ \"<|end_message|>\" -}}\n    {%- elif message.content -%}\n        {%- for part in message.content -%}\n            {%- if part is string -%}\n                {{- rtok ~ \"<|content_text|>\" ~ part ~ \"<|end_message|>\" -}}\n            {%- elif part.type is not defined or part.type in (\"text\", \"input_text\") -%}\n                {%- set text_part = (part.text if part.text is defined and part.text is string else \"\") -%}\n                {{- rtok ~ \"<|content_text|>\" ~ text_part ~ \"<|end_message|>\" -}}\n            {%- elif part.type in (\"image\", \"input_image\", \"image_url\") -%}\n                {%- if message.role not in (\"user\", \"tool\") -%}\n                    {{- raise_exception(\"Image content is only supported for user and tool messages\") -}}\n                {%- endif -%}\n                {{- rtok ~ \"<|content_image|><|unused_200054|><|end_message|>\" -}}\n            {%- elif part.type in (\"audio\", \"input_audio\", \"audio_url\") -%}\n                {{- raise_exception(\"Inkling 2 does not accept audio input\") -}}\n            {%- else -%}\n                {{- raise_exception(\"Unsupported content part type: \" ~ part.type) -}}\n            {%- endif -%}\n        {%- endfor -%}\n    {%- endif -%}\n\n    {%- if message.role == \"assistant\" and message.tool_calls -%}\n        {%- for tc in message.tool_calls -%}\n            {%- set fn = tc.function -%}\n            {%- if fn.name is not defined or fn.name is not string -%}\n                {{- raise_exception(\"tool call function name must be a string\") -}}\n            {%- endif -%}\n            {%- if message.name is defined and message.name and message.name != fn.name -%}\n                {{- raise_exception(\"assistant name \" ~ message.name ~ \" does not match its tool call \" ~ fn.name) -}}\n            {%- endif -%}\n            {%- set args = fn.arguments if fn.arguments is defined and fn.arguments else {} -%}\n            {%- if args is string -%}\n                {{- raise_exception(\"tool call arguments must be a parsed object, not a JSON string; canonicalize upstream\") -}}\n            {%- endif -%}\n            {%- if args is not mapping -%}\n                {{- raise_exception(\"tool call arguments must be an object\") -}}\n            {%- endif -%}\n            {{- \"<|message_model|>\" ~ fn.name ~ \"<|content_invoke_tool_json|>\" -}}\n            {{- '{\"name\":' ~ (fn.name | tojson(sort_keys=true, separators=(\",\", \":\"))) ~ ',\"args\":' -}}\n            {{- \"{\" -}}\n            {%- for key, value in args | dictsort(case_sensitive=true) -%}\n                {{- (key | tojson) ~ \":\" ~ (value | tojson(separators=(\",\", \":\"))) -}}\n                {%- if not loop.last -%},{%- endif -%}\n            {%- endfor -%}\n            {{- \"}}<|end_message|>\" -}}\n        {%- endfor -%}\n    {%- endif -%}\n\n    {%- if message.role == \"assistant\" -%}\n        {{- \"<|content_model_end_sampling|>\" -}}\n    {%- endif -%}\n    {%- endset -%}\n    {%- if message.role == \"assistant\" -%}\n        {%- generation -%}{{- rendered -}}{%- endgeneration -%}\n    {%- else -%}\n        {{- rendered -}}\n    {%- endif -%}\n{%- endfor -%}\n\n{%- if not state.effort_emitted -%}\n    {{- emit_thinking_effort() -}}\n{%- endif -%}",
+  "chat_template_caps": {
+   "supports_object_arguments": true,
+   "supports_parallel_tool_calls": true,
+   "supports_preserve_reasoning": true,
+   "supports_reasoning_effort": true,
+   "supports_string_content": true,
+   "supports_system_role": true,
+   "supports_tool_calls": true,
+   "supports_tools": true,
+   "supports_typed_content": true,
+   "reasoning_effort_levels": [
+    "none",
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "max"
+   ],
+   "reasoning_effort_rejected": []
+  },
+  "bos_token": "",
+  "eos_token": "<|content_model_end_sampling|>",
+  "build_info": "b12675-add07b393",
+  "is_sleeping": false,
+  "cors_proxy_enabled": false
+ },
+ "info_v1_models": {
+  "models": [
+   {
+    "name": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+    "model": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+    "modified_at": "",
+    "size": "",
+    "digest": "",
+    "type": "model",
+    "description": "",
+    "tags": [
+     ""
+    ],
+    "capabilities": [
+     "completion"
+    ],
+    "parameters": "",
+    "details": {
+     "parent_model": "",
+     "format": "gguf",
+     "family": "",
+     "families": [
+      ""
+     ],
+     "parameter_size": "",
+     "quantization_level": ""
+    }
+   }
+  ],
+  "object": "list",
+  "data": [
+   {
+    "id": "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf",
+    "aliases": [
+     "/home/minotaur/inkling2-2026-11/model/Inkling-2-Mini-UD-Q4_K_M.gguf"
+    ],
+    "tags": [],
+    "object": "model",
+    "architecture": {
+     "input_modalities": [
+      "text"
+     ],
+     "output_modalities": [
+      "text"
+     ]
+    },
+    "created": 1795817462,
+    "owned_by": "llamacpp",
+    "meta": {
+     "vocab_type": 2,
+     "n_vocab": 200058,
+     "n_ctx": 8192,
+     "n_ctx_train": 1048576,
+     "n_embd": 2304,
+     "n_params": 26070390272,
+     "size": 16598564864,
+     "ftype": "Q4_K - Medium"
+    }
+   }
+  ]
+ },
+ "cold": {
+  "nonce": "33194d62",
+  "t0": 1795817462.9697735,
+  "ttft_s": 3.802720308303833,
+  "total_s": 22.075053691864014,
+  "content_chunks": 254,
+  "timings": {
+   "cache_n": 0,
+   "prompt_n": 513,
+   "prompt_ms": 3618.863,
+   "prompt_per_token_ms": 7.054313840155945,
+   "prompt_per_second": 141.75723148403242,
+   "predicted_n": 256,
+   "predicted_ms": 18452.455,
+   "predicted_per_token_ms": 72.36256862745098,
+   "predicted_per_second": 13.819299383198603
+  },
+  "usage": {
+   "completion_tokens": 256,
+   "prompt_tokens": 513,
+   "total_tokens": 769,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   }
+  },
+  "error": null,
+  "answer_head": "The user pasted a snippet of C/C++ source from what appears to be llama.cpp / ggml? It says common/arg.cpp, includes arg.h, build-info.h, chat.h, common.h, download.h, json-schema-to-grammar.h, json.h",
+  "answer_full": "The user pasted a snippet of C/C++ source from what appears to be llama.cpp / ggml? It says common/arg.cpp, includes arg.h, build-info.h, chat.h, common.h, download.h, json-schema-to-grammar.h, json.h, llama.h, log.h, sampling.h, speculative.h, preset.h. Snippet ends at static std::initializer_list<enum llama_example> mmproj_examples = { LLAMA_EXAMPLE_MTMD, LLAMA_EXAMPLE_SERVER, LLAMA_EXAMPLE_CLI, LLAMA_EXAMPL... truncated.\n\nNeed summarize what this code does. We can answer based on visible snippet: it's a C++/Qt? no. This is common argument parsing for llama.cpp examples (llama-cli etc). It sets up includes and an initializer list of example targets for mmproj (multimodal projector) e.g. mtmd, server, cli. Need be careful: user says \"request 33194d62\" maybe irrelevant. We should summarize only visible code and state truncation. Avoid claiming beyond snippet",
+  "tag": "T2133-U-8k-cold",
+  "swapin_kib": 0,
+  "swapout_kib": 0,
+  "nvme_read_prefill_mib": 17.6,
+  "nvme_read_decode_mib": 0.0,
+  "mem_after": {
+   "avail_mib": 61978,
+   "free_mib": 45773,
+   "cached_mib": 16747,
+   "swapused_mib": 0
+  },
+  "peak_card_mib": 2572,
+  "prefill_pcie_links": [
+   [
+    "4",
+    "16"
+   ]
+  ],
+  "proc": {
+   "VmRSS": "16670520 kB",
+   "RssAnon": "711984 kB",
+   "RssFile": "15927244 kB",
+   "RssShmem": "31292 kB",
+   "VmSwap": "0 kB"
+  }
+ },
+ "cold_peak_mib": 2572,
+ "arm_peak_mib": 2572,
+ "min_avail_mib": 61910,
+ "state_after": {
+  "free_m": "               total        used        free      shared  buff/cache   available\nMem:           64220        1393       46533           2       16880       62827\nSwap:           8191           0        8191\n",
+  "swapon": "NAME      TYPE SIZE USED PRIO\n/swap.img file   8G   0B   -1\n",
+  "vmstat": {
+   "pswpin": 0,
+   "pswpout": 0
+  },
+  "t": 1795817553.5565948
+ },
+ "end_utc": "2026-11-27T22:12:33Z"
+}
